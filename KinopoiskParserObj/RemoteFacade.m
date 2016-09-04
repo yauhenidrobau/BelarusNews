@@ -33,16 +33,18 @@ typedef void (^DataLoadCallback)(NSData *info, NSError* error);
 
 -(void) loadData:(NSString *)dataURL callback:(DataLoadCallback)comptetion {
     // load data
-    self.callback = comptetion;
+    
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSURL *url = [NSURL URLWithString:(NSString *)dataURL];
         NSData* info = [NSData dataWithContentsOfURL:
                         url];
+        self.callback = comptetion;
         //[self performSelectorOnMainThread:@selector(fetchedData:)
                              //  withObject:data waitUntilDone:YES];
     });
     dispatch_async(dispatch_get_main_queue(), ^{
+        
         self.callback(self.info,nil);
     
     });

@@ -32,15 +32,13 @@
     Constants *constant = [[Constants alloc]init];
     [constant initUrl];
     [[RemoteFacade sharedInstance] loadData:[constant url] callback:^(NSData *info, NSError *error) {
-        if (error) {
-            //TODO: handle error
-        } else {
+       
            
             [[ParserManager sharedInstance] parseXmlData:info callback:^(NSArray *info, NSError *error) {
                 [[CoreDataManager sharedInstance]saveFilms:infoDict];
             }];
             
-              }
+              
     }];
 
 }

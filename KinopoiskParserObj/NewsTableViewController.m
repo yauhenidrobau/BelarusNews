@@ -29,16 +29,19 @@ NSFetchedResultsController *fetchedResultsController = nil;
 
 
 //MARK: Lifecycle
-
+-(void) initFetchResultController{
+    fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController:@"Film" key:@"titleFeed"];
+fetchedResultsController.delegate = self;
+}
 -(void) viewDidLoad {
-    NSFetchedResultsController *fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController:@"Film" key:@"titleFeed"];
 
        [super viewDidLoad];
     [self setAppierance];
+    [self initFetchResultController];
     [self updateData];
     [self loadData];
     
-    fetchedResultsController.delegate = self;
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated {

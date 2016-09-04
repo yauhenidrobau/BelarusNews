@@ -37,6 +37,7 @@
     XMLParser *parser = [[XMLParser alloc]init];
     parser.xmlParserDelegate = self;
     [parser parseData:data ];
+   
 }
 
 -(void) xmlParserDidFinishParsing: (NSDictionary<NSString *, NSString *>*)items  error: (NSError *)error{
