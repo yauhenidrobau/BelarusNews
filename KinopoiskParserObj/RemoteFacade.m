@@ -37,7 +37,7 @@ typedef void (^DataLoadCallback)(NSData *info, NSError* error);
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSURL *url = [NSURL URLWithString:(NSString *)dataURL];
-        NSData* data = [NSData dataWithContentsOfURL:
+        NSData* info = [NSData dataWithContentsOfURL:
                         url];
         //[self performSelectorOnMainThread:@selector(fetchedData:)
                              //  withObject:data waitUntilDone:YES];

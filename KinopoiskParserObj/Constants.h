@@ -10,5 +10,6 @@
 
 @interface Constants : NSObject
 
-@property(nonatomic, strong) NSString *url;
+@property(nonatomic, readonly) NSString *url;
+-(void) initUrl;
 @end

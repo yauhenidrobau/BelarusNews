@@ -7,10 +7,17 @@
 //
 
 #import "Constants.h"
+@interface Constants()
 
+
+@property(nonatomic,readwrite)NSString *url;
+
+@end
 
 @implementation Constants
 @synthesize url;
-   NSString  *url = @"https://st.kp.yandex.net/rss/news_premiers.rss";
 
+-(void) initUrl{
+  url = @"https://st.kp.yandex.net/rss/news_premiers.rss";
+}
 @end
