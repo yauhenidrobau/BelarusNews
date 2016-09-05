@@ -32,10 +32,12 @@
 
 
 -(NSFetchedResultsController *) fetchedResultsController:(NSString *)entityName key:(NSString *)keyForSort  {
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Film"];
+  
+    NSFetchRequest *fetchRequest = [NSFetchRequest  fetchRequestWithEntityName:@"Film"];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"titleFeed" ascending:YES ];
-    //NSArray *sortDescriptors  = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
    
     NSFetchedResultsController *fetchedResultsController =[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                                               managedObjectContext:self.managedObjectContext
@@ -153,7 +155,7 @@
                     //refresh data
                     
                     filmToBeSaved_.titleFeed = filmInfo[@"title"];
-                    filmToBeSaved_.descriptionFeed = @"DSF";
+                    filmToBeSaved_.descriptionFeed = filmInfo[@"description"];
                     filmToBeSaved_.pubDateFeed = filmInfo[@"pubDate"];
                     filmToBeSaved_.linkFeed = filmInfo[@"link"];
                     filmToBeSaved_.urlImage = filmInfo[@"urlImage"];

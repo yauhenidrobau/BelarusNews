@@ -23,4 +23,7 @@
 -(void) saveFilms:(NSDictionary<NSString *,NSString *>*)films;
 -(NSFetchedResultsController *) fetchedResultsController:(NSString *)entityName key:(NSString *)keyForSort;
 
+
+- (void)saveContext;
+
 @end

@@ -11,9 +11,10 @@
 @implementation DetailsViewController
 @synthesize webView;
 @synthesize navigationBarHidden;
+@synthesize url;
+@synthesize activityInd;
 
-NSURL *newsUrl;
-
+NSURL *url;
 //MARK: Lifecycle
  -(void) viewDidLoad{
      [super  viewDidLoad];
@@ -24,8 +25,10 @@ NSURL *newsUrl;
 
 - (void)viewDidAppear:(BOOL)animated {
     //activityInd.hidden = true;
-    if (newsUrl != nil) {
-        NSURLRequest *request = [NSURLRequest requestWithURL: newsUrl];
+    _newsUrl = [[NSURL alloc]initWithString:url];
+    //_newsUrl = url;
+    if (_newsUrl != nil) {
+        NSURLRequest *request = [NSURLRequest requestWithURL: _newsUrl];
         [webView loadRequest:request];
     }
     if (webView.hidden) {
@@ -37,7 +40,7 @@ NSURL *newsUrl;
     [super viewWillAppear:(animated)];
     
     navigationBarHidden = false;
-    
+    //webView.hidden = false;
 }
 
 -(void) didReceiveMemoryWarning {
@@ -46,13 +49,13 @@ NSURL *newsUrl;
 }
 
 -(void) webViewDidStartLoad:(UIWebView*)webView {
-   // activityInd.hidden = false
-   // activityInd.startAnimating()
+    activityInd.hidden = false;
+    [activityInd startAnimating];
 }
-/*
-func webViewDidFinishLoad(webView: UIWebView) {
-    activityInd.hidden = true
-    activityInd.stopAnimating()
+
+-(void) webViewDidFinishLoad:(UIWebView *)webView {
+    activityInd.hidden = true;
+    [activityInd stopAnimating];
 }
-*/
+
 @end

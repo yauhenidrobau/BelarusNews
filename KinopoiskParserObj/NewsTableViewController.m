@@ -51,7 +51,9 @@ NSFetchedResultsController *fetchedResultsController = nil;
 // MARK: - UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSArray *sections = fetchedResultsController.sections;
+    NSArray  *sections = self.fetchedResultsController.sections;
+    
+   //return [[sections[section] objectAtIndex:section ] numberOfObjects];
     return sections.count > section ? [sections[section] numberOfObjects] : 0;
 }
 
@@ -77,29 +79,34 @@ NSFetchedResultsController *fetchedResultsController = nil;
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSArray *sections = fetchedResultsController.sections;
        NSArray *currentSection = sections[section];
-        return currentSection.name;
+        return currentSection;
     }
-    
-    return nil;
-}
 */
-/*
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    Film *filmItem =  [fetchedResultsController objectAtIndexPath:indexPath];
-     performSegueWithIdentifier("detailFilmSegue", sender: filmItem.linkFeed);
 
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+   
+    
+    
+  //  NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    
+    Film *filmItem =  [fetchedResultsController objectAtIndexPath:indexPath];
+    
+    [self performSegueWithIdentifier:@"details" sender:filmItem.linkFeed];
+[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
   
     
 }
- */
+
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  
         DetailsViewController *d = (DetailsViewController *)segue.destinationViewController;
     NSString *url = sender;
-    NSURL *detailUrl = [[NSURL alloc]initWithString:url];
-    d.newsUrl = detailUrl;
+    d.url = [[NSString alloc] initWithString:url];
   
 }
 
@@ -111,25 +118,26 @@ NSFetchedResultsController *fetchedResultsController = nil;
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(nullable NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(nullable NSIndexPath *)newIndexPath{
     switch (type) {
     case  NSFetchedResultsChangeInsert:
-            if (newIndexPath) {
-                NSIndexPath *_newIndexPath = indexPath;
+            if (newIndexPath != nil) {
+                NSArray <NSIndexPath *> * _newIndexPath =[[NSArray<NSIndexPath *> alloc] initWithObjects:newIndexPath,nil];
                 [self.tableView insertRowsAtIndexPaths:_newIndexPath withRowAnimation: UITableViewRowAnimationFade];
             }
+            break;
     case NSFetchedResultsChangeDelete:
-            if (newIndexPath) {
-                NSIndexPath *_newIndexPath = indexPath;
+            if (newIndexPath != nil) {
+                NSArray <NSIndexPath *> * _newIndexPath =[[NSArray<NSIndexPath *> alloc] initWithObjects:newIndexPath,nil];
 
             [self.tableView deleteRowsAtIndexPaths:_newIndexPath withRowAnimation: UITableViewRowAnimationFade];
             }
             break;
     case NSFetchedResultsChangeUpdate:
             
-            if (newIndexPath) {
-                NSIndexPath *_newIndexPath = indexPath;
-
-            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:_newIndexPath]
+            if (newIndexPath != nil) {
+               NSArray <NSIndexPath *> * _newIndexPath =[[NSArray<NSIndexPath *> alloc] initWithObjects:newIndexPath,nil];
+                            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:_newIndexPath]
                                   withRowAnimation:UITableViewRowAnimationFade];
             }
+            break;
            /*
             // NewsTableViewCell *cell;
             cell = [self.tableView cellForRowAtIndexPath:newIndexPath];
@@ -141,8 +149,8 @@ NSFetchedResultsController *fetchedResultsController = nil;
             */
     default:
             [self.tableView reloadData];
-            
             break;
+            
     }
 }
 
@@ -162,13 +170,14 @@ NSFetchedResultsController *fetchedResultsController = nil;
             
             
            // NSIndexSet * sectionIndexSet = [[NSIndexSet ];
-            if(sectionIndex){
+            if(sectionIndex != nil){
+                
                 NSIndexSet *sectionIndexSet = [[NSIndexSet alloc]initWithIndex:sectionIndex];
             [self.tableView insertSections:sectionIndexSet withRowAnimation:UITableViewRowAnimationFade];
             }
     case NSFetchedResultsChangeDelete:
             
-            if(sectionIndex){
+            if(sectionIndex != nil){
                 NSIndexSet *sectionIndexSet = [[NSIndexSet alloc]initWithIndex:sectionIndex];
                 [self.tableView deleteSections:sectionIndexSet withRowAnimation: UITableViewRowAnimationFade];
             }

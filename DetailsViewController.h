@@ -12,5 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
-@property(nonatomic, weak) NSURL *newsUrl;
+@property(nonatomic, copy) NSURL *newsUrl;
+@property(nonatomic, copy) NSString *url;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @end

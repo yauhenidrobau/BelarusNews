@@ -11,18 +11,46 @@
             <PersistentString
                value = "fetchedResultsController.sections[0]">
             </PersistentString>
+            <PersistentString
+               value = "filmItem.titleFeed">
+            </PersistentString>
+            <PersistentString
+               value = "filmItem.descriptionFeed">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[NewsTableViewController tableView:numberOfRowsInSection:]:NewsTableViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "[sections[section] numberOfObjects]">
+               value = "sections.count">
+            </PersistentString>
+            <PersistentString
+               value = "[sections[section] count] ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableViewController tableView:didSelectRowAtIndexPath:]:NewsTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "filmItem.linkFeed">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke:RemoteFacade.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[DetailsViewController viewDidLoad]:DetailsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "newsUrl">
+            </PersistentString>
+            <PersistentString
+               value = "url">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[CoreDataManager saveFilms:]:CoreDataManager.m">
@@ -42,6 +70,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[NewsTableViewController prepareForSegue:sender:]:NewsTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "d.url">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[ParserManager parseXmlData:callback:]:ParserManager.m">
          <PersistentStrings>
             <PersistentString
@@ -54,6 +90,14 @@
          <PersistentStrings>
             <PersistentString
                value = "self.info">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableViewController controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:]:NewsTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_newIndexPath">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -80,7 +124,10 @@
          contextName = "-[NewsTableViewController numberOfSectionsInTableView:]:NewsTableViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "[sections[section] numberOfObjects]">
+               value = "sections.count">
+            </PersistentString>
+            <PersistentString
+               value = "[sections[section]  numberOfObjects]">
             </PersistentString>
             <PersistentString
                value = "fetchedResultsController.sections">
@@ -100,6 +147,9 @@
          <PersistentStrings>
             <PersistentString
                value = "dictParsedData">
+            </PersistentString>
+            <PersistentString
+               value = "descriptionFeed">
             </PersistentString>
             <PersistentString
                value = "currentDataDictionary">
@@ -122,6 +172,9 @@
       </ContextState>
       <ContextState
          contextName = "-[CoreDataManager saveContext]:CoreDataManager.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[CoreDataManager fetchedResultsController:key:]:CoreDataManager.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -11,7 +11,7 @@
 
 @interface NewsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate> 
 
-@property(nonatomic, strong) NSFetchedResultsController * fetchedResultsController;
+@property(nonatomic, copy) NSFetchedResultsController * fetchedResultsController;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
 -(void) loadData;
 -(void) updateData;

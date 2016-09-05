@@ -13,7 +13,9 @@
 @interface ParserManager () <XMLParserDelegate>
 
 @property (nonatomic, copy) ParseCallback callback;
-@property(nonatomic, strong) NSMutableDictionary<NSString *,NSString *>*info;
+
+                                                    // was NSMutableDictionary<NSString *, NSString *>*
+@property(nonatomic, strong) NSData *info;
 
 @end
 
