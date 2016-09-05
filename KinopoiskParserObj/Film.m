@@ -10,6 +10,9 @@
 
 @implementation Film 
 
+#warning !!! Должен быть @dynamic
+#warning !!! размазал по файлам, если объявляешь проперти в Film+CoreDataProperties.h, тогда и @dynamic в Film+CoreDataProperties.m помести
+
 
 @synthesize titleFeed;
 @synthesize descriptionFeed;

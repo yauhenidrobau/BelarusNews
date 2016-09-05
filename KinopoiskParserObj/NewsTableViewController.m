@@ -21,8 +21,11 @@
 
 @implementation NewsTableViewController
 
+#warning Зачем везде писать @synthesize???
 @synthesize navigationBarHidden;
 @synthesize fetchedResultsController;
+
+#warning аналог свифтового //MARK: - #pragma mark -
 //MARK: Properties
 
 NSFetchedResultsController *fetchedResultsController = nil;
@@ -168,7 +171,7 @@ NSFetchedResultsController *fetchedResultsController = nil;
     case NSFetchedResultsChangeInsert:
         
             
-            
+#warning sectionIndex != nil - неправильная проверка
            // NSIndexSet * sectionIndexSet = [[NSIndexSet ];
             if(sectionIndex != nil){
                 
