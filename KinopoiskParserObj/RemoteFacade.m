@@ -7,13 +7,15 @@
 //
 
 #import "RemoteFacade.h"
+#import "ParserManager.h"
+#import "CoreDataManager.h"
 
 typedef void (^DataLoadCallback)(NSData *info, NSError* error);
 
 @interface RemoteFacade ()
 
-@property (nonatomic, copy) DataLoadCallback callback;
 @property (nonatomic, strong) NSData *info;
+//@property (nonatomic, strong) NSMutableDictionary<NSString *, NSString *>*infoDict;
 
 @end
 
@@ -37,37 +39,13 @@ typedef void (^DataLoadCallback)(NSData *info, NSError* error);
     
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSURL *url = [NSURL URLWithString:(NSString *)dataURL];
-        NSData* info = [NSData dataWithContentsOfURL:
-                        url];
-        self.callback = comptetion;
-        //[self performSelectorOnMainThread:@selector(fetchedData:)
-                             //  withObject:data waitUntilDone:YES];
+        NSData *info = [NSData dataWithContentsOfURL:url];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (comptetion) {
+                comptetion(info, nil);
+            }
+        });      
     });
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        self.callback(self.info,nil);
-    
-    });
-    
-   
-    //SWIFT
-    /*
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { ()->() in
-        if NSURL *url = [NSURL  initWithString:(NSString *)URLString] ;
-        if let url =  NSURL.init(string: dataURL) {
-            let xmlData = NSData.init(contentsOfURL: url)
-            dispatch_async(dispatch_get_main_queue(), {
-                callback(result: .Success(items: xmlData))
-                
-                
-            })
-        }else {
-            dispatch_async(dispatch_get_main_queue(), {
-                callback(result: .UnexpectedError(error: NSError(domain: "UnexpectedErrorDomain", code: -666, userInfo: nil)))
-            })
-        }
-    })
-    */
 }
 
 @end

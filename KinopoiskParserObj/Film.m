@@ -9,13 +9,13 @@
 #import "Film.h"
 
 @implementation Film 
+
+
 @synthesize titleFeed;
 @synthesize descriptionFeed;
 @synthesize linkFeed;
 @synthesize urlImage;
 @synthesize pubDateFeed;
-
-
 // Insert code here to add functionality to your managed object subclass
 
 @end

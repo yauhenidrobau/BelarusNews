@@ -12,5 +12,5 @@
 
 +(DataManager *) sharedInstance;
 -(void) updateData;
-@property(nonatomic, strong) NSDictionary<NSString *,NSString *> *infoDict;
+@property(nonatomic, strong) NSMutableDictionary<NSString *,NSString *> *infoDict;
 @end

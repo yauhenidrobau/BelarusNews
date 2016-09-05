@@ -31,17 +31,16 @@ NSFetchedResultsController *fetchedResultsController = nil;
 //MARK: Lifecycle
 -(void) initFetchResultController{
     fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController:@"Film" key:@"titleFeed"];
-fetchedResultsController.delegate = self;
+    fetchedResultsController.delegate = self;
 }
 -(void) viewDidLoad {
 
-       [super viewDidLoad];
+    [super viewDidLoad];
     [self setAppierance];
     [self initFetchResultController];
     [self updateData];
     [self loadData];
-    
-    
+[self.tableView reloadData];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -52,7 +51,8 @@ fetchedResultsController.delegate = self;
 // MARK: - UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    NSArray *sections = fetchedResultsController.sections;
+    return sections.count > section ? [sections[section] numberOfObjects] : 0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -106,31 +106,46 @@ fetchedResultsController.delegate = self;
 
 //MARK: NSFetchedResultsControllerDelegate
 
-/*
+
 //check if there is some changes in Data Base
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(nullable NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(nullable NSIndexPath *)newIndexPath{
     switch (type) {
     case  NSFetchedResultsChangeInsert:
-            NSIndexPath *_newindexPath = newIndexPath;
-            [tableView insertRowsAtIndexPaths([_newindexPath], withRowAnimation: .Fade) ];
-            
+            if (newIndexPath) {
+                NSIndexPath *_newIndexPath = indexPath;
+                [self.tableView insertRowsAtIndexPaths:_newIndexPath withRowAnimation: UITableViewRowAnimationFade];
+            }
     case NSFetchedResultsChangeDelete:
-        NSIndexPath *_newindexPath = newIndexPath {
-            [tableView deleteRowsAtIndexPaths([_newindexPath], withRowAnimation: .Fade)];
-        }
+            if (newIndexPath) {
+                NSIndexPath *_newIndexPath = indexPath;
+
+            [self.tableView deleteRowsAtIndexPaths:_newIndexPath withRowAnimation: UITableViewRowAnimationFade];
+            }
+            break;
     case NSFetchedResultsChangeUpdate:
-        if let _newindexPath = newIndexPath {
-            let cell = self.tableView.cellForRowAtIndexPath(_newindexPath) as? NewsTableViewCell
-            let filmItem = fetchedResultsController.objectAtIndexPath(_newindexPath) as? Film
-            cell!.titleLabel.text = filmItem!.titleFeed
-            cell!.descriptionLabel.text = filmItem!.descriptionFeed
-            tableView.reloadRowsAtIndexPaths([_newindexPath], withRowAnimation: .Fade)
-        }
+            
+            if (newIndexPath) {
+                NSIndexPath *_newIndexPath = indexPath;
+
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:_newIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            }
+           /*
+            // NewsTableViewCell *cell;
+            cell = [self.tableView cellForRowAtIndexPath:newIndexPath];
+            Film * filmItem = [fetchedResultsController objectAtIndexPath:newIndexPath];
+            cell.titleLabel.text = filmItem.titleFeed;
+            cell.descriptionLabel.text = filmItem.descriptionFeed;
+            [self.tableView reloadRowsAtIndexPaths:newIndexPath withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            */
     default:
-        tableView.reloadData()
+            [self.tableView reloadData];
+            
+            break;
     }
 }
-*/
+
 - (nullable NSString *)sectionIndexTitleForSectionName:(NSString *)sectionName{
     return sectionName;
 }
@@ -138,21 +153,30 @@ fetchedResultsController.delegate = self;
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
     [self.tableView endUpdates];
 }
-/*
+
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
     
-    switch type {
-    case .NSFetchedResultsChangeInsert:
-        let sectionIndexSet = [[NSIndexSet alloc] indexSetWithIndex];
-        self.tableView.insertSections(sectionIndexSet, withRowAnimation: UITableViewRowAnimation.Fade)
-    case .NSFetchedResultsChangeDelete:
-        let sectionIndexSet = NSIndexSet(index: sectionIndex)
-        self.tableView.deleteSections(sectionIndexSet, withRowAnimation: UITableViewRowAnimation.Fade)
+    switch (type) {
+    case NSFetchedResultsChangeInsert:
+        
+            
+            
+           // NSIndexSet * sectionIndexSet = [[NSIndexSet ];
+            if(sectionIndex){
+                NSIndexSet *sectionIndexSet = [[NSIndexSet alloc]initWithIndex:sectionIndex];
+            [self.tableView insertSections:sectionIndexSet withRowAnimation:UITableViewRowAnimationFade];
+            }
+    case NSFetchedResultsChangeDelete:
+            
+            if(sectionIndex){
+                NSIndexSet *sectionIndexSet = [[NSIndexSet alloc]initWithIndex:sectionIndex];
+                [self.tableView deleteSections:sectionIndexSet withRowAnimation: UITableViewRowAnimationFade];
+            }
     default:
-        ""
+        @"";
     }
 }
-*/
+
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
     [self.tableView beginUpdates];

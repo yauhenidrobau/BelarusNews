@@ -13,7 +13,7 @@
 @interface ParserManager () <XMLParserDelegate>
 
 @property (nonatomic, copy) ParseCallback callback;
-@property(nonatomic, strong) NSArray *info;
+@property(nonatomic, strong) NSMutableDictionary<NSString *,NSString *>*info;
 
 @end
 
@@ -40,8 +40,11 @@
    
 }
 
--(void) xmlParserDidFinishParsing: (NSDictionary<NSString *, NSString *>*)items  error: (NSError *)error{
-    
+-(void) xmlParserDidFinishParsing: (NSMutableDictionary<NSString *, NSString *>*)items  error: (NSError *)error{
+    if (self.callback) {
+        self.info = items;
+        self.callback(self.info, nil);
+    }
 
 }
 

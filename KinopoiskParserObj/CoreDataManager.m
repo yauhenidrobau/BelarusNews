@@ -33,7 +33,7 @@
 
 -(NSFetchedResultsController *) fetchedResultsController:(NSString *)entityName key:(NSString *)keyForSort  {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Film"];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"titlefeed" ascending:YES ];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"titleFeed" ascending:YES ];
     //NSArray *sortDescriptors  = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
    
@@ -129,8 +129,8 @@
 
 -(void) saveFilms:(NSDictionary<NSString *,NSString *>*)films {
         // Set value to Context
-    for (NSDictionary<NSString *,NSString *>*filmInfo in films) {
-        NSString *filmTitle = filmInfo[@"title"];
+    for (NSMutableDictionary<NSString *,NSString *>*filmInfo in films.allValues) {
+        //NSString *filmTitle = filmInfo[@"title"];
         NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Film"];
         [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"titleFeed == %@"]];
         
@@ -146,13 +146,14 @@
                 else {
                     //begin create film
                    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Film" inManagedObjectContext:self.managedObjectContext];
-                    Film  *filmEntity = [[NSManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext];
+                    Film  *filmEntity = [[Film alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext];
                     filmToBeSaved = filmEntity;
                     
                     Film  *filmToBeSaved_ = filmToBeSaved;
                     //refresh data
+                    
                     filmToBeSaved_.titleFeed = filmInfo[@"title"];
-                    filmToBeSaved_.descriptionFeed = filmInfo[@"description"];
+                    filmToBeSaved_.descriptionFeed = @"DSF";
                     filmToBeSaved_.pubDateFeed = filmInfo[@"pubDate"];
                     filmToBeSaved_.linkFeed = filmInfo[@"link"];
                     filmToBeSaved_.urlImage = filmInfo[@"urlImage"];
