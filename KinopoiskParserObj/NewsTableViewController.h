@@ -11,11 +11,7 @@
 
 @interface NewsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate> 
 
-@property(nonatomic, copy) NSFetchedResultsController * fetchedResultsController;
+//@property(nonatomic, copy) NSFetchedResultsController * fetchedResultsController;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
-#warning Почему эти методы public???
--(void) loadData;
--(void) updateData;
--(void) setAppierance;
-+(NSFetchedResultsController *)initFetch;
+
 @end

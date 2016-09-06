@@ -21,17 +21,16 @@
 
 @implementation NewsTableViewController
 
-#warning Зачем везде писать @synthesize???
-@synthesize navigationBarHidden;
-@synthesize fetchedResultsController;
 
-#warning аналог свифтового //MARK: - #pragma mark -
-//MARK: Properties
+@synthesize navigationBarHidden;
+
+
+#pragma mark - Properties
 
 NSFetchedResultsController *fetchedResultsController = nil;
 
 
-//MARK: Lifecycle
+#pragma mark - Lifecycle
 -(void) initFetchResultController{
     fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController:@"Film" key:@"titleFeed"];
     fetchedResultsController.delegate = self;
@@ -43,7 +42,7 @@ NSFetchedResultsController *fetchedResultsController = nil;
     [self initFetchResultController];
     [self updateData];
     [self loadData];
-[self.tableView reloadData];
+   // [self.tableView reloadData];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -51,12 +50,11 @@ NSFetchedResultsController *fetchedResultsController = nil;
     
 }
 
-// MARK: - UITableViewDataSource
+#pragma mark - UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSArray  *sections = self.fetchedResultsController.sections;
+    NSArray  *sections = fetchedResultsController.sections;
     
-   //return [[sections[section] objectAtIndex:section ] numberOfObjects];
     return sections.count > section ? [sections[section] numberOfObjects] : 0;
 }
 
@@ -69,7 +67,7 @@ NSFetchedResultsController *fetchedResultsController = nil;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-   // cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"] ;
+    
     
     Film *filmItem = [fetchedResultsController objectAtIndexPath:(indexPath)];
     cell.titleLabel.text = filmItem.titleFeed;
@@ -78,26 +76,13 @@ NSFetchedResultsController *fetchedResultsController = nil;
     
     return cell;
 }
-/*
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSArray *sections = fetchedResultsController.sections;
-       NSArray *currentSection = sections[section];
-        return currentSection;
-    }
-*/
-
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-    
-    
-  //  NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     
     Film *filmItem =  [fetchedResultsController objectAtIndexPath:indexPath];
     
     [self performSegueWithIdentifier:@"details" sender:filmItem.linkFeed];
-[tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
   
     
@@ -107,23 +92,27 @@ NSFetchedResultsController *fetchedResultsController = nil;
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  
-        DetailsViewController *d = (DetailsViewController *)segue.destinationViewController;
+        DetailsViewController *destinationController = (DetailsViewController *)segue.destinationViewController;
     NSString *url = sender;
-    d.url = [[NSString alloc] initWithString:url];
+    destinationController.url = [[NSString alloc] initWithString:url];
   
 }
 
 
-//MARK: NSFetchedResultsControllerDelegate
+#pragma mark - NSFetchedResultsControllerDelegate
 
 
 //check if there is some changes in Data Base
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(nullable NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(nullable NSIndexPath *)newIndexPath{
     switch (type) {
     case  NSFetchedResultsChangeInsert:
-            if (newIndexPath != nil) {
+            
+            if (newIndexPath != indexPath) {
                 NSArray <NSIndexPath *> * _newIndexPath =[[NSArray<NSIndexPath *> alloc] initWithObjects:newIndexPath,nil];
+                
                 [self.tableView insertRowsAtIndexPaths:_newIndexPath withRowAnimation: UITableViewRowAnimationFade];
+                
+              
             }
             break;
     case NSFetchedResultsChangeDelete:
@@ -141,15 +130,7 @@ NSFetchedResultsController *fetchedResultsController = nil;
                                   withRowAnimation:UITableViewRowAnimationFade];
             }
             break;
-           /*
-            // NewsTableViewCell *cell;
-            cell = [self.tableView cellForRowAtIndexPath:newIndexPath];
-            Film * filmItem = [fetchedResultsController objectAtIndexPath:newIndexPath];
-            cell.titleLabel.text = filmItem.titleFeed;
-            cell.descriptionLabel.text = filmItem.descriptionFeed;
-            [self.tableView reloadRowsAtIndexPaths:newIndexPath withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            */
+           
     default:
             [self.tableView reloadData];
             break;
@@ -171,16 +152,14 @@ NSFetchedResultsController *fetchedResultsController = nil;
     case NSFetchedResultsChangeInsert:
         
             
-#warning sectionIndex != nil - неправильная проверка
-           // NSIndexSet * sectionIndexSet = [[NSIndexSet ];
-            if(sectionIndex != nil){
+            if(sectionIndex != 0){
                 
                 NSIndexSet *sectionIndexSet = [[NSIndexSet alloc]initWithIndex:sectionIndex];
             [self.tableView insertSections:sectionIndexSet withRowAnimation:UITableViewRowAnimationFade];
             }
     case NSFetchedResultsChangeDelete:
             
-            if(sectionIndex != nil){
+            if(sectionIndex != 0){
                 NSIndexSet *sectionIndexSet = [[NSIndexSet alloc]initWithIndex:sectionIndex];
                 [self.tableView deleteSections:sectionIndexSet withRowAnimation: UITableViewRowAnimationFade];
             }

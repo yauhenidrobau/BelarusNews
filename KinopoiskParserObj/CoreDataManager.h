@@ -19,12 +19,7 @@
 
 +(CoreDataManager *)sharedInstance;
 - (void)saveContext;
-#warning applicationDocumentsDirectory - этот метод должен быть публичным? Где он еще используется?
-- (NSURL *)applicationDocumentsDirectory;
 -(void) saveFilms:(NSDictionary<NSString *,NSString *>*)films;
 -(NSFetchedResultsController *) fetchedResultsController:(NSString *)entityName key:(NSString *)keyForSort;
-
-
-- (void)saveContext;
 
 @end
