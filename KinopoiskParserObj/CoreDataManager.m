@@ -40,7 +40,7 @@
     
    
     NSFetchedResultsController *fetchedResultsController =[[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                                              managedObjectContext:self.managedObjectContext
+                                                                                              managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext]
                                                                                                 sectionNameKeyPath:nil
                                                                                                          cacheName:nil];
    // NSFetchedResultsController * fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataManager.instance.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil);
@@ -127,19 +127,18 @@
     }
 }
 
-
-
 -(void) saveFilms:(NSDictionary<NSString *,NSString *>*)films {
         // Set value to Context
     for (NSMutableDictionary<NSString *,NSString *>*filmInfo in films.allValues) {
         //NSString *filmTitle = filmInfo[@"title"];
         NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Film"];
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"titleFeed == %@"]];
+        NSPredicate *predicate = [NSPredicate  predicateWithFormat:@"titleFeed == %@",filmInfo[@"title"]]  ;
+        [fetchRequest setPredicate:predicate];
         
             Film *filmToBeSaved;
           //NSMutableArray  *Film = [[NSMutableArray alloc]init];
-          NSArray *fetchResults = [self.managedObjectContext executeFetchRequest:(NSFetchRequest *)fetchRequest error:nil ];
-            
+          NSArray *fetchResults = [_managedObjectContext executeFetchRequest:fetchRequest error:nil ];
+        
                 if (fetchResults.count > 0) {
                     Film *film_ = fetchResults.firstObject;
                     filmToBeSaved = film_;
@@ -147,8 +146,8 @@
                 }
                 else {
                     //begin create film
-                   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Film" inManagedObjectContext:self.managedObjectContext];
-                    Film  *filmEntity = [[Film alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext];
+                   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Film" inManagedObjectContext:_managedObjectContext];
+                    Film  *filmEntity = [[Film alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:_managedObjectContext];
                     filmToBeSaved = filmEntity;
                     
                     Film  *filmToBeSaved_ = filmToBeSaved;
@@ -158,10 +157,11 @@
                     filmToBeSaved_.descriptionFeed = filmInfo[@"description"];
                     filmToBeSaved_.pubDateFeed = filmInfo[@"pubDate"];
                     filmToBeSaved_.linkFeed = filmInfo[@"link"];
-                    filmToBeSaved_.urlImage = filmInfo[@"urlImage"];
+                    filmToBeSaved_.urlImage = filmInfo[@"url"];
                     // SaveData
                     [ self saveContext];
                 }
+        
     }
     
 }

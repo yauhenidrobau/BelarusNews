@@ -14,11 +14,11 @@
 #warning !!! размазал по файлам, если объявляешь проперти в Film+CoreDataProperties.h, тогда и @dynamic в Film+CoreDataProperties.m помести
 
 
-@synthesize titleFeed;
-@synthesize descriptionFeed;
-@synthesize linkFeed;
-@synthesize urlImage;
-@synthesize pubDateFeed;
+@dynamic  titleFeed;
+@dynamic descriptionFeed;
+@dynamic linkFeed;
+@dynamic urlImage;
+@dynamic pubDateFeed;
 // Insert code here to add functionality to your managed object subclass
 
 @end

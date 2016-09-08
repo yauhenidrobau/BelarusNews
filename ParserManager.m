@@ -14,7 +14,6 @@
 
 @property (nonatomic, copy) ParseCallback callback;
 
-                                                    // was NSMutableDictionary<NSString *, NSString *>*
 @property(nonatomic, strong) NSData *info;
 
 @end

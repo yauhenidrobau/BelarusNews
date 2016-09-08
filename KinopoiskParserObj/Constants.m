@@ -18,6 +18,9 @@
 @synthesize url;
 
 -(void) initUrl{
-  url = @"https://st.kp.yandex.net/rss/news_premiers.rss";
+    
+    //url = @"http://kinosal.by/rss.xml";
+    url = @"http://film-ussr.ru/rss.php?c=22";
+  //url = @"https://st.kp.yandex.net/rss/news_premiers.rss";
 }
 @end

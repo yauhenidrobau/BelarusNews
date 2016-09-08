@@ -15,11 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Film (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *descriptionFeed;
-@property (nullable, nonatomic, retain) NSString *linkFeed;
-@property (nullable, nonatomic, retain) NSString *pubDateFeed;
-@property (nullable, nonatomic, retain) NSString *titleFeed;
-@property (nullable, nonatomic, retain) NSString *urlImage;
+
 
 @end
 

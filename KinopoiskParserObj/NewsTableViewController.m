@@ -46,7 +46,7 @@ NSFetchedResultsController *fetchedResultsController = nil;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
-    navigationBarHidden = true;
+    [self.navigationController setHidesBarsOnSwipe:YES];
     
 }
 
@@ -72,6 +72,11 @@ NSFetchedResultsController *fetchedResultsController = nil;
     Film *filmItem = [fetchedResultsController objectAtIndexPath:(indexPath)];
     cell.titleLabel.text = filmItem.titleFeed;
     cell.descriptionLabel.text = filmItem.descriptionFeed;
+   // cell.imageNewsView.image = [UIImage imageNamed:filmItem.urlImage] ;
+    if (filmItem.urlImage.length != 0) {
+        cell.imageNewsView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:filmItem.urlImage]]];
+    }
+    
     
     
     return cell;
@@ -87,7 +92,6 @@ NSFetchedResultsController *fetchedResultsController = nil;
   
     
 }
-
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -107,28 +111,16 @@ NSFetchedResultsController *fetchedResultsController = nil;
     switch (type) {
     case  NSFetchedResultsChangeInsert:
             
-            if (newIndexPath != indexPath) {
-                NSArray <NSIndexPath *> * _newIndexPath =[[NSArray<NSIndexPath *> alloc] initWithObjects:newIndexPath,nil];
-                
-                [self.tableView insertRowsAtIndexPaths:_newIndexPath withRowAnimation: UITableViewRowAnimationFade];
-                
-              
-            }
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation: UITableViewRowAnimationFade];
             break;
+            
     case NSFetchedResultsChangeDelete:
-            if (newIndexPath != nil) {
-                NSArray <NSIndexPath *> * _newIndexPath =[[NSArray<NSIndexPath *> alloc] initWithObjects:newIndexPath,nil];
-
-            [self.tableView deleteRowsAtIndexPaths:_newIndexPath withRowAnimation: UITableViewRowAnimationFade];
-            }
+            
+            [self.tableView deleteRowsAtIndexPaths:@[newIndexPath] withRowAnimation: UITableViewRowAnimationFade];
             break;
     case NSFetchedResultsChangeUpdate:
             
-            if (newIndexPath != nil) {
-               NSArray <NSIndexPath *> * _newIndexPath =[[NSArray<NSIndexPath *> alloc] initWithObjects:newIndexPath,nil];
-                            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:_newIndexPath]
-                                  withRowAnimation:UITableViewRowAnimationFade];
-            }
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
            
     default:
@@ -177,10 +169,12 @@ NSFetchedResultsController *fetchedResultsController = nil;
     return UIStatusBarStyle  .Default
 }
 */
- 
+
+#pragma mark - Private methods
+
 -(void) setAppierance {
     // auto re-sizing cell
-    self.tableView.estimatedRowHeight = 80;
+    self.tableView.estimatedRowHeight = 130;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     

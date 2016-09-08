@@ -18,7 +18,10 @@
 @interface XMLParser : NSObject <NSXMLParserDelegate>
 
 @property(nonatomic, weak) id <XMLParserDelegate> xmlParserDelegate;
--(void) parseData:(NSData *) data;
+
 +(XMLParser *) sharedInstance;
+
+-(void) parseData:(NSData *) data;
+
 
 @end

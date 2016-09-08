@@ -15,7 +15,8 @@
 @synthesize activityInd;
 
 NSURL *url;
-//MARK: Lifecycle
+
+#pragma mark - Lifecycle
  -(void) viewDidLoad{
      [super  viewDidLoad];
     
@@ -25,7 +26,7 @@ NSURL *url;
 
 - (void)viewDidAppear:(BOOL)animated {
     //activityInd.hidden = true;
-    _newsUrl = [[NSURL alloc]initWithString:url];
+    _newsUrl = [NSURL URLWithString:url];
     //_newsUrl = url;
     if (_newsUrl != nil) {
         NSURLRequest *request = [NSURLRequest requestWithURL: _newsUrl];
@@ -39,14 +40,15 @@ NSURL *url;
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:(animated)];
     
-    navigationBarHidden = false;
-    //webView.hidden = false;
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 -(void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
 }
+
+#pragma mark - UIWebViewDelegate
 
 -(void) webViewDidStartLoad:(UIWebView*)webView {
     activityInd.hidden = false;

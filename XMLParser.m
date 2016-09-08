@@ -1,19 +1,19 @@
-//
-//  XMLParser.m
-//  KinopoiskParserObj
-//
-//  Created by YAUHENI DROBAU on 01.09.16.
-//  Copyright © 2016 YAUHENI DROBAU. All rights reserved.
-//
+    //
+    //  XMLParser.m
+    //  KinopoiskParserObj
+    //
+    //  Created by YAUHENI DROBAU on 01.09.16.
+    //  Copyright © 2016 YAUHENI DROBAU. All rights reserved.
+    //
 
-#import "XMLParser.h"
-#import <Foundation/Foundation.h>
+    #import "XMLParser.h"
+    #import <Foundation/Foundation.h>
 
 
-@implementation XMLParser 
+    @implementation XMLParser 
 
     //MARK: Properties
-    
+
     +(XMLParser *) sharedInstance{
         static dispatch_once_t pred;
         static XMLParser * shared = nil;
@@ -32,14 +32,15 @@
     NSMutableString *pubDateFeed;
     NSMutableString *linkFeed;
     NSMutableString *urlImage;
+    NSMutableString * tempString;
 
-//XMLParser<NSXMLParserDelegate> *parserDelegate = [parserDelegate conformsToProtocol:NSXMLParserDelegate];
+    //XMLParser<NSXMLParserDelegate> *parserDelegate = [parserDelegate conformsToProtocol:NSXMLParserDelegate];
 
 
-//MARK: Lifestyle
+    //MARK: Lifestyle
 
-    
--(void) parseData:(NSData *) data {
+
+    -(void) parseData:(NSData *) data {
     dictParsedData = [[NSMutableDictionary<NSString *, NSString *> alloc]init];
     NSXMLParser *parser =[[NSXMLParser alloc]initWithData:data];
         parser.delegate = self;
@@ -47,10 +48,10 @@
     }
 
 
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName attributes:(NSDictionary<NSString *, NSString *> *)attributeDict {
+    - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName attributes:(NSDictionary<NSString *, NSString *> *)attributeDict {
     currentElement = elementName;
     if ([elementName isEqualToString:@"item"]) {
-    
+
         currentDataDictionary = [[NSMutableDictionary<NSString *, NSString *> alloc]init];
         titleFeed =[[NSMutableString alloc]initWithString:@""];
         
@@ -58,9 +59,10 @@
         pubDateFeed = [[NSMutableString alloc] initWithString: @""];
         linkFeed = [[NSMutableString alloc]init];
         urlImage = [[NSMutableString alloc] initWithString: @""];
+        tempString = [[NSMutableString alloc] initWithString: @""];
     }
-}
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName{
+    }
+    - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName{
     //save data
     if ([elementName isEqualToString:@"item"]) {
         
@@ -83,15 +85,34 @@
         if (![pubDateFeed  isEqual: @""]) {
             [currentDataDictionary  setObject:pubDateFeed forKey:@"pubDate"];
         }
-        
-        if (![urlImage  isEqual: @""]){
+        NSRange match;
+        match = [tempString rangeOfString:@"<p><img src="];
+        //match = [tempString rangeOfString: @"|"];
+        if (match.location < 200) {
+        if (tempString.length !=0) {
+            if (match.length == 12) {
+                NSString *cdataString = [tempString substringWithRange:NSMakeRange(match.length + 1,match.location + 50 )];
+                [urlImage appendString:cdataString];
+            }
+
+        }
+        }
+        if (![urlImage  isEqual: @""]) {
             [currentDataDictionary  setObject:urlImage forKey:@"url"];
         }
+    
         [dictParsedData setObject:currentDataDictionary forKey:currentDataDictionary[@"title"]];
     }
-}   
-    
-   - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+    }
+
+    - (void)parser:(NSXMLParser *)parser foundCDATA:(NSData *)CDATABlock
+    {
+     NSString *someString = [[NSString alloc] initWithData:CDATABlock encoding:NSUTF8StringEncoding];
+    [tempString appendString:someString];
+
+    }
+
+    - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
         
         if ([currentElement  isEqual: @"title"]) {
             [titleFeed appendString: string];
@@ -105,11 +126,11 @@
             [urlImage  appendString: string];
         }
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     // MARK: NSXMLParserDelegate
     - (void)parserDidEndDocument:(NSXMLParser *)parser {
         [ _xmlParserDelegate xmlParserDidFinishParsing:dictParsedData error:nil];
@@ -120,12 +141,11 @@
     print(parseError.description);
         
     }
-    
+
     - (void)parser:(NSXMLParser *)parser validationErrorOccurred:(NSError *)validationError{
         print(validationError.description);
     }
     */
-    
 
 
 
@@ -133,4 +153,5 @@
 
 
 
-@end
+
+    @end
