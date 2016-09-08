@@ -13,9 +13,12 @@
 #import "NewsTableViewCell.h"
 #import "DetailsViewController.h"
 
-@interface NewsTableViewController () 
+@interface NewsTableViewController () <UIScrollViewDelegate>
 
 @property(nonatomic,weak) UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *scrollButton;
+@property (assign, nonatomic) CGPoint lastContentOffset;
+- (IBAction)scrollButtonTouchUpInside:(id)sender;
 
 @end
 
@@ -42,6 +45,8 @@ NSFetchedResultsController *fetchedResultsController = nil;
     [self initFetchResultController];
     [self updateData];
     [self loadData];
+    self.scrollButton.hidden = YES;
+    self.scrollButton.layer.cornerRadius = [self.scrollButton frame].size.height / 2;
    // [self.tableView reloadData];
 }
 
@@ -163,6 +168,36 @@ NSFetchedResultsController *fetchedResultsController = nil;
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
     [self.tableView beginUpdates];
+}
+
+#pragma mark UIScrollViewDelegate
+
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGPoint currentOffset = scrollView.contentOffset;
+    CGFloat height = scrollView.frame.size.height;
+    if (currentOffset.y > self.lastContentOffset.y && currentOffset.y > 0 )
+    {
+        self.scrollButton.hidden = NO;
+    }
+    else
+    {
+        self.scrollButton.hidden = YES;
+        // Upward
+    }
+    self.lastContentOffset = currentOffset;
+    
+    CGFloat distanceFromBottom = scrollView.contentSize.height - currentOffset.y;
+    
+    if(distanceFromBottom <= height)
+    {
+        self.scrollButton.hidden = NO;
+    }
+}
+
+- (IBAction)scrollButtonTouchUpInside:(id)sender {
+    [self.tableView setContentOffset:CGPointZero animated:YES];
+    self.scrollButton.hidden = YES;
 }
 /*
 - (UIStatusBarStyle)preferredStatusBarStyle NS_AVAILABLE_IOS(7_0) {
