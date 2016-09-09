@@ -63,6 +63,9 @@
                value = "descriptionFeed">
             </PersistentString>
             <PersistentString
+               value = "elementName">
+            </PersistentString>
+            <PersistentString
                value = "urlImage.length">
             </PersistentString>
             <PersistentString
@@ -95,6 +98,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[XMLParser parser:foundCDATA:]:XMLParser.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "cdataString">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[RemoteFacade loadData:callback:]:RemoteFacade.m">
          <PersistentStrings>
             <PersistentString
@@ -102,14 +113,6 @@
             </PersistentString>
             <PersistentString
                value = "self.info">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[XMLParser parser:foundCDATA:]:XMLParser.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "cdataString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -142,13 +145,16 @@
                value = "titleFeed">
             </PersistentString>
             <PersistentString
-               value = "urlImage.length">
-            </PersistentString>
-            <PersistentString
                value = "dictParsedData">
             </PersistentString>
             <PersistentString
                value = "someString">
+            </PersistentString>
+            <PersistentString
+               value = "urlImage.length">
+            </PersistentString>
+            <PersistentString
+               value = "urlImage">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

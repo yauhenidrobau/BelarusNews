@@ -1,5 +1,5 @@
 //
-//  NewsTableViewController.h
+//  NewsTableView.h
 //  KinopoiskParserObj
 //
 //  Created by YAUHENI DROBAU on 01.09.16.
@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface NewsTableViewController : UITableViewController <NSFetchedResultsControllerDelegate> 
+@interface NewsTableView: UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 
 //@property(nonatomic, copy) NSFetchedResultsController * fetchedResultsController;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *uiView;
 @end

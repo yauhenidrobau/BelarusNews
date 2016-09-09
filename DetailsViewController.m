@@ -26,6 +26,8 @@ NSURL *url;
 
 - (void)viewDidAppear:(BOOL)animated {
     //activityInd.hidden = true;
+    activityInd.hidden = false;
+    [activityInd startAnimating];
     _newsUrl = [NSURL URLWithString:url];
     //_newsUrl = url;
     if (_newsUrl != nil) {
@@ -51,8 +53,7 @@ NSURL *url;
 #pragma mark - UIWebViewDelegate
 
 -(void) webViewDidStartLoad:(UIWebView*)webView {
-    activityInd.hidden = false;
-    [activityInd startAnimating];
+   
 }
 
 -(void) webViewDidFinishLoad:(UIWebView *)webView {

@@ -76,6 +76,7 @@
             [currentDataDictionary  setObject:linkFeed forKey:@"link"];
         }
         
+        
         if (![descriptionFeed  isEqual: @""]) {
             
             [currentDataDictionary  setObject:descriptionFeed forKey:@"description"];
@@ -88,7 +89,9 @@
         NSRange match;
         match = [tempString rangeOfString:@"<p><img src="];
         //match = [tempString rangeOfString: @"|"];
-        if (match.location < 200) {
+        
+        
+         if (match.location < 200) {
         if (tempString.length !=0) {
             if (match.length == 12) {
                 NSString *cdataString = [tempString substringWithRange:NSMakeRange(match.length + 1,match.location + 50 )];
@@ -97,6 +100,20 @@
 
         }
         }
+        
+        /*
+        if (match.location < 200) {
+            if (tempString.length !=0) {
+                if (match.length == 12) {
+                    NSString *cdataString = [tempString substringWithRange:NSMakeRange(match.length + 1,match.location + 50 )];
+                    [urlImage appendString:cdataString];
+                }
+                
+            }
+        }
+        
+       */
+        
         if (![urlImage  isEqual: @""]) {
             [currentDataDictionary  setObject:urlImage forKey:@"url"];
         }
@@ -125,11 +142,8 @@
         } else if ([currentElement  isEqual: @"url"] && urlImage.length == 0){
             [urlImage  appendString: string];
         }
+    
     }
-
-
-
-
 
     // MARK: NSXMLParserDelegate
     - (void)parserDidEndDocument:(NSXMLParser *)parser {

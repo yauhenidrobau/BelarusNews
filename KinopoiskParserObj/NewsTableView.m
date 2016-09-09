@@ -1,28 +1,29 @@
 //
-//  NewsTableViewController.m
+//  NewsTableView.m
 //  KinopoiskParserObj
 //
 //  Created by YAUHENI DROBAU on 01.09.16.
 //  Copyright © 2016 YAUHENI DROBAU. All rights reserved.
 //
 
-#import "NewsTableViewController.h"
+#import "NewsTableView.h"
 #import "CoreDataManager.h"
 #import "DataManager.h"
 #import "Film.h"
 #import "NewsTableViewCell.h"
 #import "DetailsViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface NewsTableViewController () <UIScrollViewDelegate>
+@interface NewsTableView () <UIScrollViewDelegate>
 
-@property(nonatomic,weak) UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (assign, nonatomic) CGPoint lastContentOffset;
+
 - (IBAction)scrollButtonTouchUpInside:(id)sender;
 
 @end
 
-@implementation NewsTableViewController
+@implementation NewsTableView
 
 
 @synthesize navigationBarHidden;
@@ -32,8 +33,8 @@
 
 NSFetchedResultsController *fetchedResultsController = nil;
 
-
 #pragma mark - Lifecycle
+
 -(void) initFetchResultController{
     fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController:@"Film" key:@"titleFeed"];
     fetchedResultsController.delegate = self;
@@ -46,8 +47,7 @@ NSFetchedResultsController *fetchedResultsController = nil;
     [self updateData];
     [self loadData];
     self.scrollButton.hidden = YES;
-    self.scrollButton.layer.cornerRadius = [self.scrollButton frame].size.height / 2;
-   // [self.tableView reloadData];
+   // self.scrollButton.layer.cornerRadius = [self.scrollButton frame].size.height / 2;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -67,23 +67,18 @@ NSFetchedResultsController *fetchedResultsController = nil;
     
    NSArray *sections = fetchedResultsController.sections;
     return sections.count;
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+   
     NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    
     Film *filmItem = [fetchedResultsController objectAtIndexPath:(indexPath)];
     cell.titleLabel.text = filmItem.titleFeed;
     cell.descriptionLabel.text = filmItem.descriptionFeed;
-   // cell.imageNewsView.image = [UIImage imageNamed:filmItem.urlImage] ;
+    cell.pubDateLabel.text = filmItem.pubDateFeed;
     if (filmItem.urlImage.length != 0) {
         cell.imageNewsView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:filmItem.urlImage]]];
     }
-    
-    
-    
     return cell;
 }
 
@@ -94,22 +89,16 @@ NSFetchedResultsController *fetchedResultsController = nil;
     [self performSegueWithIdentifier:@"details" sender:filmItem.linkFeed];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-  
-    
 }
-
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  
         DetailsViewController *destinationController = (DetailsViewController *)segue.destinationViewController;
     NSString *url = sender;
     destinationController.url = [[NSString alloc] initWithString:url];
-  
 }
 
-
 #pragma mark - NSFetchedResultsControllerDelegate
-
 
 //check if there is some changes in Data Base
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(nullable NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(nullable NSIndexPath *)newIndexPath{
@@ -134,6 +123,7 @@ NSFetchedResultsController *fetchedResultsController = nil;
             
     }
 }
+
 
 - (nullable NSString *)sectionIndexTitleForSectionName:(NSString *)sectionName{
     return sectionName;
@@ -198,6 +188,7 @@ NSFetchedResultsController *fetchedResultsController = nil;
 - (IBAction)scrollButtonTouchUpInside:(id)sender {
     [self.tableView setContentOffset:CGPointZero animated:YES];
     self.scrollButton.hidden = YES;
+    [self.navigationController setNavigationBarHidden:NO];
 }
 /*
 - (UIStatusBarStyle)preferredStatusBarStyle NS_AVAILABLE_IOS(7_0) {
@@ -209,7 +200,7 @@ NSFetchedResultsController *fetchedResultsController = nil;
 
 -(void) setAppierance {
     // auto re-sizing cell
-    self.tableView.estimatedRowHeight = 130;
+    self.tableView.estimatedRowHeight = 80;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     

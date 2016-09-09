@@ -17,7 +17,7 @@
 		1E7329101D7813750027E46E /* KinopoiskParserObjTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73290F1D7813750027E46E /* KinopoiskParserObjTests.m */; };
 		1E73291B1D7813750027E46E /* KinopoiskParserObjUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73291A1D7813750027E46E /* KinopoiskParserObjUITests.m */; };
 		1E73292B1D7813B50027E46E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73292A1D7813B50027E46E /* Constants.m */; };
-		1E7329301D7814620027E46E /* NewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73292F1D7814620027E46E /* NewsTableViewController.m */; };
+		1E7329301D7814620027E46E /* NewsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73292F1D7814620027E46E /* NewsTableView.m */; };
 		1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329351D7814C00027E46E /* NewsTableViewCell.m */; };
 		1E73293E1D7818190027E46E /* Film+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73293B1D7818190027E46E /* Film+CoreDataProperties.m */; };
 		1E73293F1D7818190027E46E /* Film.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73293D1D7818190027E46E /* Film.m */; };
@@ -65,8 +65,8 @@
 		1E73291C1D7813750027E46E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E7329291D7813B50027E46E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		1E73292A1D7813B50027E46E /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
-		1E73292E1D7814620027E46E /* NewsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableViewController.h; sourceTree = "<group>"; };
-		1E73292F1D7814620027E46E /* NewsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableViewController.m; sourceTree = "<group>"; };
+		1E73292E1D7814620027E46E /* NewsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableView.h; sourceTree = "<group>"; };
+		1E73292F1D7814620027E46E /* NewsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableView.m; sourceTree = "<group>"; };
 		1E7329341D7814C00027E46E /* NewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableViewCell.h; sourceTree = "<group>"; };
 		1E7329351D7814C00027E46E /* NewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableViewCell.m; sourceTree = "<group>"; };
 		1E73293A1D7818190027E46E /* Film+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Film+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -189,8 +189,8 @@
 		1E73292C1D78142D0027E46E /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				1E73292E1D7814620027E46E /* NewsTableViewController.h */,
-				1E73292F1D7814620027E46E /* NewsTableViewController.m */,
+				1E73292E1D7814620027E46E /* NewsTableView.h */,
+				1E73292F1D7814620027E46E /* NewsTableView.m */,
 				1E7329341D7814C00027E46E /* NewsTableViewCell.h */,
 				1E7329351D7814C00027E46E /* NewsTableViewCell.m */,
 				1E7329531D7848530027E46E /* DetailsViewController.h */,
@@ -224,10 +224,10 @@
 			children = (
 				1E7328FE1D7813740027E46E /* KinopoiskParserObj.xcdatamodeld */,
 				1E73293A1D7818190027E46E /* Film+CoreDataProperties.h */,
-				1E73293B1D7818190027E46E /* Film+CoreDataProperties.m */,
 				1E73293C1D7818190027E46E /* Film.h */,
 				1E73293D1D7818190027E46E /* Film.m */,
 				1E73294A1D783E570027E46E /* CoreDataManager.h */,
+				1E73293B1D7818190027E46E /* Film+CoreDataProperties.m */,
 				1E73294B1D783E570027E46E /* CoreDataManager.m */,
 				1E73294D1D7843310027E46E /* RemoteFacade.h */,
 				1E73294E1D7843310027E46E /* RemoteFacade.m */,
@@ -367,7 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E7329301D7814620027E46E /* NewsTableViewController.m in Sources */,
+				1E7329301D7814620027E46E /* NewsTableView.m in Sources */,
 				1E73292B1D7813B50027E46E /* Constants.m in Sources */,
 				1E73294F1D7843310027E46E /* RemoteFacade.m in Sources */,
 				1E7329471D7836400027E46E /* ParserManager.m in Sources */,
@@ -522,7 +522,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = KinopoiskParserObj/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Cogniteq.KinopoiskParserObj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -534,7 +534,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = KinopoiskParserObj/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Cogniteq.KinopoiskParserObj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
