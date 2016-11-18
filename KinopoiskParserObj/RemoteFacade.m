@@ -8,7 +8,6 @@
 
 #import "RemoteFacade.h"
 #import "ParserManager.h"
-#import "CoreDataManager.h"
 
 typedef void (^DataLoadCallback)(NSData *info, NSError* error);
 
@@ -35,10 +34,8 @@ typedef void (^DataLoadCallback)(NSData *info, NSError* error);
 
 -(void) loadData:(NSString *)dataURL callback:(DataLoadCallback)comptetion {
     // load data
-    
-    
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSURL *url = [NSURL URLWithString:(NSString *)dataURL];
+        NSURL *url = [NSURL URLWithString:dataURL];
         NSData *info = [NSData dataWithContentsOfURL:url];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (comptetion) {

@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E19D83F1D79A2590065F019 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E19D83D1D79A2040065F019 /* CoreData.framework */; };
+		1E11C9411DDDA10200D55B28 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E11C9401DDDA10200D55B28 /* Realm.framework */; };
+		1E11C9421DDDA10200D55B28 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E11C9401DDDA10200D55B28 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */; };
+		1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */; };
 		1E7328F41D7813740027E46E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7328F31D7813740027E46E /* main.m */; };
 		1E7328F71D7813740027E46E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7328F61D7813740027E46E /* AppDelegate.m */; };
 		1E7328FD1D7813740027E46E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E7328FB1D7813740027E46E /* Main.storyboard */; };
-		1E7329001D7813740027E46E /* KinopoiskParserObj.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1E7328FE1D7813740027E46E /* KinopoiskParserObj.xcdatamodeld */; };
 		1E7329021D7813740027E46E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E7329011D7813740027E46E /* Assets.xcassets */; };
 		1E7329051D7813740027E46E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E7329031D7813740027E46E /* LaunchScreen.storyboard */; };
 		1E7329101D7813750027E46E /* KinopoiskParserObjTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73290F1D7813750027E46E /* KinopoiskParserObjTests.m */; };
@@ -19,14 +21,12 @@
 		1E73292B1D7813B50027E46E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73292A1D7813B50027E46E /* Constants.m */; };
 		1E7329301D7814620027E46E /* NewsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73292F1D7814620027E46E /* NewsTableView.m */; };
 		1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329351D7814C00027E46E /* NewsTableViewCell.m */; };
-		1E73293E1D7818190027E46E /* Film+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73293B1D7818190027E46E /* Film+CoreDataProperties.m */; };
-		1E73293F1D7818190027E46E /* Film.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73293D1D7818190027E46E /* Film.m */; };
 		1E7329441D781E980027E46E /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329431D781E980027E46E /* XMLParser.m */; };
 		1E7329471D7836400027E46E /* ParserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329461D7836400027E46E /* ParserManager.m */; };
-		1E73294C1D783E570027E46E /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73294B1D783E570027E46E /* CoreDataManager.m */; };
 		1E73294F1D7843310027E46E /* RemoteFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73294E1D7843310027E46E /* RemoteFacade.m */; };
 		1E7329521D7845210027E46E /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329511D7845210027E46E /* DataManager.m */; };
 		1E7329551D7848530027E46E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329541D7848530027E46E /* DetailsViewController.m */; };
+		3D499CCAEC00E7C593490045 /* libPods-KinopoiskParserObj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0EC11EF02CB57D6640E485 /* libPods-KinopoiskParserObj.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,14 +46,31 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1E11C9431DDDA10200D55B28 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1E11C9421DDDA10200D55B28 /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		1E19D83D1D79A2040065F019 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1E11C9401DDDA10200D55B28 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		1E11C9451DDDAA1F00D55B28 /* NewsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsEntity.h; sourceTree = "<group>"; };
+		1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsEntity.m; sourceTree = "<group>"; };
+		1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDataManager.h; sourceTree = "<group>"; };
+		1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmDataManager.m; sourceTree = "<group>"; };
 		1E7328EF1D7813740027E46E /* KinopoiskParserObj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KinopoiskParserObj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7328F31D7813740027E46E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1E7328F51D7813740027E46E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1E7328F61D7813740027E46E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1E7328FC1D7813740027E46E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		1E7328FF1D7813740027E46E /* KinopoiskParserObj.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KinopoiskParserObj.xcdatamodel; sourceTree = "<group>"; };
 		1E7329011D7813740027E46E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1E7329041D7813740027E46E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1E7329061D7813740027E46E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -69,22 +86,19 @@
 		1E73292F1D7814620027E46E /* NewsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableView.m; sourceTree = "<group>"; };
 		1E7329341D7814C00027E46E /* NewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableViewCell.h; sourceTree = "<group>"; };
 		1E7329351D7814C00027E46E /* NewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableViewCell.m; sourceTree = "<group>"; };
-		1E73293A1D7818190027E46E /* Film+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Film+CoreDataProperties.h"; sourceTree = "<group>"; };
-		1E73293B1D7818190027E46E /* Film+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Film+CoreDataProperties.m"; sourceTree = "<group>"; };
-		1E73293C1D7818190027E46E /* Film.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Film.h; sourceTree = "<group>"; };
-		1E73293D1D7818190027E46E /* Film.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Film.m; sourceTree = "<group>"; };
 		1E7329421D781E980027E46E /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLParser.h; path = ../XMLParser.h; sourceTree = "<group>"; };
 		1E7329431D781E980027E46E /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLParser.m; path = ../XMLParser.m; sourceTree = "<group>"; };
 		1E7329451D7836400027E46E /* ParserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParserManager.h; path = ../ParserManager.h; sourceTree = "<group>"; };
 		1E7329461D7836400027E46E /* ParserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParserManager.m; path = ../ParserManager.m; sourceTree = "<group>"; };
-		1E73294A1D783E570027E46E /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
-		1E73294B1D783E570027E46E /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		1E73294D1D7843310027E46E /* RemoteFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteFacade.h; sourceTree = "<group>"; };
 		1E73294E1D7843310027E46E /* RemoteFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteFacade.m; sourceTree = "<group>"; };
 		1E7329501D7845210027E46E /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		1E7329511D7845210027E46E /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		1E7329531D7848530027E46E /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsViewController.h; path = ../DetailsViewController.h; sourceTree = "<group>"; };
 		1E7329541D7848530027E46E /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsViewController.m; path = ../DetailsViewController.m; sourceTree = "<group>"; };
+		336B6CDD81FCEE97E5F4E57B /* Pods-KinopoiskParserObj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinopoiskParserObj.release.xcconfig"; path = "Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj.release.xcconfig"; sourceTree = "<group>"; };
+		8B1146B5C66D8993D8AAB349 /* Pods-KinopoiskParserObj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinopoiskParserObj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj.debug.xcconfig"; sourceTree = "<group>"; };
+		FF0EC11EF02CB57D6640E485 /* libPods-KinopoiskParserObj.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KinopoiskParserObj.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +106,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E19D83F1D79A2590065F019 /* CoreData.framework in Frameworks */,
+				1E11C9411DDDA10200D55B28 /* Realm.framework in Frameworks */,
+				3D499CCAEC00E7C593490045 /* libPods-KinopoiskParserObj.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,14 +128,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E11C93D1DDD9E4C00D55B28 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1E11C9401DDDA10200D55B28 /* Realm.framework */,
+				FF0EC11EF02CB57D6640E485 /* libPods-KinopoiskParserObj.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1E7328E61D7813740027E46E = {
 			isa = PBXGroup;
 			children = (
-				1E19D83D1D79A2040065F019 /* CoreData.framework */,
+				1E11C93D1DDD9E4C00D55B28 /* Frameworks */,
 				1E7328F11D7813740027E46E /* KinopoiskParserObj */,
 				1E73290E1D7813750027E46E /* KinopoiskParserObjTests */,
 				1E7329191D7813750027E46E /* KinopoiskParserObjUITests */,
 				1E7328F01D7813740027E46E /* Products */,
+				63BC8B2900C89A3FD674B9BB /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,19 +247,25 @@
 		1E7329491D783DFD0027E46E /* Persistance */ = {
 			isa = PBXGroup;
 			children = (
-				1E7328FE1D7813740027E46E /* KinopoiskParserObj.xcdatamodeld */,
-				1E73293A1D7818190027E46E /* Film+CoreDataProperties.h */,
-				1E73293C1D7818190027E46E /* Film.h */,
-				1E73293D1D7818190027E46E /* Film.m */,
-				1E73294A1D783E570027E46E /* CoreDataManager.h */,
-				1E73293B1D7818190027E46E /* Film+CoreDataProperties.m */,
-				1E73294B1D783E570027E46E /* CoreDataManager.m */,
+				1E11C9451DDDAA1F00D55B28 /* NewsEntity.h */,
+				1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */,
+				1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */,
+				1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */,
 				1E73294D1D7843310027E46E /* RemoteFacade.h */,
 				1E73294E1D7843310027E46E /* RemoteFacade.m */,
 				1E7329501D7845210027E46E /* DataManager.h */,
 				1E7329511D7845210027E46E /* DataManager.m */,
 			);
 			name = Persistance;
+			sourceTree = "<group>";
+		};
+		63BC8B2900C89A3FD674B9BB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8B1146B5C66D8993D8AAB349 /* Pods-KinopoiskParserObj.debug.xcconfig */,
+				336B6CDD81FCEE97E5F4E57B /* Pods-KinopoiskParserObj.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,9 +275,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1E73291F1D7813750027E46E /* Build configuration list for PBXNativeTarget "KinopoiskParserObj" */;
 			buildPhases = (
+				B755CB0345D078013C0B4EF2 /* [CP] Check Pods Manifest.lock */,
 				1E7328EB1D7813740027E46E /* Sources */,
 				1E7328EC1D7813740027E46E /* Frameworks */,
 				1E7328ED1D7813740027E46E /* Resources */,
+				1E11C9431DDDA10200D55B28 /* Embed Frameworks */,
+				1E11C9441DDDA18300D55B28 /* ShellScript */,
+				5681CB03AA966031C4CA2015 /* [CP] Embed Pods Frameworks */,
+				C41DD30F770866432666F9C3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -362,6 +398,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1E11C9441DDDA18300D55B28 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
+		};
+		5681CB03AA966031C4CA2015 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B755CB0345D078013C0B4EF2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C41DD30F770866432666F9C3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1E7328EB1D7813740027E46E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -370,17 +467,15 @@
 				1E7329301D7814620027E46E /* NewsTableView.m in Sources */,
 				1E73292B1D7813B50027E46E /* Constants.m in Sources */,
 				1E73294F1D7843310027E46E /* RemoteFacade.m in Sources */,
+				1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */,
 				1E7329471D7836400027E46E /* ParserManager.m in Sources */,
-				1E73293F1D7818190027E46E /* Film.m in Sources */,
 				1E7329441D781E980027E46E /* XMLParser.m in Sources */,
-				1E73294C1D783E570027E46E /* CoreDataManager.m in Sources */,
 				1E7328F71D7813740027E46E /* AppDelegate.m in Sources */,
 				1E7329521D7845210027E46E /* DataManager.m in Sources */,
-				1E7329001D7813740027E46E /* KinopoiskParserObj.xcdatamodeld in Sources */,
+				1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */,
 				1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */,
 				1E7329551D7848530027E46E /* DetailsViewController.m in Sources */,
 				1E7328F41D7813740027E46E /* main.m in Sources */,
-				1E73293E1D7818190027E46E /* Film+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,8 +614,13 @@
 		};
 		1E7329201D7813750027E46E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B1146B5C66D8993D8AAB349 /* Pods-KinopoiskParserObj.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = KinopoiskParserObj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -531,8 +631,13 @@
 		};
 		1E7329211D7813750027E46E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 336B6CDD81FCEE97E5F4E57B /* Pods-KinopoiskParserObj.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = KinopoiskParserObj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -629,19 +734,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		1E7328FE1D7813740027E46E /* KinopoiskParserObj.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				1E7328FF1D7813740027E46E /* KinopoiskParserObj.xcdatamodel */,
-			);
-			currentVersion = 1E7328FF1D7813740027E46E /* KinopoiskParserObj.xcdatamodel */;
-			path = KinopoiskParserObj.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 1E7328E71D7813740027E46E /* Project object */;
 }

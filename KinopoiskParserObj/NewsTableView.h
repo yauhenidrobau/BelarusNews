@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+typedef void (^UpdateDataCallback)(NSError *error);
+
 @interface NewsTableView: UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 
 //@property(nonatomic, copy) NSFetchedResultsController * fetchedResultsController;

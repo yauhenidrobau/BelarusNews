@@ -6,12 +6,13 @@
 //  Copyright © 2016 YAUHENI DROBAU. All rights reserved.
 //
 
+
 #import "DataManager.h"
+
 #import "RemoteFacade.h"
 #import "ParserManager.h"
-#import "CoreDataManager.h"
 #import "Constants.h"
-
+#import "RealmDataManager.h"
 
 @implementation DataManager
 @synthesize infoDict;
@@ -26,23 +27,19 @@
     return shared;
 }
 
-
-
--(void) updateData {
-    Constants *constant = [[Constants alloc]init];
-    [constant initUrl];
-    [[RemoteFacade sharedInstance] loadData:[constant url] callback:^(NSData *info, NSError *error) {
+-(void) updateDataWithURLString:(NSString *)urlString AndCallBack:(UpdateDataCallback)completionHandler {
+    Constants *constant = [Constants new];
+    [[RemoteFacade sharedInstance] loadData:[constant getURLByString:urlString] callback:^(NSData *info, NSError *error) {
         if (error || !info) {
             //TODO: handle error
         } else {
             [[ParserManager sharedInstance] parseXmlData:info callback:^(NSData * dict, NSError *error) {
-       
-                [[CoreDataManager sharedInstance]saveFilms:dict];
+                [[RealmDataManager sharedInstance]saveNews:dict withServiceString:urlString];
+                if (completionHandler) {
+                    completionHandler(error);
+                }
             }];
         }
-        
-              
     }];
-
 }
 @end

@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+typedef void (^UpdateDataCallback)(NSError *error);
 
 @interface DataManager : NSObject
 
 +(DataManager *) sharedInstance;
--(void) updateData;
+-(void) updateDataWithURLString:(NSString *)urlString AndCallBack:(UpdateDataCallback)completionHandler;
 @property(nonatomic, strong) NSMutableDictionary<NSString *,NSString *> *infoDict;
 @end

@@ -11,6 +11,7 @@
 @interface Constants : NSObject
 
 @property(nonatomic, readonly) NSString *url;
-@property(nonnull,readonly) NSString *tutByUrl;
--(void) initUrl;
+@property(nonatomic,readonly) NSString *tutByUrl;
+@property(nonatomic,readonly) NSString *devBy;
+-(NSString *)getURLByString:(NSString *)urlString;
 @end

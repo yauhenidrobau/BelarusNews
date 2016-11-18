@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailsViewController : UIViewController <UIWebViewDelegate>
-
++ (id)newInstance;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
-@property(nonatomic, copy) NSURL *newsUrl;
-@property(nonatomic, copy) NSString *url;
+@property(nonatomic, strong) NSURL *newsUrl;
+@property(nonatomic, strong) NSString *url;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @end

@@ -23,7 +23,7 @@
         });
         return shared;
     }
-    NSMutableDictionary *dictParsedData;
+    NSMutableArray *dictParsedData;
     NSMutableDictionary *currentDataDictionary;
     NSString *currentElement;
     NSMutableString *foundCharacters;
@@ -41,7 +41,7 @@
 
 
     -(void) parseData:(NSData *) data {
-    dictParsedData = [[NSMutableDictionary<NSString *, NSString *> alloc]init];
+    dictParsedData = [[NSMutableArray alloc]init];
     NSXMLParser *parser =[[NSXMLParser alloc]initWithData:data];
         parser.delegate = self;
         [parser parse ];
@@ -86,21 +86,23 @@
         if (![pubDateFeed  isEqual: @""]) {
             [currentDataDictionary  setObject:pubDateFeed forKey:@"pubDate"];
         }
-        NSRange match;
-        match = [tempString rangeOfString:@"<p><img src="];
+        NSRange matchBegin = [descriptionFeed rangeOfString:@"<img src="];
+        NSRange matchEnd = [descriptionFeed rangeOfString:@"width="];
+
         //match = [tempString rangeOfString: @"|"];
         
         
-         if (match.location < 200) {
-        if (tempString.length !=0) {
-            if (match.length == 12) {
-                NSString *cdataString = [tempString substringWithRange:NSMakeRange(match.length + 1,match.location + 50 )];
+         if (matchBegin.location < 200 && matchEnd.location < 200) {
+//        if (descriptionFeed.length !=0) {
+//            if (match.length == 12) {
+                NSString *cdataString = [descriptionFeed substringWithRange:NSMakeRange(matchBegin.length + 1,matchEnd.location - 3  - matchBegin.length )];
+             urlImage = [NSMutableString stringWithString:@""];
                 [urlImage appendString:cdataString];
             }
-
-        }
-        }
-        
+//
+//        }
+//        }
+//        
         /*
         if (match.location < 200) {
             if (tempString.length !=0) {
@@ -115,10 +117,10 @@
        */
         
         if (![urlImage  isEqual: @""]) {
-            [currentDataDictionary  setObject:urlImage forKey:@"url"];
+            [currentDataDictionary  setObject:urlImage forKey:@"imageUrl"];
         }
     
-        [dictParsedData setObject:currentDataDictionary forKey:currentDataDictionary[@"title"]];
+        [dictParsedData addObject:currentDataDictionary];
     }
     }
 
@@ -139,9 +141,12 @@
             [linkFeed appendString: string];
         } else if ([currentElement  isEqual: @"pubDate"]) {
            [ pubDateFeed appendString:string ];
-        } else if ([currentElement  isEqual: @"url"] && urlImage.length == 0){
-            [urlImage  appendString: string];
         }
+//        else if ([currentElement  isEqual: @"media:content"] && urlImage.length == 0){
+//            [urlImage  appendString: string];
+//        } else if([currentElement isEqual:@""]) {
+//            [tempString  appendString: string];
+//        }
     
     }
 

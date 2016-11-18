@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[NewsTableView initFetchResultController]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "newsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[RealmDataManager saveNews:withServiceString:]:RealmDataManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentNews.feedIdString">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView tableView:didSelectRowAtIndexPath:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "newsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView tableView:numberOfRowsInSection:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "newsArray.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CoreDataManager saveFilms:]:CoreDataManager.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView initRealmArray]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.array[self.NewsSegmentedControl.selectedSegmentIndex]">
+            </PersistentString>
+            <PersistentString
+               value = "newsArray.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Constants getURLByString:]:Constants.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[DetailsViewController viewWillAppear:]:DetailsViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView updateData]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.array[self.NewsSegmentedControl.selectedSegmentIndex]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DataManager updateData]:DataManager.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[XMLParser parser:didEndElement:namespaceURI:qualifiedName:]:XMLParser.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "dictParsedData">
+            </PersistentString>
+            <PersistentString
+               value = "descriptionFeed">
+            </PersistentString>
+            <PersistentString
+               value = "urlImage">
+            </PersistentString>
+            <PersistentString
+               value = "currentDataDictionary">
+            </PersistentString>
+            <PersistentString
+               value = "tempString">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView scrollViewDidScroll:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "newsArray.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__25-[DataManager updateData]_block_invoke:DataManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[constant url]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DetailsViewController viewDidAppear:]:DetailsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "url">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[XMLParser parser:foundCharacters:]:XMLParser.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentElement">
+            </PersistentString>
+            <PersistentString
+               value = "descriptionFeed">
+            </PersistentString>
+            <PersistentString
+               value = "titleFeed">
+            </PersistentString>
+            <PersistentString
+               value = "linkFeed">
+            </PersistentString>
+            <PersistentString
+               value = "pubDateFeed">
+            </PersistentString>
+            <PersistentString
+               value = "tempString">
+            </PersistentString>
+            <PersistentString
+               value = "urlImage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView tableView:cellForRowAtIndexPath:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "newsEntity.urlImage">
+            </PersistentString>
+            <PersistentString
+               value = "newsArray.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

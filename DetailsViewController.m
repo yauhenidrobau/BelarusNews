@@ -14,22 +14,32 @@
 @synthesize url;
 @synthesize activityInd;
 
-NSURL *url;
+//NSURL *url;
 
 #pragma mark - Lifecycle
+
++ (id)newInstance {
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    id vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"DetailsViewController"];
+    return vc;
+}
  -(void) viewDidLoad{
      [super  viewDidLoad];
-    
      webView.hidden = true;
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:(animated)];
     //activityInd.hidden = true;
     activityInd.hidden = false;
     [activityInd startAnimating];
     _newsUrl = [NSURL URLWithString:url];
-    //_newsUrl = url;
+    [webView layoutIfNeeded];
+    //    _newsUrl = url;
     if (_newsUrl != nil) {
         NSURLRequest *request = [NSURLRequest requestWithURL: _newsUrl];
         [webView loadRequest:request];
@@ -37,11 +47,6 @@ NSURL *url;
     if (webView.hidden) {
         webView.hidden = false;
     }
-}
-
--(void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:(animated)];
-    
     [self.navigationController setNavigationBarHidden:NO];
 }
 
