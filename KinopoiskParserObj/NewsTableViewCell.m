@@ -9,9 +9,15 @@
 #import "NewsTableViewCell.h"
 
 @implementation NewsTableViewCell
+
+#warning зачем @synthesize ?
+
 @synthesize titleLabel;
 @synthesize descriptionLabel;
 @synthesize imageNewsView;
+
+
+#warning не ленись ставить пробелы и новые строки, пожалей тех, кто будет читать твой код после тебя
 - (void)awakeFromNib {
     [super awakeFromNib];
 }

@@ -20,6 +20,7 @@
 
 @implementation ParserManager
 
+#warning дублирование кода
 +(ParserManager *) sharedInstance {
     static dispatch_once_t pred;
     static ParserManager *shared = nil;

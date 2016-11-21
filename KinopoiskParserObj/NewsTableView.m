@@ -23,6 +23,7 @@
 @property (nonatomic,strong) NSArray * array;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 
+#warning не пиши в хэдере IBAction, проще потом будет искать по коду
 - (IBAction)scrollButtonTouchUpInside:(id)sender;
 
 @end
@@ -46,6 +47,8 @@ RLMResults<NewsEntity*> *newsArray = nil;
 }
 #pragma mark - Lifecycle
 
+#warning а если потом ты решишь, что Real тебе не подходит? Тут тоже метод будешь переименовывать? Почему не назвать метод типа setupData или loadData
+#warning initRealmArray - этот метод разве Lifecycle ?
 -(void)initRealmArray{
 //    fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController:@"Film" key:@"titleFeed"];
 //    fetchedResultsController.delegate = self;
@@ -69,6 +72,7 @@ RLMResults<NewsEntity*> *newsArray = nil;
     [self.navigationController setHidesBarsOnSwipe:YES];
 }
 
+#warning зачем этот метод?
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
@@ -90,7 +94,9 @@ RLMResults<NewsEntity*> *newsArray = nil;
 
     cell.titleLabel.text = newsEntity.titleFeed;
     cell.descriptionLabel.text = newsEntity.descriptionFeed;
+#warning лучше написать проверку if (newsEntity.urlImage.length) 0 - false, все, что не 0 - будет true
     if (newsEntity.urlImage.length != 0) {
+#warning если картинки большие и долго загружаются, то таблица будет дергаться, потому что ты грузишь картинки в главном потоке.
         cell.imageNewsView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:newsEntity.urlImage]]];
     } else {
         cell.imageNewsView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",self.array[self.NewsSegmentedControl.selectedSegmentIndex]]];

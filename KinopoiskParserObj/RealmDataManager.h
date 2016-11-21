@@ -14,5 +14,6 @@ typedef void (^RealmDataManagerSaveCallback)(NSError* error);
 @interface RealmDataManager : NSObject
 +(RealmDataManager *)sharedInstance;
 
+#warning newsDict - это в массив, плохое название
 -(void)saveNews:(NSArray<NSDictionary *>*)newsDict withServiceString:(NSString *)urlString;
 @end

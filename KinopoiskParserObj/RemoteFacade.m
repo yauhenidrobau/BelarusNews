@@ -22,6 +22,8 @@ typedef void (^DataLoadCallback)(NSData *info, NSError* error);
 
 
 //singleton
+
+#warning дублирование кода
 +(RemoteFacade *) sharedInstance {
     static dispatch_once_t pred;
     static RemoteFacade *shared;
