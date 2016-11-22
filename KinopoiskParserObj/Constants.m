@@ -8,8 +8,9 @@
 
 #import "Constants.h"
 @interface Constants()
-@property(nonatomic,readwrite)NSString *url;
-
+@property(nonatomic, readonly) NSString *yandexUrl;
+@property(nonatomic,readonly) NSString *tutByUrl;
+@property(nonatomic,readonly) NSString *devBy;
 @end
 
 @implementation Constants
@@ -20,10 +21,10 @@
  // url = @"http://film-ussr.ru/rss.php?c=22";
     // url = @"http://www.slamdunk.ru/rss/rss.html";
 
-    url = @"https://st.kp.yandex.net/rss/news_premiers.rss";
-    tutByUrl = @"http://news.tut.by/rss/all.rss";
-    devBy = @"https://dev.by/rss";
-    NSDictionary *urlDict = [NSDictionary dictionaryWithObjectsAndKeys:devBy,@"dev.by",tutByUrl,@"tut.by",url,@"yandex", nil];
+    _yandexUrl = @"https://st.kp.yandex.net/rss/news_premiers.rss";
+    _tutByUrl = @"http://news.tut.by/rss/all.rss";
+    _devBy = @"https://dev.by/rss";
+    NSDictionary *urlDict = [NSDictionary dictionaryWithObjectsAndKeys:_devBy,@"dev.by",_tutByUrl,@"tut.by",_yandexUrl,@"yandex", nil];
     return [urlDict objectForKey:urlString];
 }
 @end

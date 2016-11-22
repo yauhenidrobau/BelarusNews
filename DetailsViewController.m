@@ -8,15 +8,15 @@
 
 #import "DetailsViewController.h"
 
+@interface DetailsViewController ()
+
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
+
+@end
+
 @implementation DetailsViewController
-
-#warning зачем тут @synthesize ???
-@synthesize webView;
-@synthesize navigationBarHidden;
-@synthesize url;
-@synthesize activityInd;
-
-//NSURL *url;
 
 #pragma mark - Lifecycle
 
@@ -28,29 +28,23 @@
 }
  -(void) viewDidLoad{
      [super  viewDidLoad];
-     webView.hidden = true;
+     self.webView.hidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-#warning почему нет super viewDidAppear:animated ???
+    [super viewDidAppear:animated];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:(animated)];
-    //activityInd.hidden = true;
-#warning дублирование кода 1
-    activityInd.hidden = false;
-    [activityInd startAnimating];
-    _newsUrl = [NSURL URLWithString:url];
-    [webView layoutIfNeeded];
-    //    _newsUrl = url;
-#warning можео делать проверку if (_newsUrl) { ... }
-    if (_newsUrl != nil) {
+    [self showLoadingIndicator:NO];
+    [self.webView layoutIfNeeded];
+    if (_newsUrl) {
         NSURLRequest *request = [NSURLRequest requestWithURL: _newsUrl];
-        [webView loadRequest:request];
+        [self.webView loadRequest:request];
     }
-    if (webView.hidden) {
-        webView.hidden = false;
+    if (self.webView.hidden) {
+        self.webView.hidden = NO;
     }
     [self.navigationController setNavigationBarHidden:NO];
 }
@@ -67,10 +61,15 @@
 }
 
 -(void) webViewDidFinishLoad:(UIWebView *)webView {
-#warning почему не сделать метод showLoadingIndicator:(BOOL)show и в нем либо показывать, либо прятать? А если тебе потом нужно будет показывать какой-то другой индикатор? В скольких местах тебе нужно будет поменять код?
-#warning дублирование кода 2    
-    activityInd.hidden = true;
-    [activityInd stopAnimating];
+    [self showLoadingIndicator:YES];
 }
 
+-(void)showLoadingIndicator:(BOOL)show {
+    self.activityInd.hidden = show;
+    if (!show) {
+        [self.activityInd startAnimating];
+    } else {
+        [self.activityInd stopAnimating];
+    }
+}
 @end

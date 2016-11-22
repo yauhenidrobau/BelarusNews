@@ -16,46 +16,33 @@
 #import <UIKit/UIKit.h>
 #import <Reachability.h>
 
+
+#define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
+#define TUT_BY_NEWS @"http://news.tut.by/rss/all.rss"
+#define DEV_BY_NEWS @"https://dev.by/rss"
+
 @interface NewsTableView () <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *NewsSegmentedControl;
 @property (assign, nonatomic) CGPoint lastContentOffset;
-@property (nonatomic,strong) NSArray * array;
+@property (strong,nonatomic) NSArray * array;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
-
-#warning не пиши в хэдере IBAction, проще потом будет искать по коду
-- (IBAction)scrollButtonTouchUpInside:(id)sender;
-
+@property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *uiView;
 @end
 
 @implementation NewsTableView
-@synthesize navigationBarHidden;
 
-#pragma mark - Properties
-
-RLMResults<NewsEntity*> *newsArray = nil;
-UIRefreshControl *refreshControl = nil;
-
--(NSArray *)array {
-    if (!_array) {
-        _array = @[@"dev.by",@"tut.by",@"yandex"];
-    }
-    return _array;
-}
 #pragma mark - Lifecycle
 
-#warning а если потом ты решишь, что Real тебе не подходит? Тут тоже метод будешь переименовывать? Почему не назвать метод типа setupData или loadData
-#warning initRealmArray - этот метод разве Lifecycle ?
--(void)initRealmArray{
-    newsArray = [NewsEntity objectsWhere:@"feedIdString == %@",self.array[self.NewsSegmentedControl.selectedSegmentIndex]];
-}
 -(void)viewDidLoad {
 
     [super viewDidLoad];
     [self setAppierance];
     [self updateData];
-    [self initRealmArray];
+    [self setupData];
     [self addPullToRefresh];
     self.scrollButton.hidden = YES;
     self.tableView.emptyDataSetSource = self;
@@ -72,15 +59,39 @@ UIRefreshControl *refreshControl = nil;
     self.navigationItem.rightBarButtonItem = refreshBtn;
 }
 
-#warning зачем этот метод?
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+#pragma mark - Properties
+
+RLMResults<NewsEntity*> *newsArray = nil;
+UIRefreshControl *refreshControl = nil;
+
+-(NSArray *)array {
+    if (!_array) {
+        _array = [NSArray arrayWithObjects:DEV_BY_NEWS,TUT_BY_NEWS,YANDEX_NEWS, nil];
+    }
+    return _array;
+}
+
+#pragma mark - IBActions
+
+-(void)onRefreshBtnTouch {
+    [self updateData];
+}
+
+-(IBAction)scrollButtonTouchUpInside:(id)sender {
+    [UIView animateWithDuration:0.9 animations:^{
+        [self.tableView setContentOffset:CGPointZero animated:YES];
+    }];
+    self.scrollButton.hidden = YES;
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
+-(IBAction)changeValueSC:(id)sender {
+    [self updateData];
 }
 
 #pragma mark - DZNEmptyDataSetSource
 
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
+-(NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
     NSString *text = @"No News Found";
     
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
@@ -94,8 +105,7 @@ UIRefreshControl *refreshControl = nil;
     return [[NSMutableAttributedString alloc] initWithString:text attributes:attributes];
 }
 
-- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
-{
+-(NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
     NSString *text = @"Make sure that you turn on network.";
     
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
@@ -109,30 +119,25 @@ UIRefreshControl *refreshControl = nil;
     return [[NSMutableAttributedString alloc] initWithString:text attributes:attributes];
 }
 
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
+-(UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
     return [UIImage imageNamed:@"no_data"];
 }
 
-- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
-{
+-(UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
     return [UIColor whiteColor];
 }
 
 #pragma mark - DZNEmptyDataSetSource Methods
 
-- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
-{
+-(BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
     return YES;
 }
 
-- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
-{
+-(BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
     return YES;
 }
 
-- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
-{
+-(BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
     return YES;
 }
 
@@ -142,19 +147,18 @@ UIRefreshControl *refreshControl = nil;
     return newsArray.count;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     NewsEntity *newsEntity = newsArray[indexPath.row];
 
     cell.titleLabel.text = newsEntity.titleFeed;
     cell.descriptionLabel.text = newsEntity.descriptionFeed;
-#warning лучше написать проверку if (newsEntity.urlImage.length) 0 - false, все, что не 0 - будет true
-    if (newsEntity.urlImage.length != 0) {
+    if (newsEntity.urlImage.length) {
 #warning если картинки большие и долго загружаются, то таблица будет дергаться, потому что ты грузишь картинки в главном потоке.
         cell.imageNewsView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:newsEntity.urlImage]]];
     } else {
@@ -163,16 +167,15 @@ UIRefreshControl *refreshControl = nil;
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NewsEntity *newsEntity = newsArray[indexPath.row];
     DetailsViewController *vc = [DetailsViewController newInstance];
-    vc.url = newsEntity.linkFeed;
+    vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
     [vc.navigationItem setTitle:self.array[self.NewsSegmentedControl.selectedSegmentIndex]];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 #pragma mark UIScrollViewDelegate
 
@@ -188,23 +191,6 @@ UIRefreshControl *refreshControl = nil;
         self.scrollButton.hidden = YES;
         // Upward
     }
-
-}
-
--(void)onRefreshBtnTouch {
-    [self updateData];
-}
-
-- (IBAction)scrollButtonTouchUpInside:(id)sender {
-    [UIView animateWithDuration:0.9 animations:^{
-        [self.tableView setContentOffset:CGPointZero animated:YES];
-    }];
-    self.scrollButton.hidden = YES;
-    [self.navigationController setNavigationBarHidden:NO];
-}
-
-- (IBAction)changeValueSC:(id)sender {
-    [self updateData];
 }
 
 #pragma mark - Private methods
@@ -213,11 +199,8 @@ UIRefreshControl *refreshControl = nil;
     refreshControl = [[UIRefreshControl alloc] init];
     refreshControl.backgroundColor = [UIColor colorWithRed:173/255.0 green:31/255.0 blue:45/255.0 alpha:1.0];
     refreshControl.tintColor = [UIColor whiteColor];
-    [refreshControl addTarget:self action:@selector(refreshContent) forControlEvents:UIControlEventValueChanged];
+    [refreshControl addTarget:self action:@selector(updateData) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
-}
--(void)refreshContent{
-    [self updateData];
 }
 
 -(void) setAppierance {
@@ -227,6 +210,10 @@ UIRefreshControl *refreshControl = nil;
     
     [self.navigationItem.titleView setTintColor:[UIColor whiteColor]];
     [self.activityInd setHidden:YES];
+}
+
+-(void)setupData{
+    newsArray = [NewsEntity objectsWhere:@"feedIdString == %@",self.array[self.NewsSegmentedControl.selectedSegmentIndex]];
 }
 
 -(void)updateData {
@@ -244,23 +231,19 @@ UIRefreshControl *refreshControl = nil;
             [[DataManager sharedInstance ] updateDataWithURLString:self.array[self.NewsSegmentedControl.selectedSegmentIndex] AndCallBack:^(NSError *error) {
                 if (error == nil) {
                     NSLog(@"GET ELEMENTS %ld",newsArray.count);
-                    [self initRealmArray];
+                    [self setupData];
                     [self.activityInd stopAnimating];
                     [self.activityInd setHidden:YES];
                     [refreshControl endRefreshing];
                     [self.tableView reloadData];
-                    
-                    
                 }
             }];
         });
     };
-    
     reach.unreachableBlock = ^(Reachability*reach)
     {
         NSLog(@"UNREACHABLE!");
     };
-    
     // Start the notifier, which will cause the reachability object to retain itself!
     [reach startNotifier];
     

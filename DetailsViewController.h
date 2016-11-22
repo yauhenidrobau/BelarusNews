@@ -9,14 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailsViewController : UIViewController <UIWebViewDelegate>
-+ (id)newInstance;
-#warning почему паблик???
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
-#warning зачем это тут?
-@property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
++(id)newInstance;
+
 #warning в чем отличие newsUrl и url? Оба используются?
 @property(nonatomic, strong) NSURL *newsUrl;
-@property(nonatomic, strong) NSString *url;
 #warning почему паблик???
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @end
