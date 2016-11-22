@@ -28,6 +28,7 @@
 }
 
 -(void) updateDataWithURLString:(NSString *)urlString AndCallBack:(UpdateDataCallback)completionHandler {
+#warning зачем создавать константы? Сделай статическим
     Constants *constant = [Constants new];
     [[RemoteFacade sharedInstance] loadData:[constant getURLByString:urlString] callback:^(NSData *info, NSError *error) {
         if (error || !info) {

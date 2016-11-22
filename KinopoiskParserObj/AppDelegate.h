@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-
+#warning зачем это здесь? Сделай FileHelper или что-то в этом роде, где ты будешь работать с файловой системой
 - (NSURL *)applicationDocumentsDirectory;
 
 

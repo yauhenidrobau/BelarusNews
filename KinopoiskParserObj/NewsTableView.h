@@ -13,6 +13,8 @@ typedef void (^UpdateDataCallback)(NSError *error);
 
 @interface NewsTableView: UIViewController <UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
+
+#warning почему это аутлеты паблик?
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *uiView;
