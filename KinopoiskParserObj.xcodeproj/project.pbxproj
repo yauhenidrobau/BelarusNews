@@ -62,6 +62,7 @@
 		1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsEntity.m; sourceTree = "<group>"; };
 		1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDataManager.h; sourceTree = "<group>"; };
 		1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmDataManager.m; sourceTree = "<group>"; };
+		1E1D3A9E1DE47D9F00D6C00C /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1E7328EF1D7813740027E46E /* KinopoiskParserObj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KinopoiskParserObj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7328F31D7813740027E46E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1E7328F51D7813740027E46E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -201,6 +202,7 @@
 			children = (
 				1E7329291D7813B50027E46E /* Constants.h */,
 				1E73292A1D7813B50027E46E /* Constants.m */,
+				1E1D3A9E1DE47D9F00D6C00C /* Macros.h */,
 			);
 			name = Util;
 			sourceTree = "<group>";

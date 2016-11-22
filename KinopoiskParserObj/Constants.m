@@ -13,9 +13,6 @@
 @end
 
 @implementation Constants
-@synthesize url;
-@synthesize tutByUrl;
-@synthesize devBy;
 
 -(NSString *)getURLByString:(NSString *)urlString{
     

@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol XMLParserDelegate
--(void) xmlParserDidFinishParsing: (NSDictionary<NSString *, NSString *>*)items  error: (NSError *)error;
+-(void)xmlParserDidFinishParsing: (NSDictionary<NSString *, NSString *>*)items  error: (NSError *)error;
 
 
 @end
@@ -19,7 +19,7 @@
 
 @property(nonatomic, weak) id <XMLParserDelegate> xmlParserDelegate;
 
-+(XMLParser *) sharedInstance;
++(instancetype)sharedInstance;
 
 -(void) parseData:(NSData *) data;
 

@@ -8,33 +8,18 @@
 
 #import "RemoteFacade.h"
 #import "ParserManager.h"
+#import "Macros.h"
 
-typedef void (^DataLoadCallback)(NSData *info, NSError* error);
+typedef void(^DataLoadCallback)(NSData *info, NSError* error);
 
 @interface RemoteFacade ()
-
 @property (nonatomic, strong) NSData *info;
-//@property (nonatomic, strong) NSMutableDictionary<NSString *, NSString *>*infoDict;
-
 @end
 
 @implementation RemoteFacade
+SINGLETON(RemoteFacade)
 
-
-//singleton
-
-#warning дублирование кода
-+(RemoteFacade *) sharedInstance {
-    static dispatch_once_t pred;
-    static RemoteFacade *shared;
-    dispatch_once(&pred, ^ {
-        shared = [[RemoteFacade alloc]init];
-    });
-    return shared;
-}
-
-
--(void) loadData:(NSString *)dataURL callback:(DataLoadCallback)comptetion {
+-(void)loadData:(NSString *)dataURL callback:(DataLoadCallback)comptetion {
     // load data
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSURL *url = [NSURL URLWithString:dataURL];

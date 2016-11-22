@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <Realm/Realm.h>
+#import "Macros.h"
 
-typedef void (^RealmDataManagerSaveCallback)(NSError* error);
+typedef void(^RealmDataManagerSaveCallback)(NSError* error);
 
 @interface RealmDataManager : NSObject
-+(RealmDataManager *)sharedInstance;
++ (instancetype)sharedInstance;
 
-#warning newsDict - это в массив, плохое название
--(void)saveNews:(NSArray<NSDictionary *>*)newsDict withServiceString:(NSString *)urlString;
+-(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)urlString;
 @end

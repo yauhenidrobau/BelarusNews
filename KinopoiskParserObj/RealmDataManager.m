@@ -12,37 +12,24 @@
 
 @implementation RealmDataManager
 
-#warning Посмотри в Sunbird как там синглтон реализован через макрос
-+(RealmDataManager *)sharedInstance {
-    static dispatch_once_t pred;
-    static RealmDataManager *shared = nil;
-    dispatch_once(&pred, ^{
-        shared = [[RealmDataManager alloc]init];
-    });
-    return shared;
-}
+SINGLETON(RealmDataManager)
 
--(void)saveNews:(NSArray<NSDictionary *>*)newsDict withServiceString:(NSString *)urlString {
+-(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)urlString {
     RLMRealm *realm = [RLMRealm defaultRealm];
-#warning если тебе нужен индекс i только для того, чтобы получить элемент из массива, то лучше сделать через forin
-//    for (NSDictionary *dict in newsDict) {
-    for (NSInteger i = 0; i < newsDict.count;i++) {
-        NSDictionary *dict = newsDict[i];
+    for (NSDictionary *dict in receivedNewsArray) {
         @try {
             [realm beginWriteTransaction];
             NewsEntity *currentNews = [[NewsEntity alloc]init];
             currentNews.feedIdString = urlString;
-#warning почитай про modern obj c. Ты постоянно используешь objectForKey, зачем? если можно просто dict[@"title"];
-            currentNews.titleFeed = [dict objectForKey:@"title"];
-            currentNews.pubDateFeed = [dict objectForKey:@"pubDate"];
-            currentNews.descriptionFeed = [dict objectForKey:@"description"];
-            currentNews.linkFeed = [dict objectForKey:@"link"];
-            if ([dict objectForKey:@"imageUrl"]) {
-                currentNews.urlImage = [dict objectForKey:@"imageUrl"];
+            currentNews.titleFeed = dict[@"title"];
+            currentNews.pubDateFeed = dict[@"pubDate"];
+            currentNews.descriptionFeed = dict[@"description"];
+            currentNews.linkFeed = dict[@"link"];
+            if (dict[@"imageUrl"]) {
+                currentNews.urlImage = dict[@"imageUrl"];
             }
             [realm addOrUpdateObject:currentNews];
             [realm commitWriteTransaction];
-            
         }
         @catch (NSException *exception) {
             NSLog(@"exception");

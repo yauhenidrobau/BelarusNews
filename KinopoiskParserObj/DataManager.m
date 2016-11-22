@@ -13,21 +13,16 @@
 #import "ParserManager.h"
 #import "Constants.h"
 #import "RealmDataManager.h"
+#import "Macros.h"
 
+@interface DataManager ()
+@property(nonatomic, strong) NSMutableDictionary<NSString *,NSString *> *infoDict;
+@end
 @implementation DataManager
-@synthesize infoDict;
 
-+(DataManager *) sharedInstance{
-    static dispatch_once_t pred;
-    static DataManager * shared = nil;
-    
-    dispatch_once(&pred, ^{
-        shared = [[DataManager alloc] init];
-    });
-    return shared;
-}
+SINGLETON(DataManager)
 
--(void) updateDataWithURLString:(NSString *)urlString AndCallBack:(UpdateDataCallback)completionHandler {
+-(void)updateDataWithURLString:(NSString *)urlString AndCallBack:(UpdateDataCallback)completionHandler {
 #warning зачем создавать константы? Сделай статическим
     Constants *constant = [Constants new];
     [[RemoteFacade sharedInstance] loadData:[constant getURLByString:urlString] callback:^(NSData *info, NSError *error) {
