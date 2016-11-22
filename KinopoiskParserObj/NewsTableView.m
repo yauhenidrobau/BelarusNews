@@ -15,6 +15,7 @@
 #import "NewsEntity.h"
 #import <UIKit/UIKit.h>
 #import <Reachability.h>
+#import <UIAlertController+Blocks.h>
 
 
 #define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
@@ -26,7 +27,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *NewsSegmentedControl;
 @property (assign, nonatomic) CGPoint lastContentOffset;
-@property (strong,nonatomic) NSArray * array;
+@property (strong,nonatomic) NSArray * urlArray;
+@property (strong,nonatomic) NSArray * titlesArray;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -64,11 +66,18 @@
 RLMResults<NewsEntity*> *newsArray = nil;
 UIRefreshControl *refreshControl = nil;
 
--(NSArray *)array {
-    if (!_array) {
-        _array = [NSArray arrayWithObjects:DEV_BY_NEWS,TUT_BY_NEWS,YANDEX_NEWS, nil];
+-(NSArray *)urlArray {
+    if (!_urlArray) {
+        _urlArray = [NSArray arrayWithObjects:DEV_BY_NEWS,TUT_BY_NEWS,YANDEX_NEWS, nil];
     }
-    return _array;
+    return _urlArray;
+}
+
+-(NSArray *)titlesArray {
+    if (!_titlesArray) {
+        _titlesArray = @[@"dev.by",@"tut.by",@"yandex"];
+    }
+    return _titlesArray;
 }
 
 #pragma mark - IBActions
@@ -162,7 +171,7 @@ UIRefreshControl *refreshControl = nil;
 #warning если картинки большие и долго загружаются, то таблица будет дергаться, потому что ты грузишь картинки в главном потоке.
         cell.imageNewsView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:newsEntity.urlImage]]];
     } else {
-        cell.imageNewsView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",self.array[self.NewsSegmentedControl.selectedSegmentIndex]]];
+        cell.imageNewsView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]]];
     }
     return cell;
 }
@@ -172,7 +181,7 @@ UIRefreshControl *refreshControl = nil;
     NewsEntity *newsEntity = newsArray[indexPath.row];
     DetailsViewController *vc = [DetailsViewController newInstance];
     vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
-    [vc.navigationItem setTitle:self.array[self.NewsSegmentedControl.selectedSegmentIndex]];
+    [vc.navigationItem setTitle:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -182,8 +191,7 @@ UIRefreshControl *refreshControl = nil;
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGPoint currentOffset = scrollView.contentOffset;
-    if (currentOffset.y > 50 )
-    {
+    if (currentOffset.y > 50 ) {
         self.scrollButton.hidden = NO;
     }
     else
@@ -213,22 +221,58 @@ UIRefreshControl *refreshControl = nil;
 }
 
 -(void)setupData{
-    newsArray = [NewsEntity objectsWhere:@"feedIdString == %@",self.array[self.NewsSegmentedControl.selectedSegmentIndex]];
+    newsArray = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
+//    if (!newsArray) {
+//        [self.tableView setScrollEnabled:NO];
+//        [self.activityInd stopAnimating];
+//        [refreshControl endRefreshing];
+//    }
+}
+
+-(void)showLoadingIndicator:(BOOL)show {
+    self.activityInd.hidden = !show;
+    if (show) {
+        [self.activityInd startAnimating];
+    }else {
+        [self.activityInd stopAnimating];
+    }
 }
 
 -(void)updateData {
-    [self.activityInd setHidden:NO];
-    [self.activityInd startAnimating];
-    Reachability *reach = [Reachability reachabilityForInternetConnection];
-    reach.reachableBlock = ^(Reachability*reach)
-    {
-        // keep in mind this is called on a background thread
-        // and if you are updating the UI it needs to happen
-        // on the main thread, like this:
+    [self showLoadingIndicator:YES];
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        [UIAlertController  showAlertInViewController:self
+                                           withTitle:@"We have problems"
+                                             message:@"No Network :("
+                                   cancelButtonTitle:@"OK"
+                              destructiveButtonTitle:nil
+                                   otherButtonTitles:nil
+                                            tapBlock:^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {
+                                                [self showLoadingIndicator:NO];
+
+                                            }];
+    }else {
+        Reachability *reachability = [Reachability reachabilityForInternetConnection];
+        [reachability startNotifier];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"REACHABLE!");
-            [[DataManager sharedInstance ] updateDataWithURLString:self.array[self.NewsSegmentedControl.selectedSegmentIndex] AndCallBack:^(NSError *error) {
+        NetworkStatus status = [reachability currentReachabilityStatus];
+        
+        if(status == NotReachable)
+        {
+            [UIAlertController  showAlertInViewController:self
+                                                withTitle:@"We have problems"
+                                                  message:@"No Network :("
+                                        cancelButtonTitle:@"OK"
+                                   destructiveButtonTitle:nil
+                                        otherButtonTitles:nil
+                                                 tapBlock:^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {
+                                                     [self showLoadingIndicator:NO];
+
+                                                 }];
+        } else {
+            [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
                 if (error == nil) {
                     NSLog(@"GET ELEMENTS %ld",newsArray.count);
                     [self setupData];
@@ -238,14 +282,7 @@ UIRefreshControl *refreshControl = nil;
                     [self.tableView reloadData];
                 }
             }];
-        });
-    };
-    reach.unreachableBlock = ^(Reachability*reach)
-    {
-        NSLog(@"UNREACHABLE!");
-    };
-    // Start the notifier, which will cause the reachability object to retain itself!
-    [reach startNotifier];
-    
+        }
+    }
 }
 @end

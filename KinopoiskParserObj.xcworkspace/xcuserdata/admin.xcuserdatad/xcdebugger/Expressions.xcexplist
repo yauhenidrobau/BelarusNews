@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "__27-[NewsTableView updateData]_block_invoke_2:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "networkStatus">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView setupData]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "newsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

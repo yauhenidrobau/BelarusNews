@@ -406,7 +406,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n\"${PODS_ROOT}/Fabric/run\" 62097d6ca68f994b2395053fe38b14f7a41edb9f 3928b85f09d78e6d9802418fd57491cd2cc0f2945bdd0346b1e2052c5b0be349";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 62097d6ca68f994b2395053fe38b14f7a41edb9f 3928b85f09d78e6d9802418fd57491cd2cc0f2945bdd0346b1e2052c5b0be349";
 		};
 		5681CB03AA966031C4CA2015 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

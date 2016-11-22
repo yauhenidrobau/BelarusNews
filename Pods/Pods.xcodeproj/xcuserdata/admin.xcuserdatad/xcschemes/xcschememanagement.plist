@@ -6,33 +6,53 @@
 	<dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-KinopoiskParserObj.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Reachability.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Realm.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>UIAlertController+Blocks.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5A4EB57A77487B8D47D8F87AFFAF945A</key>
+		<key>19D7F223BD0ECDD38C804694FF759D3D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>67847F7794151E02BA5DBD89FE65A0E6</key>
+		<key>2ED26240CF440770C325B9645BF3D222</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>378092431E77841872D1B2B0A4728FCA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4E41163EB2F5AA30B226387C051A59F0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,7 +62,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F3CB69D327EDE5F39EDB75C42638699B</key>
+		<key>8FA1DF3CEF560B403CACC9EBEFDF3B36</key>
 		<dict>
 			<key>primary</key>
 			<true/>

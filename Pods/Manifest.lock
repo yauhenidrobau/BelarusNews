@@ -2,11 +2,15 @@ PODS:
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - DZNEmptyDataSet (1.8.1)
-  - Fabric (1.6.8)
+  - Fabric (1.6.11)
   - Reachability (3.2)
-  - Realm (1.1.0):
-    - Realm/Headers (= 1.1.0)
-  - Realm/Headers (1.1.0)
+  - Realm (2.1.0):
+    - Realm/Headers (= 2.1.0)
+  - Realm/Headers (2.1.0)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
+  - UIAlertController+Blocks (0.9.2)
 
 DEPENDENCIES:
   - Crashlytics
@@ -14,14 +18,18 @@ DEPENDENCIES:
   - Fabric
   - Reachability (~> 3.2)
   - Realm
+  - SDWebImage (~> 3.7.6)
+  - UIAlertController+Blocks
 
 SPEC CHECKSUMS:
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
-  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
+  Realm: bc829ad0ef3d4eea70c34cfcc3b1704d18d50df1
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  UIAlertController+Blocks: 80e28b92523fb58aba4d1bccec013d5a0b0bddb2
 
-PODFILE CHECKSUM: 696c81d2b2e89063501ca7cf9e69721dcfb7baff
+PODFILE CHECKSUM: 3a7b67771d3c65cf4171612eb9b9681682b8e57b
 
 COCOAPODS: 1.0.1

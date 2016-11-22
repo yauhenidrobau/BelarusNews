@@ -22,15 +22,13 @@
 
 SINGLETON(DataManager)
 
--(void)updateDataWithURLString:(NSString *)urlString AndCallBack:(UpdateDataCallback)completionHandler {
-#warning зачем создавать константы? Сделай статическим
-    Constants *constant = [Constants new];
-    [[RemoteFacade sharedInstance] loadData:[constant getURLByString:urlString] callback:^(NSData *info, NSError *error) {
+-(void)updateDataWithURLString:(NSString *)urlString AndTitleString:(NSString *)titleString WithCallBack:(UpdateDataCallback)completionHandler {
+    [[RemoteFacade sharedInstance] loadData:urlString callback:^(NSData *info, NSError *error) {
         if (error || !info) {
             //TODO: handle error
         } else {
             [[ParserManager sharedInstance] parseXmlData:info callback:^(NSData * dict, NSError *error) {
-                [[RealmDataManager sharedInstance]saveNews:dict withServiceString:urlString];
+                [[RealmDataManager sharedInstance]saveNews:dict withServiceString:titleString];
                 if (completionHandler) {
                     completionHandler(error);
                 }
