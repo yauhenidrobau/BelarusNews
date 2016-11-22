@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E11C9411DDDA10200D55B28 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E11C9401DDDA10200D55B28 /* Realm.framework */; };
-		1E11C9421DDDA10200D55B28 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E11C9401DDDA10200D55B28 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */; };
 		1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */; };
 		1E7328F41D7813740027E46E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7328F31D7813740027E46E /* main.m */; };
@@ -53,7 +51,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1E11C9421DDDA10200D55B28 /* Realm.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,7 +58,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E11C9401DDDA10200D55B28 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		1E11C9451DDDAA1F00D55B28 /* NewsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsEntity.h; sourceTree = "<group>"; };
 		1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsEntity.m; sourceTree = "<group>"; };
 		1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDataManager.h; sourceTree = "<group>"; };
@@ -106,7 +102,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E11C9411DDDA10200D55B28 /* Realm.framework in Frameworks */,
 				3D499CCAEC00E7C593490045 /* libPods-KinopoiskParserObj.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,7 +126,6 @@
 		1E11C93D1DDD9E4C00D55B28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1E11C9401DDDA10200D55B28 /* Realm.framework */,
 				FF0EC11EF02CB57D6640E485 /* libPods-KinopoiskParserObj.a */,
 			);
 			name = Frameworks;
@@ -410,7 +404,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"\n\"${PODS_ROOT}/Fabric/run\" 62097d6ca68f994b2395053fe38b14f7a41edb9f 3928b85f09d78e6d9802418fd57491cd2cc0f2945bdd0346b1e2052c5b0be349";
 		};
 		5681CB03AA966031C4CA2015 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

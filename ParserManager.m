@@ -41,7 +41,7 @@
    
 }
 
--(void) xmlParserDidFinishParsing: (NSMutableDictionary<NSString *, NSString *>*)items  error: (NSError *)error{
+-(void) xmlParserDidFinishParsing: (NSArray<NSDictionary *>*)items  error: (NSError *)error{
     if (self.callback) {
         self.info = items;
         self.callback(self.info, nil);

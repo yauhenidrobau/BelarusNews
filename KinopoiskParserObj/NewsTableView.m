@@ -14,6 +14,7 @@
 #import "DetailsViewController.h"
 #import "NewsEntity.h"
 #import <UIKit/UIKit.h>
+#import <Reachability.h>
 
 @interface NewsTableView () <UIScrollViewDelegate>
 
@@ -28,15 +29,12 @@
 @end
 
 @implementation NewsTableView
-
-
 @synthesize navigationBarHidden;
-
 
 #pragma mark - Properties
 
-//NSFetchedResultsController *fetchedResultsController = nil;
 RLMResults<NewsEntity*> *newsArray = nil;
+UIRefreshControl *refreshControl = nil;
 
 -(NSArray *)array {
     if (!_array) {
@@ -47,8 +45,6 @@ RLMResults<NewsEntity*> *newsArray = nil;
 #pragma mark - Lifecycle
 
 -(void)initRealmArray{
-//    fetchedResultsController = [[CoreDataManager sharedInstance] fetchedResultsController:@"Film" key:@"titleFeed"];
-//    fetchedResultsController.delegate = self;
     newsArray = [NewsEntity objectsWhere:@"feedIdString == %@",self.array[self.NewsSegmentedControl.selectedSegmentIndex]];
 }
 -(void)viewDidLoad {
@@ -57,20 +53,83 @@ RLMResults<NewsEntity*> *newsArray = nil;
     [self setAppierance];
     [self updateData];
     [self initRealmArray];
-//    [self loadData];
+    [self addPullToRefresh];
     self.scrollButton.hidden = YES;
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
     
-   // self.scrollButton.layer.cornerRadius = [self.scrollButton frame].size.height / 2;
+//    self.scrollButton.layer.cornerRadius = [self.scrollButton frame].size.height / 2;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationItem setTitle:@"Back"];
     [self.navigationController setHidesBarsOnSwipe:YES];
+    UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
+    self.navigationItem.rightBarButtonItem = refreshBtn;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+}
+
+#pragma mark - DZNEmptyDataSetSource
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"No News Found";
+    
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0],
+                                 NSForegroundColorAttributeName: [UIColor colorWithRed:170/255.0 green:171/255.0 blue:179/255.0 alpha:1.0],
+                                 NSParagraphStyleAttributeName: paragraphStyle};
+    
+    return [[NSMutableAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"Make sure that you turn on network.";
+    
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:15.0],
+                                 NSForegroundColorAttributeName: [UIColor colorWithRed:170/255.0 green:171/255.0 blue:179/255.0 alpha:1.0],
+                                 NSParagraphStyleAttributeName: paragraphStyle};
+    
+    return [[NSMutableAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"no_data"];
+}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIColor whiteColor];
+}
+
+#pragma mark - DZNEmptyDataSetSource Methods
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
+{
+    return YES;
 }
 
 #pragma mark - UITableViewDataSource
@@ -108,75 +167,13 @@ RLMResults<NewsEntity*> *newsArray = nil;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - NSFetchedResultsControllerDelegate
-
-//check if there is some changes in Data Base
-//- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(nullable NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(nullable NSIndexPath *)newIndexPath{
-//    switch (type) {
-//    case  NSFetchedResultsChangeInsert:
-//            
-//            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation: UITableViewRowAnimationFade];
-//            break;
-//            
-//    case NSFetchedResultsChangeDelete:
-//            
-//            [self.tableView deleteRowsAtIndexPaths:@[newIndexPath] withRowAnimation: UITableViewRowAnimationFade];
-//            break;
-//    case NSFetchedResultsChangeUpdate:
-//            
-//            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-//            break;
-//           
-//    default:
-//            [self.tableView reloadData];
-//            break;
-//            
-//    }
-//}
-
-
-//- (nullable NSString *)sectionIndexTitleForSectionName:(NSString *)sectionName{
-//    return sectionName;
-//}
-//
-//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
-//    [self.tableView endUpdates];
-//}
-//
-//- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-//    
-//    switch (type) {
-//    case NSFetchedResultsChangeInsert:
-//        
-//            
-//            if(sectionIndex != 0){
-//                
-//                NSIndexSet *sectionIndexSet = [[NSIndexSet alloc]initWithIndex:sectionIndex];
-//            [self.tableView insertSections:sectionIndexSet withRowAnimation:UITableViewRowAnimationFade];
-//            }
-//    case NSFetchedResultsChangeDelete:
-//            
-//            if(sectionIndex != 0){
-//                NSIndexSet *sectionIndexSet = [[NSIndexSet alloc]initWithIndex:sectionIndex];
-//                [self.tableView deleteSections:sectionIndexSet withRowAnimation: UITableViewRowAnimationFade];
-//            }
-//    default:
-//        @"";
-//    }
-//}
-
-//
-//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
-//    [self.tableView beginUpdates];
-//}
 
 #pragma mark UIScrollViewDelegate
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGPoint currentOffset = scrollView.contentOffset;
-    CGFloat height = scrollView.frame.size.height;
-    if (currentOffset.y > self.lastContentOffset.y && currentOffset.y > 0 )
+    if (currentOffset.y > 50 )
     {
         self.scrollButton.hidden = NO;
     }
@@ -185,39 +182,37 @@ RLMResults<NewsEntity*> *newsArray = nil;
         self.scrollButton.hidden = YES;
         // Upward
     }
-    self.lastContentOffset = currentOffset;
-    
-    CGFloat distanceFromBottom = scrollView.contentSize.height - currentOffset.y;
-    
-    if(distanceFromBottom <= height)
-    {
-        self.scrollButton.hidden = NO;
-    }
+
+}
+
+-(void)onRefreshBtnTouch {
+    [self updateData];
 }
 
 - (IBAction)scrollButtonTouchUpInside:(id)sender {
     [UIView animateWithDuration:0.9 animations:^{
         [self.tableView setContentOffset:CGPointZero animated:YES];
     }];
-//    [self.tableView setContentOffset:CGPointZero animated:YES];
     self.scrollButton.hidden = YES;
     [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (IBAction)changeValueSC:(id)sender {
-    [self.activityInd setHidden:NO];
-    [self.activityInd startAnimating];
-    [[DataManager sharedInstance ] updateDataWithURLString:self.array[self.NewsSegmentedControl.selectedSegmentIndex] AndCallBack:^(NSError *error) {
-        if (error == nil) {
-            [self initRealmArray];
-            [self.tableView reloadData];
-            [self.activityInd stopAnimating];
-            [self.activityInd setHidden:YES];
-        }
-    }];
+    [self updateData];
 }
 
 #pragma mark - Private methods
+
+-(void)addPullToRefresh{
+    refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.backgroundColor = [UIColor colorWithRed:173/255.0 green:31/255.0 blue:45/255.0 alpha:1.0];
+    refreshControl.tintColor = [UIColor whiteColor];
+    [refreshControl addTarget:self action:@selector(refreshContent) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
+}
+-(void)refreshContent{
+    [self updateData];
+}
 
 -(void) setAppierance {
     // auto re-sizing cell
@@ -229,10 +224,39 @@ RLMResults<NewsEntity*> *newsArray = nil;
 }
 
 -(void)updateData {
-    [[DataManager sharedInstance ] updateDataWithURLString:self.array[self.NewsSegmentedControl.selectedSegmentIndex] AndCallBack:^(NSError *error) {
-        if (error == nil) {
-            [self.tableView reloadData];
-        }
-    }];
+    [self.activityInd setHidden:NO];
+    [self.activityInd startAnimating];
+    Reachability *reach = [Reachability reachabilityForInternetConnection];
+    reach.reachableBlock = ^(Reachability*reach)
+    {
+        // keep in mind this is called on a background thread
+        // and if you are updating the UI it needs to happen
+        // on the main thread, like this:
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"REACHABLE!");
+            [[DataManager sharedInstance ] updateDataWithURLString:self.array[self.NewsSegmentedControl.selectedSegmentIndex] AndCallBack:^(NSError *error) {
+                if (error == nil) {
+                    NSLog(@"GET ELEMENTS %ld",newsArray.count);
+                    [self initRealmArray];
+                    [self.activityInd stopAnimating];
+                    [self.activityInd setHidden:YES];
+                    [refreshControl endRefreshing];
+                    [self.tableView reloadData];
+                    
+                    
+                }
+            }];
+        });
+    };
+    
+    reach.unreachableBlock = ^(Reachability*reach)
+    {
+        NSLog(@"UNREACHABLE!");
+    };
+    
+    // Start the notifier, which will cause the reachability object to retain itself!
+    [reach startNotifier];
+    
 }
 @end

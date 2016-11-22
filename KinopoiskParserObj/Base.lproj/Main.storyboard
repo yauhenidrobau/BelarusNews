@@ -86,12 +86,12 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Zqx-GC-hPW" firstAttribute="top" secondItem="WHh-k4-cD0" secondAttribute="topMargin" constant="7" id="3Cg-D9-EFc"/>
-                                                <constraint firstItem="Zqx-GC-hPW" firstAttribute="leading" secondItem="WHh-k4-cD0" secondAttribute="leading" constant="8" id="6Kw-Mr-xOi"/>
+                                                <constraint firstAttribute="bottom" secondItem="YFF-L9-PCS" secondAttribute="bottom" constant="14" id="1JT-Ib-E9h"/>
                                                 <constraint firstItem="YFF-L9-PCS" firstAttribute="leading" secondItem="Zqx-GC-hPW" secondAttribute="trailing" constant="8" id="EI3-pu-G6K"/>
-                                                <constraint firstItem="Zqx-GC-hPW" firstAttribute="centerY" secondItem="WHh-k4-cD0" secondAttribute="centerY" id="SEI-fa-QWz"/>
                                                 <constraint firstItem="YFF-L9-PCS" firstAttribute="top" secondItem="WHh-k4-cD0" secondAttribute="topMargin" constant="10" id="UMA-aV-55R"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="YFF-L9-PCS" secondAttribute="trailing" constant="5" id="nMK-Jm-OeQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="YFF-L9-PCS" secondAttribute="trailing" id="oEX-B5-mYn"/>
+                                                <constraint firstItem="Zqx-GC-hPW" firstAttribute="centerY" secondItem="WHh-k4-cD0" secondAttribute="centerY" id="tFr-rg-XI9"/>
+                                                <constraint firstItem="Zqx-GC-hPW" firstAttribute="leading" secondItem="WHh-k4-cD0" secondAttribute="leading" constant="8" id="wf0-cG-zmV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.098062602490731038" green="0.46899213326491812" blue="0.53838759816753923" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -137,17 +137,21 @@
                     <navigationItem key="navigationItem" id="5CF-Mi-Afl">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="4yq-u0-71x">
-                            <rect key="frame" x="41" y="7" width="293" height="30"/>
+                            <rect key="frame" x="31" y="7" width="293" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Dev.by"/>
                                 <segment title="TUT.BY News"/>
                                 <segment title="Yandex Films"/>
                             </segments>
+                            <color key="tintColor" red="0.098062602489999998" green="0.4689921333" blue="0.53838759820000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="changeValueSC:" destination="sqv-9R-s6i" eventType="valueChanged" id="SeR-lH-Gte"/>
                             </connections>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" tag="1" style="plain" systemItem="refresh" id="omd-Js-sBd">
+                            <color key="tintColor" red="0.098062602489999998" green="0.4689921333" blue="0.53838759820000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="NewsSegmentedControl" destination="4yq-u0-71x" id="SVd-Nf-j7J"/>

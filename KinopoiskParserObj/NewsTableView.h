@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
+#import "UIScrollView+EmptyDataSet.h"
 
 typedef void (^UpdateDataCallback)(NSError *error);
 
-@interface NewsTableView: UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
+@interface NewsTableView: UIViewController <UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
-//@property(nonatomic, copy) NSFetchedResultsController * fetchedResultsController;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *uiView;

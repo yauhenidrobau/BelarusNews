@@ -4,7 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>DZNEmptyDataSet.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-KinopoiskParserObj.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Reachability.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>CDA88C447CA051D102137553501DC3F7</key>
+		<key>5A4EB57A77487B8D47D8F87AFFAF945A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FC465239571A047AFFCCA448F7FA4376</key>
+		<key>67847F7794151E02BA5DBD89FE65A0E6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>736E57AD5AEFAAF68D47AE4E8FCB8F68</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F3CB69D327EDE5F39EDB75C42638699B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

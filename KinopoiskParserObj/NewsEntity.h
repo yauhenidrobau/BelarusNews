@@ -17,6 +17,5 @@
 @property  NSString *urlImage;
 
 @end
-// This protocol enables typed collections. i.e.:
-// RLMArray<NewsEntity>
+
 RLM_ARRAY_TYPE(NewsEntity)
