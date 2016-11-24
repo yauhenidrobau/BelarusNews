@@ -11,7 +11,5 @@
 @interface DetailsViewController : UIViewController <UIWebViewDelegate>
 +(id)newInstance;
 
-#warning в чем отличие newsUrl и url? Оба используются?
 @property(nonatomic, strong) NSURL *newsUrl;
-#warning почему паблик???
 @end

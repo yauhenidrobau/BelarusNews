@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "XMLParser.h"
 
-typedef void (^ParseCallback)(NSData* info, NSError* error);
+typedef void (^ParseCallback)(NSArray<NSDictionary*>* info, NSError* error);
 
 @interface ParserManager : NSObject
 +(instancetype)sharedInstance;

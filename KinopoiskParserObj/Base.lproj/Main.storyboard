@@ -26,7 +26,8 @@
                                 </connections>
                             </webView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zHg-Ti-C0V">
-                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="color" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,23 +61,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="WR2-a2-M3u">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="WR2-a2-M3u">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="90" id="u5u-px-kF3" customClass="NewsTableViewCell">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="65" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u5u-px-kF3" id="WHh-k4-cD0">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="u5u-px-kF3" id="WHh-k4-cD0">
                                             <frame key="frameInset" width="342" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image_200_200" translatesAutoresizingMaskIntoConstraints="NO" id="Zqx-GC-hPW">
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="60" id="MrA-ac-44C"/>
-                                                        <constraint firstAttribute="width" constant="60" id="rzR-4V-WSK"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitleLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFF-L9-PCS">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="TitleLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFF-L9-PCS">
+                                                    <frame key="frameInset" minX="68" minY="18" width="274" height="57"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="57" id="3mm-3n-nj2"/>
                                                     </constraints>
@@ -84,10 +80,16 @@
                                                     <color key="textColor" red="0.91565492069999999" green="0.99115813689999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image_200_200" translatesAutoresizingMaskIntoConstraints="NO" id="Zqx-GC-hPW">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="MrA-ac-44C"/>
+                                                        <constraint firstAttribute="width" constant="60" id="rzR-4V-WSK"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="YFF-L9-PCS" secondAttribute="bottom" constant="14" id="1JT-Ib-E9h"/>
-                                                <constraint firstItem="YFF-L9-PCS" firstAttribute="leading" secondItem="Zqx-GC-hPW" secondAttribute="trailing" constant="8" id="EI3-pu-G6K"/>
+                                                <constraint firstItem="YFF-L9-PCS" firstAttribute="leading" secondItem="Zqx-GC-hPW" secondAttribute="trailing" id="EI3-pu-G6K"/>
+                                                <constraint firstAttribute="bottom" secondItem="YFF-L9-PCS" secondAttribute="bottom" constant="15" id="O8s-Qf-qZb"/>
                                                 <constraint firstItem="YFF-L9-PCS" firstAttribute="top" secondItem="WHh-k4-cD0" secondAttribute="topMargin" constant="10" id="UMA-aV-55R"/>
                                                 <constraint firstAttribute="trailing" secondItem="YFF-L9-PCS" secondAttribute="trailing" id="oEX-B5-mYn"/>
                                                 <constraint firstItem="Zqx-GC-hPW" firstAttribute="centerY" secondItem="WHh-k4-cD0" secondAttribute="centerY" id="tFr-rg-XI9"/>
@@ -122,46 +124,69 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4yq-u0-71x">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="HrM-iO-dPh"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Dev.by"/>
+                                    <segment title="TUT.BY News"/>
+                                    <segment title="Yandex Films"/>
+                                </segments>
+                                <color key="tintColor" red="0.30123423449999998" green="0.77580434750000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="changeValueSC:" destination="sqv-9R-s6i" eventType="valueChanged" id="SeR-lH-Gte"/>
+                                </connections>
+                            </segmentedControl>
+                            <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eLz-fu-32V">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="6bX-FG-f3i"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="sqv-9R-s6i" id="n5w-mU-ttE"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="4yq-u0-71x" firstAttribute="top" secondItem="lSt-03-hQG" secondAttribute="bottom" id="8if-3P-pxG"/>
                             <constraint firstItem="WR2-a2-M3u" firstAttribute="leading" secondItem="KZF-gn-ztJ" secondAttribute="leading" id="T0B-uE-jGT"/>
                             <constraint firstItem="JS4-6j-NGK" firstAttribute="leading" secondItem="KZF-gn-ztJ" secondAttribute="leading" id="Tfm-en-VmM"/>
                             <constraint firstItem="huB-vo-XM5" firstAttribute="top" secondItem="WR2-a2-M3u" secondAttribute="bottom" id="ZQ2-iF-4A0"/>
-                            <constraint firstItem="WR2-a2-M3u" firstAttribute="top" secondItem="KZF-gn-ztJ" secondAttribute="top" id="dY4-rI-k0w"/>
+                            <constraint firstAttribute="trailing" secondItem="4yq-u0-71x" secondAttribute="trailing" id="fLc-dn-O8l"/>
+                            <constraint firstItem="4yq-u0-71x" firstAttribute="leading" secondItem="KZF-gn-ztJ" secondAttribute="leading" id="fw4-ml-K8c"/>
+                            <constraint firstItem="eLz-fu-32V" firstAttribute="top" secondItem="4yq-u0-71x" secondAttribute="bottom" id="g95-hB-mVJ"/>
+                            <constraint firstAttribute="trailing" secondItem="eLz-fu-32V" secondAttribute="trailing" id="gbd-Ua-ow6"/>
+                            <constraint firstItem="WR2-a2-M3u" firstAttribute="top" secondItem="eLz-fu-32V" secondAttribute="bottom" id="it2-bL-rnR"/>
                             <constraint firstItem="huB-vo-XM5" firstAttribute="top" secondItem="JS4-6j-NGK" secondAttribute="bottom" id="jlu-We-Lip"/>
                             <constraint firstAttribute="trailing" secondItem="WR2-a2-M3u" secondAttribute="trailing" id="kHZ-E7-823"/>
                             <constraint firstAttribute="trailing" secondItem="JS4-6j-NGK" secondAttribute="trailing" id="pio-AU-FHP"/>
+                            <constraint firstItem="eLz-fu-32V" firstAttribute="leading" secondItem="KZF-gn-ztJ" secondAttribute="leading" id="t3S-Lv-VEN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5CF-Mi-Afl">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="4yq-u0-71x">
-                            <rect key="frame" x="31" y="7" width="293" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Dev.by"/>
-                                <segment title="TUT.BY News"/>
-                                <segment title="Yandex Films"/>
-                            </segments>
-                            <color key="tintColor" red="0.098062602489999998" green="0.4689921333" blue="0.53838759820000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="changeValueSC:" destination="sqv-9R-s6i" eventType="valueChanged" id="SeR-lH-Gte"/>
-                            </connections>
-                        </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" tag="1" style="plain" systemItem="refresh" id="omd-Js-sBd">
-                            <color key="tintColor" red="0.098062602489999998" green="0.4689921333" blue="0.53838759820000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="NewsSegmentedControl" destination="4yq-u0-71x" id="SVd-Nf-j7J"/>
                         <outlet property="activityInd" destination="9pe-Ua-hs5" id="HJm-Xs-aKI"/>
                         <outlet property="scrollButton" destination="JS4-6j-NGK" id="eK3-fp-fW1"/>
+                        <outlet property="searchDisplayController" destination="1bM-U5-rY4" id="38h-cm-1mX"/>
                         <outlet property="tableView" destination="WR2-a2-M3u" id="njh-c9-R5Q"/>
                         <outlet property="uiView" destination="KZF-gn-ztJ" id="4Lq-vE-Yfy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rM-mF-Vgc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="1bM-U5-rY4">
+                    <connections>
+                        <outlet property="delegate" destination="sqv-9R-s6i" id="0J9-Y4-OiQ"/>
+                        <outlet property="searchBar" destination="eLz-fu-32V" id="abq-2f-M2C"/>
+                        <outlet property="searchContentsController" destination="sqv-9R-s6i" id="WbE-Cm-6G9"/>
+                        <outlet property="searchResultsDataSource" destination="sqv-9R-s6i" id="Nf4-O6-aKw"/>
+                        <outlet property="searchResultsDelegate" destination="sqv-9R-s6i" id="nDP-4E-uND"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1021.6" y="384.55772113943033"/>
         </scene>

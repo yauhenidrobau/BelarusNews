@@ -27,7 +27,7 @@ SINGLETON(DataManager)
         if (error || !info) {
             //TODO: handle error
         } else {
-            [[ParserManager sharedInstance] parseXmlData:info callback:^(NSData * dict, NSError *error) {
+            [[ParserManager sharedInstance] parseXmlData:info callback:^(NSArray<NSDictionary *>* dict, NSError *error) {
                 [[RealmDataManager sharedInstance]saveNews:dict withServiceString:titleString];
                 if (completionHandler) {
                     completionHandler(error);

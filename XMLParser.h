@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol XMLParserDelegate
--(void)xmlParserDidFinishParsing: (NSDictionary<NSString *, NSString *>*)items  error: (NSError *)error;
+-(void)xmlParserDidFinishParsing: (NSArray<NSDictionary*>*)items  error: (NSError *)error;
 @end
 @interface XMLParser : NSObject <NSXMLParserDelegate>
 @property(nonatomic, weak) id <XMLParserDelegate> xmlParserDelegate;

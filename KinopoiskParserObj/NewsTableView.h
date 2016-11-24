@@ -11,5 +11,6 @@
 
 typedef void(^UpdateDataCallback)(NSError *error);
 
-@interface NewsTableView: UIViewController <UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+@interface NewsTableView: UIViewController
+
 @end

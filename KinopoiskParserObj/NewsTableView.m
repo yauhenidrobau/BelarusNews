@@ -22,17 +22,20 @@
 #define TUT_BY_NEWS @"http://news.tut.by/rss/all.rss"
 #define DEV_BY_NEWS @"https://dev.by/rss"
 
-@interface NewsTableView () <UIScrollViewDelegate>
+@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchResultsUpdating>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *NewsSegmentedControl;
 @property (assign, nonatomic) CGPoint lastContentOffset;
-@property (strong,nonatomic) NSArray * urlArray;
-@property (strong,nonatomic) NSArray * titlesArray;
+@property (strong, nonatomic) NSArray * urlArray;
+@property (strong, nonatomic) NSArray * titlesArray;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *uiView;
+@property (strong, nonatomic) UISearchController *searchController;
+@property (strong, nonatomic) NSArray * searchResults;
+
 @end
 
 @implementation NewsTableView
@@ -43,7 +46,7 @@
 
     [super viewDidLoad];
     [self setAppierance];
-    [self updateData];
+    [self updateDataWithIndicator:YES];
     [self setupData];
     [self addPullToRefresh];
     self.scrollButton.hidden = YES;
@@ -83,9 +86,12 @@ UIRefreshControl *refreshControl = nil;
 #pragma mark - IBActions
 
 -(void)onRefreshBtnTouch {
-    [self updateData];
+    [self updateDataWithIndicator:YES];
 }
 
+-(void)pullToRefresh {
+    [self updateDataWithIndicator:NO];
+}
 -(IBAction)scrollButtonTouchUpInside:(id)sender {
     [UIView animateWithDuration:0.9 animations:^{
         [self.tableView setContentOffset:CGPointZero animated:YES];
@@ -95,7 +101,7 @@ UIRefreshControl *refreshControl = nil;
 }
 
 -(IBAction)changeValueSC:(id)sender {
-    [self updateData];
+    [self updateDataWithIndicator:YES];
 }
 
 #pragma mark - DZNEmptyDataSetSource
@@ -186,6 +192,19 @@ UIRefreshControl *refreshControl = nil;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSMutableArray *allTitlesArray = [NSMutableArray new];
+    for (NewsEntity *entity in newsArray) {
+        [allTitlesArray addObject:entity.titleFeed];
+    }
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"titleFeed contains[c] %@", searchText];
+    self.searchResults = [allTitlesArray filteredArrayUsingPredicate:resultPredicate];
+}
+
+
+
+
 #pragma mark UIScrollViewDelegate
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
@@ -207,7 +226,7 @@ UIRefreshControl *refreshControl = nil;
     refreshControl = [[UIRefreshControl alloc] init];
     refreshControl.backgroundColor = [UIColor colorWithRed:173/255.0 green:31/255.0 blue:45/255.0 alpha:1.0];
     refreshControl.tintColor = [UIColor whiteColor];
-    [refreshControl addTarget:self action:@selector(updateData) forControlEvents:UIControlEventValueChanged];
+    [refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
 }
 
@@ -238,8 +257,8 @@ UIRefreshControl *refreshControl = nil;
     }
 }
 
--(void)updateData {
-    [self showLoadingIndicator:YES];
+-(void)updateDataWithIndicator:(BOOL)showIndicator {
+    [self showLoadingIndicator:showIndicator];
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable) {
@@ -272,16 +291,23 @@ UIRefreshControl *refreshControl = nil;
 
                                                  }];
         } else {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
                 if (error == nil) {
                     NSLog(@"GET ELEMENTS %ld",newsArray.count);
-                    [self setupData];
-                    [self.activityInd stopAnimating];
-                    [self.activityInd setHidden:YES];
-                    [refreshControl endRefreshing];
-                    [self.tableView reloadData];
+                    
+
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self setupData];
+
+                            [self.activityInd stopAnimating];
+                            [self.activityInd setHidden:YES];
+                            [refreshControl endRefreshing];
+                            [self.tableView reloadData];
+                        });
                 }
             }];
+            });
         }
     }
 }

@@ -13,7 +13,6 @@
 
 @implementation NewsTableViewCell
 
-#warning не ленись ставить пробелы и новые строки, пожалей тех, кто будет читать твой код после тебя
 - (void)awakeFromNib {
     [super awakeFromNib];
 }

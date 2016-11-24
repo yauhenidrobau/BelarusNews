@@ -9,6 +9,7 @@
 #import "RealmDataManager.h"
 
 #import "NewsEntity.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation RealmDataManager
 

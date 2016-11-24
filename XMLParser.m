@@ -22,6 +22,7 @@ NSXMLParser *parser =[[NSXMLParser alloc]initWithData:data];
     [parser parse ];
 }
 
+#pragma mark - NSXMLParserDelegate
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName attributes:(NSDictionary<NSString *, NSString *> *)attributeDict {
 currentElement = elementName;
@@ -122,14 +123,13 @@ NSMutableString *linkFeed;
 NSMutableString *urlImage;
 NSMutableString * tempString;
 
-#warning TODO what is itcorrect it
+#warning TODO what is it correct it
 //XMLParser<NSXMLParserDelegate> *parserDelegate = [parserDelegate conformsToProtocol:NSXMLParserDelegate];
 
 
-#pragma mark - NSXMLParserDelegate
-
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-    [ _xmlParserDelegate xmlParserDidFinishParsing:dictParsedData error:nil];
+    NSArray<NSDictionary *> *parsedDataArray = [NSArray<NSDictionary*> arrayWithArray:dictParsedData];
+    [ _xmlParserDelegate xmlParserDidFinishParsing:parsedDataArray error:nil];
     
 }
 /*

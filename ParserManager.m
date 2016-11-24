@@ -26,10 +26,10 @@ SINGLETON(ParserManager)
    self.callback = completion;
     XMLParser *parser = [[XMLParser alloc]init];
     parser.xmlParserDelegate = self;
-    [parser parseData:data ];
+    [parser parseData:data];
 }
 
--(void) xmlParserDidFinishParsing: (NSArray<NSDictionary *>*)items  error: (NSError *)error{
+-(void) xmlParserDidFinishParsing: (NSArray<NSDictionary*>*)items  error: (NSError *)error{
     if (self.callback) {
         self.info = items;
         self.callback(self.info, nil);
