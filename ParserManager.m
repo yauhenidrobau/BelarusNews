@@ -35,7 +35,9 @@ SINGLETON(ParserManager)
 #warning Ты в NSData присваиваешь массив!
         self.info = items;
 #warning ОБЯЗАТЕЛЬНО ДОЛЖНА БЫТЬ ПРОВЕРКА НА СУЩЕСТВОВАНИЕ БЛОКА!!!!!!!!!
-        self.callback(self.info, nil);
+        if (self.callback) {
+            self.callback(self.info, nil);
+        } else self.callback(nil,nil);
     }
 }
 

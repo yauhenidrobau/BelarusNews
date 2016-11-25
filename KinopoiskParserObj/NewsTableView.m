@@ -23,6 +23,8 @@
 #define TUT_BY_NEWS @"http://news.tut.by/rss/all.rss"
 #define DEV_BY_NEWS @"https://dev.by/rss"
 
+typedef void(^UpdateDataCallback)(NSError *error);
+
 @interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchResultsUpdating,UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
@@ -34,7 +36,8 @@
 @property (strong, nonatomic) NSArray * urlArray;
 @property (strong, nonatomic) NSArray * titlesArray;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
-
+@property (strong, nonatomic) RLMResults<NewsEntity*> *newsArray;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) UISearchController *searchController;
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
 
@@ -54,7 +57,11 @@
     self.scrollButton.hidden = YES;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
-    
+#warning [self.navigationItem setTitle:@"Back"]; - что ты этим делаешь? Если заголовок кнопки back, то это не очень хороший вариант!
+    [self.navigationItem setTitle:@"Back"];
+    [self.navigationController setHidesBarsOnSwipe:YES];
+    UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
+    self.navigationItem.rightBarButtonItem = refreshBtn;
     UINavigationController *searchResultsController = [self.storyboard instantiateViewControllerWithIdentifier:@"SearchResultsTableViewController"];
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
     self.searchController.searchResultsUpdater = self;
@@ -76,19 +83,7 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
-#warning в viewDidLoad этот код нельзя перенести?
-#warning [self.navigationItem setTitle:@"Back"]; - что ты этим делаешь? Если заголовок кнопки back, то это не очень хороший вариант!
-    [self.navigationItem setTitle:@"Back"];
-    [self.navigationController setHidesBarsOnSwipe:YES];
-    UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
-    self.navigationItem.rightBarButtonItem = refreshBtn;
 }
-
-#pragma mark - Properties
-#warning это не проперти. Почему не в интерфейсе?????
-RLMResults<NewsEntity*> *newsArray = nil;
-UIRefreshControl *refreshControl = nil;
 
 -(NSArray *)urlArray {
 #warning На что здесь проверка идет? Если массив создан, но в нем нет элементов, то проверка if (_urlArray) вернут тру, но он будет пустой
@@ -184,7 +179,7 @@ UIRefreshControl *refreshControl = nil;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return newsArray.count;
+    return self.newsArray.count;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -196,7 +191,7 @@ UIRefreshControl *refreshControl = nil;
    
     NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    NewsEntity *newsEntity = newsArray[indexPath.row];
+    NewsEntity *newsEntity = self.newsArray[indexPath.row];
 
     cell.titleLabel.text = newsEntity.titleFeed;
     cell.descriptionLabel.text = newsEntity.descriptionFeed;
@@ -213,7 +208,7 @@ UIRefreshControl *refreshControl = nil;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NewsEntity *newsEntity = newsArray[indexPath.row];
+    NewsEntity *newsEntity = self.newsArray[indexPath.row];
     DetailsViewController *vc = [DetailsViewController newInstance];
     vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
     [vc.navigationItem setTitle:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
@@ -256,18 +251,7 @@ UIRefreshControl *refreshControl = nil;
 #pragma mark UIScrollViewDelegate
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGPoint currentOffset = scrollView.contentOffset;
-#warning лучше написать так
-    //self.scrollButton.hidden = (currentOffset.y > 50);
-    
-    if (currentOffset.y > 50 ) {
-        self.scrollButton.hidden = NO;
-    }
-    else
-    {
-        self.scrollButton.hidden = YES;
-        // Upward
-    }
+    self.scrollButton.hidden = !(scrollView.contentOffset.y > 50);
 }
 
 #pragma mark - Private methods

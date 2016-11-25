@@ -10,7 +10,6 @@
 
 #import "NewsEntity.h"
 #warning Зачем здесь импорт SDWebImage?
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation RealmDataManager
 

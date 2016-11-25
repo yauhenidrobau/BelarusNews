@@ -13,6 +13,17 @@
 @implementation XMLParser 
 SINGLETON(XMLParser)
 
+NSMutableArray *dictParsedData;
+NSMutableDictionary *currentDataDictionary;
+NSString *currentElement;
+NSMutableString *foundCharacters;
+NSMutableString *titleFeed;
+NSMutableString *descriptionFeed;
+NSMutableString *pubDateFeed;
+NSMutableString *linkFeed;
+NSMutableString *urlImage;
+NSMutableString * tempString;
+
 #pragma mark - Lifecycle
 
 - (void)parseData:(NSData *) data {
@@ -46,6 +57,8 @@ SINGLETON(XMLParser)
             [currentDataDictionary  setObject:titleFeed forKey:@"title"];
         }
         if (![linkFeed isEqual:@"" ]) {
+#warning must get 0 element
+
             // must get 0 element
             [currentDataDictionary  setObject:linkFeed forKey:@"link"];
         }
@@ -87,20 +100,6 @@ SINGLETON(XMLParser)
        [ pubDateFeed appendString:string ];
     }
 }
-
-#pragma mark - Properties
-#warning Это не проперти, это iVar-ы, т.е. instance variable. У проперти есть getter и setter и работа с памятью немного сложнее организована. Но в любом случае это должно быть в начале файла
-
-NSMutableArray *dictParsedData;
-NSMutableDictionary *currentDataDictionary;
-NSString *currentElement;
-NSMutableString *foundCharacters;
-NSMutableString *titleFeed;
-NSMutableString *descriptionFeed;
-NSMutableString *pubDateFeed;
-NSMutableString *linkFeed;
-NSMutableString *urlImage;
-NSMutableString * tempString;
 
 #warning TODO what is it correct it
 //XMLParser<NSXMLParserDelegate> *parserDelegate = [parserDelegate conformsToProtocol:NSXMLParserDelegate];
