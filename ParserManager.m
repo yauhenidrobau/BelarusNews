@@ -19,6 +19,7 @@
 @end
 
 @implementation ParserManager
+
 SINGLETON(ParserManager)
 
 //   how to use blocks here
@@ -31,7 +32,9 @@ SINGLETON(ParserManager)
 
 -(void) xmlParserDidFinishParsing: (NSArray<NSDictionary*>*)items  error: (NSError *)error{
     if (self.callback) {
+#warning Ты в NSData присваиваешь массив!
         self.info = items;
+#warning ОБЯЗАТЕЛЬНО ДОЛЖНА БЫТЬ ПРОВЕРКА НА СУЩЕСТВОВАНИЕ БЛОКА!!!!!!!!!
         self.callback(self.info, nil);
     }
 }

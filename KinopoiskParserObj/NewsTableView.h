@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIScrollView+EmptyDataSet.h"
 
+#warning Почему паблик?
 typedef void(^UpdateDataCallback)(NSError *error);
 
 @interface NewsTableView: UIViewController

@@ -12,6 +12,8 @@
 typedef void (^ParseCallback)(NSArray<NSDictionary*>* info, NSError* error);
 
 @interface ParserManager : NSObject
+
 +(instancetype)sharedInstance;
 -(void) parseXmlData:(NSData *)data callback:(ParseCallback)completion;
+
 @end

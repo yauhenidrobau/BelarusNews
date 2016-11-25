@@ -58,6 +58,8 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+#warning в viewDidLoad этот код нельзя перенести?
+#warning [self.navigationItem setTitle:@"Back"]; - что ты этим делаешь? Если заголовок кнопки back, то это не очень хороший вариант!
     [self.navigationItem setTitle:@"Back"];
     [self.navigationController setHidesBarsOnSwipe:YES];
     UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
@@ -65,11 +67,12 @@
 }
 
 #pragma mark - Properties
-
+#warning это не проперти. Почему не в интерфейсе?????
 RLMResults<NewsEntity*> *newsArray = nil;
 UIRefreshControl *refreshControl = nil;
 
 -(NSArray *)urlArray {
+#warning На что здесь проверка идет? Если массив создан, но в нем нет элементов, то проверка if (_urlArray) вернут тру, но он будет пустой
     if (!_urlArray) {
         _urlArray = [NSArray arrayWithObjects:DEV_BY_NEWS,TUT_BY_NEWS,YANDEX_NEWS, nil];
     }
@@ -92,7 +95,9 @@ UIRefreshControl *refreshControl = nil;
 -(void)pullToRefresh {
     [self updateDataWithIndicator:NO];
 }
+
 -(IBAction)scrollButtonTouchUpInside:(id)sender {
+#warning плохо в плане работы с памятью. В блоке должна быть слабая ссылка, а не сильная self
     [UIView animateWithDuration:0.9 animations:^{
         [self.tableView setContentOffset:CGPointZero animated:YES];
     }];
@@ -189,6 +194,7 @@ UIRefreshControl *refreshControl = nil;
     vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
     [vc.navigationItem setTitle:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+#warning сделай через Segue!!!
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -210,6 +216,9 @@ UIRefreshControl *refreshControl = nil;
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGPoint currentOffset = scrollView.contentOffset;
+#warning лучше написать так
+    //self.scrollButton.hidden = (currentOffset.y > 50);
+    
     if (currentOffset.y > 50 ) {
         self.scrollButton.hidden = NO;
     }
@@ -262,6 +271,7 @@ UIRefreshControl *refreshControl = nil;
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable) {
+#warning Почитай, как делается поддержка нескольких языков в приложении NSLocalizedString(key, comment). Все строки храни в Localized файлах.
         [UIAlertController  showAlertInViewController:self
                                            withTitle:@"We have problems"
                                              message:@"No Network :("
@@ -291,6 +301,7 @@ UIRefreshControl *refreshControl = nil;
 
                                                  }];
         } else {
+#warning неправильно. [[DataManager sharedInstance ] updateDataWithURLString - вот это ты должен вызывать в main потоке и возвращать даныне тоже в main. А внутри работать с фоновым потоком.
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
                 if (error == nil) {
@@ -300,8 +311,10 @@ UIRefreshControl *refreshControl = nil;
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self setupData];
 
+#warning вот эти две строки должен вынести в отдельный метод и там либо показывать, либо скрывать индикатор
                             [self.activityInd stopAnimating];
                             [self.activityInd setHidden:YES];
+#warning опять же сильная ссылка внутри блока
                             [refreshControl endRefreshing];
                             [self.tableView reloadData];
                         });

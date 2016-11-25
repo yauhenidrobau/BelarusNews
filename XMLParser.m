@@ -15,32 +15,32 @@ SINGLETON(XMLParser)
 
 #pragma mark - Lifecycle
 
--(void)parseData:(NSData *) data {
-dictParsedData = [[NSMutableArray alloc]init];
-NSXMLParser *parser =[[NSXMLParser alloc]initWithData:data];
+- (void)parseData:(NSData *) data {
+    dictParsedData = [NSMutableArray new];
+    NSXMLParser *parser = [[NSXMLParser alloc]initWithData:data];
     parser.delegate = self;
-    [parser parse ];
+    [parser parse];
 }
 
 #pragma mark - NSXMLParserDelegate
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName attributes:(NSDictionary<NSString *, NSString *> *)attributeDict {
-currentElement = elementName;
+    currentElement = elementName;
     if ([elementName isEqualToString:@"item"]) {
 
         currentDataDictionary = [[NSMutableDictionary<NSString *, NSString *> alloc]init];
-        titleFeed =[[NSMutableString alloc]initWithString:@""];
+        titleFeed = [[NSMutableString alloc]initWithString:@""];
         
         descriptionFeed =  [[NSMutableString alloc] initWithString: @""];
         pubDateFeed = [[NSMutableString alloc] initWithString: @""];
-        linkFeed = [[NSMutableString alloc]init];
+        linkFeed = [NSMutableString new];
         urlImage = [[NSMutableString alloc] initWithString: @""];
         tempString = [[NSMutableString alloc] initWithString: @""];
     }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName{
-//save data
+    //save data
     if ([elementName isEqualToString:@"item"]) {
         if (![titleFeed  isEqual: @""]) {
             [currentDataDictionary  setObject:titleFeed forKey:@"title"];
@@ -57,30 +57,13 @@ currentElement = elementName;
         }
         NSRange matchBegin = [descriptionFeed rangeOfString:@"<img src="];
         NSRange matchEnd = [descriptionFeed rangeOfString:@"width="];
-        //match = [tempString rangeOfString: @"|"];
+
          if (matchBegin.location < 200 && matchEnd.location < 200) {
-    //        if (descriptionFeed.length !=0) {
-    //            if (match.length == 12) {
             NSString *cdataString = [descriptionFeed substringWithRange:NSMakeRange(matchBegin.length + 1,matchEnd.location - 3  - matchBegin.length )];
              urlImage = [NSMutableString stringWithString:@""];
             [urlImage appendString:cdataString];
             }
-    //
-    //        }
-    //        }
-    //        
-        /*
-        if (match.location < 200) {
-            if (tempString.length !=0) {
-                if (match.length == 12) {
-                    NSString *cdataString = [tempString substringWithRange:NSMakeRange(match.length + 1,match.location + 50 )];
-                    [urlImage appendString:cdataString];
-                }
-                
-            }
-        }
-        
-       */
+
         if (![urlImage  isEqual: @""]) {
             [currentDataDictionary  setObject:urlImage forKey:@"imageUrl"];
         }
@@ -103,14 +86,10 @@ currentElement = elementName;
     } else if ([currentElement  isEqual: @"pubDate"]) {
        [ pubDateFeed appendString:string ];
     }
-//        else if ([currentElement  isEqual: @"media:content"] && urlImage.length == 0){
-//            [urlImage  appendString: string];
-//        } else if([currentElement isEqual:@""]) {
-//            [tempString  appendString: string];
-//        }
 }
 
 #pragma mark - Properties
+#warning Это не проперти, это iVar-ы, т.е. instance variable. У проперти есть getter и setter и работа с памятью немного сложнее организована. Но в любом случае это должно быть в начале файла
 
 NSMutableArray *dictParsedData;
 NSMutableDictionary *currentDataDictionary;
