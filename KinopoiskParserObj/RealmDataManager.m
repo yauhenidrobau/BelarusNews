@@ -15,13 +15,13 @@
 
 SINGLETON(RealmDataManager)
 
--(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)urlString {
+-(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)feedIdString {
     RLMRealm *realm = [RLMRealm defaultRealm];
     for (NSDictionary *dict in receivedNewsArray) {
         @try {
             [realm beginWriteTransaction];
             NewsEntity *currentNews = [[NewsEntity alloc]init];
-            currentNews.feedIdString = urlString;
+            currentNews.feedIdString = feedIdString;
             currentNews.titleFeed = dict[@"title"];
             currentNews.pubDateFeed = dict[@"pubDate"];
             currentNews.descriptionFeed = dict[@"description"];

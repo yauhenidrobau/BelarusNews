@@ -47,7 +47,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O3Q-gA-o9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1679" y="385"/>
+            <point key="canvasLocation" x="1585" y="385"/>
         </scene>
         <!--News Table View-->
         <scene sceneID="I7p-Mj-V4s">
@@ -138,10 +138,12 @@
                                     <action selector="changeValueSC:" destination="sqv-9R-s6i" eventType="valueChanged" id="SeR-lH-Gte"/>
                                 </connections>
                             </segmentedControl>
-                            <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eLz-fu-32V">
+                            <searchBar contentMode="redraw" placeholder="Search news..." translatesAutoresizingMaskIntoConstraints="NO" id="eLz-fu-32V">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="6bX-FG-f3i"/>
                                 </constraints>
+                                <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                                <offsetWrapper key="searchFieldBackgroundPositionAdjustment" horizontal="0.0" vertical="0.0"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="sqv-9R-s6i" id="n5w-mU-ttE"/>
@@ -167,28 +169,78 @@
                     </view>
                     <navigationItem key="navigationItem" id="5CF-Mi-Afl">
                         <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="51C-sf-7uE"/>
                     </navigationItem>
                     <connections>
                         <outlet property="NewsSegmentedControl" destination="4yq-u0-71x" id="SVd-Nf-j7J"/>
                         <outlet property="activityInd" destination="9pe-Ua-hs5" id="HJm-Xs-aKI"/>
                         <outlet property="scrollButton" destination="JS4-6j-NGK" id="eK3-fp-fW1"/>
-                        <outlet property="searchDisplayController" destination="1bM-U5-rY4" id="38h-cm-1mX"/>
+                        <outlet property="searchBar" destination="eLz-fu-32V" id="iFK-KT-R97"/>
                         <outlet property="tableView" destination="WR2-a2-M3u" id="njh-c9-R5Q"/>
-                        <outlet property="uiView" destination="KZF-gn-ztJ" id="4Lq-vE-Yfy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rM-mF-Vgc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="1bM-U5-rY4">
-                    <connections>
-                        <outlet property="delegate" destination="sqv-9R-s6i" id="0J9-Y4-OiQ"/>
-                        <outlet property="searchBar" destination="eLz-fu-32V" id="abq-2f-M2C"/>
-                        <outlet property="searchContentsController" destination="sqv-9R-s6i" id="WbE-Cm-6G9"/>
-                        <outlet property="searchResultsDataSource" destination="sqv-9R-s6i" id="Nf4-O6-aKw"/>
-                        <outlet property="searchResultsDelegate" destination="sqv-9R-s6i" id="nDP-4E-uND"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1021.6" y="384.55772113943033"/>
+            <point key="canvasLocation" x="929" y="385"/>
+        </scene>
+        <!--Search Results Table View Controller-->
+        <scene sceneID="IlX-dg-Cbz">
+            <objects>
+                <tableViewController id="SLT-Cp-AOj" customClass="SearchResultsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="PSm-XE-F3W">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="90" id="rWb-GX-oLF" customClass="NewsTableViewCell">
+                                <rect key="frame" x="0.0" y="92" width="375" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rWb-GX-oLF" id="rax-EO-HtW">
+                                    <frame key="frameInset" width="342" height="89"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitleLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mpm-x0-wWn">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="57" id="xYJ-fU-XCE"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.91565492069999999" green="0.99115813689999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image_200_200" translatesAutoresizingMaskIntoConstraints="NO" id="nrj-6b-Oq2">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="PdC-Zk-HgR"/>
+                                                <constraint firstAttribute="height" constant="60" id="jrO-0x-RH8"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Mpm-x0-wWn" firstAttribute="leading" secondItem="nrj-6b-Oq2" secondAttribute="trailing" constant="5" id="6mh-1I-Zsp"/>
+                                        <constraint firstItem="nrj-6b-Oq2" firstAttribute="centerY" secondItem="rax-EO-HtW" secondAttribute="centerY" id="D3w-hK-Wyk"/>
+                                        <constraint firstItem="Mpm-x0-wWn" firstAttribute="top" secondItem="rax-EO-HtW" secondAttribute="topMargin" constant="10" id="NQK-Cf-ozd"/>
+                                        <constraint firstAttribute="trailing" secondItem="Mpm-x0-wWn" secondAttribute="trailing" id="QGH-JA-uaD"/>
+                                        <constraint firstAttribute="bottom" secondItem="Mpm-x0-wWn" secondAttribute="bottom" constant="15" id="kqS-WC-m4A"/>
+                                        <constraint firstItem="nrj-6b-Oq2" firstAttribute="leading" secondItem="rax-EO-HtW" secondAttribute="leading" constant="8" id="t4p-fA-v9L"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.098062602489999998" green="0.4689921333" blue="0.53838759820000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="imageNewsView" destination="nrj-6b-Oq2" id="NVy-fs-yk2"/>
+                                    <outlet property="titleLabel" destination="Mpm-x0-wWn" id="HVh-Y6-FUK"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="SLT-Cp-AOj" id="Y5N-Y1-Td0"/>
+                            <outlet property="delegate" destination="SLT-Cp-AOj" id="HnN-5n-lRD"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Y3q-kM-1UP"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gso-DN-BPs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="929" y="1120"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jd2-n5-V4W">
@@ -207,6 +259,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BmQ-Bw-52f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="203" y="385"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Lfb-Jc-Hcw">
+            <objects>
+                <navigationController storyboardIdentifier="SearchResultsTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="cTv-il-fWL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bar-3A-j6O">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="SLT-Cp-AOj" kind="relationship" relationship="rootViewController" id="Dx4-mJ-f8f"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wMY-1k-85e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="195" y="1120"/>
         </scene>
     </scenes>
     <resources>

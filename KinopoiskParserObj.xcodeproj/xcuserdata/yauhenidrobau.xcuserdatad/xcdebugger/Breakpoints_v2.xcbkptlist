@@ -121,7 +121,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
             endingLineNumber = "97"
-            landmarkName = "-parser:didEndElement:namespaceURI:qualifiedName:"
+            landmarkName = "-parser:foundCharacters:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,7 +137,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "100"
             endingLineNumber = "100"
-            landmarkName = "-parser:didEndElement:namespaceURI:qualifiedName:"
+            landmarkName = "-parser:foundCharacters:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,7 +153,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "101"
             endingLineNumber = "101"
-            landmarkName = "-parser:didEndElement:namespaceURI:qualifiedName:"
+            landmarkName = "-parser:foundCharacters:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -169,7 +169,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "96"
             endingLineNumber = "96"
-            landmarkName = "-parser:didEndElement:namespaceURI:qualifiedName:"
+            landmarkName = "-parser:foundCharacters:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

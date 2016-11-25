@@ -16,25 +16,27 @@
 #import <UIKit/UIKit.h>
 #import <Reachability.h>
 #import <UIAlertController+Blocks.h>
+#import "SearchResultsTableViewController.h"
 
 
 #define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
 #define TUT_BY_NEWS @"http://news.tut.by/rss/all.rss"
 #define DEV_BY_NEWS @"https://dev.by/rss"
 
-@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchResultsUpdating>
+@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchResultsUpdating,UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *NewsSegmentedControl;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (assign, nonatomic) CGPoint lastContentOffset;
 @property (strong, nonatomic) NSArray * urlArray;
 @property (strong, nonatomic) NSArray * titlesArray;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIView *uiView;
+
 @property (strong, nonatomic) UISearchController *searchController;
-@property (strong, nonatomic) NSArray * searchResults;
+@property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
 
 @end
 
@@ -53,12 +55,28 @@
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
     
+    UINavigationController *searchResultsController = [self.storyboard instantiateViewControllerWithIdentifier:@"SearchResultsTableViewController"];
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
+    self.searchController.searchResultsUpdater = self;
+    [self.searchBar sizeToFit];
+    self.searchController.searchBar.frame = self.searchBar.frame;
+    UIBarButtonItem *searchBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.searchBar];
+//    self.navigationItem.leftBarButtonItem = searchBarItem;
+
+    
+//    CGRectMake(self.searchController.searchBar.frame.origin.x,
+//               self.searchController.searchBar.frame.origin.y,
+//               self.searchController.searchBar.frame.size.width, 44.0);
+    
+//    self.searchController.searchBar.frame = self.searchBar.frame;
+//    self.searchBar = self.searchController.searchBar;
+   // self.tableView.tableHeaderView = self.searchController.searchBar;
 //    self.scrollButton.layer.cornerRadius = [self.scrollButton frame].size.height / 2;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationItem setTitle:@"Back"];
+    [self.navigationItem setTitle:@"News"];
     [self.navigationController setHidesBarsOnSwipe:YES];
     UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
     self.navigationItem.rightBarButtonItem = refreshBtn;
@@ -158,22 +176,25 @@ UIRefreshControl *refreshControl = nil;
 
 #pragma mark - UITableViewDataSource
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     return newsArray.count;
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
     NewsEntity *newsEntity = newsArray[indexPath.row];
 
     cell.titleLabel.text = newsEntity.titleFeed;
     cell.descriptionLabel.text = newsEntity.descriptionFeed;
-    if (newsEntity.urlImage.length) {
+    if (newsEntity.urlImage) {
 #warning если картинки большие и долго загружаются, то таблица будет дергаться, потому что ты грузишь картинки в главном потоке.
         cell.imageNewsView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:newsEntity.urlImage]]];
     } else {
@@ -181,6 +202,8 @@ UIRefreshControl *refreshControl = nil;
     }
     return cell;
 }
+
+#pragma mark UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -192,23 +215,40 @@ UIRefreshControl *refreshControl = nil;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
-{
-    NSMutableArray *allTitlesArray = [NSMutableArray new];
-    for (NewsEntity *entity in newsArray) {
-        [allTitlesArray addObject:entity.titleFeed];
+#pragma mark - UISearchControllerDelegate & UISearchResultsDelegate
+
+-(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+   
+    NSString *searchString = self.searchController.searchBar.text;
+    [self updateFilteredContentForNewsTitle:searchString];
+    if (self.searchController.searchResultsController) {
+        UINavigationController *navigationVC = (UINavigationController *)self.searchController.searchResultsController;
+        SearchResultsTableViewController *vc = (SearchResultsTableViewController *)navigationVC.topViewController;
+        vc.searchResults = self.searchResults;
+        vc.titlesArray = self.titlesArray;
+        [vc.tableView reloadData];
+        
     }
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"titleFeed contains[c] %@", searchText];
-    self.searchResults = [allTitlesArray filteredArrayUsingPredicate:resultPredicate];
 }
 
-
-
+-(void)updateFilteredContentForNewsTitle:(NSString *)newsTitle {
+    if (!newsTitle) {
+        self.searchResults = [newsArray mutableCopy];
+    } else {
+        NSMutableArray *searchResults = [NSMutableArray new];
+        for (NSInteger i = 0;i < newsArray.count;i++) {
+            NewsEntity *entity = newsArray[i];
+            if ([entity.titleFeed containsString:newsTitle]) {
+                [searchResults addObject:entity];
+            }
+        }
+        self.searchResults = searchResults;
+    }
+}
 
 #pragma mark UIScrollViewDelegate
 
--(void) scrollViewDidScroll:(UIScrollView *)scrollView
-{
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint currentOffset = scrollView.contentOffset;
     if (currentOffset.y > 50 ) {
         self.scrollButton.hidden = NO;
@@ -222,7 +262,7 @@ UIRefreshControl *refreshControl = nil;
 
 #pragma mark - Private methods
 
--(void)addPullToRefresh{
+-(void)addPullToRefresh {
     refreshControl = [[UIRefreshControl alloc] init];
     refreshControl.backgroundColor = [UIColor colorWithRed:173/255.0 green:31/255.0 blue:45/255.0 alpha:1.0];
     refreshControl.tintColor = [UIColor whiteColor];
@@ -230,7 +270,7 @@ UIRefreshControl *refreshControl = nil;
     [self.tableView addSubview:refreshControl];
 }
 
--(void) setAppierance {
+-(void)setAppierance {
     // auto re-sizing cell
     self.tableView.estimatedRowHeight = 80;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -258,7 +298,6 @@ UIRefreshControl *refreshControl = nil;
 }
 
 -(void)updateDataWithIndicator:(BOOL)showIndicator {
-    [self showLoadingIndicator:showIndicator];
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
     if (networkStatus == NotReachable) {
@@ -295,19 +334,18 @@ UIRefreshControl *refreshControl = nil;
             [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
                 if (error == nil) {
                     NSLog(@"GET ELEMENTS %ld",newsArray.count);
-                    
-
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self setupData];
-
-                            [self.activityInd stopAnimating];
-                            [self.activityInd setHidden:YES];
-                            [refreshControl endRefreshing];
-                            [self.tableView reloadData];
-                        });
+                    [self setupData];
+                    [self.activityInd stopAnimating];
+                    [self.activityInd setHidden:YES];
+                    [refreshControl endRefreshing];
+                    [self.tableView reloadData];
                 }
             }];
             });
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showLoadingIndicator:showIndicator];
+            });
+            
         }
     }
 }
