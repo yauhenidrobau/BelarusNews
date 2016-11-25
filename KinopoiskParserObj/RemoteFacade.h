@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+
 typedef void (^DataLoadCallback)(NSData * info, NSError* error);
+
 @interface RemoteFacade : NSObject
 
 +(instancetype)sharedInstance;
-
 -(void)loadData:(NSString *)dataURL callback:(DataLoadCallback)comptetion;
+
 @end

@@ -9,7 +9,9 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CC5C1CCC-51B8-4274-82DE-39A7625AEC58",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+
     "E5E7A11309596C553636DD80B2C5774B9F510A16" : "ParserObjC%20last\/",
+    "E5E7A11309596C553636DD80B2C5774B9F510A16" : "ParserObjectiveC_new\/",
     "3B2014476C1CAE0C3C524AC63FD28EAF405E70D1" : ""
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "KinopoiskParserObj",

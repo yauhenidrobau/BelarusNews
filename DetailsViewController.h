@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailsViewController : UIViewController <UIWebViewDelegate>
+#warning зачем делать метод newInstance для контроллера? 
 +(id)newInstance;
-
 @property(nonatomic, strong) NSURL *newsUrl;
+
 @end

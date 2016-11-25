@@ -13,10 +13,12 @@
 @protocol XMLParserDelegate
 -(void)xmlParserDidFinishParsing: (NSArray<NSDictionary*>*)items  error: (NSError *)error;
 @end
+
 @interface XMLParser : NSObject <NSXMLParserDelegate>
+
 @property(nonatomic, weak) id <XMLParserDelegate> xmlParserDelegate;
 
 +(instancetype)sharedInstance;
-
 -(void)parseData:(NSData *) data;
+
 @end

@@ -16,8 +16,11 @@
 #import "Macros.h"
 
 @interface DataManager ()
+
 @property(nonatomic, strong) NSMutableDictionary<NSString *,NSString *> *infoDict;
+
 @end
+
 @implementation DataManager
 
 SINGLETON(DataManager)
