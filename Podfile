@@ -8,4 +8,5 @@ target 'KinopoiskParserObj' do
    pod 'UIAlertController+Blocks'
    pod 'Fabric'
    pod 'Crashlytics'
+   pod 'AFNetworking', '~> 2.0'
 end

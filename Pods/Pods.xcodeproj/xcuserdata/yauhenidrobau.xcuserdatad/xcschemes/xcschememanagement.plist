@@ -4,73 +4,60 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Pods-KinopoiskParserObj.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Reachability.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Realm.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>UIAlertController+Blocks.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>19D7F223BD0ECDD38C804694FF759D3D</key>
+		<key>096AE2B0FC8068E3A182FD2293C591EE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2ED26240CF440770C325B9645BF3D222</key>
+		<key>35AFF0515361785FB237ECBEAA1AEB7D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>378092431E77841872D1B2B0A4728FCA</key>
+		<key>410B25DF16EA5C5B3E2698F74F9625FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4E41163EB2F5AA30B226387C051A59F0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5A4EB57A77487B8D47D8F87AFFAF945A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>67847F7794151E02BA5DBD89FE65A0E6</key>
+		<key>5679836E97C9B6972260B4C00D7C8023</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -80,12 +67,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8FA1DF3CEF560B403CACC9EBEFDF3B36</key>
+		<key>DA7EB651A6298E5A7DA6C177BB85B7D3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F3CB69D327EDE5F39EDB75C42638699B</key>
+		<key>E8C742ED4F63939B89B6D116C10BE49A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
