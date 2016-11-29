@@ -10,6 +10,7 @@
 #import <Realm/Realm.h>
 #import "Macros.h"
 
+#warning correct callback
 typedef void(^RealmDataManagerSaveCallback)(NSError* error);
 
 @interface RealmDataManager : NSObject

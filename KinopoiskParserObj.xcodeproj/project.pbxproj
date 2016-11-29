@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */; };
 		1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */; };
-		1E70E6561DE81D610098A232 /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E70E6551DE81D610098A232 /* SearchResultsTableViewController.m */; };
 		1E7328F41D7813740027E46E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7328F31D7813740027E46E /* main.m */; };
 		1E7328F71D7813740027E46E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7328F61D7813740027E46E /* AppDelegate.m */; };
 		1E7328FD1D7813740027E46E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E7328FB1D7813740027E46E /* Main.storyboard */; };
@@ -64,8 +63,6 @@
 		1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDataManager.h; sourceTree = "<group>"; };
 		1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmDataManager.m; sourceTree = "<group>"; };
 		1E1D3A9E1DE47D9F00D6C00C /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
-		1E70E6541DE81D610098A232 /* SearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewController.h; sourceTree = "<group>"; };
-		1E70E6551DE81D610098A232 /* SearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTableViewController.m; sourceTree = "<group>"; };
 		1E7328EF1D7813740027E46E /* KinopoiskParserObj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KinopoiskParserObj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7328F31D7813740027E46E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1E7328F51D7813740027E46E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -219,8 +216,6 @@
 				1E7329351D7814C00027E46E /* NewsTableViewCell.m */,
 				1E7329531D7848530027E46E /* DetailsViewController.h */,
 				1E7329541D7848530027E46E /* DetailsViewController.m */,
-				1E70E6541DE81D610098A232 /* SearchResultsTableViewController.h */,
-				1E70E6551DE81D610098A232 /* SearchResultsTableViewController.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -467,7 +462,6 @@
 			files = (
 				1E7329301D7814620027E46E /* NewsTableView.m in Sources */,
 				1E73292B1D7813B50027E46E /* Constants.m in Sources */,
-				1E70E6561DE81D610098A232 /* SearchResultsTableViewController.m in Sources */,
 				1E73294F1D7843310027E46E /* RemoteFacade.m in Sources */,
 				1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */,
 				1E7329471D7836400027E46E /* ParserManager.m in Sources */,

@@ -16,8 +16,6 @@
 #import <UIKit/UIKit.h>
 #import <Reachability.h>
 #import <UIAlertController+Blocks.h>
-#import "SearchResultsTableViewController.h"
-
 
 #define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
 #define TUT_BY_NEWS @"http://news.tut.by/rss/all.rss"
@@ -57,28 +55,11 @@ typedef void(^UpdateDataCallback)(NSError *error);
     self.scrollButton.hidden = YES;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
-#warning [self.navigationItem setTitle:@"Back"]; - что ты этим делаешь? Если заголовок кнопки back, то это не очень хороший вариант!
-    [self.navigationItem setTitle:@"Back"];
+
     [self.navigationController setHidesBarsOnSwipe:YES];
     UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
     self.navigationItem.rightBarButtonItem = refreshBtn;
-    UINavigationController *searchResultsController = [self.storyboard instantiateViewControllerWithIdentifier:@"SearchResultsTableViewController"];
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
-    self.searchController.searchResultsUpdater = self;
-    [self.searchBar sizeToFit];
-    self.searchController.searchBar.frame = self.searchBar.frame;
-    UIBarButtonItem *searchBarItem = [[UIBarButtonItem alloc]initWithCustomView:self.searchBar];
-//    self.navigationItem.leftBarButtonItem = searchBarItem;
-
     
-//    CGRectMake(self.searchController.searchBar.frame.origin.x,
-//               self.searchController.searchBar.frame.origin.y,
-//               self.searchController.searchBar.frame.size.width, 44.0);
-    
-//    self.searchController.searchBar.frame = self.searchBar.frame;
-//    self.searchBar = self.searchController.searchBar;
-   // self.tableView.tableHeaderView = self.searchController.searchBar;
-//    self.scrollButton.layer.cornerRadius = [self.scrollButton frame].size.height / 2;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -86,15 +67,14 @@ typedef void(^UpdateDataCallback)(NSError *error);
 }
 
 -(NSArray *)urlArray {
-#warning На что здесь проверка идет? Если массив создан, но в нем нет элементов, то проверка if (_urlArray) вернут тру, но он будет пустой
-    if (!_urlArray) {
+    if (!_urlArray.count) {
         _urlArray = [NSArray arrayWithObjects:DEV_BY_NEWS,TUT_BY_NEWS,YANDEX_NEWS, nil];
     }
     return _urlArray;
 }
 
 -(NSArray *)titlesArray {
-    if (!_titlesArray) {
+    if (!_titlesArray.count) {
         _titlesArray = @[@"dev.by",@"tut.by",@"yandex"];
     }
     return _titlesArray;
@@ -111,9 +91,10 @@ typedef void(^UpdateDataCallback)(NSError *error);
 }
 
 -(IBAction)scrollButtonTouchUpInside:(id)sender {
+    __block UITableView *tableView = self.tableView;
 #warning плохо в плане работы с памятью. В блоке должна быть слабая ссылка, а не сильная self
     [UIView animateWithDuration:0.9 animations:^{
-        [self.tableView setContentOffset:CGPointZero animated:YES];
+        [tableView setContentOffset:CGPointZero animated:YES];
     }];
     self.scrollButton.hidden = YES;
     [self.navigationController setNavigationBarHidden:NO];
@@ -192,15 +173,8 @@ typedef void(^UpdateDataCallback)(NSError *error);
     NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     NewsEntity *newsEntity = self.newsArray[indexPath.row];
-
-    cell.titleLabel.text = newsEntity.titleFeed;
-    cell.descriptionLabel.text = newsEntity.descriptionFeed;
-    if (newsEntity.urlImage) {
-#warning если картинки большие и долго загружаются, то таблица будет дергаться, потому что ты грузишь картинки в главном потоке.
-        cell.imageNewsView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:newsEntity.urlImage]]];
-    } else {
-        cell.imageNewsView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]]];
-    }
+    [cell cellForNews:newsEntity AndTitles:self.titlesArray AndIndex:self.NewsSegmentedControl.selectedSegmentIndex];
+    
     return cell;
 }
 
@@ -219,39 +193,39 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 #pragma mark - UISearchControllerDelegate & UISearchResultsDelegate
 
--(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-   
-    NSString *searchString = self.searchController.searchBar.text;
-    [self updateFilteredContentForNewsTitle:searchString];
-    if (self.searchController.searchResultsController) {
-        UINavigationController *navigationVC = (UINavigationController *)self.searchController.searchResultsController;
-        SearchResultsTableViewController *vc = (SearchResultsTableViewController *)navigationVC.topViewController;
-        vc.searchResults = self.searchResults;
-        vc.titlesArray = self.titlesArray;
-        [vc.tableView reloadData];
-        
-    }
-}
-
--(void)updateFilteredContentForNewsTitle:(NSString *)newsTitle {
-    if (!newsTitle) {
-        self.searchResults = [self.newsArray mutableCopy];
-    } else {
-        NSMutableArray *searchResults = [NSMutableArray new];
-        for (NSInteger i = 0;i < self.newsArray.count;i++) {
-            NewsEntity *entity = self.newsArray[i];
-            if ([entity.titleFeed containsString:newsTitle]) {
-                [searchResults addObject:entity];
-            }
-        }
-        self.searchResults = searchResults;
-    }
-}
+//-(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+//   
+//    NSString *searchString = self.searchController.searchBar.text;
+//    [self updateFilteredContentForNewsTitle:searchString];
+//    if (self.searchController.searchResultsController) {
+//        UINavigationController *navigationVC = (UINavigationController *)self.searchController.searchResultsController;
+//        SearchResultsTableViewController *vc = (SearchResultsTableViewController *)navigationVC.topViewController;
+//        vc.searchResults = self.searchResults;
+//        vc.titlesArray = self.titlesArray;
+//        [vc.tableView reloadData];
+//        
+//    }
+//}
+//
+//-(void)updateFilteredContentForNewsTitle:(NSString *)newsTitle {
+//    if (!newsTitle) {
+//        self.searchResults = [self.newsArray mutableCopy];
+//    } else {
+//        NSMutableArray *searchResults = [NSMutableArray new];
+//        for (NSInteger i = 0;i < self.newsArray.count;i++) {
+//            NewsEntity *entity = self.newsArray[i];
+//            if ([entity.titleFeed containsString:newsTitle]) {
+//                [searchResults addObject:entity];
+//            }
+//        }
+//        self.searchResults = searchResults;
+//    }
+//}
 
 #pragma mark UIScrollViewDelegate
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    self.scrollButton.hidden = !(scrollView.contentOffset.y > 50);
+    self.scrollButton.hidden = !(scrollView.contentOffset.y > 20);
 }
 
 #pragma mark - Private methods
@@ -275,11 +249,11 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 -(void)setupData{
     self.newsArray = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
-//    if (!newsArray) {
-//        [self.tableView setScrollEnabled:NO];
-//        [self.activityInd stopAnimating];
-//        [refreshControl endRefreshing];
-//    }
+    if (!self.newsArray.count) {
+        [self.tableView setScrollEnabled:NO];
+        [self.activityInd stopAnimating];
+        [self.refreshControl endRefreshing];
+    }
 }
 
 -(void)showLoadingIndicator:(BOOL)show {
@@ -291,70 +265,53 @@ typedef void(^UpdateDataCallback)(NSError *error);
     }
 }
 
--(void)updateDataWithIndicator:(BOOL)showIndicator {
-    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
-    if (networkStatus == NotReachable) {
-#warning Почитай, как делается поддержка нескольких языков в приложении NSLocalizedString(key, comment). Все строки храни в Localized файлах.
-        [UIAlertController  showAlertInViewController:self
-                                           withTitle:@"We have problems"
-                                             message:@"No Network :("
-                                   cancelButtonTitle:@"OK"
-                              destructiveButtonTitle:nil
-                                   otherButtonTitles:nil
-                                            tapBlock:^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {
-                                                [self showLoadingIndicator:NO];
-
-                                            }];
-    }else {
-        Reachability *reachability = [Reachability reachabilityForInternetConnection];
-        [reachability startNotifier];
-        
-        NetworkStatus status = [reachability currentReachabilityStatus];
-        
-        if(status == NotReachable)
-        {
-            [UIAlertController  showAlertInViewController:self
-                                                withTitle:@"We have problems"
-                                                  message:@"No Network :("
-                                        cancelButtonTitle:@"OK"
-                                   destructiveButtonTitle:nil
-                                        otherButtonTitles:nil
-                                                 tapBlock:^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {
-                                                     [self showLoadingIndicator:NO];
-
-                                                 }];
-        } else {
-#warning неправильно. [[DataManager sharedInstance ] updateDataWithURLString - вот это ты должен вызывать в main потоке и возвращать даныне тоже в main. А внутри работать с фоновым потоком.
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
-                if (error == nil) {
-                    NSLog(@"GET ELEMENTS %ld",self.newsArray.count);
-                    [self setupData];
-                    [self.activityInd stopAnimating];
-                    [self.activityInd setHidden:YES];
-                    [self.refreshControl endRefreshing];
-                    [self.tableView reloadData];
-                    
-
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self setupData];
-
-#warning вот эти две строки должен вынести в отдельный метод и там либо показывать, либо скрывать индикатор
-                            [self.activityInd stopAnimating];
-                            [self.activityInd setHidden:YES];
-#warning опять же сильная ссылка внутри блока
-                            [self.refreshControl endRefreshing];
-                            [self.tableView reloadData];
-                        });
-                }
-            }];
-            });
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showLoadingIndicator:showIndicator];
-            });
-            
-        }
-    }
+-(void)showAlertController {
+    [UIAlertController  showAlertInViewController:self
+                                        withTitle:@"We have problems"
+                                          message:@"No Network :("
+                                cancelButtonTitle:@"OK"
+                           destructiveButtonTitle:nil
+                                otherButtonTitles:nil
+                                         tapBlock:^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {
+                                             [self showLoadingIndicator:NO];
+                                             
+                                         }];
 }
+
+-(void)updateDataWithIndicator:(BOOL)showIndicator {
+//    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+//    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+//    if (networkStatus != NotReachable) {
+//#warning Почитай, как делается поддержка нескольких языков в приложении NSLocalizedString(key, comment). Все строки храни в Localized файлах.
+//        [self showAlertController];
+//    }else {
+//        Reachability *reachability = [Reachability reachabilityForInternetConnection];
+//        [reachability startNotifier];
+//        
+//        NetworkStatus status = [reachability currentReachabilityStatus];
+//        
+//        if(status != NotReachable)
+//        {
+//            [self showAlertController];
+//
+//        } else {
+#warning неправильно. [[DataManager sharedInstance ] updateDataWithURLString - вот это ты должен вызывать в main потоке и возвращать даныне тоже в main. А внутри работать с фоновым потоком.
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            __block UIRefreshControl *refreshControl = self.refreshControl;
+                            __block UITableView *tableView = self.tableView;
+
+                            [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
+                            
+                                if (error == nil) {
+                                    NSLog(@"GET ELEMENTS %ld",self.newsArray.count);
+                                    [self setupData];
+                                    [self showLoadingIndicator:NO];
+                                    [refreshControl endRefreshing];
+                                    [tableView reloadData];
+                                }
+                            }];
+                        });
+}
+//    }
+//}
 @end

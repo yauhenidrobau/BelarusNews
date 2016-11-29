@@ -53,20 +53,23 @@ NSMutableString * tempString;
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName{
     //save data
     if ([elementName isEqualToString:@"item"]) {
-        if (![titleFeed  isEqual: @""]) {
+        if (titleFeed.length) {
             [currentDataDictionary  setObject:titleFeed forKey:@"title"];
         }
-        if (![linkFeed isEqual:@"" ]) {
+        if (linkFeed.length) {
 #warning must get 0 element
 
             // must get 0 element
             [currentDataDictionary  setObject:linkFeed forKey:@"link"];
         }
-        if (![descriptionFeed  isEqual: @""]) {
+        if (descriptionFeed.length) {
             [currentDataDictionary  setObject:descriptionFeed forKey:@"description"];
         }
-        if (![pubDateFeed  isEqual: @""]) {
-            [currentDataDictionary  setObject:pubDateFeed forKey:@"pubDate"];
+        if (pubDateFeed.length) {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+            [formatter setDateFormat:@"E, d MMM yyyy HH:mm:ss Z"];
+            NSDate *pubDate = [formatter dateFromString:[pubDateFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+            [currentDataDictionary  setObject:pubDate forKey:@"pubDate"];
         }
         NSRange matchBegin = [descriptionFeed rangeOfString:@"<img src="];
         NSRange matchEnd = [descriptionFeed rangeOfString:@"width="];
@@ -77,7 +80,7 @@ NSMutableString * tempString;
             [urlImage appendString:cdataString];
             }
 
-        if (![urlImage  isEqual: @""]) {
+        if (urlImage.length) {
             [currentDataDictionary  setObject:urlImage forKey:@"imageUrl"];
         }
         [dictParsedData addObject:currentDataDictionary];
@@ -97,7 +100,9 @@ NSMutableString * tempString;
     } else if ([currentElement  isEqual: @"link"] && linkFeed.length == 0){
         [linkFeed appendString: string];
     } else if ([currentElement  isEqual: @"pubDate"]) {
-       [ pubDateFeed appendString:string ];
+        if (!pubDateFeed.length) {
+            [ pubDateFeed  appendString:string ];
+        }
     }
 }
 

@@ -27,54 +27,34 @@ SINGLETON(RemoteFacade)
 -(void)loadData:(NSString *)urlString callback:(DataLoadCallback)comptetion {
     // load data
 #warning AFNetworking - очень рекомендую разобраться
-//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-//    
-//    NSURL *URL = [NSURL URLWithString:urlString];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-//    [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-//        self.info = responseObject;
-//        if (comptetion) {
-//            comptetion(self.info, nil);
-//        }
-//    }];
-//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSURL *URL = [NSURL URLWithString:urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    
-    AFHTTPRequestOperationManager *operation = [AFHTTPRequestOperationManager manager];
-    
-    // Make sure to set the responseSerializer correctly
-    operation.requestSerializer = [AFHTTPRequestSerializer serializer];
-    [operation.requestSerializer setValue:@"application/rss+xml" forHTTPHeaderField:@"content-type"];
-    operation.responseSerializer = [AFHTTPResponseSerializer serializer];
-    operation.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/rss+xml"];
-    [operation setResponseSerializer:[AFXMLParserResponseSerializer serializer]];
-//    NSData *dataa = [operation responseData];
-    [operation GET:urlString parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSData *dat = (NSData *)responseObject;
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving News"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    }];
 
-     
-     //    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-//        if (error) {
-//            NSLog(@"Error: %@", error);
-//        } else {
-//            NSString* errResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
-//            NSLog(@"%@",errResponse);
-////            NSLog(@"%@ %@", response, responseObject);
-//        }
-//    }];
-//    [dataTask resume];
+    NSURL *URL = [NSURL URLWithString:urlString];
+   NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:URL];
     
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithBaseURL:URL sessionConfiguration:configuration];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    [request setValue:@"application/rss+xml" forHTTPHeaderField:@"content-type"];
+//    [manager.requestSerializer setValue:@"application/rss+xml" forHTTPHeaderField:@"content-type"];
+    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+//    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"application/rss+xml"];
+    [manager setResponseSerializer:[AFXMLParserResponseSerializer serializer]];
+    NSURLSessionDataTask *dataTask = [manager  GET:urlString parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        self.info = (NSData *)responseObject;
+        if (comptetion) {
+            comptetion(self.info, nil);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        self.info = (NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+        if (comptetion) {
+            comptetion(self.info, nil);
+        }
+    }];
+        
+    [dataTask resume];
+    
+    
+    //  Old version of download
     
 //    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //        NSURL *url = [NSURL URLWithString:dataURL];

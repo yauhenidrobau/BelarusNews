@@ -14,7 +14,7 @@
 @interface ParserManager () <XMLParserDelegate>
 
 @property (nonatomic, copy) ParseCallback callback;
-@property(nonatomic, strong) NSData *info;
+@property(nonatomic, strong) NSArray *info;
 
 @end
 
@@ -37,7 +37,7 @@ SINGLETON(ParserManager)
 #warning ОБЯЗАТЕЛЬНО ДОЛЖНА БЫТЬ ПРОВЕРКА НА СУЩЕСТВОВАНИЕ БЛОКА!!!!!!!!!
         if (self.callback) {
             self.callback(self.info, nil);
-        } else self.callback(nil,nil);
+        } else self.callback(nil,[NSError errorWithDomain:@"Error" code:-111 userInfo:@{}]);
     }
 }
 
