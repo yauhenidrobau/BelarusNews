@@ -20,12 +20,6 @@
 
 #pragma mark - Lifecycle
 
-+ (id)newInstance {
-#warning если у тебя один сториборд, то можно просто писать self.storyboard
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    id vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"DetailsViewController"];
-    return vc;
-}
  -(void) viewDidLoad{
      [super  viewDidLoad];
      self.webView.hidden = YES;

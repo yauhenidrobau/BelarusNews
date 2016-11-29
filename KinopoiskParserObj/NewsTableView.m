@@ -16,6 +16,7 @@
 #import <UIKit/UIKit.h>
 #import <Reachability.h>
 #import <UIAlertController+Blocks.h>
+#import <NYSegmentedControl.h>
 
 #define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
 #define TUT_BY_NEWS @"http://news.tut.by/rss/all.rss"
@@ -23,10 +24,10 @@
 
 typedef void(^UpdateDataCallback)(NSError *error);
 
-@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchResultsUpdating,UISearchBarDelegate>
+@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate,NYSegmentedControlDataSource>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *NewsSegmentedControl;
+@property (weak, nonatomic) IBOutlet NYSegmentedControl *NewsSegmentedControl;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -38,6 +39,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) UISearchController *searchController;
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -50,20 +52,22 @@ typedef void(^UpdateDataCallback)(NSError *error);
     [super viewDidLoad];
     [self setAppierance];
     [self updateDataWithIndicator:YES];
-    [self setupData];
+//    [self setupData];
+    [self setupAppearanceNewsSegmentedControl];
     [self addPullToRefresh];
-    self.scrollButton.hidden = YES;
-    self.tableView.emptyDataSetSource = self;
-    self.tableView.emptyDataSetDelegate = self;
 
-    [self.navigationController setHidesBarsOnSwipe:YES];
-    UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
-    self.navigationItem.rightBarButtonItem = refreshBtn;
     
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 -(NSArray *)urlArray {
@@ -75,7 +79,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 -(NSArray *)titlesArray {
     if (!_titlesArray.count) {
-        _titlesArray = @[@"dev.by",@"tut.by",@"yandex"];
+        _titlesArray = @[@"DEV.BY",@"TUT.BY",@"YANDEX"];
     }
     return _titlesArray;
 }
@@ -91,16 +95,15 @@ typedef void(^UpdateDataCallback)(NSError *error);
 }
 
 -(IBAction)scrollButtonTouchUpInside:(id)sender {
-    __block UITableView *tableView = self.tableView;
-#warning плохо в плане работы с памятью. В блоке должна быть слабая ссылка, а не сильная self
+    __weak typeof(self.tableView) weakTableView = self.tableView;
     [UIView animateWithDuration:0.9 animations:^{
-        [tableView setContentOffset:CGPointZero animated:YES];
+        [weakTableView setContentOffset:CGPointZero animated:YES];
     }];
     self.scrollButton.hidden = YES;
     [self.navigationController setNavigationBarHidden:NO];
 }
 
--(IBAction)changeValueSC:(id)sender {
+-(IBAction)changeValueSC {
     [self updateDataWithIndicator:YES];
 }
 
@@ -181,18 +184,31 @@ typedef void(^UpdateDataCallback)(NSError *error);
 #pragma mark UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NewsEntity *newsEntity = self.newsArray[indexPath.row];
-    DetailsViewController *vc = [DetailsViewController newInstance];
-    vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
-    [vc.navigationItem setTitle:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-#warning сделай через Segue!!!
-    [self.navigationController pushViewController:vc animated:YES];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"DetailsVCID"]) {
+        UITableViewCell *cell = (UITableViewCell*)sender;
+        DetailsViewController *vc = segue.destinationViewController;
+        NewsEntity *newsEntity = self.newsArray[[self.tableView indexPathForCell:cell].row];
+        vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
+        [vc.navigationItem setTitle:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
+    }
+}
+#pragma mark - NYSegmentedControlDataSource
+
+- (NSUInteger) numberOfSegmentsOfControl:(NYSegmentedControl *)control {
+    return self.titlesArray.count;
+}
+- (NSString *) segmentedControl:(NYSegmentedControl *)control titleAtIndex:(NSInteger)index {
+    return self.titlesArray[index];
+}
+
 
 #pragma mark - UISearchControllerDelegate & UISearchResultsDelegate
 
+#warning TODO not delete please
 //-(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
 //   
 //    NSString *searchString = self.searchController.searchBar.text;
@@ -238,17 +254,28 @@ typedef void(^UpdateDataCallback)(NSError *error);
     [self.tableView addSubview:self.refreshControl];
 }
 
+-(void)timerActionRefresh {
+    [self updateDataWithIndicator:YES];
+}
 -(void)setAppierance {
     // auto re-sizing cell
     self.tableView.estimatedRowHeight = 80;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
-    [self.navigationItem.titleView setTintColor:[UIColor whiteColor]];
     [self.activityInd setHidden:YES];
+    self.scrollButton.hidden = YES;
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
+    
+    [self.navigationController setHidesBarsOnSwipe:YES];
+    [self.navigationItem.titleView setTintColor:[UIColor whiteColor]];
+    UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
+    self.navigationItem.rightBarButtonItem = refreshBtn;
 }
 
 -(void)setupData{
     self.newsArray = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
+    [self.tableView reloadData];
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
         [self.activityInd stopAnimating];
@@ -266,6 +293,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 }
 
 -(void)showAlertController {
+#warning TODO NSLocalizedString
     [UIAlertController  showAlertInViewController:self
                                         withTitle:@"We have problems"
                                           message:@"No Network :("
@@ -274,44 +302,62 @@ typedef void(^UpdateDataCallback)(NSError *error);
                                 otherButtonTitles:nil
                                          tapBlock:^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {
                                              [self showLoadingIndicator:NO];
-                                             
+                                             [self setupData];
                                          }];
 }
 
 -(void)updateDataWithIndicator:(BOOL)showIndicator {
-//    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
-//    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
-//    if (networkStatus != NotReachable) {
-//#warning Почитай, как делается поддержка нескольких языков в приложении NSLocalizedString(key, comment). Все строки храни в Localized файлах.
-//        [self showAlertController];
-//    }else {
-//        Reachability *reachability = [Reachability reachabilityForInternetConnection];
-//        [reachability startNotifier];
-//        
-//        NetworkStatus status = [reachability currentReachabilityStatus];
-//        
-//        if(status != NotReachable)
-//        {
-//            [self showAlertController];
-//
-//        } else {
+    
 #warning неправильно. [[DataManager sharedInstance ] updateDataWithURLString - вот это ты должен вызывать в main потоке и возвращать даныне тоже в main. А внутри работать с фоновым потоком.
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            __block UIRefreshControl *refreshControl = self.refreshControl;
-                            __block UITableView *tableView = self.tableView;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+        NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+        if (networkStatus == NotReachable) {
+            [self showAlertController];
+        }else {
+            Reachability *reachability = [Reachability reachabilityForInternetConnection];
+            [reachability startNotifier];
+            NetworkStatus status = [reachability currentReachabilityStatus];
+            if(status == NotReachable) {
+                [self showAlertController];
+            } else {
+                __weak typeof(self.refreshControl) weakRefreshControl = self.refreshControl;
+                __weak typeof(self.tableView) weakTableView = self.tableView;
+                [self showLoadingIndicator:showIndicator];
 
-                            [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
-                            
-                                if (error == nil) {
-                                    NSLog(@"GET ELEMENTS %ld",self.newsArray.count);
-                                    [self setupData];
-                                    [self showLoadingIndicator:NO];
-                                    [refreshControl endRefreshing];
-                                    [tableView reloadData];
-                                }
-                            }];
-                        });
+                [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
+                    if (error == nil) {
+                        [self setupData];
+                        NSLog(@"GET ELEMENTS %ld",self.newsArray.count);
+                        if(showIndicator) {
+                        [self showLoadingIndicator:!showIndicator];
+                        }
+                        [weakRefreshControl endRefreshing];
+                        [weakTableView reloadData];
+                    }
+                }];
+            }
+        }
+    });
 }
-//    }
-//}
+
+-(void)setupAppearanceNewsSegmentedControl {
+    [self.NewsSegmentedControl layoutIfNeeded];
+    UIColor *mainColor = [UIColor colorWithRed:253. / 255. green:253. /255. blue:253. / 255. alpha:1.0];
+    self.NewsSegmentedControl.borderWidth = 0.5f;
+    self.NewsSegmentedControl.borderColor = [UIColor colorWithWhite:227./255. alpha:1.0f];
+    self.NewsSegmentedControl.backgroundColor = [UIColor colorWithRed:235./255. green:236./255. blue:239./255. alpha:1.0f];
+//    self.NewsSegmentedControl.layer.cornerRadius = self.NewsSegmentedControl.frame.size.height / 2;
+    self.NewsSegmentedControl.cornerRadius = self.NewsSegmentedControl.frame.size.height / 2;
+    self.NewsSegmentedControl.drawsGradientBackground = NO;
+    self.NewsSegmentedControl.drawsSegmentIndicatorGradientBackground = YES;
+    self.NewsSegmentedControl.segmentIndicatorGradientTopColor = mainColor;
+    self.NewsSegmentedControl.segmentIndicatorGradientBottomColor = mainColor;
+    self.NewsSegmentedControl.segmentIndicatorAnimationDuration = 0.3f;
+    self.NewsSegmentedControl.segmentIndicatorBorderWidth = 0.0f;
+    self.NewsSegmentedControl.selectedTitleTextColor = [UIColor colorWithRed:9. / 255. green:171. /255. blue:225. / 255. alpha:1.0];
+    self.NewsSegmentedControl.titleTextColor = [UIColor colorWithRed:98. / 255. green:128. /255. blue:142. / 255. alpha:1.0];
+    self.NewsSegmentedControl.dataSource = self;
+    [self.NewsSegmentedControl addTarget:self action:@selector(changeValueSC) forControlEvents:UIControlEventValueChanged];
+}
 @end

@@ -9,4 +9,5 @@ target 'KinopoiskParserObj' do
    pod 'Fabric'
    pod 'Crashlytics'
    pod 'AFNetworking', '~> 2.0'
+   pod 'NYSegmentedControl'
 end

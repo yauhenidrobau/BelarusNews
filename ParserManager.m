@@ -32,9 +32,7 @@ SINGLETON(ParserManager)
 
 -(void) xmlParserDidFinishParsing: (NSArray<NSDictionary*>*)items  error: (NSError *)error{
     if (self.callback) {
-#warning Ты в NSData присваиваешь массив!
         self.info = items;
-#warning ОБЯЗАТЕЛЬНО ДОЛЖНА БЫТЬ ПРОВЕРКА НА СУЩЕСТВОВАНИЕ БЛОКА!!!!!!!!!
         if (self.callback) {
             self.callback(self.info, nil);
         } else self.callback(nil,[NSError errorWithDomain:@"Error" code:-111 userInfo:@{}]);

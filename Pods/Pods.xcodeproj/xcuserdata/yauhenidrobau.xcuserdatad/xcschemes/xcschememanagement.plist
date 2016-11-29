@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>NYSegmentedControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-KinopoiskParserObj.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,12 +47,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>096AE2B0FC8068E3A182FD2293C591EE</key>
+		<key>015BCEAC6A341771E6720CEEB9CC32B4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>35AFF0515361785FB237ECBEAA1AEB7D</key>
+		<key>207490A39D7D03E761A6B8473700BA68</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,7 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5679836E97C9B6972260B4C00D7C8023</key>
+		<key>4FCA771C1D811CAA77A1FADDC09D1374</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>613F07F9E9EFD0572D6EF1709738001E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>68DA67D8573FEA3DC15E7F79E23542FC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,12 +82,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA7EB651A6298E5A7DA6C177BB85B7D3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E8C742ED4F63939B89B6D116C10BE49A</key>
+		<key>9C5DC53E2A6CFCEAE071A0699254C101</key>
 		<dict>
 			<key>primary</key>
 			<true/>
