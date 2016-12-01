@@ -79,7 +79,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 -(NSArray *)titlesArray {
     if (!_titlesArray.count) {
-        _titlesArray = @[@"DEV.BY",@"TUT.BY",@"YANDEX"];
+        _titlesArray = @[NSLocalizedString(@"DEV.BY", nil),NSLocalizedString(@"TUT.BY", nil),NSLocalizedString(@"MTS.BY", nil)];
     }
     return _titlesArray;
 }
@@ -110,7 +110,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 #pragma mark - DZNEmptyDataSetSource
 
 -(NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = @"No News Found";
+    NSString *text = NSLocalizedString(@"No News", nil);
     
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
@@ -124,7 +124,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 }
 
 -(NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = @"Make sure that you turn on network.";
+    NSString *text = NSLocalizedString(@"No Network", nil);
     
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
@@ -295,9 +295,9 @@ typedef void(^UpdateDataCallback)(NSError *error);
 -(void)showAlertController {
 #warning TODO NSLocalizedString
     [UIAlertController  showAlertInViewController:self
-                                        withTitle:@"We have problems"
-                                          message:@"No Network :("
-                                cancelButtonTitle:@"OK"
+                                        withTitle:NSLocalizedString(@"We have problems",nil)
+                                          message:NSLocalizedString(@"No Network :(",nil)
+                                cancelButtonTitle:NSLocalizedString(@"OK",nil)
                            destructiveButtonTitle:nil
                                 otherButtonTitles:nil
                                          tapBlock:^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {
@@ -326,7 +326,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
                 [self showLoadingIndicator:showIndicator];
 
                 [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
-                    if (error == nil) {
+                    if (!error) {
                         [self setupData];
                         NSLog(@"GET ELEMENTS %ld",self.newsArray.count);
                         if(showIndicator) {

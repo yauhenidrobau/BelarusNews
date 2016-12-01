@@ -1,0 +1,15 @@
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "51C-sf-7uE"; */
+"51C-sf-7uE.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "Наверх"; ObjectID = "JS4-6j-NGK"; */
+"JS4-6j-NGK.normalTitle" = "Наверх";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Xqc-xj-tJa"; */
+"Xqc-xj-tJa.text" = "Label";
+
+/* Class = "UILabel"; text = "TitleLabel"; ObjectID = "YFF-L9-PCS"; */
+"YFF-L9-PCS.text" = "TitleLabel";
+
+/* Class = "UISearchBar"; placeholder = "Search news..."; ObjectID = "eLz-fu-32V"; */
+"eLz-fu-32V.placeholder" = "Search news...";

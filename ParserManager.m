@@ -35,7 +35,7 @@ SINGLETON(ParserManager)
         self.info = items;
         if (self.callback) {
             self.callback(self.info, nil);
-        } else self.callback(nil,[NSError errorWithDomain:@"Error" code:-111 userInfo:@{}]);
+        }
     }
 }
 

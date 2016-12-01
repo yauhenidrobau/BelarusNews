@@ -37,33 +37,5 @@
     self.pubDateLabel.text =[formatter stringFromDate:entity.pubDateFeed];
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
                  placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",titlesArray[index]]]];
-    
-//    [self downloadThumbnails:[NSURL URLWithString:entity.urlImage] AndTitles:(NSArray *)titlesArray AndIndex:(NSInteger)index];
-    
-    
-//    self.imageNewsView.image =
-//    cell.titleLabel.text = newsEntity.titleFeed;
-//    cell.descriptionLabel.text = newsEntity.descriptionFeed;
-//    if (newsEntity.urlImage) {
-//#warning если картинки большие и долго загружаются, то таблица будет дергаться, потому что ты грузишь картинки в главном потоке.
-//        cell.imageNewsView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:newsEntity.urlImage]]];
-//    } else {
-//        cell.imageNewsView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]]];
-//    }
-}
-
-- (void) downloadThumbnails:(NSURL *)imageUrl AndTitles:(NSArray *)titlesArray AndIndex:(NSInteger)index {
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    [manager downloadWithURL:imageUrl
-                     options:0
-                    progress:nil
-                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-         if (image) {
-             self.imageNewsView.image = image;
-         } else {
-             self.imageNewsView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",titlesArray[index]]];
-         }
-     }];
-    
 }
 @end

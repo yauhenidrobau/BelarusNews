@@ -144,7 +144,7 @@
                                     <action selector="scrollButtonTouchUpInside:" destination="sqv-9R-s6i" eventType="touchUpInside" id="2c2-2w-mzG"/>
                                 </connections>
                             </button>
-                            <searchBar contentMode="redraw" placeholder="Search news..." translatesAutoresizingMaskIntoConstraints="NO" id="eLz-fu-32V">
+                            <searchBar contentMode="redraw" placeholder="Search news..." translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLz-fu-32V">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="6bX-FG-f3i"/>
                                 </constraints>
