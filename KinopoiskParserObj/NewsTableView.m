@@ -61,7 +61,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
@@ -333,7 +333,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
                         [self showLoadingIndicator:!showIndicator];
                         }
                         [weakRefreshControl endRefreshing];
-                        [weakTableView reloadData];
+//                        [weakTableView reloadData];
                     }
                 }];
             }
