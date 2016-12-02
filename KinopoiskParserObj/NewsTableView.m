@@ -19,6 +19,7 @@
 #import <NYSegmentedControl.h>
 
 #define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
+#define MTS_BY_NEWS @"http://www.mts.by/rss/"
 #define TUT_BY_NEWS @"http://news.tut.by/rss/all.rss"
 #define DEV_BY_NEWS @"https://dev.by/rss"
 
@@ -40,6 +41,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 @property (strong, nonatomic) UISearchController *searchController;
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) BOOL isAlertShown;
 
 @end
 
@@ -55,13 +57,14 @@ typedef void(^UpdateDataCallback)(NSError *error);
 //    [self setupData];
     [self setupAppearanceNewsSegmentedControl];
     [self addPullToRefresh];
+    self.isAlertShown = NO;
 
     
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
@@ -72,14 +75,14 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 -(NSArray *)urlArray {
     if (!_urlArray.count) {
-        _urlArray = [NSArray arrayWithObjects:DEV_BY_NEWS,TUT_BY_NEWS,YANDEX_NEWS, nil];
+        _urlArray = [NSArray arrayWithObjects:DEV_BY_NEWS,TUT_BY_NEWS,MTS_BY_NEWS, nil];
     }
     return _urlArray;
 }
 
 -(NSArray *)titlesArray {
     if (!_titlesArray.count) {
-        _titlesArray = @[@"DEV.BY",@"TUT.BY",@"YANDEX"];
+        _titlesArray = @[@"DEV.BY",@"TUT.BY",@"MTS.BY"];
     }
     return _titlesArray;
 }
@@ -275,6 +278,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 -(void)setupData{
     self.newsArray = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
+    NSLog(@"Get ELEMENTS  %lu",self.newsArray.count);
     [self.tableView reloadData];
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
@@ -294,16 +298,20 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 -(void)showAlertController {
 #warning TODO NSLocalizedString
-    [UIAlertController  showAlertInViewController:self
-                                        withTitle:@"We have problems"
-                                          message:@"No Network :("
-                                cancelButtonTitle:@"OK"
-                           destructiveButtonTitle:nil
-                                otherButtonTitles:nil
-                                         tapBlock:^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {
-                                             [self showLoadingIndicator:NO];
-                                             [self setupData];
-                                         }];
+    if (!self.isAlertShown) {
+        [self showLoadingIndicator:YES];
+        [UIAlertController  showAlertInViewController:self
+                                            withTitle:@"We have problems"
+                                              message:@"No Network :("
+                                    cancelButtonTitle:@"OK"
+                               destructiveButtonTitle:nil
+                                    otherButtonTitles:nil
+                                             tapBlock:^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {
+                                                 [self setupData];
+                                                 [self showLoadingIndicator:NO];
+                                             }];
+        self.isAlertShown = YES;
+    }
 }
 
 -(void)updateDataWithIndicator:(BOOL)showIndicator {
@@ -314,26 +322,29 @@ typedef void(^UpdateDataCallback)(NSError *error);
         NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
         if (networkStatus == NotReachable) {
             [self showAlertController];
+            [self setupData];
         }else {
             Reachability *reachability = [Reachability reachabilityForInternetConnection];
             [reachability startNotifier];
             NetworkStatus status = [reachability currentReachabilityStatus];
             if(status == NotReachable) {
                 [self showAlertController];
+                [self setupData];
+
             } else {
-                __weak typeof(self.refreshControl) weakRefreshControl = self.refreshControl;
-                __weak typeof(self.tableView) weakTableView = self.tableView;
                 [self showLoadingIndicator:showIndicator];
 
+                __weak typeof(self)wself = self;
+                self.isAlertShown = NO;
                 [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
                     if (error == nil) {
                         [self setupData];
-                        NSLog(@"GET ELEMENTS %ld",self.newsArray.count);
+//                        NSLog(@"GET ELEMENTS %ld",self.newsArray.count);
                         if(showIndicator) {
                         [self showLoadingIndicator:!showIndicator];
                         }
-                        [weakRefreshControl endRefreshing];
-                        [weakTableView reloadData];
+                        [wself.refreshControl endRefreshing];
+                        [wself.tableView reloadData];
                     }
                 }];
             }

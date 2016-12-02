@@ -53,18 +53,31 @@ SINGLETON(RemoteFacade)
 //        
 //    [dataTask resume];
     
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    
+    AFURLConnectionOperation *operation = [[AFURLConnectionOperation alloc] initWithRequest:request];
+    __weak typeof(self)wself = self;
+    [operation setCompletionBlock:^{
+//        NSLog(@"Complete: %@",weakOperation.responseData);
+        wself.info = operation.responseData;
+        if (comptetion) {
+            comptetion(wself.info,nil);
+        }
+    }];
+    [operation start];
+    
     
     //  Old version of download
     
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSURL *url = [NSURL URLWithString:urlString];
-        NSData *info = [NSData dataWithContentsOfURL:url];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (comptetion) {
-                comptetion(info, nil);
-            }
-        });      
-    });
+//    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        NSURL *url = [NSURL URLWithString:urlString];
+//        NSData *info = [NSData dataWithContentsOfURL:url];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if (comptetion) {
+//                comptetion(info, nil);
+//            }
+//        });      
+//    });
 }
 
 @end

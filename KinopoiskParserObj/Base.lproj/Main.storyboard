@@ -178,7 +178,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5CF-Mi-Afl">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="51C-sf-7uE"/>
+                        <barButtonItem key="leftBarButtonItem" image="icon_list" id="51C-sf-7uE"/>
                     </navigationItem>
                     <connections>
                         <outlet property="NewsSegmentedControl" destination="aOm-1K-Q9F" id="Ukg-MA-Cdk"/>
@@ -212,6 +212,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_list" width="36" height="32"/>
         <image name="no_image_200_200" width="200" height="200"/>
     </resources>
 </document>

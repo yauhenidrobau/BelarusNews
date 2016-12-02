@@ -33,6 +33,14 @@
          contextName = "__67-[DataManager updateDataWithURLString:AndTitleString:WithCallBack:]_block_invoke_2:DataManager.m">
       </ContextState>
       <ContextState
+         contextName = "-[NewsTableView showAlertController]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.isAlertShown">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[CoreDataManager saveFilms:]:CoreDataManager.m">
       </ContextState>
       <ContextState
@@ -111,6 +119,11 @@
       </ContextState>
       <ContextState
          contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke:RemoteFacade.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.info">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[NewsTableViewCell cellForNews:AndTitles:AndIndex:]:NewsTableViewCell.m">
