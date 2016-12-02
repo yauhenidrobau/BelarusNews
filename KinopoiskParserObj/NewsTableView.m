@@ -82,7 +82,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 -(NSArray *)titlesArray {
     if (!_titlesArray.count) {
-        _titlesArray = @[@"DEV.BY",@"TUT.BY",@"MTS.BY"];
+        _titlesArray = @[NSLocalizedString(@"DEV.BY", nil),NSLocalizedString(@"TUT.BY", nil),NSLocalizedString(@"MTS.BY", nil)];
     }
     return _titlesArray;
 }
@@ -98,9 +98,9 @@ typedef void(^UpdateDataCallback)(NSError *error);
 }
 
 -(IBAction)scrollButtonTouchUpInside:(id)sender {
-    __weak typeof(self.tableView) weakTableView = self.tableView;
+    __weak __typeof(self) wself = self;
     [UIView animateWithDuration:0.9 animations:^{
-        [weakTableView setContentOffset:CGPointZero animated:YES];
+        [wself.tableView setContentOffset:CGPointZero animated:YES];
     }];
     self.scrollButton.hidden = YES;
     [self.navigationController setNavigationBarHidden:NO];
@@ -113,7 +113,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 #pragma mark - DZNEmptyDataSetSource
 
 -(NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = @"No News Found";
+    NSString *text = NSLocalizedString(@"No News", nil);
     
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
@@ -127,7 +127,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 }
 
 -(NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = @"Make sure that you turn on network.";
+    NSString *text = NSLocalizedString(@"No Network", nil);
     
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
@@ -332,12 +332,11 @@ typedef void(^UpdateDataCallback)(NSError *error);
                 [self setupData];
 
             } else {
+                __weak __typeof(self) wself = self;
                 [self showLoadingIndicator:showIndicator];
-
-                __weak typeof(self)wself = self;
                 self.isAlertShown = NO;
                 [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
-                    if (error == nil) {
+                    if (!error) {
                         [self setupData];
 //                        NSLog(@"GET ELEMENTS %ld",self.newsArray.count);
                         if(showIndicator) {

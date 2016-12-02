@@ -24,10 +24,10 @@ SINGLETON(ParserManager)
 
 //   how to use blocks here
 -(void) parseXmlData:(NSData *)data callback:(ParseCallback)completion {
-   self.callback = completion;
+    self.callback = completion;
     XMLParser *parser = [[XMLParser alloc]init];
     parser.xmlParserDelegate = self;
-    [parser parseData:data];
+        [parser parseData:data];
 }
 
 -(void) xmlParserDidFinishParsing: (NSArray<NSDictionary*>*)items  error: (NSError *)error{
@@ -35,7 +35,7 @@ SINGLETON(ParserManager)
         self.info = items;
         if (self.callback) {
             self.callback(self.info, nil);
-        } else self.callback(nil,[NSError errorWithDomain:@"Error" code:-111 userInfo:@{}]);
+        }
     }
 }
 

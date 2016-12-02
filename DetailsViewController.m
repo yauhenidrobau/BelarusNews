@@ -43,9 +43,12 @@
     [self.navigationController setNavigationBarHidden:NO];
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
 -(void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 
 #pragma mark - UIWebViewDelegate

@@ -24,60 +24,52 @@ typedef void(^DataLoadCallback)(NSData *info, NSError* error);
 
 SINGLETON(RemoteFacade)
 
--(void)loadData:(NSString *)urlString callback:(DataLoadCallback)comptetion {
+-(void)loadData:(NSString *)urlString callback:(DataLoadCallback)completion {
     // load data
 #warning AFNetworking - очень рекомендую разобраться
-//
-//    NSURL *URL = [NSURL URLWithString:urlString];
-//   NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:URL];
-//    
-//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithBaseURL:URL sessionConfiguration:configuration];
-//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    [request setValue:@"application/rss+xml" forHTTPHeaderField:@"content-type"];
-//    [manager.requestSerializer setValue:@"application/rss+xml" forHTTPHeaderField:@"content-type"];
-//    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
-//    manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"application/rss+xml"];
-//    [manager setResponseSerializer:[AFXMLParserResponseSerializer serializer]];
-//    NSURLSessionDataTask *dataTask = [manager  GET:urlString parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-//        self.info = (NSData *)responseObject;
-//        if (comptetion) {
-//            comptetion(self.info, nil);
-//        }
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        self.info = (NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-//        if (comptetion) {
-//            comptetion(self.info, nil);
-//        }
-//    }];
-//        
-//    [dataTask resume];
     
+    // First variant
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     
     AFURLConnectionOperation *operation = [[AFURLConnectionOperation alloc] initWithRequest:request];
-    __weak typeof(self)wself = self;
+    __weak __typeof(self)wself = self;
+    __weak __typeof(operation)woperation = operation;
     [operation setCompletionBlock:^{
-//        NSLog(@"Complete: %@",weakOperation.responseData);
-        wself.info = operation.responseData;
-        if (comptetion) {
-            comptetion(wself.info,nil);
+        wself.info = woperation.responseData;
+        if (completion) {
+            completion(wself.info,nil);
         }
     }];
     [operation start];
     
+     // Second variant
+//
+//    NSURL *URL = [NSURL URLWithString:urlString];
+//    __weak __typeof(self) wself = self;
+//   NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:URL];
+//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        wself.info = (NSData *)responseObject;
+//        if(completion) {
+//            completion(wself.info,nil);
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
+//    [operation start];
+
     
     //  Old version of download
     
 //    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        NSURL *url = [NSURL URLWithString:urlString];
-//        NSData *info = [NSData dataWithContentsOfURL:url];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            if (comptetion) {
-//                comptetion(info, nil);
-//            }
-//        });      
-//    });
+ //       NSURL *url = [NSURL URLWithString:urlString];
+  //      NSData *info = [NSData dataWithContentsOfURL:url];
+   //     dispatch_async(dispatch_get_main_queue(), ^{
+  //         if (comptetion) {
+   //            comptetion(info, nil);
+   //         }
+  //      });
+ //   });
 }
 
 @end

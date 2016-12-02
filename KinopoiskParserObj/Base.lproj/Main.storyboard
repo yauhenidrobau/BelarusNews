@@ -49,6 +49,24 @@
             </objects>
             <point key="canvasLocation" x="1585" y="385"/>
         </scene>
+        <!--Side Bar Controller-->
+        <scene sceneID="jXM-ca-WRY">
+            <objects>
+                <viewController id="QpU-tt-q4O" customClass="LMSideBarController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uW4-9W-Zgd"/>
+                        <viewControllerLayoutGuide type="bottom" id="l4F-th-iix"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aop-mf-fJG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Voa-Qn-QXm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="922" y="-261"/>
+        </scene>
         <!--News Table View-->
         <scene sceneID="I7p-Mj-V4s">
             <objects>
@@ -74,7 +92,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u5u-px-kF3" id="WHh-k4-cD0">
-                                            <frame key="frameInset" width="342" height="79"/>
+                                            <frame key="frameInset" width="342" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitleLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFF-L9-PCS">
@@ -144,11 +162,12 @@
                                     <action selector="scrollButtonTouchUpInside:" destination="sqv-9R-s6i" eventType="touchUpInside" id="2c2-2w-mzG"/>
                                 </connections>
                             </button>
-                            <searchBar contentMode="redraw" placeholder="Search news..." translatesAutoresizingMaskIntoConstraints="NO" id="eLz-fu-32V">
+                            <searchBar contentMode="redraw" placeholder="Search news..." translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLz-fu-32V">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="6bX-FG-f3i"/>
                                 </constraints>
-                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <offsetWrapper key="searchTextPositionAdjustment" horizontal="0.0" vertical="0.0"/>
                                 <offsetWrapper key="searchFieldBackgroundPositionAdjustment" horizontal="0.0" vertical="0.0"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go"/>
@@ -178,7 +197,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="5CF-Mi-Afl">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" image="icon_list" id="51C-sf-7uE"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="51C-sf-7uE">
+                            <connections>
+                                <segue destination="QpU-tt-q4O" kind="show" id="5ZT-zu-i8O"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="NewsSegmentedControl" destination="aOm-1K-Q9F" id="Ukg-MA-Cdk"/>
@@ -212,7 +235,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_list" width="36" height="32"/>
         <image name="no_image_200_200" width="200" height="200"/>
     </resources>
 </document>

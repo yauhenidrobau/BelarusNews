@@ -4,7 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>LMSideBarController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>NYSegmentedControl.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,22 +52,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>19D7F223BD0ECDD38C804694FF759D3D</key>
+		<key>018161E7D0E0CE7D30C37D59D2316132</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2ED26240CF440770C325B9645BF3D222</key>
+		<key>195F7B6AA04A8D60B61754F4F7818BB6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>378092431E77841872D1B2B0A4728FCA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4E41163EB2F5AA30B226387C051A59F0</key>
+		<key>410B25DF16EA5C5B3E2698F74F9625FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,7 +72,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8FA1DF3CEF560B403CACC9EBEFDF3B36</key>
+		<key>748957441CC601D5B60099F39CBD0549</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>831E4D67BAE7F38171D50CD417F7E3C9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9C5DC53E2A6CFCEAE071A0699254C101</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A458EBBD7B2AAA54BB03498E0AA6F7D2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DCF7B5B39EE2E4B5CCD30C72CAD992E2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
