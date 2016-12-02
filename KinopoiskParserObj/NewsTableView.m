@@ -95,9 +95,9 @@ typedef void(^UpdateDataCallback)(NSError *error);
 }
 
 -(IBAction)scrollButtonTouchUpInside:(id)sender {
-    __weak typeof(self.tableView) weakTableView = self.tableView;
+    __weak __typeof(self) wself = self;
     [UIView animateWithDuration:0.9 animations:^{
-        [weakTableView setContentOffset:CGPointZero animated:YES];
+        [wself.tableView setContentOffset:CGPointZero animated:YES];
     }];
     self.scrollButton.hidden = YES;
     [self.navigationController setNavigationBarHidden:NO];
@@ -321,8 +321,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
             if(status == NotReachable) {
                 [self showAlertController];
             } else {
-                __weak typeof(self.refreshControl) weakRefreshControl = self.refreshControl;
-                __weak typeof(self.tableView) weakTableView = self.tableView;
+                __weak __typeof(self) wself = self;
                 [self showLoadingIndicator:showIndicator];
 
                 [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
@@ -332,7 +331,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
                         if(showIndicator) {
                         [self showLoadingIndicator:!showIndicator];
                         }
-                        [weakRefreshControl endRefreshing];
+                        [wself.refreshControl endRefreshing];
 //                        [weakTableView reloadData];
                     }
                 }];

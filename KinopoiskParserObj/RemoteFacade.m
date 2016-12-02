@@ -28,16 +28,13 @@ SINGLETON(RemoteFacade)
     // load data
 #warning AFNetworking - очень рекомендую разобраться
     NSURL *URL = [NSURL URLWithString:urlString];
+    __weak __typeof(self) wself = self;
    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:URL];
-
-
-    
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        // Print the response body in text
-        self.info = (NSData *)responseObject;
+        wself.info = (NSData *)responseObject;
         if(completion) {
-            completion(self.info,nil);
+            completion(wself.info,nil);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

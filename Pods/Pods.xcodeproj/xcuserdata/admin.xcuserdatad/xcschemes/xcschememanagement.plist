@@ -6,90 +6,58 @@
 	<dict>
 		<key>AFNetworking.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
+		</dict>
+		<key>LMSideBarController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>NYSegmentedControl.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>8</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-KinopoiskParserObj.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Reachability.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Realm.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>UIAlertController+Blocks.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>015BCEAC6A341771E6720CEEB9CC32B4</key>
+		<key>018161E7D0E0CE7D30C37D59D2316132</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>096AE2B0FC8068E3A182FD2293C591EE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>19D7F223BD0ECDD38C804694FF759D3D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>207490A39D7D03E761A6B8473700BA68</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2ED26240CF440770C325B9645BF3D222</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>35AFF0515361785FB237ECBEAA1AEB7D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>378092431E77841872D1B2B0A4728FCA</key>
+		<key>195F7B6AA04A8D60B61754F4F7818BB6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -99,37 +67,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4E41163EB2F5AA30B226387C051A59F0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4FCA771C1D811CAA77A1FADDC09D1374</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5679836E97C9B6972260B4C00D7C8023</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>613F07F9E9EFD0572D6EF1709738001E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>68DA67D8573FEA3DC15E7F79E23542FC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>736E57AD5AEFAAF68D47AE4E8FCB8F68</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8FA1DF3CEF560B403CACC9EBEFDF3B36</key>
+		<key>748957441CC601D5B60099F39CBD0549</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>831E4D67BAE7F38171D50CD417F7E3C9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -139,12 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA7EB651A6298E5A7DA6C177BB85B7D3</key>
+		<key>A458EBBD7B2AAA54BB03498E0AA6F7D2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E8C742ED4F63939B89B6D116C10BE49A</key>
+		<key>DCF7B5B39EE2E4B5CCD30C72CAD992E2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -45,7 +45,6 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void) didReceiveMemoryWarning {
