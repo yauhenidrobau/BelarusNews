@@ -17,6 +17,8 @@
 #import <Reachability.h>
 #import <UIAlertController+Blocks.h>
 #import <NYSegmentedControl.h>
+#import "UIViewController+LMSideBarController.h"
+
 
 #define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
 #define MTS_BY_NEWS @"http://www.mts.by/rss/"
@@ -25,7 +27,7 @@
 
 typedef void(^UpdateDataCallback)(NSError *error);
 
-@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate,NYSegmentedControlDataSource>
+@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate,NYSegmentedControlDataSource, LMSideBarControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet NYSegmentedControl *NewsSegmentedControl;
@@ -49,6 +51,8 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 #pragma mark - Lifecycle
 
+
+
 -(void)viewDidLoad {
 
     [super viewDidLoad];
@@ -58,7 +62,6 @@ typedef void(^UpdateDataCallback)(NSError *error);
     [self setupAppearanceNewsSegmentedControl];
     [self addPullToRefresh];
     self.isAlertShown = NO;
-
     
 }
 
@@ -95,6 +98,9 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 -(void)pullToRefresh {
     [self updateDataWithIndicator:NO];
+}
+- (IBAction)leftBarItemTouchUpInside:(id)sender {
+    [self.sideBarController showMenuViewControllerInDirection:LMSideBarControllerDirectionLeft];
 }
 
 -(IBAction)scrollButtonTouchUpInside:(id)sender {
@@ -208,7 +214,6 @@ typedef void(^UpdateDataCallback)(NSError *error);
     return self.titlesArray[index];
 }
 
-
 #pragma mark - UISearchControllerDelegate & UISearchResultsDelegate
 
 #warning TODO not delete please
@@ -297,13 +302,12 @@ typedef void(^UpdateDataCallback)(NSError *error);
 }
 
 -(void)showAlertController {
-#warning TODO NSLocalizedString
     if (!self.isAlertShown) {
         [self showLoadingIndicator:YES];
         [UIAlertController  showAlertInViewController:self
-                                            withTitle:@"We have problems"
-                                              message:@"No Network :("
-                                    cancelButtonTitle:@"OK"
+                                            withTitle:NSLocalizedString(@"We have problems", nil)
+                                              message:NSLocalizedString(@"No Network",nil)
+                                    cancelButtonTitle:NSLocalizedString(@"OK",nil)
                                destructiveButtonTitle:nil
                                     otherButtonTitles:nil
                                              tapBlock:^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {

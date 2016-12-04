@@ -26,6 +26,7 @@
 		1E7329551D7848530027E46E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329541D7848530027E46E /* DetailsViewController.m */; };
 		3D499CCAEC00E7C593490045 /* libPods-KinopoiskParserObj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0EC11EF02CB57D6640E485 /* libPods-KinopoiskParserObj.a */; };
 		84246F4F1DF01E1300226DD8 /* NSLocalizedString.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84246F511DF01E1300226DD8 /* NSLocalizedString.strings */; };
+		843B7B561DF35E27001532A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B7B551DF35E27001532A4 /* RootViewController.m */; };
 		844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A9FD11DF0EE2A00917832 /* MenuViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +102,8 @@
 		84246F531DF01F9500226DD8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		84246F541DF01F9500226DD8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NSLocalizedString.strings; sourceTree = "<group>"; };
 		84246F561DF0200E00226DD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		843B7B541DF35E27001532A4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		843B7B551DF35E27001532A4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		844A9FD01DF0EE2A00917832 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		844A9FD11DF0EE2A00917832 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		8B1146B5C66D8993D8AAB349 /* Pods-KinopoiskParserObj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinopoiskParserObj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj.debug.xcconfig"; sourceTree = "<group>"; };
@@ -280,6 +283,8 @@
 			children = (
 				844A9FD01DF0EE2A00917832 /* MenuViewController.h */,
 				844A9FD11DF0EE2A00917832 /* MenuViewController.m */,
+				843B7B541DF35E27001532A4 /* RootViewController.h */,
+				843B7B551DF35E27001532A4 /* RootViewController.m */,
 			);
 			name = MenuVC;
 			sourceTree = "<group>";
@@ -490,6 +495,7 @@
 				1E7329471D7836400027E46E /* ParserManager.m in Sources */,
 				1E7329441D781E980027E46E /* XMLParser.m in Sources */,
 				1E7328F71D7813740027E46E /* AppDelegate.m in Sources */,
+				843B7B561DF35E27001532A4 /* RootViewController.m in Sources */,
 				1E7329521D7845210027E46E /* DataManager.m in Sources */,
 				1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */,
 				1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */,
@@ -598,7 +604,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -637,7 +643,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

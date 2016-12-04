@@ -7,44 +7,78 @@
 //
 
 #import "MenuViewController.h"
-#import <LMSideBarStyle.h>
+
 
 @interface MenuViewController ()
+
+@property (nonatomic, strong) NSArray *menuTitles;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 
 @end
 
 @implementation MenuViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Init side bar styles
-    LMSideBarStyle *sideBarDepthStyle = [LMSideBarStyle new];
-    sideBarDepthStyle.menuWidth = 220;
     
-    // Init view controllers
-    LMSideBarController *leftMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftMenuViewController"];
-    [leftMenuViewController setSideBarStyle:sideBarDepthStyle forDirection:LMSideBarControllerDirectionLeft];
-    // Setup side bar controller
-    [self setPanGestureEnabled:YES];
-    [self setDelegate:self];
-    [self setMenuViewController:leftMenuViewController forDirection:LMSideBarControllerDirectionLeft];
-    [self setSideBarStyle:sideBarDepthStyle forDirection:LMSideBarControllerDirectionLeft];
-    [self setContentViewController:self.navigationController];
+    self.menuTitles = @[NSLocalizedString(@"Profile",nil),
+                        NSLocalizedString(@"Settings",nil),
+                        NSLocalizedString(@"About",nil),
+                        NSLocalizedString(@"Log out",nil)];
+    
+    self.avatarImageView.clipsToBounds = YES;
+    self.avatarImageView.layer.cornerRadius = 50.0;
+    self.avatarImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.avatarImageView.layer.borderWidth = 3.0f;
+    self.avatarImageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    self.avatarImageView.layer.shouldRasterize = YES;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+#pragma mark - TABLE VIEW DATASOURCE
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.menuTitles.count;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"menuCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    cell.textLabel.text = self.menuTitles[indexPath.row];
+    cell.textLabel.textColor = [UIColor colorWithWhite:0.11 alpha:1];
+    cell.backgroundColor = [UIColor clearColor];
+    
+    return cell;
 }
-*/
+
+
+#pragma mark - TABLE VIEW DELEGATE
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+//    LMMainNavigationController *mainNavigationController = (LMMainNavigationController *)self.sideBarController.contentViewController;
+//    NSString *menuTitle = self.menuTitles[indexPath.row];
+//    if ([menuTitle isEqualToString:@"Home"]) {
+//        [mainNavigationController showHomeViewController];
+//    }
+//    else {
+//        mainNavigationController.othersViewController.title = menuTitle;
+//        [mainNavigationController showOthersViewController];
+//    }
+//    
+    [self.sideBarController hideMenuViewController:YES];
+}
+
 
 @end

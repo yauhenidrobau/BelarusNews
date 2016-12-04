@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[NewsTableView setupData]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "newsArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__27-[NewsTableView updateData]_block_invoke_2:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
@@ -11,10 +19,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableView setupData]:NewsTableView.m">
+         contextName = "-[UIViewController(LMSideBarController) sideBarController]:UIViewController+LMSideBarController.m">
          <PersistentStrings>
             <PersistentString
-               value = "newsArray">
+               value = "iter.parentViewController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DetailsViewController viewWillAppear:]:DetailsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_newsUrl">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView awakeFromNib]:NewsTableView.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[XMLParser parser:didEndElement:namespaceURI:qualifiedName:]:XMLParser.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "pubDateFeed">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
