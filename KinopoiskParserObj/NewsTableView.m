@@ -13,6 +13,7 @@
 #import "NewsTableViewCell.h"
 #import "DetailsViewController.h"
 #import "NewsEntity.h"
+#import "SearchManager.h"
 #import <UIKit/UIKit.h>
 #import <Reachability.h>
 #import <UIAlertController+Blocks.h>
@@ -27,7 +28,7 @@
 
 typedef void(^UpdateDataCallback)(NSError *error);
 
-@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate,NYSegmentedControlDataSource, LMSideBarControllerDelegate>
+@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UITextFieldDelegate,NYSegmentedControlDataSource, LMSideBarControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet NYSegmentedControl *NewsSegmentedControl;
@@ -44,6 +45,8 @@ typedef void(^UpdateDataCallback)(NSError *error);
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL isAlertShown;
+@property (nonatomic, assign) BOOL isSearchStart;
+
 
 @end
 
@@ -57,8 +60,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
     [super viewDidLoad];
     [self setAppierance];
-    [self updateDataWithIndicator:YES];
-//    [self setupData];
+    [self setupData];
     [self setupAppearanceNewsSegmentedControl];
     [self addPullToRefresh];
     self.isAlertShown = NO;
@@ -70,6 +72,10 @@ typedef void(^UpdateDataCallback)(NSError *error);
     self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self updateDataWithIndicator:YES];
+}
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.timer invalidate];
@@ -171,7 +177,10 @@ typedef void(^UpdateDataCallback)(NSError *error);
 #pragma mark - UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    if (self.isSearchStart) {
+        return self.searchResults.count;
+    }
+
     return self.newsArray.count;
 }
 
@@ -179,12 +188,12 @@ typedef void(^UpdateDataCallback)(NSError *error);
     return 1;
 }
 
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    NewsEntity *newsEntity = self.newsArray[indexPath.row];
+    NewsEntity *newsEntity = self.searchResults.count? self.searchResults[indexPath.row] :self.newsArray[indexPath.row];
+    cell.textLabel.textColor = [UIColor whiteColor];
     [cell cellForNews:newsEntity AndTitles:self.titlesArray AndIndex:self.NewsSegmentedControl.selectedSegmentIndex];
     
     return cell;
@@ -200,7 +209,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
     if ([segue.identifier isEqualToString:@"DetailsVCID"]) {
         UITableViewCell *cell = (UITableViewCell*)sender;
         DetailsViewController *vc = segue.destinationViewController;
-        NewsEntity *newsEntity = self.newsArray[[self.tableView indexPathForCell:cell].row];
+        NewsEntity *newsEntity = self.searchResults[[self.tableView indexPathForCell:cell].row]? self.searchResults[[self.tableView indexPathForCell:cell].row] : self.newsArray[[self.tableView indexPathForCell:cell].row];
         vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
         [vc.navigationItem setTitle:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
     }
@@ -214,37 +223,16 @@ typedef void(^UpdateDataCallback)(NSError *error);
     return self.titlesArray[index];
 }
 
-#pragma mark - UISearchControllerDelegate & UISearchResultsDelegate
+#pragma mark - UITextFieldDelegate
 
-#warning TODO not delete please
-//-(void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-//   
-//    NSString *searchString = self.searchController.searchBar.text;
-//    [self updateFilteredContentForNewsTitle:searchString];
-//    if (self.searchController.searchResultsController) {
-//        UINavigationController *navigationVC = (UINavigationController *)self.searchController.searchResultsController;
-//        SearchResultsTableViewController *vc = (SearchResultsTableViewController *)navigationVC.topViewController;
-//        vc.searchResults = self.searchResults;
-//        vc.titlesArray = self.titlesArray;
-//        [vc.tableView reloadData];
-//        
-//    }
-//}
-//
-//-(void)updateFilteredContentForNewsTitle:(NSString *)newsTitle {
-//    if (!newsTitle) {
-//        self.searchResults = [self.newsArray mutableCopy];
-//    } else {
-//        NSMutableArray *searchResults = [NSMutableArray new];
-//        for (NSInteger i = 0;i < self.newsArray.count;i++) {
-//            NewsEntity *entity = self.newsArray[i];
-//            if ([entity.titleFeed containsString:newsTitle]) {
-//                [searchResults addObject:entity];
-//            }
-//        }
-//        self.searchResults = searchResults;
-//    }
-//}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *textString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    self.isSearchStart = (textString.length);
+   self.searchResults = [[SearchManager sharedInstance]updateSearchResults:textString forArray:self.newsArray];
+    
+    [self.tableView reloadData];
+    return YES;
+}
 
 #pragma mark UIScrollViewDelegate
 
@@ -283,7 +271,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 -(void)setupData{
     self.newsArray = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
-    NSLog(@"Get ELEMENTS  %lu",self.newsArray.count);
+    NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
     [self.tableView reloadData];
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
@@ -340,6 +328,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
                 [self showLoadingIndicator:showIndicator];
                 self.isAlertShown = NO;
                 [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
+                    [reachability stopNotifier];
                     if (!error) {
                         [self setupData];
 //                        NSLog(@"GET ELEMENTS %ld",self.newsArray.count);

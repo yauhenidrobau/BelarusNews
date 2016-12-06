@@ -8,71 +8,50 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>LMSideBarController.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>9</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>NYSegmentedControl.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-KinopoiskParserObj.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Reachability.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>Realm.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
 		<key>UIAlertController+Blocks.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>8</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>015BCEAC6A341771E6720CEEB9CC32B4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>018161E7D0E0CE7D30C37D59D2316132</key>
 		<dict>
 			<key>primary</key>
@@ -83,27 +62,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>207490A39D7D03E761A6B8473700BA68</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>410B25DF16EA5C5B3E2698F74F9625FB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4FCA771C1D811CAA77A1FADDC09D1374</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>613F07F9E9EFD0572D6EF1709738001E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>68DA67D8573FEA3DC15E7F79E23542FC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
