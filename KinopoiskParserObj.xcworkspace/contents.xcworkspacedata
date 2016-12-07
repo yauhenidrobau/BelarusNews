@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:KinopoiskParserObj.xcodeproj">
+      location = "group:/Users/yauhenidrobau/Documents/Work/ParserObjC last/Belarus News.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

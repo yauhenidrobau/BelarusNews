@@ -16,7 +16,7 @@
 @implementation SearchManager
 SINGLETON(SearchManager)
 
--(NSArray*)updateSearchResults:(NSString *)searchText forArray:(RLMResults<NewsEntity*>*)newsArray {
+-(NSArray*)updateSearchResults:(NSString *)searchText forArray:(NSArray*)newsArray {
 
 
     if (!searchText) {

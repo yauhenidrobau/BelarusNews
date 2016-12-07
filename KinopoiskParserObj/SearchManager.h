@@ -13,5 +13,5 @@
 @interface SearchManager : NSObject
 
 +(instancetype)sharedInstance;
--(NSArray*)updateSearchResults:(NSString *)searchText forArray:(RLMResults<NewsEntity*>*)newsArray;
+-(NSArray*)updateSearchResults:(NSString *)searchText forArray:(NSArray*)newsArray;
 @end

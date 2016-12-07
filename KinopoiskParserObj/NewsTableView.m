@@ -98,7 +98,9 @@ typedef enum {
 
 -(NSArray *)titlesArray {
     if (!_titlesArray.count) {
-        _titlesArray = @[NSLocalizedString(@"All News", nil),NSLocalizedString(@"DEV.BY", nil),NSLocalizedString(@"TUT.BY", nil),NSLocalizedString(@"MTS.BY", nil)];
+        _titlesArray = @[
+//                         NSLocalizedString(@"All News", nil),
+                         NSLocalizedString(@"DEV.BY", nil),NSLocalizedString(@"TUT.BY", nil),NSLocalizedString(@"MTS.BY", nil)];
     }
     return _titlesArray;
 }
@@ -356,10 +358,8 @@ typedef enum {
             [self showAlertController];
             [self setupData];
         }else {
-            Reachability *reachability = [Reachability reachabilityForInternetConnection];
-            [reachability startNotifier];
-            NetworkStatus status = [reachability currentReachabilityStatus];
-            if(status == NotReachable) {
+            [networkReachability startNotifier];
+            if(networkStatus == NotReachable) {
                 [self showAlertController];
                 [self setupData];
 
@@ -368,8 +368,8 @@ typedef enum {
                 [self showLoadingIndicator:showIndicator];
                 self.isAlertShown = NO;
                 [[DataManager sharedInstance ] updateDataWithURLString:self.urlArray[self.NewsSegmentedControl.selectedSegmentIndex] AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
-                    [reachability stopNotifier];
-                    if (!error) {
+                    [networkReachability stopNotifier];
+                    if (!error) { 
                         [self setupData];
 //                        NSLog(@"GET ELEMENTS %ld",self.newsArray.count);
                         if(showIndicator) {
