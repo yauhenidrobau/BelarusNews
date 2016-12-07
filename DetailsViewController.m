@@ -48,6 +48,9 @@
     
 }
 
+-(void)dealloc {
+    self.webView = nil;
+}
 -(void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

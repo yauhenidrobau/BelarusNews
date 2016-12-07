@@ -67,9 +67,14 @@ NSMutableString * tempString;
         }
         if (pubDateFeed.length) {
             NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-            [formatter setDateFormat:@"E, d MMM yyyy HH:mm:ss Z"];
+            [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+            [formatter setDateFormat:@"EEE, dd MMM yyyy HH:mm"];
+
             NSDate *pubDate = [formatter dateFromString:[pubDateFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-            [currentDataDictionary  setObject:pubDate forKey:@"pubDate"];
+            if (pubDate) {
+                currentDataDictionary[@"pubDate"] = pubDate;
+            }
+            
         }
         NSRange matchBegin = [descriptionFeed rangeOfString:@"<img src="];
         NSRange matchEnd = [descriptionFeed rangeOfString:@"width="];

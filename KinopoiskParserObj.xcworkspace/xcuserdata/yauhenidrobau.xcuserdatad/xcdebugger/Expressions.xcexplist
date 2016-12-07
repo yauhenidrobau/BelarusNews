@@ -95,6 +95,9 @@
             <PersistentString
                value = "[dict[@&quot;pubDate&quot;] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]">
             </PersistentString>
+            <PersistentString
+               value = "currentNews.titleFeed">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -126,10 +129,10 @@
          contextName = "-[NewsTableView initRealmArray]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "newsArray.count">
+               value = "self.array[self.NewsSegmentedControl.selectedSegmentIndex]">
             </PersistentString>
             <PersistentString
-               value = "self.array[self.NewsSegmentedControl.selectedSegmentIndex]">
+               value = "newsArray.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -145,16 +148,16 @@
          contextName = "-[NewsTableViewCell cellForNews:AndTitles:AndIndex:]:NewsTableViewCell.m">
          <PersistentStrings>
             <PersistentString
-               value = "[NSDate date]">
+               value = "entity.pubDateFeed">
+            </PersistentString>
+            <PersistentString
+               value = "self.pubDateLabel.text">
             </PersistentString>
             <PersistentString
                value = "[entity.pubDateFeed compare:[NSdate date]]">
             </PersistentString>
             <PersistentString
-               value = "entity.pubDateFeed">
-            </PersistentString>
-            <PersistentString
-               value = "self.pubDateLabel.text">
+               value = "[NSDate date]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -189,28 +192,10 @@
          contextName = "-[NewsTableView prepareForSegue:sender:]:NewsTableView.m">
       </ContextState>
       <ContextState
-         contextName = "-[XMLParser parser:foundCharacters:]:XMLParser.m">
+         contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "currentElement">
-            </PersistentString>
-            <PersistentString
-               value = "descriptionFeed">
-            </PersistentString>
-            <PersistentString
-               value = "titleFeed">
-            </PersistentString>
-            <PersistentString
-               value = "tempString">
-            </PersistentString>
-            <PersistentString
-               value = "linkFeed">
-            </PersistentString>
-            <PersistentString
-               value = "pubDateFeed">
-            </PersistentString>
-            <PersistentString
-               value = "urlImage">
+               value = "self.NewsSegmentedControl.selectedSegmentIndex">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -223,18 +208,36 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke:NewsTableView.m">
+         contextName = "-[XMLParser parser:foundCharacters:]:XMLParser.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.NewsSegmentedControl.selectedSegmentIndex">
+               value = "currentElement">
+            </PersistentString>
+            <PersistentString
+               value = "descriptionFeed">
+            </PersistentString>
+            <PersistentString
+               value = "titleFeed">
+            </PersistentString>
+            <PersistentString
+               value = "pubDateFeed">
+            </PersistentString>
+            <PersistentString
+               value = "linkFeed">
+            </PersistentString>
+            <PersistentString
+               value = "tempString">
+            </PersistentString>
+            <PersistentString
+               value = "urlImage">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke_2:RemoteFacade.m">
+         contextName = "-[NewsTableView setupData]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "manager">
+               value = "self.newsArray">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -247,10 +250,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableView setupData]:NewsTableView.m">
+         contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke_2:RemoteFacade.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.newsArray">
+               value = "manager">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -275,10 +278,10 @@
                value = "newsEntity.titleFeed">
             </PersistentString>
             <PersistentString
-               value = "entity.titleFeed">
+               value = "newsArray.count">
             </PersistentString>
             <PersistentString
-               value = "newsArray.count">
+               value = "entity.titleFeed">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -309,7 +312,7 @@
                value = "descriptionFeed">
             </PersistentString>
             <PersistentString
-               value = "tempString">
+               value = "pubDateFeed">
             </PersistentString>
             <PersistentString
                value = "[pubDateFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]">
@@ -318,7 +321,7 @@
                value = "currentDataDictionary">
             </PersistentString>
             <PersistentString
-               value = "pubDateFeed">
+               value = "tempString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

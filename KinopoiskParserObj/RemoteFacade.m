@@ -58,18 +58,7 @@ SINGLETON(RemoteFacade)
 //    }];
 //    [operation start];
 
-    
-    //  Old version of download
-    
-//    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
- //       NSURL *url = [NSURL URLWithString:urlString];
-  //      NSData *info = [NSData dataWithContentsOfURL:url];
-   //     dispatch_async(dispatch_get_main_queue(), ^{
-  //         if (comptetion) {
-   //            comptetion(info, nil);
-   //         }
-  //      });
- //   });
+
 }
 
 @end

@@ -27,16 +27,28 @@ SINGLETON(ParserManager)
     self.callback = completion;
     XMLParser *parser = [[XMLParser alloc]init];
     parser.xmlParserDelegate = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         [parser parseData:data];
+    });    
 }
 
 -(void) xmlParserDidFinishParsing: (NSArray<NSDictionary*>*)items  error: (NSError *)error{
-    if (self.callback) {
-        self.info = items;
+    dispatch_async(dispatch_get_main_queue(), ^{
         if (self.callback) {
-            self.callback(self.info, nil);
+            self.info = items;
+            if (self.callback) {
+                self.callback(self.info, nil);
+            }
         }
+    });
+    
+    if ([NSThread isMainThread]) {
+        NSLog(@"is main");
+    } else {
+        NSLog(@"is background");
     }
+    
+    
 }
 
 
