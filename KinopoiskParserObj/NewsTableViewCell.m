@@ -36,6 +36,6 @@
     self.descriptionLabel.text = entity.descriptionFeed;
     self.pubDateLabel.text =[formatter stringFromDate:entity.pubDateFeed];
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
-                 placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",titlesArray[index]]]];
+                 placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.feedIdString]]];
 }
 @end

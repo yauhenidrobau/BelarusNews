@@ -41,15 +41,15 @@
          contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke.45:RemoteFacade.m">
       </ContextState>
       <ContextState
-         contextName = "-[CoreDataManager saveFilms:]:CoreDataManager.m">
-      </ContextState>
-      <ContextState
          contextName = "-[SearchManager updateSearchResults:forArray:]:SearchManager.m">
          <PersistentStrings>
             <PersistentString
                value = "self.searchResults">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CoreDataManager saveFilms:]:CoreDataManager.m">
       </ContextState>
       <ContextState
          contextName = "-[NewsTableView textField:shouldChangeCharactersInRange:replacementString:]:NewsTableView.m">
@@ -126,10 +126,10 @@
          contextName = "-[NewsTableView initRealmArray]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "newsArray.count">
+               value = "self.array[self.NewsSegmentedControl.selectedSegmentIndex]">
             </PersistentString>
             <PersistentString
-               value = "self.array[self.NewsSegmentedControl.selectedSegmentIndex]">
+               value = "newsArray.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -195,13 +195,13 @@
                value = "titleFeed">
             </PersistentString>
             <PersistentString
-               value = "tempString">
+               value = "linkFeed">
             </PersistentString>
             <PersistentString
                value = "pubDateFeed">
             </PersistentString>
             <PersistentString
-               value = "linkFeed">
+               value = "tempString">
             </PersistentString>
             <PersistentString
                value = "urlImage">
@@ -217,10 +217,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke_2:RemoteFacade.m">
+         contextName = "-[NewsTableView setupData]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "manager">
+               value = "self.newsArray">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -233,15 +233,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableView setupData]:NewsTableView.m">
+         contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke_2:RemoteFacade.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.newsArray.count">
+               value = "manager">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[DetailsViewController viewWillAppear:]:DetailsViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__67-[DataManager updateDataWithURLString:AndTitleString:WithCallBack:]_block_invoke:DataManager.m">
       </ContextState>
       <ContextState
          contextName = "-[NewsTableView scrollViewDidScroll:]:NewsTableView.m">
@@ -258,15 +261,12 @@
                value = "newsEntity.titleFeed">
             </PersistentString>
             <PersistentString
-               value = "entity.titleFeed">
-            </PersistentString>
-            <PersistentString
                value = "newsArray.count">
             </PersistentString>
+            <PersistentString
+               value = "entity.titleFeed">
+            </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__67-[DataManager updateDataWithURLString:AndTitleString:WithCallBack:]_block_invoke:DataManager.m">
       </ContextState>
       <ContextState
          contextName = "-[NewsTableView tableView:cellForRowAtIndexPath:]:NewsTableView.m">
@@ -295,7 +295,7 @@
                value = "descriptionFeed">
             </PersistentString>
             <PersistentString
-               value = "tempString">
+               value = "currentDataDictionary">
             </PersistentString>
             <PersistentString
                value = "[pubDateFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]">
@@ -304,7 +304,7 @@
                value = "pubDateFeed">
             </PersistentString>
             <PersistentString
-               value = "currentDataDictionary">
+               value = "tempString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

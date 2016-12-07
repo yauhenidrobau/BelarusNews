@@ -26,7 +26,14 @@
 #define TUT_BY_NEWS @"http://news.tut.by/rss/all.rss"
 #define DEV_BY_NEWS @"https://dev.by/rss"
 
+
 typedef void(^UpdateDataCallback)(NSError *error);
+typedef enum {
+    AllCategoryType = 0,
+    DevByCategoryType = 1,
+    TutByCategoryType  = 2,
+    MtsByCategoryType = 3
+}CategoryTypes;
 
 @interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UITextFieldDelegate,NYSegmentedControlDataSource, LMSideBarControllerDelegate>
 
@@ -39,7 +46,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 @property (strong, nonatomic) NSArray * urlArray;
 @property (strong, nonatomic) NSArray * titlesArray;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
-@property (strong, nonatomic) RLMResults<NewsEntity*> *newsArray;
+@property (strong, nonatomic) NSArray *newsArray;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) UISearchController *searchController;
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
@@ -91,7 +98,7 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 -(NSArray *)titlesArray {
     if (!_titlesArray.count) {
-        _titlesArray = @[NSLocalizedString(@"DEV.BY", nil),NSLocalizedString(@"TUT.BY", nil),NSLocalizedString(@"MTS.BY", nil)];
+        _titlesArray = @[NSLocalizedString(@"All News", nil),NSLocalizedString(@"DEV.BY", nil),NSLocalizedString(@"TUT.BY", nil),NSLocalizedString(@"MTS.BY", nil)];
     }
     return _titlesArray;
 }
@@ -119,7 +126,11 @@ typedef void(^UpdateDataCallback)(NSError *error);
 }
 
 -(IBAction)changeValueSC {
-    [self updateDataWithIndicator:YES];
+    if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
+        [self updateDataWithIndicator:YES];
+    } else {
+        [self setupData];
+    }
 }
 
 #pragma mark - DZNEmptyDataSetSource
@@ -185,7 +196,10 @@ typedef void(^UpdateDataCallback)(NSError *error);
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    if (self.isSearchStart) {
+        return self.searchResults.count? 1 : 0;
+    }
+    return self.newsArray.count? 1 : 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -270,8 +284,19 @@ typedef void(^UpdateDataCallback)(NSError *error);
 }
 
 -(void)setupData{
-    self.newsArray = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
-    NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
+    if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
+        RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
+        NSArray *resultsArray = [self RLMResultsToArray:results];
+        
+        self.newsArray = [self sortNewsArray:resultsArray];
+        NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
+    } else {
+        RLMResults *allResults = [NewsEntity allObjects];
+        NSArray *allResultsArray = [self RLMResultsToArray:allResults];
+
+        self.newsArray = [self sortNewsArray:allResultsArray];
+        NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
+    }
     [self.tableView reloadData];
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
@@ -280,6 +305,21 @@ typedef void(^UpdateDataCallback)(NSError *error);
     }
 }
 
+
+-(NSArray *)sortNewsArray:(NSArray*)newsArray {
+    NSSortDescriptor * newSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"pubDateFeed" ascending:NO];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:newSortDescriptor];
+    self.newsArray = [newsArray sortedArrayUsingDescriptors:sortDescriptors];
+    return self.newsArray;
+}
+
+-(NSArray*)RLMResultsToArray:(RLMResults *)results{
+    NSMutableArray *array = [NSMutableArray array];
+    for (RLMObject *object in results) {
+        [array addObject:object];
+    }
+    return array;
+}
 -(void)showLoadingIndicator:(BOOL)show {
     self.activityInd.hidden = !show;
     if (show) {

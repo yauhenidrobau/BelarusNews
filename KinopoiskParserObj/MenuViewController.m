@@ -54,7 +54,7 @@
     }
     
     cell.textLabel.text = self.menuTitles[indexPath.row];
-    cell.textLabel.textColor = [UIColor colorWithWhite:0.11 alpha:1];
+    cell.textLabel.textColor = [UIColor whiteColor];
     cell.backgroundColor = [UIColor clearColor];
     
     return cell;
