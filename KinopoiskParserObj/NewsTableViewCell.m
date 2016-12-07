@@ -31,10 +31,20 @@
 
 -(void)cellForNews:(NewsEntity *)entity AndTitles:(NSArray *)titlesArray AndIndex:(NSInteger)index {
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"d MMM HH:mm:ss"];
     self.titleLabel.text = entity.titleFeed;
     self.descriptionLabel.text = entity.descriptionFeed;
-    self.pubDateLabel.text =[formatter stringFromDate:entity.pubDateFeed];
+    [formatter setDateFormat:@"d MMM"];
+    
+    if([[formatter stringFromDate:entity.pubDateFeed] isEqualToString:[formatter stringFromDate:[NSDate date]]]) {
+        [formatter setDateFormat:@"HH:mm"];
+        self.pubDateLabel.text =[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Today at", nil),[formatter stringFromDate:entity.pubDateFeed]];
+        
+    } else {
+        [formatter setDateFormat:@"d MMM HH:mm:ss"];
+        self.pubDateLabel.text =[formatter stringFromDate:entity.pubDateFeed];
+
+    }
+
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
                  placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.feedIdString]]];
 }
