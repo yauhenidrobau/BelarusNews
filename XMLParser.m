@@ -66,9 +66,10 @@ NSMutableString * tempString;
             [currentDataDictionary  setObject:descriptionFeed forKey:@"description"];
         }
         if (pubDateFeed.length) {
+#warning TODO FORMATER MANAGER
             NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
             [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
-            [formatter setDateFormat:@"EEE, dd MMM yyyy HH:mm"];
+            [formatter setDateFormat:@"E, d MMM yyyy HH:mm:ss Z"];
 
             NSDate *pubDate = [formatter dateFromString:[pubDateFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
             if (pubDate) {

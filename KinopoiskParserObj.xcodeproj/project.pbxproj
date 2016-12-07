@@ -26,9 +26,10 @@
 		1E7329551D7848530027E46E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329541D7848530027E46E /* DetailsViewController.m */; };
 		1EF77A1D1DF549900075DC52 /* SearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A1C1DF549900075DC52 /* SearchManager.m */; };
 		3D499CCAEC00E7C593490045 /* libPods-KinopoiskParserObj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0EC11EF02CB57D6640E485 /* libPods-KinopoiskParserObj.a */; };
-		84246F4F1DF01E1300226DD8 /* NSLocalizedString.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84246F511DF01E1300226DD8 /* NSLocalizedString.strings */; };
 		843B7B561DF35E27001532A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B7B551DF35E27001532A4 /* RootViewController.m */; };
 		844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A9FD11DF0EE2A00917832 /* MenuViewController.m */; };
+		84702F801DF883D2005CE945 /* DateFormatterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84702F7F1DF883D1005CE945 /* DateFormatterManager.m */; };
+		84702F881DF8887C005CE945 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84702F8A1DF8887C005CE945 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,15 +101,19 @@
 		1EF77A1B1DF549900075DC52 /* SearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchManager.h; sourceTree = "<group>"; };
 		1EF77A1C1DF549900075DC52 /* SearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchManager.m; sourceTree = "<group>"; };
 		336B6CDD81FCEE97E5F4E57B /* Pods-KinopoiskParserObj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinopoiskParserObj.release.xcconfig"; path = "Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj.release.xcconfig"; sourceTree = "<group>"; };
-		84246F501DF01E1300226DD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NSLocalizedString.strings; sourceTree = "<group>"; };
-		84246F521DF01F9500226DD8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
-		84246F531DF01F9500226DD8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		84246F541DF01F9500226DD8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/NSLocalizedString.strings; sourceTree = "<group>"; };
-		84246F561DF0200E00226DD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		843B7B541DF35E27001532A4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		843B7B551DF35E27001532A4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		844A9FD01DF0EE2A00917832 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		844A9FD11DF0EE2A00917832 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		84702F7E1DF883D1005CE945 /* DateFormatterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterManager.h; sourceTree = "<group>"; };
+		84702F7F1DF883D1005CE945 /* DateFormatterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterManager.m; sourceTree = "<group>"; };
+		84702F891DF8887C005CE945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		84702F8B1DF8888D005CE945 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		84702F8C1DF8888F005CE945 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		84702F911DF88B5A005CE945 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		84702F931DF88B6C005CE945 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		84702F941DF88BB8005CE945 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		84702F951DF88BC5005CE945 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		8B1146B5C66D8993D8AAB349 /* Pods-KinopoiskParserObj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinopoiskParserObj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj.debug.xcconfig"; sourceTree = "<group>"; };
 		FF0EC11EF02CB57D6640E485 /* libPods-KinopoiskParserObj.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KinopoiskParserObj.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -176,10 +181,10 @@
 				1E73292C1D78142D0027E46E /* UI */,
 				1E7329281D7813890027E46E /* Util */,
 				1E7328F51D7813740027E46E /* AppDelegate.h */,
-				84246F511DF01E1300226DD8 /* NSLocalizedString.strings */,
 				1E7328F61D7813740027E46E /* AppDelegate.m */,
 				1E7328FB1D7813740027E46E /* Main.storyboard */,
 				1E7329011D7813740027E46E /* Assets.xcassets */,
+				84702F8A1DF8887C005CE945 /* Localizable.strings */,
 				1E7329031D7813740027E46E /* LaunchScreen.storyboard */,
 				1E7329061D7813740027E46E /* Info.plist */,
 				1E7328F21D7813740027E46E /* Supporting Files */,
@@ -270,6 +275,8 @@
 				1E7329511D7845210027E46E /* DataManager.m */,
 				1EF77A1B1DF549900075DC52 /* SearchManager.h */,
 				1EF77A1C1DF549900075DC52 /* SearchManager.m */,
+				84702F7E1DF883D1005CE945 /* DateFormatterManager.h */,
+				84702F7F1DF883D1005CE945 /* DateFormatterManager.m */,
 			);
 			name = Persistance;
 			sourceTree = "<group>";
@@ -382,8 +389,8 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 				ru,
 			);
 			mainGroup = 1E7328E61D7813740027E46E;
@@ -403,7 +410,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84246F4F1DF01E1300226DD8 /* NSLocalizedString.strings in Resources */,
+				84702F881DF8887C005CE945 /* Localizable.strings in Resources */,
 				1E7329051D7813740027E46E /* LaunchScreen.storyboard in Resources */,
 				1E7329021D7813740027E46E /* Assets.xcassets in Resources */,
 				1E7328FD1D7813740027E46E /* Main.storyboard in Resources */,
@@ -506,6 +513,7 @@
 				1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */,
 				1E7329551D7848530027E46E /* DetailsViewController.m in Sources */,
 				1EF77A1D1DF549900075DC52 /* SearchManager.m in Sources */,
+				84702F801DF883D2005CE945 /* DateFormatterManager.m in Sources */,
 				1E7328F41D7813740027E46E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,8 +554,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				1E7328FC1D7813740027E46E /* Base */,
-				84246F521DF01F9500226DD8 /* ru */,
-				84246F561DF0200E00226DD8 /* en */,
+				84702F911DF88B5A005CE945 /* ru */,
+				84702F931DF88B6C005CE945 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -556,18 +564,21 @@
 			isa = PBXVariantGroup;
 			children = (
 				1E7329041D7813740027E46E /* Base */,
-				84246F531DF01F9500226DD8 /* ru */,
+				84702F941DF88BB8005CE945 /* en */,
+				84702F951DF88BC5005CE945 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		84246F511DF01E1300226DD8 /* NSLocalizedString.strings */ = {
+		84702F8A1DF8887C005CE945 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				84246F501DF01E1300226DD8 /* en */,
-				84246F541DF01F9500226DD8 /* ru */,
+				84702F891DF8887C005CE945 /* Base */,
+				84702F8B1DF8888D005CE945 /* en */,
+				84702F8C1DF8888F005CE945 /* ru */,
 			);
-			name = NSLocalizedString.strings;
+			name = Localizable.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

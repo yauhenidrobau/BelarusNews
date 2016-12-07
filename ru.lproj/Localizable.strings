@@ -1,0 +1,26 @@
+/* 
+  NSLocalizedString.strings
+  KinopoiskParserObj
+
+  Created by Admin on 07/12/2016.
+  Copyright © 2016 YAUHENI DROBAU. All rights reserved.
+*/
+
+
+"All News" = "All News";
+"DEV.BY" = "DEV.BY";
+"TUT.BY" = "TUT.BY";
+"MTS.BY" = "MTS.BY";
+"YANDEX" = "YANDEX";
+
+"No News" = "Нет Новостей";
+"No Network" = "Убедитесь, что интернет включен.";
+"We have problems" = "У нас проблемы :(";
+"OK" = "ОК";
+
+"Today at" = "Сегодня в";
+
+"Profile" = "Профиль";
+"Settings" = "Настройки";
+"About" = "О нас";
+"Log out" = "Выйти";

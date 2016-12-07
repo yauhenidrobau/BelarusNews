@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[UIViewController(LMSideBarController) sideBarController]:UIViewController+LMSideBarController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "iter.parentViewController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[NewsTableView setupData]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
@@ -11,18 +19,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__27-[NewsTableView updateData]_block_invoke_2:NewsTableView.m">
+         contextName = "-[XMLParser parser:didEndElement:namespaceURI:qualifiedName:]:XMLParser.m">
          <PersistentStrings>
             <PersistentString
-               value = "networkStatus">
+               value = "pubDateFeed">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[UIViewController(LMSideBarController) sideBarController]:UIViewController+LMSideBarController.m">
+         contextName = "-[NewsTableViewCell cellForNews:AndTitles:AndIndex:]:NewsTableViewCell.m">
          <PersistentStrings>
             <PersistentString
-               value = "iter.parentViewController">
+               value = "entity.feedIdString">
+            </PersistentString>
+            <PersistentString
+               value = "entity.pubDateFeed">
+            </PersistentString>
+            <PersistentString
+               value = "self.pubDateLabel.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -35,15 +49,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableView awakeFromNib]:NewsTableView.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[XMLParser parser:didEndElement:namespaceURI:qualifiedName:]:XMLParser.m">
+         contextName = "__27-[NewsTableView updateData]_block_invoke_2:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "pubDateFeed">
+               value = "networkStatus">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView awakeFromNib]:NewsTableView.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

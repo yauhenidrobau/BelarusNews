@@ -286,19 +286,19 @@ typedef enum {
 }
 
 -(void)setupData{
-    if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
+//    if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
         RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
         NSArray *resultsArray = [self RLMResultsToArray:results];
         
         self.newsArray = [self sortNewsArray:resultsArray];
         NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
-    } else {
-        RLMResults *allResults = [NewsEntity allObjects];
-        NSArray *allResultsArray = [self RLMResultsToArray:allResults];
-
-        self.newsArray = [self sortNewsArray:allResultsArray];
-        NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
-    }
+//    } else {
+//        RLMResults *allResults = [NewsEntity allObjects];
+//        NSArray *allResultsArray = [self RLMResultsToArray:allResults];
+//
+//        self.newsArray = [self sortNewsArray:allResultsArray];
+//        NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
+//    }
     [self.tableView reloadData];
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
