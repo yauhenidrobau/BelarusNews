@@ -61,30 +61,30 @@ typedef enum {
 
 #pragma mark - Lifecycle
 
-
-
 -(void)viewDidLoad {
-
     [super viewDidLoad];
+    
     [self setAppierance];
     [self setupData];
     [self setupAppearanceNewsSegmentedControl];
     [self addPullToRefresh];
     self.isAlertShown = NO;
-    
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
     [self updateDataWithIndicator:YES];
 }
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+
     [self.timer invalidate];
     self.timer = nil;
 }
