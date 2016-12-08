@@ -7,8 +7,10 @@
 //
 
 #import "RemoteFacade.h"
+
 #import "ParserManager.h"
 #import "Macros.h"
+#import <AFNetworking/AFNetworking.h>
 
 typedef void(^DataLoadCallback)(NSData *info, NSError* error);
 
@@ -22,18 +24,48 @@ typedef void(^DataLoadCallback)(NSData *info, NSError* error);
 
 SINGLETON(RemoteFacade)
 
--(void)loadData:(NSString *)dataURL callback:(DataLoadCallback)comptetion {
+-(void)loadData:(NSArray *)urlArray callback:(DataLoadCallback)completion {
     // load data
 #warning AFNetworking - очень рекомендую разобраться
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSURL *url = [NSURL URLWithString:dataURL];
-        NSData *info = [NSData dataWithContentsOfURL:url];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (comptetion) {
-                comptetion(info, nil);
+    
+//    // First variant
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+//    
+//    AFURLConnectionOperation *operation = [[AFURLConnectionOperation alloc] initWithRequest:request];
+//    __weak __typeof(self)wself = self;
+//    __weak __typeof(operation)woperation = operation;
+//    [operation setCompletionBlock:^{
+//        wself.info = woperation.responseData;
+//        if (completion) {
+//            completion(wself.info,nil);
+//        }
+//    }];
+//    [operation start];
+    
+    
+     // Second variant
+    
+    NSOperationQueue *operationQueue = [NSOperationQueue new];
+    for (NSString *urlString in urlArray) {
+        NSURL *URL = [NSURL URLWithString:urlString];
+        __weak __typeof(self) wself = self;
+        NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:URL];
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            wself.info = (NSData *)responseObject;
+            if(completion) {
+                completion(wself.info,nil);
             }
-        });      
-    });
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+
+        [operationQueue addOperation:operation];
+        [operation start];
+
+    }
+    
+    
 }
 
 @end

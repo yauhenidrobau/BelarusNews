@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIScrollView+EmptyDataSet.h"
+#import <UIViewController+LMSideBarController.h>
 
 @interface NewsTableView: UIViewController
 

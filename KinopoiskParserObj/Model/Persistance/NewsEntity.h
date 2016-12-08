@@ -12,7 +12,7 @@
 @property  NSString *feedIdString;
 @property  NSString *descriptionFeed;
 @property  NSString *linkFeed;
-@property  NSString *pubDateFeed;
+@property  NSDate *pubDateFeed;
 @property  NSString *titleFeed;
 @property  NSString *urlImage;
 

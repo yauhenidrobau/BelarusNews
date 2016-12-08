@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */; };
 		1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */; };
+		1E372F851DF94C7400362CC1 /* DateFormatterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E372F821DF94C7400362CC1 /* DateFormatterManager.m */; };
+		1E372F861DF94C7400362CC1 /* SearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E372F841DF94C7400362CC1 /* SearchManager.m */; };
 		1E7328F41D7813740027E46E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7328F31D7813740027E46E /* main.m */; };
 		1E7328F71D7813740027E46E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7328F61D7813740027E46E /* AppDelegate.m */; };
 		1E7328FD1D7813740027E46E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E7328FB1D7813740027E46E /* Main.storyboard */; };
@@ -24,11 +26,9 @@
 		1E73294F1D7843310027E46E /* RemoteFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73294E1D7843310027E46E /* RemoteFacade.m */; };
 		1E7329521D7845210027E46E /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329511D7845210027E46E /* DataManager.m */; };
 		1E7329551D7848530027E46E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329541D7848530027E46E /* DetailsViewController.m */; };
-		1EF77A1D1DF549900075DC52 /* SearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF77A1C1DF549900075DC52 /* SearchManager.m */; };
 		3D499CCAEC00E7C593490045 /* libPods-KinopoiskParserObj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0EC11EF02CB57D6640E485 /* libPods-KinopoiskParserObj.a */; };
 		843B7B561DF35E27001532A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B7B551DF35E27001532A4 /* RootViewController.m */; };
 		844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A9FD11DF0EE2A00917832 /* MenuViewController.m */; };
-		84702F801DF883D2005CE945 /* DateFormatterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84702F7F1DF883D1005CE945 /* DateFormatterManager.m */; };
 		84702F881DF8887C005CE945 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84702F8A1DF8887C005CE945 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +68,10 @@
 		1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDataManager.h; sourceTree = "<group>"; };
 		1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmDataManager.m; sourceTree = "<group>"; };
 		1E1D3A9E1DE47D9F00D6C00C /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		1E372F811DF94C7400362CC1 /* DateFormatterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterManager.h; sourceTree = "<group>"; };
+		1E372F821DF94C7400362CC1 /* DateFormatterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterManager.m; sourceTree = "<group>"; };
+		1E372F831DF94C7400362CC1 /* SearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchManager.h; sourceTree = "<group>"; };
+		1E372F841DF94C7400362CC1 /* SearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchManager.m; sourceTree = "<group>"; };
 		1E7328EF1D7813740027E46E /* KinopoiskParserObj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KinopoiskParserObj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7328F31D7813740027E46E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1E7328F51D7813740027E46E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -88,25 +92,21 @@
 		1E73292F1D7814620027E46E /* NewsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableView.m; sourceTree = "<group>"; };
 		1E7329341D7814C00027E46E /* NewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableViewCell.h; sourceTree = "<group>"; };
 		1E7329351D7814C00027E46E /* NewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableViewCell.m; sourceTree = "<group>"; };
-		1E7329421D781E980027E46E /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLParser.h; path = ../XMLParser.h; sourceTree = "<group>"; };
-		1E7329431D781E980027E46E /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLParser.m; path = ../XMLParser.m; sourceTree = "<group>"; };
-		1E7329451D7836400027E46E /* ParserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParserManager.h; path = ../ParserManager.h; sourceTree = "<group>"; };
-		1E7329461D7836400027E46E /* ParserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParserManager.m; path = ../ParserManager.m; sourceTree = "<group>"; };
+		1E7329421D781E980027E46E /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
+		1E7329431D781E980027E46E /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; };
+		1E7329451D7836400027E46E /* ParserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserManager.h; sourceTree = "<group>"; };
+		1E7329461D7836400027E46E /* ParserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserManager.m; sourceTree = "<group>"; };
 		1E73294D1D7843310027E46E /* RemoteFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteFacade.h; sourceTree = "<group>"; };
 		1E73294E1D7843310027E46E /* RemoteFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteFacade.m; sourceTree = "<group>"; };
 		1E7329501D7845210027E46E /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		1E7329511D7845210027E46E /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
-		1E7329531D7848530027E46E /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsViewController.h; path = ../DetailsViewController.h; sourceTree = "<group>"; };
-		1E7329541D7848530027E46E /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsViewController.m; path = ../DetailsViewController.m; sourceTree = "<group>"; };
-		1EF77A1B1DF549900075DC52 /* SearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchManager.h; sourceTree = "<group>"; };
-		1EF77A1C1DF549900075DC52 /* SearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchManager.m; sourceTree = "<group>"; };
+		1E7329531D7848530027E46E /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		1E7329541D7848530027E46E /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		336B6CDD81FCEE97E5F4E57B /* Pods-KinopoiskParserObj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinopoiskParserObj.release.xcconfig"; path = "Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj.release.xcconfig"; sourceTree = "<group>"; };
 		843B7B541DF35E27001532A4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		843B7B551DF35E27001532A4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		844A9FD01DF0EE2A00917832 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		844A9FD11DF0EE2A00917832 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
-		84702F7E1DF883D1005CE945 /* DateFormatterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterManager.h; sourceTree = "<group>"; };
-		84702F7F1DF883D1005CE945 /* DateFormatterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterManager.m; sourceTree = "<group>"; };
 		84702F891DF8887C005CE945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84702F8B1DF8888D005CE945 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84702F8C1DF8888F005CE945 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -150,6 +150,18 @@
 				FF0EC11EF02CB57D6640E485 /* libPods-KinopoiskParserObj.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1E372F801DF94B8400362CC1 /* XML */ = {
+			isa = PBXGroup;
+			children = (
+				1E7329421D781E980027E46E /* XMLParser.h */,
+				1E7329431D781E980027E46E /* XMLParser.m */,
+				1E7329451D7836400027E46E /* ParserManager.h */,
+				1E7329461D7836400027E46E /* ParserManager.m */,
+			);
+			name = XML;
+			path = Model/XML;
 			sourceTree = "<group>";
 		};
 		1E7328E61D7813740027E46E = {
@@ -225,7 +237,7 @@
 				1E73292A1D7813B50027E46E /* Constants.m */,
 				1E1D3A9E1DE47D9F00D6C00C /* Macros.h */,
 			);
-			name = Util;
+			path = Util;
 			sourceTree = "<group>";
 		};
 		1E73292C1D78142D0027E46E /* UI */ = {
@@ -239,32 +251,25 @@
 				1E7329531D7848530027E46E /* DetailsViewController.h */,
 				1E7329541D7848530027E46E /* DetailsViewController.m */,
 			);
-			name = UI;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		1E73292D1D7814340027E46E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1E372F801DF94B8400362CC1 /* XML */,
 				1E7329491D783DFD0027E46E /* Persistance */,
-				1E7329481D783DE00027E46E /* XML */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		1E7329481D783DE00027E46E /* XML */ = {
-			isa = PBXGroup;
-			children = (
-				1E7329421D781E980027E46E /* XMLParser.h */,
-				1E7329431D781E980027E46E /* XMLParser.m */,
-				1E7329451D7836400027E46E /* ParserManager.h */,
-				1E7329461D7836400027E46E /* ParserManager.m */,
-			);
-			name = XML;
 			sourceTree = "<group>";
 		};
 		1E7329491D783DFD0027E46E /* Persistance */ = {
 			isa = PBXGroup;
 			children = (
+				1E372F811DF94C7400362CC1 /* DateFormatterManager.h */,
+				1E372F821DF94C7400362CC1 /* DateFormatterManager.m */,
+				1E372F831DF94C7400362CC1 /* SearchManager.h */,
+				1E372F841DF94C7400362CC1 /* SearchManager.m */,
 				1E11C9451DDDAA1F00D55B28 /* NewsEntity.h */,
 				1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */,
 				1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */,
@@ -273,12 +278,9 @@
 				1E73294E1D7843310027E46E /* RemoteFacade.m */,
 				1E7329501D7845210027E46E /* DataManager.h */,
 				1E7329511D7845210027E46E /* DataManager.m */,
-				1EF77A1B1DF549900075DC52 /* SearchManager.h */,
-				1EF77A1C1DF549900075DC52 /* SearchManager.m */,
-				84702F7E1DF883D1005CE945 /* DateFormatterManager.h */,
-				84702F7F1DF883D1005CE945 /* DateFormatterManager.m */,
 			);
 			name = Persistance;
+			path = Model/Persistance;
 			sourceTree = "<group>";
 		};
 		63BC8B2900C89A3FD674B9BB /* Pods */ = {
@@ -298,7 +300,7 @@
 				843B7B541DF35E27001532A4 /* RootViewController.h */,
 				843B7B551DF35E27001532A4 /* RootViewController.m */,
 			);
-			name = MenuVC;
+			path = MenuVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -507,13 +509,13 @@
 				1E7329471D7836400027E46E /* ParserManager.m in Sources */,
 				1E7329441D781E980027E46E /* XMLParser.m in Sources */,
 				1E7328F71D7813740027E46E /* AppDelegate.m in Sources */,
+				1E372F851DF94C7400362CC1 /* DateFormatterManager.m in Sources */,
 				843B7B561DF35E27001532A4 /* RootViewController.m in Sources */,
 				1E7329521D7845210027E46E /* DataManager.m in Sources */,
+				1E372F861DF94C7400362CC1 /* SearchManager.m in Sources */,
 				1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */,
 				1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */,
 				1E7329551D7848530027E46E /* DetailsViewController.m in Sources */,
-				1EF77A1D1DF549900075DC52 /* SearchManager.m in Sources */,
-				84702F801DF883D2005CE945 /* DateFormatterManager.m in Sources */,
 				1E7328F41D7813740027E46E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

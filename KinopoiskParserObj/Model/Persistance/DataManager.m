@@ -25,18 +25,21 @@
 
 SINGLETON(DataManager)
 
--(void)updateDataWithURLString:(NSString *)urlString AndTitleString:(NSString *)titleString WithCallBack:(UpdateDataCallback)completionHandler {
-    [[RemoteFacade sharedInstance] loadData:urlString callback:^(NSData *info, NSError *error) {
+-(void)updateDataWithURLArray:(NSArray *)urlArray AndTitleString:(NSString *)titleString WithCallBack:(UpdateDataCallback)completionHandler {
+    [[RemoteFacade sharedInstance] loadData:urlArray callback:^(NSData *info, NSError *error) {
         if (error || !info) {
             //TODO: handle error
         } else {
-            [[ParserManager sharedInstance] parseXmlData:info callback:^(NSArray<NSDictionary *>* dict, NSError *error) {
-                [[RealmDataManager sharedInstance]saveNews:dict withServiceString:titleString];
+            
+            [[ParserManager sharedInstance] parseXmlData:info callback:^(NSArray<NSDictionary *>* newsArray, NSError *error) {
+                [[RealmDataManager sharedInstance]saveNews:newsArray withServiceString:titleString];
                 if (completionHandler) {
                     completionHandler(error);
                 }
             }];
+            
         }
+        
     }];
 }
 @end

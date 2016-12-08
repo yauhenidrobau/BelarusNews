@@ -13,6 +13,6 @@ typedef void(^UpdateDataCallback)(NSError *error);
 @interface DataManager : NSObject
 
 +(instancetype)sharedInstance;
--(void)updateDataWithURLString:(NSString *)urlString AndTitleString:(NSString *)titleString WithCallBack:(UpdateDataCallback)completionHandler;
+-(void)updateDataWithURLArray:(NSArray *)urlArray AndTitleString:(NSString *)titleString WithCallBack:(UpdateDataCallback)completionHandler;
 
 @end
