@@ -165,8 +165,8 @@
                                                     <color key="textColor" red="0.91565492069999999" green="0.99115813689999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="no_image_200_200" translatesAutoresizingMaskIntoConstraints="NO" id="Zqx-GC-hPW">
-                                                    <frame key="frameInset" width="1000" height="1000"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="no_image_200_200" translatesAutoresizingMaskIntoConstraints="NO" id="Zqx-GC-hPW">
+                                                    <frame key="frameInset" minX="8" minY="8" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="MrA-ac-44C"/>
                                                         <constraint firstAttribute="width" constant="60" id="rzR-4V-WSK"/>
@@ -228,23 +228,20 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lrq-hV-5AO">
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search news..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a5f-oN-JF1">
-                                        <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="textColor" red="0.098062602489999998" green="0.4689921333" blue="0.53838759820000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="02v-2v-Cfg">
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <outlet property="delegate" destination="sqv-9R-s6i" id="AUw-22-xgp"/>
+                                            <outlet property="delegate" destination="sqv-9R-s6i" id="wbs-D0-uHM"/>
                                         </connections>
-                                    </textField>
+                                    </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="0vf-bS-wtd"/>
-                                    <constraint firstAttribute="bottom" secondItem="a5f-oN-JF1" secondAttribute="bottom" id="83N-s0-Xp4"/>
-                                    <constraint firstAttribute="trailing" secondItem="a5f-oN-JF1" secondAttribute="trailing" constant="10" id="89B-bk-tQU"/>
-                                    <constraint firstItem="a5f-oN-JF1" firstAttribute="top" secondItem="Lrq-hV-5AO" secondAttribute="top" id="K0g-aQ-0Jd"/>
-                                    <constraint firstItem="a5f-oN-JF1" firstAttribute="leading" secondItem="Lrq-hV-5AO" secondAttribute="leading" constant="10" id="d2H-fc-2Mg"/>
+                                    <constraint firstAttribute="trailing" secondItem="02v-2v-Cfg" secondAttribute="trailing" id="JOZ-QA-Zww"/>
+                                    <constraint firstAttribute="bottom" secondItem="02v-2v-Cfg" secondAttribute="bottom" id="hDv-A1-uxP"/>
+                                    <constraint firstItem="02v-2v-Cfg" firstAttribute="top" secondItem="Lrq-hV-5AO" secondAttribute="top" id="r25-z9-H2D"/>
+                                    <constraint firstItem="02v-2v-Cfg" firstAttribute="leading" secondItem="Lrq-hV-5AO" secondAttribute="leading" id="x4G-7q-zlX"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -279,6 +276,7 @@
                         <outlet property="NewsSegmentedControl" destination="aOm-1K-Q9F" id="Ukg-MA-Cdk"/>
                         <outlet property="activityInd" destination="9pe-Ua-hs5" id="HJm-Xs-aKI"/>
                         <outlet property="scrollButton" destination="JS4-6j-NGK" id="eK3-fp-fW1"/>
+                        <outlet property="searchBar" destination="02v-2v-Cfg" id="qae-bs-vtu"/>
                         <outlet property="tableView" destination="WR2-a2-M3u" id="njh-c9-R5Q"/>
                     </connections>
                 </viewController>

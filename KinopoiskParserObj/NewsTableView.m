@@ -35,7 +35,7 @@ typedef enum {
     MtsByCategoryType = 3
 }CategoryTypes;
 
-@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UITextFieldDelegate,NYSegmentedControlDataSource, LMSideBarControllerDelegate>
+@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate,UISearchResultsUpdating,NYSegmentedControlDataSource, LMSideBarControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet NYSegmentedControl *NewsSegmentedControl;
@@ -69,6 +69,11 @@ typedef enum {
     [self setupAppearanceNewsSegmentedControl];
     [self addPullToRefresh];
     self.isAlertShown = NO;
+    self.searchController = [UISearchController new];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.definesPresentationContext = YES;
+    self.searchBar = self.searchController.searchBar;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -239,15 +244,16 @@ typedef enum {
     return self.titlesArray[index];
 }
 
-#pragma mark - UITextFieldDelegate
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSString *textString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+#pragma mark - UISearchBarDelegate
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSString *textString = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
     self.isSearchStart = (textString.length);
-   self.searchResults = [[SearchManager sharedInstance]updateSearchResults:textString forArray:self.newsArray];
-    
-    [self.tableView reloadData];
     return YES;
+}
+#pragma mark - UISearchResultsUpdating
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    self.searchResults = [[SearchManager sharedInstance]updateSearchResults:searchController.searchBar.text forArray:self.newsArray];
+    [self.tableView reloadData];
 }
 
 #pragma mark UIScrollViewDelegate
