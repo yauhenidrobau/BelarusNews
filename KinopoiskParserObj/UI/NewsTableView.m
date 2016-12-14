@@ -49,6 +49,7 @@ typedef enum {
 @property (strong, nonatomic) NSArray *newsArray;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) UISearchController *searchController;
+@property (nonatomic, strong) NSOperationQueue *operaionQueue;
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL isAlertShown;
@@ -75,7 +76,8 @@ typedef enum {
     self.searchController.definesPresentationContext = YES;
     self.searchBarView = self.searchController.searchBar;
     [self.searchController.searchBar sizeToFit];
-
+    
+    self.operaionQueue = [NSOperationQueue new];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -298,9 +300,11 @@ typedef enum {
 
 #pragma mark UISearchUpdating
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    self.refreshControl.backgroundColor = [UIColor colorWithRed:173/255.0 green:31/255.0 blue:45/255.0 alpha:1.0];
-    self.searchResults = [[SearchManager sharedInstance]updateSearchResults:self.searchController.searchBar.text forArray:self.newsArray];
-    //    [self.tableView reloadData];
+    [self.operaionQueue cancelAllOperations];
+    [self.operaionQueue addOperationWithBlock:^{
+        self.searchResults = [[SearchManager sharedInstance]updateSearchResults:self.searchController.searchBar.text forArray:self.newsArray];
+            [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - Private methods
@@ -414,7 +418,7 @@ typedef enum {
                 __weak __typeof(self) wself = self;
                 [self showLoadingIndicator:showIndicator];
                 self.isAlertShown = NO;
-                [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlArray AndTitleString:wself.titlesArray[wself.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
+                [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlArray AndTitleArray:wself.titlesArray WithCallBack:^(NSError *error) {
                     [networkReachability stopNotifier];
                     if (!error) {
                         [self setupData];

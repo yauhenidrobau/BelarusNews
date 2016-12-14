@@ -12,6 +12,8 @@
 
 @interface SearchManager ()
 @property (nonatomic, strong) NSArray *searchResults;
+@property (nonatomic, strong) NSOperationQueue *operationQueue;
+
 @end
 @implementation SearchManager
 SINGLETON(SearchManager)
