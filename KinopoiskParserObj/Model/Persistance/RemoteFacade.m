@@ -46,12 +46,14 @@ SINGLETON(RemoteFacade)
      // Second variant
     
     NSOperationQueue *operationQueue = [NSOperationQueue new];
+    [operationQueue setMaxConcurrentOperationCount:1];
     for (NSString *urlString in urlArray) {
         NSURL *URL = [NSURL URLWithString:urlString];
-        __weak __typeof(self) wself = self;
         NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:URL];
+
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            __weak __typeof(self) wself = self;
             wself.info = (NSData *)responseObject;
             if(completion) {
                 completion(wself.info,nil);
@@ -59,13 +61,9 @@ SINGLETON(RemoteFacade)
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
         }];
-
         [operationQueue addOperation:operation];
-        [operation start];
-
     }
-    
-    
+   
 }
 
 @end

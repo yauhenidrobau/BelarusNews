@@ -27,9 +27,9 @@ SINGLETON(ParserManager)
     self.callback = completion;
     XMLParser *parser = [[XMLParser alloc]init];
     parser.xmlParserDelegate = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         [parser parseData:data];
-    });    
+//    });    
 }
 
 -(void) xmlParserDidFinishParsing: (NSArray<NSDictionary*>*)items  error: (NSError *)error{

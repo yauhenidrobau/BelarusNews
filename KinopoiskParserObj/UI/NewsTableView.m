@@ -35,11 +35,11 @@ typedef enum {
     MtsByCategoryType = 3
 }CategoryTypes;
 
-@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UITextFieldDelegate,NYSegmentedControlDataSource, LMSideBarControllerDelegate>
+@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate,NYSegmentedControlDataSource, LMSideBarControllerDelegate, UISearchResultsUpdating,UISearchControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet NYSegmentedControl *NewsSegmentedControl;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIView *searchBarView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (assign, nonatomic) CGPoint lastContentOffset;
@@ -53,7 +53,6 @@ typedef enum {
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL isAlertShown;
 @property (nonatomic, assign) BOOL isSearchStart;
-
 
 @end
 
@@ -69,6 +68,14 @@ typedef enum {
     [self setupAppearanceNewsSegmentedControl];
     [self addPullToRefresh];
     self.isAlertShown = NO;
+    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.searchBar.delegate = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.definesPresentationContext = YES;
+    self.searchBarView = self.searchController.searchBar;
+    [self.searchController.searchBar sizeToFit];
+
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -85,6 +92,9 @@ typedef enum {
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 
+    if (self.searchController.isActive) {
+        self.searchController.active = NO;
+    }
     [self.timer invalidate];
     self.timer = nil;
 }
@@ -100,7 +110,7 @@ typedef enum {
     if (!_titlesArray.count) {
         switch(self.NewsSegmentedControl.selectedSegmentIndex) {
             case AllCategoryType:
-                _titlesArray = @[NSLocalizedString(@"DEV.BY", nil),NSLocalizedString(@"TUT.BY", nil),NSLocalizedString(@"MTS.BY", nil)];
+                _titlesArray = @[@"",NSLocalizedString(@"DEV.BY", nil),NSLocalizedString(@"TUT.BY", nil),NSLocalizedString(@"MTS.BY", nil)];
             break;
             case DevByCategoryType:
                 _titlesArray = @[ NSLocalizedString(@"DEV.BY", nil)];
@@ -270,14 +280,13 @@ typedef enum {
     }
 }
 
-#pragma mark - UITextFieldDelegate
+#pragma mark - UISearchBarDelegate
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSString *textString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    self.isSearchStart = (textString.length);
-   self.searchResults = [[SearchManager sharedInstance]updateSearchResults:textString forArray:self.newsArray];
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text NS_AVAILABLE_IOS(3_0) {
     
-    [self.tableView reloadData];
+//    NSString *textString = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
+//    self.isSearchStart = (textString.length);
+    
     return YES;
 }
 
@@ -285,6 +294,13 @@ typedef enum {
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     self.scrollButton.hidden = !(scrollView.contentOffset.y > 20);
+}
+
+#pragma mark UISearchUpdating
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    self.refreshControl.backgroundColor = [UIColor colorWithRed:173/255.0 green:31/255.0 blue:45/255.0 alpha:1.0];
+    self.searchResults = [[SearchManager sharedInstance]updateSearchResults:self.searchController.searchBar.text forArray:self.newsArray];
+    //    [self.tableView reloadData];
 }
 
 #pragma mark - Private methods
@@ -317,19 +333,19 @@ typedef enum {
 }
 
 -(void)setupData{
-//    if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
+    if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
         RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
         NSArray *resultsArray = [self RLMResultsToArray:results];
         
         self.newsArray = [self sortNewsArray:resultsArray];
         NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
-//    } else {
-//        RLMResults *allResults = [NewsEntity allObjects];
-//        NSArray *allResultsArray = [self RLMResultsToArray:allResults];
-//
-//        self.newsArray = [self sortNewsArray:allResultsArray];
-//        NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
-//    }
+    } else {
+        RLMResults *allResults = [NewsEntity allObjects];
+        NSArray *allResultsArray = [self RLMResultsToArray:allResults];
+
+        self.newsArray = [self sortNewsArray:allResultsArray];
+        NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
+    }
     [self.tableView reloadData];
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
@@ -398,7 +414,7 @@ typedef enum {
                 __weak __typeof(self) wself = self;
                 [self showLoadingIndicator:showIndicator];
                 self.isAlertShown = NO;
-                [[DataManager sharedInstance ] updateDataWithURLArray:self.urlArray AndTitleString:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
+                [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlArray AndTitleString:wself.titlesArray[wself.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
                     [networkReachability stopNotifier];
                     if (!error) {
                         [self setupData];

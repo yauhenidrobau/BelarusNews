@@ -20,12 +20,14 @@ SINGLETON(SearchManager)
     if (!searchText) {
         self.searchResults = [newsArray mutableCopy];
     } else {
-        NSMutableArray *searchResults = [NSMutableArray new];
+        NSArray *searchResults = [NSMutableArray new];
         for (NSInteger i = 0;i < newsArray.count;i++) {
             NewsEntity *entity = newsArray[i];
-            if ([entity.titleFeed containsString:searchText]) {
-                [searchResults addObject:entity];
-            }
+            NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"titleFeed contains[c] %@", searchText];
+            searchResults = [newsArray filteredArrayUsingPredicate:resultPredicate];
+//            if ([entity.titleFeed containsString:searchText]) {
+//                [searchResults addObject:entity];
+//            }
         }
         self.searchResults = searchResults;
     }
