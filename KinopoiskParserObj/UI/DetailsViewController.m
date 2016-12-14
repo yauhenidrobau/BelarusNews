@@ -20,12 +20,6 @@
 
 #pragma mark - Lifecycle
 
-+ (id)newInstance {
-#warning если у тебя один сториборд, то можно просто писать self.storyboard
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    id vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"DetailsViewController"];
-    return vc;
-}
  -(void) viewDidLoad{
      [super  viewDidLoad];
      self.webView.hidden = YES;
@@ -49,9 +43,13 @@
     [self.navigationController setNavigationBarHidden:NO];
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+}
+
 -(void) didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 
 #pragma mark - UIWebViewDelegate
@@ -72,4 +70,14 @@
         [self.activityInd stopAnimating];
     }
 }
+
+//- (void)clearCookies
+//{
+//    NSHTTPCookieStorage *storage = NSHTTPCookieStorage.sharedHTTPCookieStorage;
+//    
+//    for (NSHTTPCookie *cookie in storage.cookies)
+//        [storage deleteCookie:cookie];
+//    
+//    [NSUserDefaults.standardUserDefaults synchronize];
+//}
 @end

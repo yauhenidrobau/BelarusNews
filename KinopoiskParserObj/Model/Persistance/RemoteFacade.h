@@ -13,6 +13,6 @@ typedef void (^DataLoadCallback)(NSData * info, NSError* error);
 @interface RemoteFacade : NSObject
 
 +(instancetype)sharedInstance;
--(void)loadData:(NSString *)dataURL callback:(DataLoadCallback)comptetion;
+-(void)loadData:(NSArray *)urlArrayL callback:(DataLoadCallback)comptetion;
 
 @end

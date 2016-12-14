@@ -124,15 +124,20 @@
       </ContextState>
       <ContextState
          contextName = "-[RemoteFacade loadData:callback:]:RemoteFacade.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "operationQueue.operations">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[NewsTableView initRealmArray]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.array[self.NewsSegmentedControl.selectedSegmentIndex]">
+               value = "newsArray.count">
             </PersistentString>
             <PersistentString
-               value = "newsArray.count">
+               value = "self.array[self.NewsSegmentedControl.selectedSegmentIndex]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -148,16 +153,16 @@
          contextName = "-[NewsTableViewCell cellForNews:AndTitles:AndIndex:]:NewsTableViewCell.m">
          <PersistentStrings>
             <PersistentString
-               value = "entity.pubDateFeed">
+               value = "self.pubDateLabel.text">
             </PersistentString>
             <PersistentString
-               value = "self.pubDateLabel.text">
+               value = "[NSDate date]">
             </PersistentString>
             <PersistentString
                value = "[entity.pubDateFeed compare:[NSdate date]]">
             </PersistentString>
             <PersistentString
-               value = "[NSDate date]">
+               value = "entity.pubDateFeed">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -220,13 +225,13 @@
                value = "titleFeed">
             </PersistentString>
             <PersistentString
+               value = "tempString">
+            </PersistentString>
+            <PersistentString
                value = "pubDateFeed">
             </PersistentString>
             <PersistentString
                value = "linkFeed">
-            </PersistentString>
-            <PersistentString
-               value = "tempString">
             </PersistentString>
             <PersistentString
                value = "urlImage">
@@ -234,10 +239,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableView setupData]:NewsTableView.m">
+         contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke_2:RemoteFacade.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.newsArray">
+               value = "manager">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -250,10 +255,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke_2:RemoteFacade.m">
+         contextName = "-[NewsTableView setupData]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "manager">
+               value = "self.newsArray">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -278,10 +283,10 @@
                value = "newsEntity.titleFeed">
             </PersistentString>
             <PersistentString
-               value = "newsArray.count">
+               value = "entity.titleFeed">
             </PersistentString>
             <PersistentString
-               value = "entity.titleFeed">
+               value = "newsArray.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -312,6 +317,9 @@
                value = "descriptionFeed">
             </PersistentString>
             <PersistentString
+               value = "tempString">
+            </PersistentString>
+            <PersistentString
                value = "pubDateFeed">
             </PersistentString>
             <PersistentString
@@ -319,9 +327,6 @@
             </PersistentString>
             <PersistentString
                value = "currentDataDictionary">
-            </PersistentString>
-            <PersistentString
-               value = "tempString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
