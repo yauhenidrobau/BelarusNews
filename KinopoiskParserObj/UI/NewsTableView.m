@@ -42,7 +42,8 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIView *searchBarView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (assign, nonatomic) CGPoint lastContentOffset;
+@property (nonatomic) CGPoint lastContentOffset;
+@property (strong, nonatomic) NSOperationQueue * operationQueue;
 @property (strong, nonatomic) NSArray * urlArray;
 @property (strong, nonatomic) NSArray * titlesArray;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
@@ -51,8 +52,8 @@ typedef enum {
 @property (strong, nonatomic) UISearchController *searchController;
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
 @property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, assign) BOOL isAlertShown;
-@property (nonatomic, assign) BOOL isSearchStart;
+@property (nonatomic) BOOL isAlertShown;
+@property (nonatomic) BOOL isSearchStart;
 
 @end
 
@@ -75,6 +76,7 @@ typedef enum {
     self.searchController.definesPresentationContext = YES;
     self.searchBarView = self.searchController.searchBar;
     [self.searchController.searchBar sizeToFit];
+    self.operationQueue = [NSOperationQueue new];
 
 }
 
@@ -298,9 +300,8 @@ typedef enum {
 
 #pragma mark UISearchUpdating
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    self.refreshControl.backgroundColor = [UIColor colorWithRed:173/255.0 green:31/255.0 blue:45/255.0 alpha:1.0];
     self.searchResults = [[SearchManager sharedInstance]updateSearchResults:self.searchController.searchBar.text forArray:self.newsArray];
-    //    [self.tableView reloadData];
+        [self.tableView reloadData];
 }
 
 #pragma mark - Private methods
@@ -414,7 +415,7 @@ typedef enum {
                 __weak __typeof(self) wself = self;
                 [self showLoadingIndicator:showIndicator];
                 self.isAlertShown = NO;
-                [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlArray AndTitleString:wself.titlesArray[wself.NewsSegmentedControl.selectedSegmentIndex] WithCallBack:^(NSError *error) {
+                [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlArray AndTitleArray:wself.titlesArray WithCallBack:^(NSError *error) {
                     [networkReachability stopNotifier];
                     if (!error) {
                         [self setupData];

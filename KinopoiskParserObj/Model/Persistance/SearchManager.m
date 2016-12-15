@@ -12,26 +12,42 @@
 
 @interface SearchManager ()
 @property (nonatomic, strong) NSArray *searchResults;
+@property (nonatomic, strong) NSOperationQueue *operationQueue;
+
 @end
 @implementation SearchManager
 SINGLETON(SearchManager)
 
--(NSArray*)updateSearchResults:(NSString *)searchText forArray:(NSArray*)newsArray {
-    if (!searchText) {
-        self.searchResults = [newsArray mutableCopy];
-    } else {
-        NSArray *searchResults = [NSMutableArray new];
-        for (NSInteger i = 0;i < newsArray.count;i++) {
-            NewsEntity *entity = newsArray[i];
-            NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"titleFeed contains[c] %@", searchText];
-            searchResults = [newsArray filteredArrayUsingPredicate:resultPredicate];
-//            if ([entity.titleFeed containsString:searchText]) {
-//                [searchResults addObject:entity];
-//            }
-        }
-        self.searchResults = searchResults;
+-(instancetype)init {
+    self = [super init];
+    if (self) {
+        self.operationQueue = [NSOperationQueue new];
     }
+    return self;
+}
+
+-(NSArray*)updateSearchResults:(NSString *)searchText forArray:(NSArray*)newsArray {
+    [self.operationQueue cancelAllOperations];
+    NSOperation *operation = [[NSOperation alloc]init];
+    [operation setCompletionBlock:^{
+        if (!searchText) {
+            self.searchResults = [newsArray mutableCopy];
+        } else {
+            NSArray *searchResults = [NSMutableArray new];
+            for (NSInteger i = 0;i < newsArray.count;i++) {
+                NewsEntity *entity = newsArray[i];
+                NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"titleFeed contains[c] %@", searchText];
+                searchResults = [newsArray filteredArrayUsingPredicate:resultPredicate];
+                //            if ([entity.titleFeed containsString:searchText]) {
+                //                [searchResults addObject:entity];
+                //            }
+            }
+            self.searchResults = searchResults;
+        }
+    }];
+    [self.operationQueue addOperation:operation];
     return self.searchResults;
+
 }
 
 @end
