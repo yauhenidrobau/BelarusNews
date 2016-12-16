@@ -82,6 +82,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[NewsTableView swipeRecognizer:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "recognizer.direction">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke_2:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
@@ -362,10 +370,16 @@
          contextName = "-[NewsTableView tableView:cellForRowAtIndexPath:]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
+               value = "self.searchResults[indexPath.row]">
+            </PersistentString>
+            <PersistentString
                value = "newsEntity.urlImage">
             </PersistentString>
             <PersistentString
                value = "newsArray.count">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
             </PersistentString>
             <PersistentString
                value = "self.searchController.searchBar.frame">
@@ -403,6 +417,14 @@
       </ContextState>
       <ContextState
          contextName = "-[Constants getURLByString:]:Constants.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView tableView:heightForFooterInSection:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.scrollButton.frame.size.height">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[ParserManager xmlParserDidFinishParsing:error:]:ParserManager.m">

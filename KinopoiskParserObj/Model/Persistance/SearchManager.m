@@ -38,15 +38,10 @@ SINGLETON(SearchManager)
             }
         } else {
             NSArray *searchResults = [NSMutableArray new];
-            for (NSInteger i = 0;i < newsArray.count;i++) {
-                NewsEntity *entity = newsArray[i];
+
                 NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"titleFeed contains[c] %@", searchText];
                 searchResults = [newsArray filteredArrayUsingPredicate:resultPredicate];
-                //            if ([entity.titleFeed containsString:searchText]) {
-                //                [searchResults addObject:entity];
-                //            }
-            }
-            self.searchResults = searchResults;
+                self.searchResults = searchResults;
                 if (completion) {
                     completion(self.searchResults,nil);
                 }
