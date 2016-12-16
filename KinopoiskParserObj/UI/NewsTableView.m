@@ -443,7 +443,6 @@ typedef enum {
                     [networkReachability stopNotifier];
                     if (!error) {
                         [self setupData];
-//                        NSLog(@"GET ELEMENTS %ld",self.newsArray.count);
                         if(showIndicator) {
                         [self showLoadingIndicator:!showIndicator];
                         }

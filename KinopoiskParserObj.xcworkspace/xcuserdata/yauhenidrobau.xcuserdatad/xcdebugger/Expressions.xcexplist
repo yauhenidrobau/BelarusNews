@@ -3,6 +3,9 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[XMLParser parser:didStartElement:namespaceURI:qualifiedName:attributes:]:XMLParser.m">
+      </ContextState>
+      <ContextState
          contextName = "-[NewsTableView updateData]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
@@ -161,6 +164,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__49-[ParserManager xmlParserDidFinishParsing:error:]_block_invoke:ParserManager.m">
+      </ContextState>
+      <ContextState
          contextName = "-[RemoteFacade loadData:callback:]:RemoteFacade.m">
          <PersistentStrings>
             <PersistentString
@@ -204,6 +210,9 @@
             </PersistentString>
             <PersistentString
                value = "entity.feedIdString">
+            </PersistentString>
+            <PersistentString
+               value = "[formatter stringFromDate:entity.pubDateFeed]">
             </PersistentString>
             <PersistentString
                value = "[entity.pubDateFeed compare:[NSdate date]]">
@@ -278,6 +287,9 @@
          <PersistentStrings>
             <PersistentString
                value = "currentElement">
+            </PersistentString>
+            <PersistentString
+               value = "currentDataDictionary">
             </PersistentString>
             <PersistentString
                value = "descriptionFeed">
@@ -393,22 +405,25 @@
          contextName = "-[XMLParser parser:didEndElement:namespaceURI:qualifiedName:]:XMLParser.m">
          <PersistentStrings>
             <PersistentString
+               value = "currentDataDictionary">
+            </PersistentString>
+            <PersistentString
                value = "dictParsedData">
             </PersistentString>
             <PersistentString
                value = "descriptionFeed">
             </PersistentString>
             <PersistentString
-               value = "currentDataDictionary">
-            </PersistentString>
-            <PersistentString
                value = "pubDateFeed">
             </PersistentString>
             <PersistentString
-               value = "[pubDateFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]">
+               value = "tempString">
             </PersistentString>
             <PersistentString
-               value = "tempString">
+               value = "urlImage">
+            </PersistentString>
+            <PersistentString
+               value = "[pubDateFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
