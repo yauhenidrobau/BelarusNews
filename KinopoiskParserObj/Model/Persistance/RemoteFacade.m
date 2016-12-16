@@ -9,14 +9,17 @@
 #import "RemoteFacade.h"
 
 #import "ParserManager.h"
+#import "DataManager.h"
 #import "Macros.h"
 #import <AFNetworking/AFNetworking.h>
 
-typedef void(^DataLoadCallback)(NSData *info, NSError* error);
+typedef void(^DataLoadCallback)(NSData *info,NSString *feedIdString, NSError* error);
 
 @interface RemoteFacade ()
 
 @property (nonatomic, strong) NSData *info;
+@property (nonatomic, strong) NSString *feedIdString;
+
 
 @end
 
@@ -47,23 +50,64 @@ SINGLETON(RemoteFacade)
     
     NSOperationQueue *operationQueue = [NSOperationQueue new];
     [operationQueue setMaxConcurrentOperationCount:1];
-    for (NSString *urlString in urlArray) {
-        NSURL *URL = [NSURL URLWithString:urlString];
+    if (urlArray[0]) {
+        NSURL *URL = [NSURL URLWithString:urlArray[0]];
         NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:URL];
-
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             __weak __typeof(self) wself = self;
-            wself.info = (NSData *)responseObject;
-            if(completion) {
-                completion(wself.info,nil);
-            }
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                wself.info = (NSData *)responseObject;
+                if ([urlArray[0] isEqualToString:DEV_BY_NEWS]) {
+                    wself.feedIdString = NSLocalizedString(@"DEV.BY", nil);
+                } else if ([urlArray[0] isEqualToString:TUT_BY_NEWS]) {
+                    wself.feedIdString = NSLocalizedString(@"TUT.BY", nil);
+                } else {
+                    wself.feedIdString = NSLocalizedString(@"MTS.BY", nil);
+                }
+                if(completion) {
+                    completion(wself.info,wself.feedIdString, nil);
+                }
+            }];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        [operationQueue addOperation:operation];
+    } if (urlArray.count > 1) {
+        NSURL *URL = [NSURL URLWithString:urlArray[1]];
+        NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:URL];
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            __weak __typeof(self) wself = self;
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                wself.info = (NSData *)responseObject;
+                wself.feedIdString = NSLocalizedString(@"TUT.BY", nil);
+                if(completion) {
+                    completion(wself.info,wself.feedIdString, nil);
+                }
+            }];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        [operationQueue addOperation:operation];
+    } if (urlArray.count > 1) {
+        NSURL *URL = [NSURL URLWithString:urlArray[2]];
+        NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:URL];
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            __weak __typeof(self) wself = self;
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                wself.info = (NSData *)responseObject;
+                wself.feedIdString = NSLocalizedString(@"MTS.BY", nil);
+                if(completion) {
+                    completion(wself.info,wself.feedIdString, nil);
+                }
+            }];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
         }];
         [operationQueue addOperation:operation];
     }
-   
 }
 
 @end

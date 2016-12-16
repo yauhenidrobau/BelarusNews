@@ -20,13 +20,6 @@
 #import <NYSegmentedControl.h>
 #import "UIViewController+LMSideBarController.h"
 
-
-#define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
-#define MTS_BY_NEWS @"http://www.mts.by/rss/"
-#define TUT_BY_NEWS @"http://news.tut.by/rss/all.rss"
-#define DEV_BY_NEWS @"https://dev.by/rss"
-
-
 typedef void(^UpdateDataCallback)(NSError *error);
 typedef enum {
     AllCategoryType = 0,
@@ -35,7 +28,7 @@ typedef enum {
     MtsByCategoryType = 3
 }CategoryTypes;
 
-@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate,NYSegmentedControlDataSource, LMSideBarControllerDelegate, UISearchResultsUpdating,UISearchControllerDelegate>
+@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate,NYSegmentedControlDataSource, LMSideBarControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet NYSegmentedControl *NewsSegmentedControl;
@@ -69,15 +62,7 @@ typedef enum {
     [self setupAppearanceNewsSegmentedControl];
     [self addPullToRefresh];
     self.isAlertShown = NO;
-    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
-    self.searchController.searchResultsUpdater = self;
-    self.searchController.searchBar.delegate = self;
-    self.searchController.dimsBackgroundDuringPresentation = NO;
-    self.searchController.definesPresentationContext = YES;
-    self.searchBarView = self.searchController.searchBar;
-    [self.searchController.searchBar sizeToFit];
     self.operationQueue = [NSOperationQueue new];
-
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -103,7 +88,22 @@ typedef enum {
 
 -(NSArray *)urlArray {
     if (!_urlArray.count) {
-        _urlArray = [NSArray arrayWithObjects:DEV_BY_NEWS,TUT_BY_NEWS,MTS_BY_NEWS, nil];
+        switch(self.NewsSegmentedControl.selectedSegmentIndex) {
+            case AllCategoryType:
+                _urlArray = @[DEV_BY_NEWS,TUT_BY_NEWS,MTS_BY_NEWS];
+                break;
+            case DevByCategoryType:
+                _urlArray = @[DEV_BY_NEWS];
+                break;
+            case TutByCategoryType:
+                _urlArray = @[TUT_BY_NEWS];
+                break;
+            case MtsByCategoryType:
+                _urlArray = @[MTS_BY_NEWS];
+                break;
+            default: nil;
+                break;
+        }
     }
     return _urlArray;
 }
@@ -126,7 +126,6 @@ typedef enum {
             default: nil;
                 break;
         }
-        
     }
     return _titlesArray;
 }
@@ -154,7 +153,9 @@ typedef enum {
 }
 
 -(IBAction)changeValueSC {
-    self.urlArray = nil;
+//    if (isAllNewsLoaded) {
+//        <#statements#>
+//    }
     if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
         [self updateDataWithIndicator:YES];
     } else {
@@ -254,7 +255,7 @@ typedef enum {
         DetailsViewController *vc = segue.destinationViewController;
         NewsEntity *newsEntity = self.searchResults[[self.tableView indexPathForCell:cell].row]? self.searchResults[[self.tableView indexPathForCell:cell].row] : self.newsArray[[self.tableView indexPathForCell:cell].row];
         vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
-        [vc.navigationItem setTitle:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
+        [vc.navigationItem setTitle:self.titlesArray[0]];
     }
 }
 #pragma mark - NYSegmentedControlDataSource
@@ -300,8 +301,11 @@ typedef enum {
 
 #pragma mark UISearchUpdating
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    self.searchResults = [[SearchManager sharedInstance]updateSearchResults:self.searchController.searchBar.text forArray:self.newsArray];
+    [[SearchManager sharedInstance]updateSearchResults:self.searchController.searchBar.text forArray:self.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
+        self.searchResults = searchResults;
         [self.tableView reloadData];
+    }];
+    
 }
 
 #pragma mark - Private methods
@@ -334,8 +338,9 @@ typedef enum {
 }
 
 -(void)setupData{
+    [self showLoadingIndicator:YES];
     if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
-        RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
+        RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[0]];
         NSArray *resultsArray = [self RLMResultsToArray:results];
         
         self.newsArray = [self sortNewsArray:resultsArray];
@@ -348,6 +353,8 @@ typedef enum {
         NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
     }
     [self.tableView reloadData];
+    [self showLoadingIndicator:NO];
+
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
         [self.activityInd stopAnimating];
@@ -404,18 +411,20 @@ typedef enum {
         NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
         if (networkStatus == NotReachable) {
             [self showAlertController];
-            [self setupData];
+//            [self setupData];
         }else {
             [networkReachability startNotifier];
             if(networkStatus == NotReachable) {
                 [self showAlertController];
-                [self setupData];
+//                [self setupData];
 
             } else {
                 __weak __typeof(self) wself = self;
                 [self showLoadingIndicator:showIndicator];
                 self.isAlertShown = NO;
-                [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlArray AndTitleArray:wself.titlesArray WithCallBack:^(NSError *error) {
+                wself.urlArray = nil;
+                wself.titlesArray = nil;
+                [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlArray  WithCallBack:^(NSError *error) {
                     [networkReachability stopNotifier];
                     if (!error) {
                         [self setupData];
@@ -431,6 +440,7 @@ typedef enum {
         }
     });
 }
+
 
 -(void)setupAppearanceNewsSegmentedControl {
     [self.NewsSegmentedControl layoutIfNeeded];

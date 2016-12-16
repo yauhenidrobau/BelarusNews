@@ -14,29 +14,27 @@
 
 SINGLETON(RealmDataManager)
 
--(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceArray:(NSArray *)urlArray {
-    for (NSString *feedIdString in urlArray) {
-        RLMRealm *realm = [RLMRealm defaultRealm];
-        for (NSDictionary *dict in receivedNewsArray) {
-            @try {
-                [realm beginWriteTransaction];
-                NewsEntity *currentNews = [[NewsEntity alloc]init];
-                currentNews.feedIdString = feedIdString;
-                currentNews.titleFeed = dict[@"title"];
-                currentNews.pubDateFeed = dict[@"pubDate"];
-                currentNews.descriptionFeed = dict[@"description"];
-                currentNews.linkFeed = dict[@"link"];
-                if (dict[@"imageUrl"]) {
-                    currentNews.urlImage = dict[@"imageUrl"];
-                }
-                [realm addOrUpdateObject:currentNews];
-                [realm commitWriteTransaction];
+-(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)serviceString{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    for (NSDictionary *dict in receivedNewsArray) {
+        @try {
+            [realm beginWriteTransaction];
+            NewsEntity *currentNews = [[NewsEntity alloc]init];
+            currentNews.feedIdString = serviceString;
+            currentNews.titleFeed = dict[@"title"];
+            currentNews.pubDateFeed = dict[@"pubDate"];
+            currentNews.descriptionFeed = dict[@"description"];
+            currentNews.linkFeed = dict[@"link"];
+            if (dict[@"imageUrl"]) {
+                currentNews.urlImage = dict[@"imageUrl"];
             }
-            @catch (NSException *exception) {
-                NSLog(@"exception");
-                if ([realm inWriteTransaction]) {
-                    [realm cancelWriteTransaction];
-                }
+            [realm addOrUpdateObject:currentNews];
+            [realm commitWriteTransaction];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"exception");
+            if ([realm inWriteTransaction]) {
+                [realm cancelWriteTransaction];
             }
         }
     }

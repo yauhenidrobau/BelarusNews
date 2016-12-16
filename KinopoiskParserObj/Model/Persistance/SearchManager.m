@@ -26,12 +26,16 @@ SINGLETON(SearchManager)
     return self;
 }
 
--(NSArray*)updateSearchResults:(NSString *)searchText forArray:(NSArray*)newsArray {
+-(void)updateSearchResults:(NSString *)searchText forArray:(NSArray*)newsArray withCompletion:(SearchDataCallback)completion {
     [self.operationQueue cancelAllOperations];
     NSOperation *operation = [[NSOperation alloc]init];
     [operation setCompletionBlock:^{
-        if (!searchText) {
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        if (!searchText.length) {
             self.searchResults = [newsArray mutableCopy];
+            if (completion) {
+                completion(self.searchResults,nil);
+            }
         } else {
             NSArray *searchResults = [NSMutableArray new];
             for (NSInteger i = 0;i < newsArray.count;i++) {
@@ -43,11 +47,13 @@ SINGLETON(SearchManager)
                 //            }
             }
             self.searchResults = searchResults;
+                if (completion) {
+                    completion(self.searchResults,nil);
+                }
         }
+        }];
     }];
     [self.operationQueue addOperation:operation];
-    return self.searchResults;
-
 }
 
 @end
