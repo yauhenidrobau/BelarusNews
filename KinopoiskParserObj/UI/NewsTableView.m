@@ -145,9 +145,11 @@ typedef enum {
 }
 
 -(IBAction)scrollButtonTouchUpInside:(id)sender {
-    __weak __typeof(self) wself = self;
+    __weak __typeof(self)wself = self;
     [UIView animateWithDuration:0.9 animations:^{
-        [wself.tableView setContentOffset:CGPointZero animated:YES];
+        __strong typeof(self)wstrong = wself;
+
+        [wstrong.tableView setContentOffset:CGPointZero animated:YES];
     }];
     self.scrollButton.hidden = YES;
     [self.navigationController setNavigationBarHidden:NO];
@@ -301,9 +303,12 @@ typedef enum {
 #pragma mark UISearchUpdating
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     [self.operaionQueue cancelAllOperations];
+    __weak typeof (self)wself = self;
     [self.operaionQueue addOperationWithBlock:^{
-        self.searchResults = [[SearchManager sharedInstance]updateSearchResults:self.searchController.searchBar.text forArray:self.newsArray];
-            [self.tableView reloadData];
+        __strong typeof (self)wstrong = wself;
+
+        wstrong.searchResults = [[SearchManager sharedInstance]updateSearchResults:wstrong.searchController.searchBar.text forArray:wstrong.newsArray];
+            [wstrong.tableView reloadData];
     }];
 }
 
@@ -401,33 +406,37 @@ typedef enum {
 
 -(void)updateDataWithIndicator:(BOOL)showIndicator {
     
-#warning неправильно. [[DataManager sharedInstance ] updateDataWithURLString - вот это ты должен вызывать в main потоке и возвращать даныне тоже в main. А внутри работать с фоновым потоком.
+    __weak typeof(self)wself = self;
     dispatch_async(dispatch_get_main_queue(), ^{
+        __strong typeof(self)wstrong = wself;
         Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
         NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
         if (networkStatus == NotReachable) {
-            [self showAlertController];
-            [self setupData];
+            [wstrong showAlertController];
+            [wstrong setupData];
         }else {
             [networkReachability startNotifier];
             if(networkStatus == NotReachable) {
-                [self showAlertController];
-                [self setupData];
+                [wstrong showAlertController];
+                [wstrong setupData];
 
             } else {
-                __weak __typeof(self) wself = self;
-                [self showLoadingIndicator:showIndicator];
-                self.isAlertShown = NO;
-                [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlArray AndTitleArray:wself.titlesArray WithCallBack:^(NSError *error) {
+                [wstrong showLoadingIndicator:showIndicator];
+                wstrong.isAlertShown = NO;
+                __weak typeof(self)wself = wstrong;
+
+                [[DataManager sharedInstance] updateDataWithURLArray:wstrong.urlArray AndTitleArray:wstrong.titlesArray WithCallBack:^(NSError *error) {
+                    __strong typeof(self)wstrong = wself;
+
                     [networkReachability stopNotifier];
                     if (!error) {
-                        [self setupData];
+                        [wstrong setupData];
 //                        NSLog(@"GET ELEMENTS %ld",self.newsArray.count);
                         if(showIndicator) {
-                        [self showLoadingIndicator:!showIndicator];
+                        [wstrong showLoadingIndicator:!showIndicator];
                         }
-                        [wself.refreshControl endRefreshing];
-                        [wself.tableView reloadData];
+                        [wstrong.refreshControl endRefreshing];
+                        [wstrong.tableView reloadData];
                     }
                 }];
             }

@@ -52,11 +52,14 @@ SINGLETON(RemoteFacade)
         NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:URL];
 
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        __weak typeof(self) wself = self;
+
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            __weak __typeof(self) wself = self;
-            wself.info = (NSData *)responseObject;
+            __strong typeof(self) wstrong = wself;
+
+            wstrong.info = (NSData *)responseObject;
             if(completion) {
-                completion(wself.info,nil);
+                completion(wstrong.info,nil);
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error: %@", error);
