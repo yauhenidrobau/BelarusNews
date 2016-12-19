@@ -38,15 +38,17 @@ NSMutableString * tempString;
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName attributes:(NSDictionary<NSString *, NSString *> *)attributeDict {
     currentElement = elementName;
     if ([elementName isEqualToString:@"item"]) {
-
+        
         currentDataDictionary = [[NSMutableDictionary<NSString *, NSString *> alloc]init];
         titleFeed = [[NSMutableString alloc]initWithString:@""];
         
         descriptionFeed =  [[NSMutableString alloc] initWithString: @""];
         pubDateFeed = [[NSMutableString alloc] initWithString: @""];
         linkFeed = [NSMutableString new];
-        urlImage = [[NSMutableString alloc] initWithString: @""];
         tempString = [[NSMutableString alloc] initWithString: @""];
+    }
+    if ([elementName isEqualToString:@"media:content"]) {
+        urlImage = [[NSMutableString alloc] initWithString: attributeDict[@"url"]];
     }
 }
 
@@ -54,6 +56,7 @@ NSMutableString * tempString;
     //save data
     if ([elementName isEqualToString:@"item"]) {
         if (titleFeed.length) {
+            titleFeed.string = [titleFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             [currentDataDictionary  setObject:titleFeed forKey:@"title"];
         }
         if (linkFeed.length) {
@@ -64,6 +67,9 @@ NSMutableString * tempString;
         }
         if (descriptionFeed.length) {
             [currentDataDictionary  setObject:descriptionFeed forKey:@"description"];
+        }
+        if (urlImage.length) {
+            [currentDataDictionary  setObject:urlImage forKey:@"imageUrl"];
         }
         if (pubDateFeed.length) {
 #warning TODO FORMATER MANAGER
@@ -77,19 +83,8 @@ NSMutableString * tempString;
             }
             
         }
-        NSRange matchBegin = [descriptionFeed rangeOfString:@"<img src="];
-        NSRange matchEnd = [descriptionFeed rangeOfString:@"width="];
-
-         if (matchBegin.location < 200 && matchEnd.location < 200) {
-            NSString *cdataString = [descriptionFeed substringWithRange:NSMakeRange(matchBegin.length + 1,matchEnd.location - 3  - matchBegin.length )];
-             urlImage = [NSMutableString stringWithString:@""];
-            [urlImage appendString:cdataString];
-            }
-
-        if (urlImage.length) {
-            [currentDataDictionary  setObject:urlImage forKey:@"imageUrl"];
-        }
         [dictParsedData addObject:currentDataDictionary];
+        urlImage = nil;
     }
 }
 

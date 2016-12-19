@@ -22,7 +22,7 @@
          contextName = "-[XMLParser parser:didEndElement:namespaceURI:qualifiedName:]:XMLParser.m">
          <PersistentStrings>
             <PersistentString
-               value = "pubDateFeed">
+               value = "titleFeed">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -33,12 +33,18 @@
                value = "entity.feedIdString">
             </PersistentString>
             <PersistentString
-               value = "entity.pubDateFeed">
+               value = "self.titleLabel.text">
             </PersistentString>
             <PersistentString
                value = "self.pubDateLabel.text">
             </PersistentString>
+            <PersistentString
+               value = "entity.pubDateFeed">
+            </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView awakeFromNib]:NewsTableView.m">
       </ContextState>
       <ContextState
          contextName = "-[DetailsViewController viewWillAppear:]:DetailsViewController.m">
@@ -55,9 +61,6 @@
                value = "networkStatus">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[NewsTableView awakeFromNib]:NewsTableView.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

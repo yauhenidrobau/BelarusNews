@@ -10,8 +10,10 @@
 #import <Realm/Realm.h>
 #import "NewsEntity.h"
 
+typedef void(^SearchDataCallback)(NSArray *searchResults,NSError *error);
+
 @interface SearchManager : NSObject
 
 +(instancetype)sharedInstance;
--(NSArray*)updateSearchResults:(NSString *)searchText forArray:(NSArray*)newsArray;
+-(void)updateSearchResults:(NSString *)searchText forArray:(NSArray*)newsArray withCompletion:(SearchDataCallback)completion;
 @end

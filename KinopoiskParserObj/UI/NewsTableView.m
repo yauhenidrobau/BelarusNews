@@ -20,13 +20,6 @@
 #import <NYSegmentedControl.h>
 #import "UIViewController+LMSideBarController.h"
 
-
-#define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
-#define MTS_BY_NEWS @"http://www.mts.by/rss/"
-#define TUT_BY_NEWS @"http://news.tut.by/rss/all.rss"
-#define DEV_BY_NEWS @"https://dev.by/rss"
-
-
 typedef void(^UpdateDataCallback)(NSError *error);
 typedef enum {
     AllCategoryType = 0,
@@ -35,25 +28,26 @@ typedef enum {
     MtsByCategoryType = 3
 }CategoryTypes;
 
-@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate,NYSegmentedControlDataSource, LMSideBarControllerDelegate, UISearchResultsUpdating,UISearchControllerDelegate>
+@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate,NYSegmentedControlDataSource, LMSideBarControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet NYSegmentedControl *NewsSegmentedControl;
-@property (weak, nonatomic) IBOutlet UIView *searchBarView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (assign, nonatomic) CGPoint lastContentOffset;
+@property (nonatomic) CGPoint lastContentOffset;
+@property (strong, nonatomic) NSOperationQueue * operationQueue;
 @property (strong, nonatomic) NSArray * urlArray;
 @property (strong, nonatomic) NSArray * titlesArray;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
 @property (strong, nonatomic) NSArray *newsArray;
+@property (strong, nonatomic) NSDictionary *newsURLDict;
+
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
-@property (strong, nonatomic) UISearchController *searchController;
-@property (nonatomic, strong) NSOperationQueue *operaionQueue;
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
 @property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, assign) BOOL isAlertShown;
-@property (nonatomic, assign) BOOL isSearchStart;
+@property (nonatomic) BOOL isAlertShown;
+@property (nonatomic) BOOL isSearchStart;
 
 @end
 
@@ -69,15 +63,24 @@ typedef enum {
     [self setupAppearanceNewsSegmentedControl];
     [self addPullToRefresh];
     self.isAlertShown = NO;
-    self.searchController = [[UISearchController alloc]initWithSearchResultsController:nil];
-    self.searchController.searchResultsUpdater = self;
-    self.searchController.searchBar.delegate = self;
-    self.searchController.dimsBackgroundDuringPresentation = NO;
-    self.searchController.definesPresentationContext = YES;
-    self.searchBarView = self.searchController.searchBar;
-    [self.searchController.searchBar sizeToFit];
+    self.operationQueue = [NSOperationQueue new];
+    self.newsURLDict = @{@"dev": DEV_BY_NEWS,
+                         @"tut.by": [NSDictionary dictionaryWithObjectsAndKeys:
+                                     @"main",MAIN_NEWS,
+                                     @"economic",ECONOMIC_NEWS,
+                                     @"society",SOCIETY_NEWS,
+                                     @"world",WORLD_NEWS,
+                                     @"culture",CULTURE_NEWS,
+                                     @"accident",ACCIDENT_NEWS,
+                                     @"finance",FINANCE_NEWS,
+                                     @"realty",REALTY_NEWS,
+                                     @"sport",SPORT_NEWS,
+                                     @"auto",AUTO_NEWS,
+                                     @"lady",LADY_NEWS,
+                                     @"science",SCIENCE_NEWS, nil],
+                         @"yandex" : YANDEX_NEWS,
+                         @"MTS" : MTS_BY_NEWS};
     
-    self.operaionQueue = [NSOperationQueue new];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -94,41 +97,22 @@ typedef enum {
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 
-    if (self.searchController.isActive) {
-        self.searchController.active = NO;
-    }
     [self.timer invalidate];
     self.timer = nil;
 }
 
 -(NSArray *)urlArray {
     if (!_urlArray.count) {
-        _urlArray = [NSArray arrayWithObjects:DEV_BY_NEWS,TUT_BY_NEWS,MTS_BY_NEWS, nil];
+        _urlArray = self.newsURLDict[self.urlIdentificator];
     }
     return _urlArray;
 }
 
 -(NSArray *)titlesArray {
     if (!_titlesArray.count) {
-        switch(self.NewsSegmentedControl.selectedSegmentIndex) {
-            case AllCategoryType:
-                _titlesArray = @[@"",NSLocalizedString(@"DEV.BY", nil),NSLocalizedString(@"TUT.BY", nil),NSLocalizedString(@"MTS.BY", nil)];
-            break;
-            case DevByCategoryType:
-                _titlesArray = @[ NSLocalizedString(@"DEV.BY", nil)];
-                break;
-            case TutByCategoryType:
-                _titlesArray = @[NSLocalizedString(@"TUT.BY", nil)];
-                break;
-            case MtsByCategoryType:
-                _titlesArray = @[NSLocalizedString(@"MTS.BY", nil)];
-                break;
-            default: nil;
-                break;
-        }
-        
+        _titlesArray = @[self.urlIdentificator];
     }
-    return _titlesArray;
+        return _titlesArray;
 }
 
 #pragma mark - IBActions
@@ -145,24 +129,79 @@ typedef enum {
 }
 
 -(IBAction)scrollButtonTouchUpInside:(id)sender {
-    __weak __typeof(self)wself = self;
+    __weak __typeof(self) wself = self;
     [UIView animateWithDuration:0.9 animations:^{
-        __strong typeof(self)wstrong = wself;
-
-        [wstrong.tableView setContentOffset:CGPointZero animated:YES];
+        [wself.tableView setContentOffset:CGPointZero animated:YES];
     }];
     self.scrollButton.hidden = YES;
     [self.navigationController setNavigationBarHidden:NO];
 }
 
 -(IBAction)changeValueSC {
-    self.urlArray = nil;
+//    if (isAllNewsLoaded) {
+//        <#statements#>
+//    }
     if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
         [self updateDataWithIndicator:YES];
     } else {
         [self setupData];
     }
 }
+
+
+#pragma mark - UITableViewDataSource
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.isSearchStart) {
+        return self.searchResults.count? self.searchResults.count : 0;
+    }
+
+    return self.newsArray.count? self.newsArray.count : 0;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+   
+    NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    NewsEntity *newsEntity = nil;
+    if (self.isSearchStart) {
+        newsEntity = self.searchResults.count? self.searchResults[indexPath.row] : self.newsArray[indexPath.row];
+    } else {
+        newsEntity = self.newsArray.count? self.newsArray[indexPath.row] : self.newsArray[indexPath.row];
+    }
+    [cell cellForNews:newsEntity AndTitles:self.titlesArray AndIndex:self.NewsSegmentedControl.selectedSegmentIndex];
+    
+    return cell;
+}
+
+#pragma mark UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return self.scrollButton.frame.size.height;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *view = [[UIView alloc]initWithFrame:self.scrollButton.frame];
+    view.alpha = 0;
+    return view;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"DetailsVCID"]) {
+        UITableViewCell *cell = (UITableViewCell*)sender;
+        DetailsViewController *vc = segue.destinationViewController;
+        NewsEntity *newsEntity = self.searchResults[[self.tableView indexPathForCell:cell].row]? self.searchResults[[self.tableView indexPathForCell:cell].row] : self.newsArray[[self.tableView indexPathForCell:cell].row];
+        vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
+        [vc.navigationItem setTitle:self.titlesArray[0]];
+    }
+}
+
 
 #pragma mark - DZNEmptyDataSetSource
 
@@ -181,8 +220,12 @@ typedef enum {
 }
 
 -(NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = NSLocalizedString(@"No Network", nil);
-    
+    NSString *text;
+    if (self.isSearchStart) {
+        text = @"";
+    } else {
+    text = NSLocalizedString(@"No Network", nil);
+    }
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
@@ -216,49 +259,6 @@ typedef enum {
     return NO;
 }
 
-#pragma mark - UITableViewDataSource
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.isSearchStart) {
-        return self.searchResults.count;
-    }
-
-    return self.newsArray.count;
-}
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.isSearchStart) {
-        return self.searchResults.count? 1 : 0;
-    }
-    return self.newsArray.count? 1 : 0;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-    NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    
-    NewsEntity *newsEntity = self.searchResults.count? self.searchResults[indexPath.row] :self.newsArray[indexPath.row];
-    cell.textLabel.textColor = [UIColor whiteColor];
-    [cell cellForNews:newsEntity AndTitles:self.titlesArray AndIndex:self.NewsSegmentedControl.selectedSegmentIndex];
-    
-    return cell;
-}
-
-#pragma mark UITableViewDelegate
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"DetailsVCID"]) {
-        UITableViewCell *cell = (UITableViewCell*)sender;
-        DetailsViewController *vc = segue.destinationViewController;
-        NewsEntity *newsEntity = self.searchResults[[self.tableView indexPathForCell:cell].row]? self.searchResults[[self.tableView indexPathForCell:cell].row] : self.newsArray[[self.tableView indexPathForCell:cell].row];
-        vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
-        [vc.navigationItem setTitle:self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
-    }
-}
 #pragma mark - NYSegmentedControlDataSource
 
 - (NSUInteger) numberOfSegmentsOfControl:(NYSegmentedControl *)control {
@@ -270,13 +270,13 @@ typedef enum {
             return @"All News";
             break;
         case DevByCategoryType:
-            return @"DEV.BY";
+            return @"Pravo.BY";
             break;
         case TutByCategoryType:
-            return @"TUT.BY";
+            return @"National center ";
             break;
         case MtsByCategoryType:
-            return @"MTS.BY";
+            return @"Belta.BY";
             break;
         default:
             return @"";
@@ -286,30 +286,30 @@ typedef enum {
 
 #pragma mark - UISearchBarDelegate
 
-- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text NS_AVAILABLE_IOS(3_0) {
-    
-//    NSString *textString = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
-//    self.isSearchStart = (textString.length);
-    
-    return YES;
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (searchText.length > 2) {
+        [self showLoadingIndicator:YES];
+        self.isSearchStart = YES;
+        __weak typeof (self)wself = self;
+        [[SearchManager sharedInstance]updateSearchResults:self.searchBar.text forArray:self.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
+            wself.searchResults = searchResults;
+            [self showLoadingIndicator:NO];
+            [wself.tableView reloadData];
+        }];
+    } else {
+        self.isSearchStart = NO;
+        [self setupData];
+    }
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+  
 }
 
 #pragma mark UIScrollViewDelegate
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     self.scrollButton.hidden = !(scrollView.contentOffset.y > 20);
-}
-
-#pragma mark UISearchUpdating
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
-    [self.operaionQueue cancelAllOperations];
-    __weak typeof (self)wself = self;
-    [self.operaionQueue addOperationWithBlock:^{
-        __strong typeof (self)wstrong = wself;
-
-        wstrong.searchResults = [[SearchManager sharedInstance]updateSearchResults:wstrong.searchController.searchBar.text forArray:wstrong.newsArray];
-            [wstrong.tableView reloadData];
-    }];
 }
 
 #pragma mark - Private methods
@@ -342,8 +342,9 @@ typedef enum {
 }
 
 -(void)setupData{
+    [self showLoadingIndicator:YES];
     if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
-        RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
+        RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[0]];
         NSArray *resultsArray = [self RLMResultsToArray:results];
         
         self.newsArray = [self sortNewsArray:resultsArray];
@@ -356,6 +357,8 @@ typedef enum {
         NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
     }
     [self.tableView reloadData];
+    [self showLoadingIndicator:NO];
+
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
         [self.activityInd stopAnimating];
@@ -406,43 +409,41 @@ typedef enum {
 
 -(void)updateDataWithIndicator:(BOOL)showIndicator {
     
-    __weak typeof(self)wself = self;
+#warning неправильно. [[DataManager sharedInstance ] updateDataWithURLString - вот это ты должен вызывать в main потоке и возвращать даныне тоже в main. А внутри работать с фоновым потоком.
     dispatch_async(dispatch_get_main_queue(), ^{
-        __strong typeof(self)wstrong = wself;
         Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
         NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
         if (networkStatus == NotReachable) {
-            [wstrong showAlertController];
-            [wstrong setupData];
+            [self showAlertController];
+//            [self setupData];
         }else {
             [networkReachability startNotifier];
             if(networkStatus == NotReachable) {
-                [wstrong showAlertController];
-                [wstrong setupData];
+                [self showAlertController];
+//                [self setupData];
 
             } else {
-                [wstrong showLoadingIndicator:showIndicator];
-                wstrong.isAlertShown = NO;
-                __weak typeof(self)wself = wstrong;
-
-                [[DataManager sharedInstance] updateDataWithURLArray:wstrong.urlArray AndTitleArray:wstrong.titlesArray WithCallBack:^(NSError *error) {
-                    __strong typeof(self)wstrong = wself;
-
+                __weak __typeof(self) wself = self;
+                [self showLoadingIndicator:showIndicator];
+                self.isAlertShown = NO;
+                wself.urlArray = nil;
+                wself.titlesArray = nil;
+                [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlArray  WithCallBack:^(NSError *error) {
                     [networkReachability stopNotifier];
                     if (!error) {
-                        [wstrong setupData];
-//                        NSLog(@"GET ELEMENTS %ld",self.newsArray.count);
+                        [self setupData];
                         if(showIndicator) {
-                        [wstrong showLoadingIndicator:!showIndicator];
+                        [self showLoadingIndicator:!showIndicator];
                         }
-                        [wstrong.refreshControl endRefreshing];
-                        [wstrong.tableView reloadData];
+                        [wself.refreshControl endRefreshing];
+                        [wself.tableView reloadData];
                     }
                 }];
             }
         }
     });
 }
+
 
 -(void)setupAppearanceNewsSegmentedControl {
     [self.NewsSegmentedControl layoutIfNeeded];

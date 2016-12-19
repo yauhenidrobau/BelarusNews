@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <LMSideBarController.h>
 
+
+typedef enum {
+    DevByCategory = 0,
+    TutBYCategory = 1,
+    YandexCategory = 2,
+    MtsByCategory = 3
+}CategoryTypes;
+
 @interface MenuViewController : LMSideBarController <LMSideBarControllerDelegate>
 
 @end

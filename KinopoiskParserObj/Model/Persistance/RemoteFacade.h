@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^DataLoadCallback)(NSData * info, NSError* error);
+typedef void (^DataLoadCallback)(NSData * info,NSString *feedIdString, NSError* error);
 
 @interface RemoteFacade : NSObject
 

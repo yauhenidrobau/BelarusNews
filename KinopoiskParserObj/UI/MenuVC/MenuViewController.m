@@ -7,7 +7,7 @@
 //
 
 #import "MenuViewController.h"
-
+#import "NewsTableView.h"
 
 @interface MenuViewController ()
 
@@ -24,10 +24,10 @@
 {
     [super viewDidLoad];
     
-    self.menuTitles = @[NSLocalizedString(@"Profile",nil),
-                        NSLocalizedString(@"Settings",nil),
-                        NSLocalizedString(@"About",nil),
-                        NSLocalizedString(@"Log out",nil)];
+    self.menuTitles = @[NSLocalizedString(@"DEV.BY",nil),
+                        NSLocalizedString(@"TUT.BY",nil),
+                        NSLocalizedString(@"YANDEX",nil),
+                        NSLocalizedString(@"MTS",nil)];
     
     self.avatarImageView.clipsToBounds = YES;
     self.avatarImageView.layer.cornerRadius = 50.0;
@@ -65,9 +65,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NewsTableView *vc = [NewsTableView new];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    vc
+    [self.navigationController pushViewController:vc animated:YES];
     
-//    LMMainNavigationController *mainNavigationController = (LMMainNavigationController *)self.sideBarController.contentViewController;
+//    UINAVI *mainNavigationController = (LMMainNavigationController *)self.sideBarController.contentViewController;
 //    NSString *menuTitle = self.menuTitles[indexPath.row];
 //    if ([menuTitle isEqualToString:@"Home"]) {
 //        [mainNavigationController showHomeViewController];

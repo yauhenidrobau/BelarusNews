@@ -18,22 +18,37 @@
 @implementation SearchManager
 SINGLETON(SearchManager)
 
--(NSArray*)updateSearchResults:(NSString *)searchText forArray:(NSArray*)newsArray {
-    if (!searchText) {
-        self.searchResults = [newsArray mutableCopy];
-    } else {
-        NSArray *searchResults = [NSMutableArray new];
-        for (NSInteger i = 0;i < newsArray.count;i++) {
-            NewsEntity *entity = newsArray[i];
-            NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"titleFeed contains[c] %@", searchText];
-            searchResults = [newsArray filteredArrayUsingPredicate:resultPredicate];
-//            if ([entity.titleFeed containsString:searchText]) {
-//                [searchResults addObject:entity];
-//            }
-        }
-        self.searchResults = searchResults;
+-(instancetype)init {
+    self = [super init];
+    if (self) {
+        self.operationQueue = [NSOperationQueue new];
     }
-    return self.searchResults;
+    return self;
+}
+
+-(void)updateSearchResults:(NSString *)searchText forArray:(NSArray*)newsArray withCompletion:(SearchDataCallback)completion {
+    [self.operationQueue cancelAllOperations];
+    NSOperation *operation = [[NSOperation alloc]init];
+    [operation setCompletionBlock:^{
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        if (!searchText.length) {
+            self.searchResults = [newsArray mutableCopy];
+            if (completion) {
+                completion(self.searchResults,nil);
+            }
+        } else {
+            NSArray *searchResults = [NSMutableArray new];
+
+                NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"titleFeed contains[c] %@", searchText];
+                searchResults = [newsArray filteredArrayUsingPredicate:resultPredicate];
+                self.searchResults = searchResults;
+                if (completion) {
+                    completion(self.searchResults,nil);
+                }
+        }
+        }];
+    }];
+    [self.operationQueue addOperation:operation];
 }
 
 @end

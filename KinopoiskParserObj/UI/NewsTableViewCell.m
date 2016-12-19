@@ -23,6 +23,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.textLabel.textColor = [UIColor whiteColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

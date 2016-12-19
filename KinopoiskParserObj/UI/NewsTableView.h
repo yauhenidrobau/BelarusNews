@@ -12,4 +12,6 @@
 
 @interface NewsTableView: UIViewController
 
+@property (strong, nonatomic) NSString *urlIdentificator;
+
 @end
