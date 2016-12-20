@@ -12,8 +12,10 @@
 #import "UIViewController+LMSideBarController.h"
 #import <LMSideBarDepthStyle.h>
 #import "MenuViewController.h"
+#import "NewsTableView.h"
 
 @interface RootViewController ()
+@property(nonatomic,strong) NewsTableView *mainViewController;
 
 @end
 
@@ -30,8 +32,10 @@
     
     // Init view controllers
     MenuViewController *leftMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftMenuViewController"];
+    self.mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewsTableView"];
+
     //    LMRightMenuViewController *rightMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightMenuViewController"];
-        UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"mainNavigationController"];
+        self.mainNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"mainNavigationController"];
     //
     // Setup side bar controller
     [self setPanGestureEnabled:YES];
@@ -40,7 +44,7 @@
     //    [self setMenuViewController:rightMenuViewController forDirection:LMSideBarControllerDirectionRight];
     [self setSideBarStyle:sideBarDepthStyle forDirection:LMSideBarControllerDirectionLeft];
     //    [self setSideBarStyle:sideBarDepthStyle forDirection:LMSideBarControllerDirectionRight];
-    [self setContentViewController:navigationController];
+    [self setContentViewController:self.mainNavigationController];
 }
 
 
@@ -55,6 +59,8 @@
 
 - (void)sideBarController:(LMSideBarController *)sideBarController willHideMenuViewController:(UIViewController *)menuViewController {
 //    self.prefersStatusBarHidden = NO;
+//    [self.mainNavigationController setViewControllers:@[self.mainViewController] animated:YES];
+//    [self.mainViewController.tableView reloadData];
 }
 
 - (void)sideBarController:(LMSideBarController *)sideBarController didHideMenuViewController:(UIViewController *)menuViewController {

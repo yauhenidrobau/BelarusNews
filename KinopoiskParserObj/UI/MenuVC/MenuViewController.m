@@ -7,7 +7,9 @@
 //
 
 #import "MenuViewController.h"
+
 #import "NewsTableView.h"
+#import "RootViewController.h"
 
 @interface MenuViewController ()
 
@@ -65,11 +67,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NewsTableView *vc = [NewsTableView new];
+    NewsTableView *vc = [[NewsTableView alloc]init];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    vc
-    [self.navigationController pushViewController:vc animated:YES];
-    
+    vc.urlIdentificator = self.menuTitles[indexPath.row];
+    RootViewController *rootVC = [[RootViewController alloc]init];
+//    [rootVC.mainNavigationController setViewControllers:@[vc] animated:YES];
 //    UINAVI *mainNavigationController = (LMMainNavigationController *)self.sideBarController.contentViewController;
 //    NSString *menuTitle = self.menuTitles[indexPath.row];
 //    if ([menuTitle isEqualToString:@"Home"]) {
@@ -79,8 +81,10 @@
 //        mainNavigationController.othersViewController.title = menuTitle;
 //        [mainNavigationController showOthersViewController];
 //    }
-//    
+//
     [self.sideBarController hideMenuViewController:YES];
+    [self.sideBarController showViewController:vc sender:self];
+
 }
 
 

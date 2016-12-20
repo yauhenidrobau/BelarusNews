@@ -30,7 +30,7 @@
     [super setSelected:selected animated:animated];
 }
 
--(void)cellForNews:(NewsEntity *)entity AndTitles:(NSArray *)titlesArray AndIndex:(NSInteger)index {
+-(void)cellForNews:(NewsEntity *)entity{
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     self.titleLabel.text = entity.titleFeed;
     self.descriptionLabel.text = entity.descriptionFeed;

@@ -29,21 +29,22 @@ SINGLETON(SearchManager)
 -(void)updateSearchResults:(NSString *)searchText forArray:(NSArray*)newsArray withCompletion:(SearchDataCallback)completion {
     [self.operationQueue cancelAllOperations];
     NSOperation *operation = [[NSOperation alloc]init];
+    __weak typeof (self)wself = self;
     [operation setCompletionBlock:^{
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         if (!searchText.length) {
-            self.searchResults = [newsArray mutableCopy];
+            wself.searchResults = [newsArray mutableCopy];
             if (completion) {
-                completion(self.searchResults,nil);
+                completion(wself.searchResults,nil);
             }
         } else {
             NSArray *searchResults = [NSMutableArray new];
 
                 NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"titleFeed contains[c] %@", searchText];
                 searchResults = [newsArray filteredArrayUsingPredicate:resultPredicate];
-                self.searchResults = searchResults;
+                wself.searchResults = searchResults;
                 if (completion) {
-                    completion(self.searchResults,nil);
+                    completion(wself.searchResults,nil);
                 }
         }
         }];

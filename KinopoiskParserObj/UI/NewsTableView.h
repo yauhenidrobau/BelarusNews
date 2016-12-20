@@ -13,5 +13,6 @@
 @interface NewsTableView: UIViewController
 
 @property (strong, nonatomic) NSString *urlIdentificator;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

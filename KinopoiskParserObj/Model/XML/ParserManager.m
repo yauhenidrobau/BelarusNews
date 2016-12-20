@@ -33,11 +33,12 @@ SINGLETON(ParserManager)
 }
 
 -(void) xmlParserDidFinishParsing: (NSArray<NSDictionary*>*)items  error: (NSError *)error{
+    __weak typeof (self)wself = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.callback) {
-            self.info = items;
-            if (self.callback) {
-                self.callback(self.info, nil);
+        if (wself.callback) {
+            wself.info = items;
+            if (wself.callback) {
+                wself.callback(wself.info, nil);
             }
         }
     });

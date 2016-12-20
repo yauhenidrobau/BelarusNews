@@ -11,5 +11,6 @@
 
 @interface NewsTableViewCell : UITableViewCell
 
--(void)cellForNews:(NewsEntity *)entity AndTitles:(NSArray *)titlesArray AndIndex:(NSInteger)index;
+-(void)cellForNews:(NewsEntity *)entity;
+
 @end

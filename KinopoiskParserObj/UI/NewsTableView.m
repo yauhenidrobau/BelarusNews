@@ -19,6 +19,7 @@
 #import <UIAlertController+Blocks.h>
 #import <NYSegmentedControl.h>
 #import "UIViewController+LMSideBarController.h"
+#import "Constants.h"
 
 typedef void(^UpdateDataCallback)(NSError *error);
 typedef enum {
@@ -34,14 +35,14 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet NYSegmentedControl *NewsSegmentedControl;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) CGPoint lastContentOffset;
 @property (strong, nonatomic) NSOperationQueue * operationQueue;
 @property (strong, nonatomic) NSArray * urlArray;
-@property (strong, nonatomic) NSArray * titlesArray;
+@property (strong, nonatomic) NSString * titleString;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
 @property (strong, nonatomic) NSArray *newsArray;
 @property (strong, nonatomic) NSDictionary *newsURLDict;
+@property (strong, nonatomic) NSArray *titlesArray;
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
@@ -59,28 +60,29 @@ typedef enum {
     [super viewDidLoad];
     
     [self setAppierance];
-    [self setupData];
     [self setupAppearanceNewsSegmentedControl];
     [self addPullToRefresh];
     self.isAlertShown = NO;
     self.operationQueue = [NSOperationQueue new];
-    self.newsURLDict = @{@"dev": DEV_BY_NEWS,
-                         @"tut.by": [NSDictionary dictionaryWithObjectsAndKeys:
-                                     @"main",MAIN_NEWS,
-                                     @"economic",ECONOMIC_NEWS,
-                                     @"society",SOCIETY_NEWS,
-                                     @"world",WORLD_NEWS,
-                                     @"culture",CULTURE_NEWS,
-                                     @"accident",ACCIDENT_NEWS,
-                                     @"finance",FINANCE_NEWS,
-                                     @"realty",REALTY_NEWS,
-                                     @"sport",SPORT_NEWS,
-                                     @"auto",AUTO_NEWS,
-                                     @"lady",LADY_NEWS,
-                                     @"science",SCIENCE_NEWS, nil],
-                         @"yandex" : YANDEX_NEWS,
-                         @"MTS" : MTS_BY_NEWS};
-    
+    self.urlIdentificator = @"TUT.BY";
+    self.newsURLDict = @{@"DEV.BY": @[DEV_BY_NEWS],
+                         @"TUT.BY": [NSDictionary dictionaryWithObjectsAndKeys:
+                                     MAIN_NEWS,@"Main",
+                                     ECONOMIC_NEWS,@"Economic",
+                                     SOCIETY_NEWS,@"Society",
+                                     WORLD_NEWS,@"World",
+                                     CULTURE_NEWS,@"Culture",
+                                     ACCIDENT_NEWS,@"Accident",
+                                     FINANCE_NEWS,@"Finance",
+                                     REALTY_NEWS,@"Realty",
+                                     SPORT_NEWS,@"Sport",
+                                     AUTO_NEWS,@"Auto",
+                                     LADY_NEWS,@"Lady",
+                                     SCIENCE_NEWS,@"Science", nil],
+                         @"YANDEX" : @[YANDEX_NEWS],
+                         @"MTS" : @[MTS_BY_NEWS]};
+    [self setupData];
+
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -103,18 +105,38 @@ typedef enum {
 
 -(NSArray *)urlArray {
     if (!_urlArray.count) {
-        _urlArray = self.newsURLDict[self.urlIdentificator];
+        if (self.urlIdentificator.length) {
+            NSDictionary *dict = self.newsURLDict[self.urlIdentificator];
+            _urlArray = dict.allValues[self.NewsSegmentedControl.selectedSegmentIndex];
+        } else {
+        _urlArray = @[self.newsURLDict[@"TUT.BY"]];
+        }
     }
     return _urlArray;
 }
 
--(NSArray *)titlesArray {
-    if (!_titlesArray.count) {
-        _titlesArray = @[self.urlIdentificator];
+-(NSString *)titleString {
+    if (!_titleString.length) {
+        if (self.urlIdentificator.length) {
+            _titleString = self.urlIdentificator;
+        } else {
+            _titleString = @"TUT.BY";
+        }
     }
-        return _titlesArray;
+        return _titleString;
 }
 
+-(NSArray *)titlesArray {
+    if (!_titlesArray.count) {
+        if (self.urlIdentificator.length) {
+            NSDictionary *dict = self.newsURLDict[self.urlIdentificator];
+            _titlesArray = dict.allKeys;
+        } else {
+            _titlesArray = @[self.newsURLDict[@"DEV.BY"]];
+        }
+    }
+    return _titlesArray;
+}
 #pragma mark - IBActions
 
 -(void)onRefreshBtnTouch {
@@ -172,7 +194,7 @@ typedef enum {
     } else {
         newsEntity = self.newsArray.count? self.newsArray[indexPath.row] : self.newsArray[indexPath.row];
     }
-    [cell cellForNews:newsEntity AndTitles:self.titlesArray AndIndex:self.NewsSegmentedControl.selectedSegmentIndex];
+    [cell cellForNews:newsEntity];
     
     return cell;
 }
@@ -198,7 +220,7 @@ typedef enum {
         DetailsViewController *vc = segue.destinationViewController;
         NewsEntity *newsEntity = self.searchResults[[self.tableView indexPathForCell:cell].row]? self.searchResults[[self.tableView indexPathForCell:cell].row] : self.newsArray[[self.tableView indexPathForCell:cell].row];
         vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
-        [vc.navigationItem setTitle:self.titlesArray[0]];
+        [vc.navigationItem setTitle:self.newsURLDict.allKeys[[self.tableView indexPathForCell:cell].row]];
     }
 }
 
@@ -262,26 +284,23 @@ typedef enum {
 #pragma mark - NYSegmentedControlDataSource
 
 - (NSUInteger) numberOfSegmentsOfControl:(NYSegmentedControl *)control {
-    return self.titlesArray.count;
+    if ([self.newsURLDict[_urlIdentificator] isKindOfClass:[NSArray class]]) {
+        return 1;
+    } else {
+        NSDictionary *dict = self.newsURLDict[_urlIdentificator];
+        return dict.allKeys.count;
+//        return [self.newsURLDict[_urlIdentificator];
+    }
+    return self.newsURLDict.allKeys.count;
 }
 - (NSString *) segmentedControl:(NYSegmentedControl *)control titleAtIndex:(NSInteger)index {
-    switch(index) {
-        case AllCategoryType:
-            return @"All News";
-            break;
-        case DevByCategoryType:
-            return @"Pravo.BY";
-            break;
-        case TutByCategoryType:
-            return @"National center ";
-            break;
-        case MtsByCategoryType:
-            return @"Belta.BY";
-            break;
-        default:
-            return @"";
-            break;
+    if ([self.newsURLDict[_urlIdentificator] isKindOfClass:[NSArray class]]) {
+        return @"All News";
+    } else {
+        NSDictionary *dict = self.newsURLDict[_urlIdentificator];
+        return dict.allKeys[index];
     }
+    return @"";
 }
 
 #pragma mark - UISearchBarDelegate
@@ -293,7 +312,7 @@ typedef enum {
         __weak typeof (self)wself = self;
         [[SearchManager sharedInstance]updateSearchResults:self.searchBar.text forArray:self.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
             wself.searchResults = searchResults;
-            [self showLoadingIndicator:NO];
+            [wself showLoadingIndicator:NO];
             [wself.tableView reloadData];
         }];
     } else {
@@ -343,19 +362,19 @@ typedef enum {
 
 -(void)setupData{
     [self showLoadingIndicator:YES];
-    if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
-        RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[0]];
-        NSArray *resultsArray = [self RLMResultsToArray:results];
-        
-        self.newsArray = [self sortNewsArray:resultsArray];
-        NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
-    } else {
-        RLMResults *allResults = [NewsEntity allObjects];
-        NSArray *allResultsArray = [self RLMResultsToArray:allResults];
+//    if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
+//        RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titleString];
+//        NSArray *resultsArray = [self RLMResultsToArray:results];
+//        
+//        self.newsArray = [self sortNewsArray:resultsArray];
+//        NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
+//    } else {
+        RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
+        NSArray *allResultsArray = [self RLMResultsToArray:results];
 
         self.newsArray = [self sortNewsArray:allResultsArray];
         NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
-    }
+//    }
     [self.tableView reloadData];
     [self showLoadingIndicator:NO];
 
@@ -393,6 +412,7 @@ typedef enum {
 -(void)showAlertController {
     if (!self.isAlertShown) {
         [self showLoadingIndicator:YES];
+        __weak typeof(self) wself = self;
         [UIAlertController  showAlertInViewController:self
                                             withTitle:NSLocalizedString(@"We have problems", nil)
                                               message:NSLocalizedString(@"No Network",nil)
@@ -400,8 +420,8 @@ typedef enum {
                                destructiveButtonTitle:nil
                                     otherButtonTitles:nil
                                              tapBlock:^(UIAlertController * _Nonnull controller, UIAlertAction * _Nonnull action, NSInteger buttonIndex) {
-                                                 [self setupData];
-                                                 [self showLoadingIndicator:NO];
+                                                 [wself setupData];
+                                                 [wself showLoadingIndicator:NO];
                                              }];
         self.isAlertShown = YES;
     }
@@ -409,8 +429,8 @@ typedef enum {
 
 -(void)updateDataWithIndicator:(BOOL)showIndicator {
     
-#warning неправильно. [[DataManager sharedInstance ] updateDataWithURLString - вот это ты должен вызывать в main потоке и возвращать даныне тоже в main. А внутри работать с фоновым потоком.
     dispatch_async(dispatch_get_main_queue(), ^{
+
         Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
         NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
         if (networkStatus == NotReachable) {
@@ -421,19 +441,20 @@ typedef enum {
             if(networkStatus == NotReachable) {
                 [self showAlertController];
 //                [self setupData];
-
             } else {
-                __weak __typeof(self) wself = self;
                 [self showLoadingIndicator:showIndicator];
                 self.isAlertShown = NO;
-                wself.urlArray = nil;
-                wself.titlesArray = nil;
-                [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlArray  WithCallBack:^(NSError *error) {
+                self.urlArray = @[];
+                self.titleString = @"";
+                self.titlesArray = @[];
+                [[DataManager sharedInstance ] updateDataWithURLArray:self.newsURLDict[_urlIdentificator] WithCallBack:^(NSError *error) {
+                    __weak typeof(self) wself = self;
+
                     [networkReachability stopNotifier];
                     if (!error) {
-                        [self setupData];
+                        [wself setupData];
                         if(showIndicator) {
-                        [self showLoadingIndicator:!showIndicator];
+                        [wself showLoadingIndicator:!showIndicator];
                         }
                         [wself.refreshControl endRefreshing];
                         [wself.tableView reloadData];
@@ -443,7 +464,6 @@ typedef enum {
         }
     });
 }
-
 
 -(void)setupAppearanceNewsSegmentedControl {
     [self.NewsSegmentedControl layoutIfNeeded];
