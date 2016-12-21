@@ -25,7 +25,7 @@
 
 #define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
 #define MTS_BY_NEWS @"http://www.mts.by/rss/"
-
+#define S13_NEWS @"http://s13.ru/feed/atom"
 @interface Constants : NSObject
 
 @end

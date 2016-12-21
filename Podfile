@@ -11,4 +11,5 @@ target 'KinopoiskParserObj' do
    pod 'AFNetworking', '~> 2.0'
    pod 'NYSegmentedControl'
    pod 'LMSideBarController'
+
 end

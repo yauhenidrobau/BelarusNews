@@ -14,6 +14,7 @@
 @interface MenuViewController ()
 
 @property (nonatomic, strong) NSArray *menuTitles;
+@property (nonatomic, strong) NSArray *menuImages;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
@@ -29,8 +30,9 @@
     self.menuTitles = @[NSLocalizedString(@"DEV.BY",nil),
                         NSLocalizedString(@"TUT.BY",nil),
                         NSLocalizedString(@"YANDEX",nil),
-                        NSLocalizedString(@"MTS",nil)];
-    
+                        NSLocalizedString(@"MTS",nil),
+                        @"S13"];
+    self.menuImages = @[@"DEV.BY",@"TUT.BY",@"YANDEX",@"MTS.BY",@"MTS.BY"];
     self.avatarImageView.clipsToBounds = YES;
     self.avatarImageView.layer.cornerRadius = 50.0;
     self.avatarImageView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -54,10 +56,12 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    
-    cell.textLabel.text = self.menuTitles[indexPath.row];
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.backgroundColor = [UIColor clearColor];
+    UIImageView *cellImage = (UIImageView*)[cell viewWithTag:1];
+    cellImage.image = [UIImage imageNamed:self.menuImages[indexPath.row]];
+    UILabel *titleLabel = (UILabel *)[cell viewWithTag:2];
+    titleLabel.text = self.menuTitles[indexPath.row];
+    titleLabel.textColor = [UIColor whiteColor];
+//    cell.backgroundColor = [UIColor clearColor];
     
     return cell;
 }
@@ -67,23 +71,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NewsTableView *vc = [[NewsTableView alloc]init];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    vc.urlIdentificator = self.menuTitles[indexPath.row];
-    RootViewController *rootVC = [[RootViewController alloc]init];
+//    NewsTableView *vc = [[NewsTableView alloc]init];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    vc.urlIdentificator = self.menuTitles[indexPath.row];
+//    RootViewController *rootVC = [[RootViewController alloc]init];
 //    [rootVC.mainNavigationController setViewControllers:@[vc] animated:YES];
-//    UINAVI *mainNavigationController = (LMMainNavigationController *)self.sideBarController.contentViewController;
-//    NSString *menuTitle = self.menuTitles[indexPath.row];
-//    if ([menuTitle isEqualToString:@"Home"]) {
-//        [mainNavigationController showHomeViewController];
-//    }
-//    else {
-//        mainNavigationController.othersViewController.title = menuTitle;
-//        [mainNavigationController showOthersViewController];
-//    }
-//
+    self.title = self.menuTitles[indexPath.row];
     [self.sideBarController hideMenuViewController:YES];
-    [self.sideBarController showViewController:vc sender:self];
+//    [self.sideBarController showViewController:vc sender:self];
 
 }
 

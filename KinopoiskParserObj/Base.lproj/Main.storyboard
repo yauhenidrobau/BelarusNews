@@ -67,23 +67,34 @@
                                     <constraint firstAttribute="width" constant="220" id="JvD-9W-yHw"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuCell" textLabel="tVM-SA-36T" style="IBUITableViewCellStyleDefault" id="rnd-sX-ef7">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuCell" id="rnd-sX-ef7">
                                         <rect key="frame" x="0.0" y="28" width="220" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rnd-sX-ef7" id="Bqv-kQ-U5f">
                                             <frame key="frameInset" width="220" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tVM-SA-36T">
-                                                    <frame key="frameInset" minX="15" width="190" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" name="Palatino-Roman" family="Palatino" pointSize="17"/>
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oay-U8-PYj">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="44" id="nSh-aX-aCW"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1u-3b-ZJQ">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="g1u-3b-ZJQ" firstAttribute="centerX" secondItem="Bqv-kQ-U5f" secondAttribute="centerX" id="1bg-GT-NDZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="oay-U8-PYj" secondAttribute="bottom" id="DWn-cW-dn2"/>
+                                                <constraint firstAttribute="trailing" secondItem="oay-U8-PYj" secondAttribute="trailing" id="M6Y-NI-72k"/>
+                                                <constraint firstItem="g1u-3b-ZJQ" firstAttribute="centerY" secondItem="Bqv-kQ-U5f" secondAttribute="centerY" id="MF2-1C-OU9"/>
+                                                <constraint firstItem="oay-U8-PYj" firstAttribute="leading" secondItem="Bqv-kQ-U5f" secondAttribute="leading" id="TpT-wr-nbT"/>
+                                                <constraint firstItem="oay-U8-PYj" firstAttribute="top" secondItem="Bqv-kQ-U5f" secondAttribute="top" id="VzZ-4d-sZv"/>
+                                            </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -140,7 +151,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOm-1K-Q9F" customClass="NYSegmentedControl">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aOm-1K-Q9F">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="mjg-1q-bdn"/>
@@ -277,8 +288,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="NewsSegmentedControl" destination="aOm-1K-Q9F" id="Ukg-MA-Cdk"/>
                         <outlet property="activityInd" destination="9pe-Ua-hs5" id="HJm-Xs-aKI"/>
+                        <outlet property="dropDownMenu" destination="aOm-1K-Q9F" id="V7h-on-Ivk"/>
                         <outlet property="scrollButton" destination="JS4-6j-NGK" id="eK3-fp-fW1"/>
                         <outlet property="searchBar" destination="fDP-nF-k0O" id="fum-YQ-R6V"/>
                         <outlet property="tableView" destination="WR2-a2-M3u" id="njh-c9-R5Q"/>

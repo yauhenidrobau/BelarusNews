@@ -33,10 +33,9 @@
     // Init view controllers
     MenuViewController *leftMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftMenuViewController"];
     self.mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewsTableView"];
-
-    //    LMRightMenuViewController *rightMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"rightMenuViewController"];
-        self.mainNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"mainNavigationController"];
-    //
+    self.mainNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"mainNavigationController"];
+    [self.mainNavigationController setViewControllers:@[leftMenuViewController, self.mainViewController] animated:YES];
+    [self.mainNavigationController setHidesBarsOnSwipe:YES];
     // Setup side bar controller
     [self setPanGestureEnabled:YES];
     [self setDelegate:self];
@@ -59,8 +58,9 @@
 
 - (void)sideBarController:(LMSideBarController *)sideBarController willHideMenuViewController:(UIViewController *)menuViewController {
 //    self.prefersStatusBarHidden = NO;
-//    [self.mainNavigationController setViewControllers:@[self.mainViewController] animated:YES];
-//    [self.mainViewController.tableView reloadData];
+    self.mainViewController.urlIdentificator = menuViewController.title;
+    [self.mainViewController viewDidLoad];
+    [self.mainViewController viewWillAppear:YES];
 }
 
 - (void)sideBarController:(LMSideBarController *)sideBarController didHideMenuViewController:(UIViewController *)menuViewController {

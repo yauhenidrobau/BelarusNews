@@ -13,5 +13,5 @@ typedef void(^UpdateDataCallback)(NSError *error);
 @interface DataManager : NSObject
 
 +(instancetype)sharedInstance;
--(void)updateDataWithURLArray:(NSDictionary *)dataDict WithCallBack:(UpdateDataCallback)completionHandler;
+-(void)updateDataWithURLArray:(NSString *)urlString AndTitle:(NSString *)title WithCallBack:(UpdateDataCallback)completionHandler;
 @end

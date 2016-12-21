@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^DataLoadCallback)(NSData * info,NSString *feedIdString, NSError* error);
+typedef void (^DataLoadCallback)(NSData * info, NSError* error);
 
 @interface RemoteFacade : NSObject
 
 +(instancetype)sharedInstance;
--(void)loadData:(NSDictionary *)dataDict callback:(DataLoadCallback)completion;
+-(void)loadData:(NSString *)urlString callback:(DataLoadCallback)completion;
 
 @end

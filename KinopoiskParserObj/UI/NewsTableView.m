@@ -17,9 +17,14 @@
 #import <UIKit/UIKit.h>
 #import <Reachability.h>
 #import <UIAlertController+Blocks.h>
-#import <NYSegmentedControl.h>
 #import "UIViewController+LMSideBarController.h"
 #import "Constants.h"
+
+#import "Masonry.h"
+#import "ZLDropDownMenuUICalc.h"
+#import "ZLDropDownMenuCollectionViewCell.h"
+#import "ZLDropDownMenu.h"
+#import "NSString+ZLStringSize.h"
 
 typedef void(^UpdateDataCallback)(NSError *error);
 typedef enum {
@@ -29,20 +34,19 @@ typedef enum {
     MtsByCategoryType = 3
 }CategoryTypes;
 
-@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate,NYSegmentedControlDataSource, LMSideBarControllerDelegate>
+@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate, LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
-@property (weak, nonatomic) IBOutlet NYSegmentedControl *NewsSegmentedControl;
+@property (weak, nonatomic) IBOutlet UIView *dropDownMenu;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @property (nonatomic) CGPoint lastContentOffset;
 @property (strong, nonatomic) NSOperationQueue * operationQueue;
-@property (strong, nonatomic) NSArray * urlArray;
-@property (strong, nonatomic) NSString * titleString;
+@property (strong, nonatomic) NSString *urlString;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
 @property (strong, nonatomic) NSArray *newsArray;
 @property (strong, nonatomic) NSDictionary *newsURLDict;
-@property (strong, nonatomic) NSArray *titlesArray;
+@property (strong, nonatomic) NSString *titlesString;
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
@@ -50,6 +54,8 @@ typedef enum {
 @property (nonatomic) BOOL isAlertShown;
 @property (nonatomic) BOOL isSearchStart;
 
+@property (nonatomic, strong) NSArray *mainTitleArray;
+@property (nonatomic, strong) NSArray *subTitleArray;
 @end
 
 @implementation NewsTableView
@@ -59,12 +65,13 @@ typedef enum {
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setAppierance];
-    [self setupAppearanceNewsSegmentedControl];
-    [self addPullToRefresh];
-    self.isAlertShown = NO;
-    self.operationQueue = [NSOperationQueue new];
-    self.urlIdentificator = @"TUT.BY";
+    _mainTitleArray = @[@"DEV.BY", @"TUT.BY", @"S13", @"MTS"];
+    _subTitleArray = @[
+                       @[],
+                       @[@"Main", @"Economic", @"Society", @"World",@"Culture",@"Accident",@"Finance",@"Realty",@"Sport",@"Auto",@"Lady",@"Science"],
+                       @[],
+                       @[]
+                       ];
     self.newsURLDict = @{@"DEV.BY": @[DEV_BY_NEWS],
                          @"TUT.BY": [NSDictionary dictionaryWithObjectsAndKeys:
                                      MAIN_NEWS,@"Main",
@@ -81,6 +88,15 @@ typedef enum {
                                      SCIENCE_NEWS,@"Science", nil],
                          @"YANDEX" : @[YANDEX_NEWS],
                          @"MTS" : @[MTS_BY_NEWS]};
+    
+    self.titlesString = _mainTitleArray[0];
+    self.urlString = self.newsURLDict[self.titlesString][0];
+    [self setAppierance];
+//    [self setupAppearanceNewsSegmentedControl];
+    [self addPullToRefresh];
+    self.isAlertShown = NO;
+    self.operationQueue = [NSOperationQueue new];
+    self.urlIdentificator = self.urlIdentificator.length? self.urlIdentificator : @"DEV.BY";
     [self setupData];
 
 }
@@ -89,12 +105,11 @@ typedef enum {
     [super viewWillAppear:animated];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
+    [self update];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [self updateDataWithIndicator:YES];
 }
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -103,44 +118,25 @@ typedef enum {
     self.timer = nil;
 }
 
--(NSArray *)urlArray {
-    if (!_urlArray.count) {
-        if (self.urlIdentificator.length) {
-            NSDictionary *dict = self.newsURLDict[self.urlIdentificator];
-            _urlArray = dict.allValues[self.NewsSegmentedControl.selectedSegmentIndex];
-        } else {
-        _urlArray = @[self.newsURLDict[@"TUT.BY"]];
-        }
-    }
-    return _urlArray;
-}
-
--(NSString *)titleString {
-    if (!_titleString.length) {
-        if (self.urlIdentificator.length) {
-            _titleString = self.urlIdentificator;
-        } else {
-            _titleString = @"TUT.BY";
-        }
-    }
-        return _titleString;
-}
-
--(NSArray *)titlesArray {
-    if (!_titlesArray.count) {
-        if (self.urlIdentificator.length) {
-            NSDictionary *dict = self.newsURLDict[self.urlIdentificator];
-            _titlesArray = dict.allKeys;
-        } else {
-            _titlesArray = @[self.newsURLDict[@"DEV.BY"]];
-        }
-    }
-    return _titlesArray;
-}
+//-(NSString *)urlString {
+//    
+//    return _urlString = [self getUrlFromDictionary];
+//}
+//
+//-(NSString *)titlesString {
+//    if (!_titlesString.length) {
+//        if (self.urlIdentificator.length) {
+//            _titlesString = [self getTitleFromNewsClass:self.newsURLDict[self.urlIdentificator]];
+//        } else {
+//            _titlesString = self.urlIdentificator;
+//        }
+//    }
+//    return _titlesString;
+//}
 #pragma mark - IBActions
 
 -(void)onRefreshBtnTouch {
-    [self updateDataWithIndicator:YES];
+    [self update];
 }
 
 -(void)pullToRefresh {
@@ -159,16 +155,16 @@ typedef enum {
     [self.navigationController setNavigationBarHidden:NO];
 }
 
--(IBAction)changeValueSC {
-//    if (isAllNewsLoaded) {
-//        <#statements#>
+//-(IBAction)changeValueSC {
+////    if (isAllNewsLoaded) {
+////        <#statements#>
+////    }
+//    if (self.newsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
+//        [self update];
+//    } else {
+//        [self setupData];
 //    }
-    if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
-        [self updateDataWithIndicator:YES];
-    } else {
-        [self setupData];
-    }
-}
+//}
 
 
 #pragma mark - UITableViewDataSource
@@ -281,26 +277,58 @@ typedef enum {
     return NO;
 }
 
-#pragma mark - NYSegmentedControlDataSource
+//#pragma mark - NYSegmentedControlDataSource
+//
+//- (NSUInteger) numberOfSegmentsOfControl:(NYSegmentedControl *)control {
+//    if ([self.newsURLDict[_urlIdentificator] isKindOfClass:[NSArray class]]) {
+//        return 1;
+//    } else {
+//        NSDictionary *dict = self.newsURLDict[_urlIdentificator];
+//        return dict.allKeys.count;
+////        return [self.newsURLDict[_urlIdentificator];
+//    }
+//    return self.newsURLDict.allKeys.count;
+//}
+//- (NSString *) segmentedControl:(NYSegmentedControl *)control titleAtIndex:(NSInteger)index {
+//    if ([self.newsURLDict[_urlIdentificator] isKindOfClass:[NSArray class]]) {
+//        return @"All News";
+//    } else {
+//        NSDictionary *dict = self.newsURLDict[_urlIdentificator];
+//        return dict.allKeys[index];
+//    }
+//    return @"";
+//}
 
-- (NSUInteger) numberOfSegmentsOfControl:(NYSegmentedControl *)control {
-    if ([self.newsURLDict[_urlIdentificator] isKindOfClass:[NSArray class]]) {
-        return 1;
-    } else {
-        NSDictionary *dict = self.newsURLDict[_urlIdentificator];
-        return dict.allKeys.count;
-//        return [self.newsURLDict[_urlIdentificator];
-    }
-    return self.newsURLDict.allKeys.count;
+#pragma mark - ZLDropDownMenuDataSource
+
+- (NSInteger)numberOfColumnsInMenu:(ZLDropDownMenu *)menu {
+    return self.mainTitleArray.count;
 }
-- (NSString *) segmentedControl:(NYSegmentedControl *)control titleAtIndex:(NSInteger)index {
-    if ([self.newsURLDict[_urlIdentificator] isKindOfClass:[NSArray class]]) {
-        return @"All News";
-    } else {
-        NSDictionary *dict = self.newsURLDict[_urlIdentificator];
-        return dict.allKeys[index];
-    }
+
+- (NSInteger)menu:(ZLDropDownMenu *)menu numberOfRowsInColumns:(NSInteger)column {
+    return [self.subTitleArray[column] count];
+}
+
+- (NSString *)menu:(ZLDropDownMenu *)menu titleForColumn:(NSInteger)column {
+    return self.mainTitleArray[column];
+}
+
+- (NSString *)menu:(ZLDropDownMenu *)menu titleForRowAtIndexPath:(ZLIndexPath *)indexPath {
+    NSArray *array = self.subTitleArray[indexPath.column];
+    if (array.count) {
+       return array[indexPath.row];
+    } else
     return @"";
+}
+
+#pragma mark - ZLDropDownMenuDelegate
+- (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
+    NSArray *array = self.subTitleArray[indexPath.column];
+    NSLog(@"%@", array[indexPath.row]);
+    self.titlesString = array[indexPath.row];
+    self.urlString = self.newsURLDict[self.titlesString];
+    NSLog(@"%@ : %@", self.titlesString,self.urlString);
+
 }
 
 #pragma mark - UISearchBarDelegate
@@ -342,7 +370,7 @@ typedef enum {
 }
 
 -(void)timerActionRefresh {
-    [self updateDataWithIndicator:YES];
+    [self update];
 }
 -(void)setAppierance {
     // auto re-sizing cell
@@ -358,6 +386,23 @@ typedef enum {
     [self.navigationItem.titleView setTintColor:[UIColor whiteColor]];
     UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
     self.navigationItem.rightBarButtonItem = refreshBtn;
+    
+//    self.newsSegmentedControl.delegate = self;
+//    self.newsSegmentedControl.dataSource = self;
+//    self.newsSegmentedControl.bounds = CGRectMake(0, 0, deviceWidth(), 50.f);
+//    
+//    self.tableView.tableHeaderView = self.newsSegmentedControl;
+    ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] init];
+    menu.bounds = CGRectMake(0, 0, deviceWidth(), 50);
+    menu.delegate = self;
+    menu.dataSource = self;
+    self.tableView.tableHeaderView = menu;
+    //    [self.newsSegmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(topView.mas_bottom);
+//        make.left.right.equalTo(self.view);
+//        make.height.mas_equalTo(50);
+//    }];
+    
 }
 
 -(void)setupData{
@@ -369,7 +414,7 @@ typedef enum {
 //        self.newsArray = [self sortNewsArray:resultsArray];
 //        NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
 //    } else {
-        RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesArray[self.NewsSegmentedControl.selectedSegmentIndex]];
+        RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesString];
         NSArray *allResultsArray = [self RLMResultsToArray:results];
 
         self.newsArray = [self sortNewsArray:allResultsArray];
@@ -427,6 +472,9 @@ typedef enum {
     }
 }
 
+-(void)update {
+    [self updateDataWithIndicator:YES];
+}
 -(void)updateDataWithIndicator:(BOOL)showIndicator {
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -444,10 +492,10 @@ typedef enum {
             } else {
                 [self showLoadingIndicator:showIndicator];
                 self.isAlertShown = NO;
-                self.urlArray = @[];
-                self.titleString = @"";
-                self.titlesArray = @[];
-                [[DataManager sharedInstance ] updateDataWithURLArray:self.newsURLDict[_urlIdentificator] WithCallBack:^(NSError *error) {
+                
+//                NSString *urlString = [self.newsURLDict[_urlIdentificator] isKindOfClass:[NSArray class]]? s
+                
+                [[DataManager sharedInstance ] updateDataWithURLArray:self.urlString AndTitle:self.titlesString WithCallBack:^(NSError *error) {
                     __weak typeof(self) wself = self;
 
                     [networkReachability stopNotifier];
@@ -465,23 +513,43 @@ typedef enum {
     });
 }
 
--(void)setupAppearanceNewsSegmentedControl {
-    [self.NewsSegmentedControl layoutIfNeeded];
-    UIColor *mainColor = [UIColor colorWithRed:253. / 255. green:253. /255. blue:253. / 255. alpha:1.0];
-    self.NewsSegmentedControl.borderWidth = 0.5f;
-    self.NewsSegmentedControl.borderColor = [UIColor colorWithWhite:227./255. alpha:1.0f];
-    self.NewsSegmentedControl.backgroundColor = [UIColor colorWithRed:235./255. green:236./255. blue:239./255. alpha:1.0f];
-//    self.NewsSegmentedControl.layer.cornerRadius = self.NewsSegmentedControl.frame.size.height / 2;
-    self.NewsSegmentedControl.cornerRadius = self.NewsSegmentedControl.frame.size.height / 2;
-    self.NewsSegmentedControl.drawsGradientBackground = NO;
-    self.NewsSegmentedControl.drawsSegmentIndicatorGradientBackground = YES;
-    self.NewsSegmentedControl.segmentIndicatorGradientTopColor = mainColor;
-    self.NewsSegmentedControl.segmentIndicatorGradientBottomColor = mainColor;
-    self.NewsSegmentedControl.segmentIndicatorAnimationDuration = 0.3f;
-    self.NewsSegmentedControl.segmentIndicatorBorderWidth = 0.0f;
-    self.NewsSegmentedControl.selectedTitleTextColor = [UIColor colorWithRed:9. / 255. green:171. /255. blue:225. / 255. alpha:1.0];
-    self.NewsSegmentedControl.titleTextColor = [UIColor colorWithRed:98. / 255. green:128. /255. blue:142. / 255. alpha:1.0];
-    self.NewsSegmentedControl.dataSource = self;
-    [self.NewsSegmentedControl addTarget:self action:@selector(changeValueSC) forControlEvents:UIControlEventValueChanged];
-}
+//-(void)setupAppearanceNewsSegmentedControl {
+//    [self.NewsSegmentedControl layoutIfNeeded];
+//    UIColor *mainColor = [UIColor colorWithRed:253. / 255. green:253. /255. blue:253. / 255. alpha:1.0];
+//    self.NewsSegmentedControl.borderWidth = 0.5f;
+//    self.NewsSegmentedControl.borderColor = [UIColor colorWithWhite:227./255. alpha:1.0f];
+//    self.NewsSegmentedControl.backgroundColor = [UIColor colorWithRed:235./255. green:236./255. blue:239./255. alpha:1.0f];
+////    self.NewsSegmentedControl.layer.cornerRadius = self.NewsSegmentedControl.frame.size.height / 2;
+//    self.NewsSegmentedControl.cornerRadius = self.NewsSegmentedControl.frame.size.height / 2;
+//    self.NewsSegmentedControl.drawsGradientBackground = NO;
+//    self.NewsSegmentedControl.drawsSegmentIndicatorGradientBackground = YES;
+//    self.NewsSegmentedControl.segmentIndicatorGradientTopColor = mainColor;
+//    self.NewsSegmentedControl.segmentIndicatorGradientBottomColor = mainColor;
+//    self.NewsSegmentedControl.segmentIndicatorAnimationDuration = 0.3f;
+//    self.NewsSegmentedControl.segmentIndicatorBorderWidth = 0.0f;
+//    self.NewsSegmentedControl.selectedTitleTextColor = [UIColor colorWithRed:9. / 255. green:171. /255. blue:225. / 255. alpha:1.0];
+//    self.NewsSegmentedControl.titleTextColor = [UIColor colorWithRed:98. / 255. green:128. /255. blue:142. / 255. alpha:1.0];
+//    self.NewsSegmentedControl.dataSource = self;
+//    [self.NewsSegmentedControl addTarget:self action:@selector(changeValueSC) forControlEvents:UIControlEventValueChanged];
+//}
+
+//-(NSString *)getTitleFromNewsClass:(id)news{
+//    NSDictionary *dict = self.newsURLDict[self.urlIdentificator];
+//
+//    if ([news isKindOfClass:[NSArray class]]) {
+////        NSArray *temp = self.newsURLDict[self.urlIdentificator];
+//        return self.urlIdentificator;
+//    } else
+//       return dict.allKeys[self.NewsSegmentedControl.selectedSegmentIndex];
+//}
+//
+//-(NSString *)getUrlFromDictionary {
+//    NSDictionary *dict = self.newsURLDict[self.urlIdentificator];
+//    
+//    if ([dict isKindOfClass:[NSArray class]]) {
+//        NSArray *temp = self.newsURLDict[self.urlIdentificator];
+//        return temp[0];
+//    } else
+//        return dict.allValues[self.NewsSegmentedControl.selectedSegmentIndex];
+//}
 @end

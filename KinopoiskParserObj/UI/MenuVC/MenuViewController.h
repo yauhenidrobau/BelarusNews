@@ -19,4 +19,6 @@ typedef enum {
 
 @interface MenuViewController : LMSideBarController <LMSideBarControllerDelegate>
 
+@property (strong, nonatomic) NSString *titleString;
+
 @end
