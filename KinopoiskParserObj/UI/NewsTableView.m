@@ -37,7 +37,6 @@ typedef enum {
 @interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate, LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
-@property (weak, nonatomic) IBOutlet UIView *dropDownMenu;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @property (nonatomic) CGPoint lastContentOffset;
@@ -67,10 +66,10 @@ typedef enum {
     
     _mainTitleArray = @[@"DEV.BY", @"TUT.BY", @"S13", @"MTS"];
     _subTitleArray = @[
-                       @[],
+                       @[@"All News"],
                        @[@"Main", @"Economic", @"Society", @"World",@"Culture",@"Accident",@"Finance",@"Realty",@"Sport",@"Auto",@"Lady",@"Science"],
-                       @[],
-                       @[]
+                       @[@"All News"],
+                       @[@"All News"]
                        ];
     self.newsURLDict = @{@"DEV.BY": @[DEV_BY_NEWS],
                          @"TUT.BY": [NSDictionary dictionaryWithObjectsAndKeys:
@@ -88,6 +87,12 @@ typedef enum {
                                      SCIENCE_NEWS,@"Science", nil],
                          @"YANDEX" : @[YANDEX_NEWS],
                          @"MTS" : @[MTS_BY_NEWS]};
+    ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] init];
+    menu.bounds = CGRectMake(0, 0, deviceWidth(), 50);
+    menu.dataSource = self;
+    menu.delegate = self;
+
+    self.tableView.tableHeaderView = menu;
     
     self.titlesString = _mainTitleArray[0];
     self.urlString = self.newsURLDict[self.titlesString][0];
@@ -204,6 +209,7 @@ typedef enum {
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *view = [[UIView alloc]initWithFrame:self.scrollButton.frame];
     view.alpha = 0;
+    view.backgroundColor = [UIColor clearColor];
     return view;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -306,7 +312,9 @@ typedef enum {
 }
 
 - (NSInteger)menu:(ZLDropDownMenu *)menu numberOfRowsInColumns:(NSInteger)column {
-    return [self.subTitleArray[column] count];
+    
+    return ((NSArray*)self.subTitleArray[column]).count;
+//    self.subTitleArray[column].count;
 }
 
 - (NSString *)menu:(ZLDropDownMenu *)menu titleForColumn:(NSInteger)column {
@@ -325,9 +333,10 @@ typedef enum {
 - (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
     NSArray *array = self.subTitleArray[indexPath.column];
     NSLog(@"%@", array[indexPath.row]);
-    self.titlesString = array[indexPath.row];
+    self.titlesString = array.count? array[indexPath.row] : self.mainTitleArray[indexPath.column];
     self.urlString = self.newsURLDict[self.titlesString];
     NSLog(@"%@ : %@", self.titlesString,self.urlString);
+    [self updateDataWithIndicator:YES];
 
 }
 
@@ -392,11 +401,7 @@ typedef enum {
 //    self.newsSegmentedControl.bounds = CGRectMake(0, 0, deviceWidth(), 50.f);
 //    
 //    self.tableView.tableHeaderView = self.newsSegmentedControl;
-    ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] init];
-    menu.bounds = CGRectMake(0, 0, deviceWidth(), 50);
-    menu.delegate = self;
-    menu.dataSource = self;
-    self.tableView.tableHeaderView = menu;
+    
     //    [self.newsSegmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(topView.mas_bottom);
 //        make.left.right.equalTo(self.view);

@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[NewsTableView menu:numberOfRowsInColumns:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "((NSArray*)self.subTitleArray[column]).count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
@@ -254,6 +262,9 @@
       <ContextState
          contextName = "-[NewsTableView menu:titleForRowAtIndexPath:]:NewsTableView.m">
          <PersistentStrings>
+            <PersistentString
+               value = "array[indexPath.row]">
+            </PersistentString>
             <PersistentString
                value = "indexPath.row">
             </PersistentString>

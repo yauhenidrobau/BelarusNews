@@ -36,6 +36,7 @@
     self.mainNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"mainNavigationController"];
     [self.mainNavigationController setViewControllers:@[leftMenuViewController, self.mainViewController] animated:YES];
     [self.mainNavigationController setHidesBarsOnSwipe:YES];
+    self.mainViewController.title = @"sdfdsfdsdsfd";
     // Setup side bar controller
     [self setPanGestureEnabled:YES];
     [self setDelegate:self];
