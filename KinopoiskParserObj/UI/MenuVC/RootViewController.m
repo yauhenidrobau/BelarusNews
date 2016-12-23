@@ -35,8 +35,7 @@
     self.mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewsTableView"];
     self.mainNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"mainNavigationController"];
     [self.mainNavigationController setViewControllers:@[leftMenuViewController, self.mainViewController] animated:YES];
-    [self.mainNavigationController setHidesBarsOnSwipe:YES];
-    self.mainViewController.title = @"sdfdsfdsdsfd";
+    self.mainViewController.title = @"All News";
     // Setup side bar controller
     [self setPanGestureEnabled:YES];
     [self setDelegate:self];

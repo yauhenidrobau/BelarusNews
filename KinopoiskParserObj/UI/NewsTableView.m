@@ -39,6 +39,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
+@property (weak, nonatomic) IBOutlet UIView *menuView;
 @property (nonatomic) CGPoint lastContentOffset;
 @property (strong, nonatomic) NSOperationQueue * operationQueue;
 @property (strong, nonatomic) NSString *urlString;
@@ -87,12 +88,12 @@ typedef enum {
                                      SCIENCE_NEWS,@"Science", nil],
                          @"YANDEX" : @[YANDEX_NEWS],
                          @"MTS" : @[MTS_BY_NEWS]};
+    
     ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] init];
     menu.bounds = CGRectMake(0, 0, deviceWidth(), 50);
-    menu.dataSource = self;
     menu.delegate = self;
-
-    self.tableView.tableHeaderView = menu;
+    menu.dataSource = self;
+    self.menuView = menu;
     
     self.titlesString = _mainTitleArray[0];
     self.urlString = self.newsURLDict[self.titlesString][0];
@@ -109,6 +110,7 @@ typedef enum {
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self.navigationItem setTitle:@""];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
     [self update];
 }
@@ -212,6 +214,7 @@ typedef enum {
     view.backgroundColor = [UIColor clearColor];
     return view;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -222,7 +225,7 @@ typedef enum {
         DetailsViewController *vc = segue.destinationViewController;
         NewsEntity *newsEntity = self.searchResults[[self.tableView indexPathForCell:cell].row]? self.searchResults[[self.tableView indexPathForCell:cell].row] : self.newsArray[[self.tableView indexPathForCell:cell].row];
         vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
-        [vc.navigationItem setTitle:self.newsURLDict.allKeys[[self.tableView indexPathForCell:cell].row]];
+        [vc.navigationItem setTitle:self.mainTitleArray[[self.tableView indexPathForCell:cell].row]];
     }
 }
 
@@ -332,9 +335,15 @@ typedef enum {
 #pragma mark - ZLDropDownMenuDelegate
 - (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
     NSArray *array = self.subTitleArray[indexPath.column];
-    NSLog(@"%@", array[indexPath.row]);
-    self.titlesString = array.count? array[indexPath.row] : self.mainTitleArray[indexPath.column];
-    self.urlString = self.newsURLDict[self.titlesString];
+//    NSLog(@"%@", array[indexPath.row]);
+    if (array.count == 1) {
+        self.titlesString = self.mainTitleArray[indexPath.column];
+        self.urlString = self.newsURLDict[self.titlesString];
+    } else {
+    self.titlesString = array[indexPath.row];
+    NSDictionary *dict = self.newsURLDict[self.mainTitleArray[indexPath.column]];
+    self.urlString = dict[self.titlesString];
+    }
     NSLog(@"%@ : %@", self.titlesString,self.urlString);
     [self updateDataWithIndicator:YES];
 
@@ -350,11 +359,14 @@ typedef enum {
         [[SearchManager sharedInstance]updateSearchResults:self.searchBar.text forArray:self.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
             wself.searchResults = searchResults;
             [wself showLoadingIndicator:NO];
+            NSLog(@"Get SEARCH");
+
             [wself.tableView reloadData];
         }];
     } else {
         self.isSearchStart = NO;
         [self setupData];
+        NSLog(@"Get from DataBase");
     }
 }
 
@@ -461,7 +473,7 @@ typedef enum {
 
 -(void)showAlertController {
     if (!self.isAlertShown) {
-        [self showLoadingIndicator:YES];
+//        [self showLoadingIndicator:YES];
         __weak typeof(self) wself = self;
         [UIAlertController  showAlertInViewController:self
                                             withTitle:NSLocalizedString(@"We have problems", nil)
@@ -481,7 +493,8 @@ typedef enum {
     [self updateDataWithIndicator:YES];
 }
 -(void)updateDataWithIndicator:(BOOL)showIndicator {
-    
+    [self showLoadingIndicator:showIndicator];
+
     dispatch_async(dispatch_get_main_queue(), ^{
 
         Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
@@ -495,7 +508,6 @@ typedef enum {
                 [self showAlertController];
 //                [self setupData];
             } else {
-                [self showLoadingIndicator:showIndicator];
                 self.isAlertShown = NO;
                 
 //                NSString *urlString = [self.newsURLDict[_urlIdentificator] isKindOfClass:[NSArray class]]? s
