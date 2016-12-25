@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pubDateLabel;
-
+@property (strong,nonatomic) NSString *newsLink;
 @end
 
 @implementation NewsTableViewCell
@@ -24,11 +24,15 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.textLabel.textColor = [UIColor whiteColor];
+//    self.userDefaults = [NSUserDefaults standardUserDefaults];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
+
+
 
 -(void)cellForNews:(NewsEntity *)entity{
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
@@ -45,7 +49,7 @@
         self.pubDateLabel.text =[formatter stringFromDate:entity.pubDateFeed];
 
     }
-
+    self.newsLink = entity.linkFeed;
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
                  placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.feedIdString]]];
 }

@@ -11,10 +11,35 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[NewsTableView menu:didSelectRowAtIndexPath:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.titlesString">
+            </PersistentString>
+            <PersistentString
+               value = "self.urlString">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.urlString">
+            </PersistentString>
+            <PersistentString
+               value = "self.titlesString">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[NewsTableView setupData]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
                value = "newsArray">
+            </PersistentString>
+            <PersistentString
+               value = "self.titlesString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -47,18 +72,18 @@
          contextName = "-[NewsTableView awakeFromNib]:NewsTableView.m">
       </ContextState>
       <ContextState
-         contextName = "-[DetailsViewController viewWillAppear:]:DetailsViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_newsUrl">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "__27-[NewsTableView updateData]_block_invoke_2:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
                value = "networkStatus">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DetailsViewController viewWillAppear:]:DetailsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_newsUrl">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

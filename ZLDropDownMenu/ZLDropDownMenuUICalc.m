@@ -33,7 +33,7 @@
     static ZLDROPDOWNMENU_MENU_UI_VALUE menuUIValue;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        menuUIValue.ANIMATION_DURATION = 0.5f;
+        menuUIValue.ANIMATION_DURATION = 0.2f;
         _menuUIValue = &menuUIValue;
     });
     return _menuUIValue;

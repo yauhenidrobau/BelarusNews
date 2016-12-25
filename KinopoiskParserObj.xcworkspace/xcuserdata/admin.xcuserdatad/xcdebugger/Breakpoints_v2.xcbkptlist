@@ -405,6 +405,54 @@
             endingLineNumber = "34"
             landmarkName = "-updateSearchResults:forArray:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__61-[SearchManager updateSearchResults:forArray:withCompletion:]_block_invoke"
+                  moduleName = "KinopoiskParserObj"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/Model/Persistance/SearchManager.m"
+                  timestampString = "504385123.449302"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__61-[SearchManager updateSearchResults:forArray:withCompletion:]_block_invoke_2"
+                  moduleName = "KinopoiskParserObj"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/Model/Persistance/SearchManager.m"
+                  timestampString = "504385123.457766"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "15">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KinopoiskParserObj/Model/Persistance/DataManager.m"
+            timestampString = "503963847.793563"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "-updateDataWithURLArray:AndTitle:WithCallBack:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -414,42 +462,170 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KinopoiskParserObj/UI/NewsTableView.m"
-            timestampString = "503444929.869406"
+            timestampString = "504382609.210702"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
-            landmarkName = "-urlArray"
+            startingLineNumber = "502"
+            endingLineNumber = "502"
+            landmarkName = "-updateDataWithIndicator:"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[NewsTableView searchBar:textDidChange:]"
+                  symbolName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke"
                   moduleName = "KinopoiskParserObj"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/UI/NewsTableView.m"
-                  timestampString = "503878858.70423"
+                  timestampString = "504385123.488921"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "305"
-                  endingLineNumber = "305"
-                  offsetFromSymbolStart = "173">
+                  startingLineNumber = "502"
+                  endingLineNumber = "502"
+                  offsetFromSymbolStart = "209">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__41-[NewsTableView searchBar:textDidChange:]_block_invoke"
+                  symbolName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke_2"
                   moduleName = "KinopoiskParserObj"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/UI/NewsTableView.m"
-                  timestampString = "503878858.717443"
+                  timestampString = "504385123.497936"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "305"
-                  endingLineNumber = "305"
+                  startingLineNumber = "502"
+                  endingLineNumber = "502"
+                  offsetFromSymbolStart = "15">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KinopoiskParserObj/UI/NewsTableView.m"
+            timestampString = "504382609.210702"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
+            landmarkName = "-menu:didSelectRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KinopoiskParserObj/UI/NewsTableView.m"
+            timestampString = "504382609.210702"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "507"
+            endingLineNumber = "507"
+            landmarkName = "-updateDataWithIndicator:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KinopoiskParserObj/Model/Persistance/DataManager.m"
+            timestampString = "504219142.442091"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "-updateDataWithURLArray:AndTitle:WithCallBack:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[DataManager updateDataWithURLArray:AndTitle:WithCallBack:]"
+                  moduleName = "KinopoiskParserObj"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/Model/Persistance/DataManager.m"
+                  timestampString = "504385123.569457"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__60-[DataManager updateDataWithURLArray:AndTitle:WithCallBack:]_block_invoke"
+                  moduleName = "KinopoiskParserObj"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/Model/Persistance/DataManager.m"
+                  timestampString = "504385123.579096"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "78">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KinopoiskParserObj/Model/Persistance/DataManager.m"
+            timestampString = "504219149.453603"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "-updateDataWithURLArray:AndTitle:WithCallBack:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__60-[DataManager updateDataWithURLArray:AndTitle:WithCallBack:]_block_invoke"
+                  moduleName = "KinopoiskParserObj"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/Model/Persistance/DataManager.m"
+                  timestampString = "504385123.594437"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "109">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__60-[DataManager updateDataWithURLArray:AndTitle:WithCallBack:]_block_invoke_2"
+                  moduleName = "KinopoiskParserObj"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/Model/Persistance/DataManager.m"
+                  timestampString = "504385123.603136"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
                   offsetFromSymbolStart = "16">
                </Location>
             </Locations>
@@ -461,13 +637,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KinopoiskParserObj/Model/Persistance/RealmDataManager.m"
-            timestampString = "503445674.074111"
+            filePath = "KinopoiskParserObj/Model/Persistance/DataManager.m"
+            timestampString = "504219150.42067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "-saveNews:withServiceArray:"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "-updateDataWithURLArray:AndTitle:WithCallBack:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -477,13 +653,93 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KinopoiskParserObj/Model/XML/XMLParser.m"
-            timestampString = "503877514.863304"
+            filePath = "KinopoiskParserObj/Model/Persistance/RemoteFacade.m"
+            timestampString = "504219553.308477"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "-parser:didEndElement:namespaceURI:qualifiedName:"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-loadData:callback:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KinopoiskParserObj/Model/Persistance/RemoteFacade.m"
+            timestampString = "504219553.308477"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "-loadData:callback:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KinopoiskParserObj/Model/Persistance/RemoteFacade.m"
+            timestampString = "504219553.308477"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-loadData:callback:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[RemoteFacade loadData:callback:]"
+                  moduleName = "KinopoiskParserObj"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/Model/Persistance/RemoteFacade.m"
+                  timestampString = "504385123.667325"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "360">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__34-[RemoteFacade loadData:callback:]_block_invoke"
+                  moduleName = "KinopoiskParserObj"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/Model/Persistance/RemoteFacade.m"
+                  timestampString = "504385123.676388"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KinopoiskParserObj/UI/NewsTableView.m"
+            timestampString = "504382609.210702"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
+            landmarkName = "-setupData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -494,12 +750,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KinopoiskParserObj/UI/NewsTableView.m"
-            timestampString = "503883145.980306"
+            timestampString = "504382609.210702"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "-urlArray"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
+            landmarkName = "-menu:didSelectRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KinopoiskParserObj/Model/XML/XMLParser.m"
+            timestampString = "504219960.272659"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "-parser:didStartElement:namespaceURI:qualifiedName:attributes:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KinopoiskParserObj/Model/XML/XMLParser.m"
+            timestampString = "504219968.937655"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "-parser:didEndElement:namespaceURI:qualifiedName:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

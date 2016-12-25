@@ -39,7 +39,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
-@property (weak, nonatomic) IBOutlet UIView *menuView;
+@property (weak, nonatomic) IBOutlet ZLDropDownMenu *menuView;
 @property (nonatomic) CGPoint lastContentOffset;
 @property (strong, nonatomic) NSOperationQueue * operationQueue;
 @property (strong, nonatomic) NSString *urlString;
@@ -65,10 +65,10 @@ typedef enum {
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    _mainTitleArray = @[@"DEV.BY", @"TUT.BY", @"S13", @"MTS"];
+    _mainTitleArray = @[@"TUT.BY",@"DEV.BY", @"PRAVO.BY", @"MTS"];
     _subTitleArray = @[
-                       @[@"All News"],
                        @[@"Main", @"Economic", @"Society", @"World",@"Culture",@"Accident",@"Finance",@"Realty",@"Sport",@"Auto",@"Lady",@"Science"],
+                       @[@"All News"],
                        @[@"All News"],
                        @[@"All News"]
                        ];
@@ -86,17 +86,19 @@ typedef enum {
                                      AUTO_NEWS,@"Auto",
                                      LADY_NEWS,@"Lady",
                                      SCIENCE_NEWS,@"Science", nil],
+                         @"PRAVO.BY" : @[PRAVO_NEWS],
                          @"YANDEX" : @[YANDEX_NEWS],
                          @"MTS" : @[MTS_BY_NEWS]};
-    
+
     ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] init];
     menu.bounds = CGRectMake(0, 0, deviceWidth(), 50);
     menu.delegate = self;
     menu.dataSource = self;
-    self.menuView = menu;
+    self.tableView.tableHeaderView = menu;
+//    self.menuView = menu;
     
-    self.titlesString = _mainTitleArray[0];
-    self.urlString = self.newsURLDict[self.titlesString][0];
+    self.titlesString = self.mainTitleArray[0];
+    self.urlString = MAIN_NEWS;
     [self setAppierance];
 //    [self setupAppearanceNewsSegmentedControl];
     [self addPullToRefresh];
@@ -125,25 +127,22 @@ typedef enum {
     self.timer = nil;
 }
 
-//-(NSString *)urlString {
-//    
-//    return _urlString = [self getUrlFromDictionary];
-//}
-//
-//-(NSString *)titlesString {
-//    if (!_titlesString.length) {
-//        if (self.urlIdentificator.length) {
-//            _titlesString = [self getTitleFromNewsClass:self.newsURLDict[self.urlIdentificator]];
-//        } else {
-//            _titlesString = self.urlIdentificator;
-//        }
-//    }
-//    return _titlesString;
-//}
 #pragma mark - IBActions
 
 -(void)onRefreshBtnTouch {
     [self update];
+}
+
+-(void)onFavoriteBtnTouch:(id)sender {
+    NewsEntity * entity = [NewsEntity new];
+    entity.titleFeed = self.titleLabel.text;
+    entity.descriptionFeed = self.descriptionLabel.text;
+    entity.urlImage = self.imageNewsView.image;
+    entity.linkFeed = self.newsLink;
+    self.favoriteButton.imageView.image = nil;
+    //     setImage:[UIImage imageNamed:@"YANDEX"]];
+    //    [self layoutIfNeeded];
+    //    [userDefaults setObject:entity forKey:@""];
 }
 
 -(void)pullToRefresh {
@@ -192,6 +191,8 @@ typedef enum {
    
     NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     NewsEntity *newsEntity = nil;
+    cell.favoriteButton.tag = indexPath.row;
+    [cell.favoriteButton addTarget:self action:@selector(onFavoriteBtnTouch:) forControlEvents:UIControlEventTouchUpInside];
     if (self.isSearchStart) {
         newsEntity = self.searchResults.count? self.searchResults[indexPath.row] : self.newsArray[indexPath.row];
     } else {
@@ -317,7 +318,6 @@ typedef enum {
 - (NSInteger)menu:(ZLDropDownMenu *)menu numberOfRowsInColumns:(NSInteger)column {
     
     return ((NSArray*)self.subTitleArray[column]).count;
-//    self.subTitleArray[column].count;
 }
 
 - (NSString *)menu:(ZLDropDownMenu *)menu titleForColumn:(NSInteger)column {
@@ -338,7 +338,7 @@ typedef enum {
 //    NSLog(@"%@", array[indexPath.row]);
     if (array.count == 1) {
         self.titlesString = self.mainTitleArray[indexPath.column];
-        self.urlString = self.newsURLDict[self.titlesString];
+        self.urlString = self.newsURLDict[self.titlesString][0];
     } else {
     self.titlesString = array[indexPath.row];
     NSDictionary *dict = self.newsURLDict[self.mainTitleArray[indexPath.column]];
@@ -403,7 +403,6 @@ typedef enum {
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
     
-    [self.navigationController setHidesBarsOnSwipe:YES];
     [self.navigationItem.titleView setTintColor:[UIColor whiteColor]];
     UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
     self.navigationItem.rightBarButtonItem = refreshBtn;

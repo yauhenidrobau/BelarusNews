@@ -37,7 +37,7 @@ NSMutableString * tempString;
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName attributes:(NSDictionary<NSString *, NSString *> *)attributeDict {
     currentElement = elementName;
-    if ([elementName isEqualToString:@"item"]) {
+    if ([elementName isEqualToString:@"item"] || [elementName isEqualToString:@"atom"]) {
         
         currentDataDictionary = [[NSMutableDictionary<NSString *, NSString *> alloc]init];
         titleFeed = [[NSMutableString alloc]initWithString:@""];
@@ -54,7 +54,7 @@ NSMutableString * tempString;
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName{
     //save data
-    if ([elementName isEqualToString:@"item"]) {
+    if ([elementName isEqualToString:@"item"] || [elementName isEqualToString:@"atom"]) {
         if (titleFeed.length) {
             titleFeed.string = [titleFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             [currentDataDictionary  setObject:titleFeed forKey:@"title"];

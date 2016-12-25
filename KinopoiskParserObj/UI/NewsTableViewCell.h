@@ -11,6 +11,8 @@
 
 @interface NewsTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
+
 -(void)cellForNews:(NewsEntity *)entity;
 
 @end

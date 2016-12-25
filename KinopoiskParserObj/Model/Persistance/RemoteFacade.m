@@ -29,6 +29,13 @@ typedef void(^DataLoadCallback)(NSData *info, NSError* error);
 
 SINGLETON(RemoteFacade)
 
+-(instancetype)init {
+    self = [super init];
+    if (self) {
+        self.operationQueue = [NSOperationQueue new];
+    }
+    return self;
+}
 -(void)loadData:(NSString *)urlString callback:(DataLoadCallback)completion {
     // load data
 #warning AFNetworking - очень рекомендую разобраться
@@ -50,7 +57,7 @@ SINGLETON(RemoteFacade)
     
      // Second variant
     
-    self.operationQueue = [NSOperationQueue new];
+    [self.operationQueue cancelAllOperations];
     [self.operationQueue setMaxConcurrentOperationCount:1];
     
 //    if ([urlArray isKindOfClass:[NSArray class]]) {
