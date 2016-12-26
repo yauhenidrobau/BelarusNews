@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 
 -(void)cellForNews:(NewsEntity *)entity;
+-(void)saveFavoriteNews:(NewsEntity*)entity;
 
 @end

@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pubDateLabel;
-@property (strong,nonatomic) NSString *newsLink;
+
 @end
 
 @implementation NewsTableViewCell
@@ -32,9 +32,12 @@
     [super setSelected:selected animated:animated];
 }
 
+-(void)saveFavoriteNews:(NewsEntity*)entity {
+    
+    self.favoriteButton.imageView.image = nil;
+}
 
-
--(void)cellForNews:(NewsEntity *)entity{
+-(void)cellForNews:(NewsEntity *)entity {
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     self.titleLabel.text = entity.titleFeed;
     self.descriptionLabel.text = entity.descriptionFeed;
@@ -46,10 +49,9 @@
         
     } else {
         [formatter setDateFormat:@"d MMM HH:mm:ss"];
-        self.pubDateLabel.text =[formatter stringFromDate:entity.pubDateFeed];
+        self.pubDateLabel.text = [formatter stringFromDate:entity.pubDateFeed];
 
     }
-    self.newsLink = entity.linkFeed;
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
                  placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.feedIdString]]];
 }

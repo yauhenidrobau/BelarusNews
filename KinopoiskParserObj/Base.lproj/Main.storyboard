@@ -207,9 +207,6 @@
                                                         <constraint firstAttribute="height" constant="20" id="mwZ-pE-zXq"/>
                                                     </constraints>
                                                     <state key="normal" image="icon-favorites"/>
-                                                    <connections>
-                                                        <action selector="onFavoriteBtnTouch:" destination="u5u-px-kF3" eventType="touchUpInside" id="Gml-tR-iGM"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

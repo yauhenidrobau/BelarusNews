@@ -51,6 +51,8 @@ typedef enum {
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+
 @property (nonatomic) BOOL isAlertShown;
 @property (nonatomic) BOOL isSearchStart;
 
@@ -96,7 +98,7 @@ typedef enum {
     menu.dataSource = self;
     self.tableView.tableHeaderView = menu;
 //    self.menuView = menu;
-    
+    self.userDefaults = [NSUserDefaults standardUserDefaults];
     self.titlesString = self.mainTitleArray[0];
     self.urlString = MAIN_NEWS;
     [self setAppierance];
@@ -133,13 +135,33 @@ typedef enum {
     [self update];
 }
 
--(void)onFavoriteBtnTouch:(id)sender {
-    NewsEntity * entity = [NewsEntity new];
-    entity.titleFeed = self.titleLabel.text;
-    entity.descriptionFeed = self.descriptionLabel.text;
-    entity.urlImage = self.imageNewsView.image;
-    entity.linkFeed = self.newsLink;
-    self.favoriteButton.imageView.image = nil;
+-(void)onFavoriteBtnTouch:(UIButton *)sender {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
+    NewsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setValue:entity.titleFeed forKey:@"titleFeed"];
+    [dict setValue:entity.feedIdString forKey:@"feedIdString"];
+    [dict setValue:entity.descriptionFeed forKey:@"descriptionFeed"];
+    [dict setValue:entity.linkFeed forKey:@"linkFeed"];
+    [dict setValue:entity.pubDateFeed forKey:@"pubDateFeed"];
+    [dict setValue:entity.urlImage forKey:@"urlImage"];
+
+    NSString *key = entity.titleFeed;
+    [cell.favoriteButton setImage:[cell.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    if ([self.userDefaults objectForKey:key]) {
+        [cell.favoriteButton setTintColor:[UIColor grayColor]];
+        [self.userDefaults removeObjectForKey:key];
+//        [cell.favoriteButton setImage:[UIImage imageNamed:@"icon-favorite-gold"] forState:UIControlStateNormal];
+    } else {
+        [cell.favoriteButton setTintColor:[UIColor yellowColor]];
+
+        [self.userDefaults setObject:dict forKey:key];
+//        [cell.favoriteButton setImage:[UIImage imageNamed:@"icon-favorites"] forState:UIControlStateNormal];
+    }
+    [cell layoutIfNeeded];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    [cell saveFavoriteNews:entity];
     //     setImage:[UIImage imageNamed:@"YANDEX"]];
     //    [self layoutIfNeeded];
     //    [userDefaults setObject:entity forKey:@""];
@@ -161,25 +183,12 @@ typedef enum {
     [self.navigationController setNavigationBarHidden:NO];
 }
 
-//-(IBAction)changeValueSC {
-////    if (isAllNewsLoaded) {
-////        <#statements#>
-////    }
-//    if (self.newsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
-//        [self update];
-//    } else {
-//        [self setupData];
-//    }
-//}
-
-
 #pragma mark - UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.isSearchStart) {
         return self.searchResults.count? self.searchResults.count : 0;
     }
-
     return self.newsArray.count? self.newsArray.count : 0;
 }
 
@@ -191,14 +200,13 @@ typedef enum {
    
     NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     NewsEntity *newsEntity = nil;
+    
     cell.favoriteButton.tag = indexPath.row;
     [cell.favoriteButton addTarget:self action:@selector(onFavoriteBtnTouch:) forControlEvents:UIControlEventTouchUpInside];
-    if (self.isSearchStart) {
-        newsEntity = self.searchResults.count? self.searchResults[indexPath.row] : self.newsArray[indexPath.row];
-    } else {
-        newsEntity = self.newsArray.count? self.newsArray[indexPath.row] : self.newsArray[indexPath.row];
-    }
+    newsEntity = [self setNewsEntityForIndexPath:indexPath];
     [cell cellForNews:newsEntity];
+    NSString *key = newsEntity.titleFeed;
+    [self setFavoriteButtonForCell:cell WithEntity:newsEntity];
     
     return cell;
 }
@@ -491,6 +499,7 @@ typedef enum {
 -(void)update {
     [self updateDataWithIndicator:YES];
 }
+
 -(void)updateDataWithIndicator:(BOOL)showIndicator {
     [self showLoadingIndicator:showIndicator];
 
@@ -529,6 +538,24 @@ typedef enum {
     });
 }
 
+-(NewsEntity *)setNewsEntityForIndexPath:(NSIndexPath*)indexPath {
+    NewsEntity *newsEntity = nil;
+    if (self.isSearchStart) {
+        newsEntity = self.searchResults.count? self.searchResults[indexPath.row] : self.newsArray[indexPath.row];
+    } else {
+        newsEntity = self.newsArray.count? self.newsArray[indexPath.row] : self.newsArray[indexPath.row];
+    }
+    return newsEntity;
+}
+
+-(void)setFavoriteButtonForCell:(NewsTableViewCell *)cell WithEntity:(NewsEntity *)entity {
+    [cell.favoriteButton setImage:[cell.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    if ([self.userDefaults objectForKey:entity.titleFeed]) {
+        cell.favoriteButton.tintColor = [UIColor yellowColor];
+    } else {
+        cell.favoriteButton.tintColor = [UIColor lightGrayColor];
+    }
+}
 //-(void)setupAppearanceNewsSegmentedControl {
 //    [self.NewsSegmentedControl layoutIfNeeded];
 //    UIColor *mainColor = [UIColor colorWithRed:253. / 255. green:253. /255. blue:253. / 255. alpha:1.0];
