@@ -17,10 +17,12 @@
 "No Network" = "Make sure that you turn on network.";
 "We have problems" = "We have problems";
 "OK" = "OK";
+"Search for news..." = "Search for news...";
 
 "Today at" = "Today at";
 
 "Profile" = "Profile";
+"Favorites" = "Favorites";
 "Settings" = "Settings";
 "About" = "About";
 "Log out" = "Log out";

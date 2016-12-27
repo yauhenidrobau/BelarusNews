@@ -10,10 +10,12 @@
 
 @interface NewsEntity : RLMObject
 @property  NSString *feedIdString;
+@property  NSInteger newsID;
 @property  NSString *descriptionFeed;
 @property  NSString *linkFeed;
 @property  NSDate *pubDateFeed;
 @property  NSString *titleFeed;
+@property  BOOL favorite;
 @property  NSString *urlImage;
 
 @end

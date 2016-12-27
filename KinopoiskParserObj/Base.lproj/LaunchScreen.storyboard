@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,24 +18,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NewsFeed - Latest News always with you!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTj-d7-wJa">
-                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="33"/>
-                                <color key="textColor" red="0.035320695639999997" green="0.56408975589999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-launch-MTS.BY" translatesAutoresizingMaskIntoConstraints="NO" id="wtD-ex-19C" userLabel="MTS.BY"/>
+                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-launch-Dev.by" translatesAutoresizingMaskIntoConstraints="NO" id="RlR-oV-qXF" userLabel="Dev.BY">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-launch-TUT.BY" translatesAutoresizingMaskIntoConstraints="NO" id="Fki-W4-FYq" userLabel="TUT.BY"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-launch-PRAVO.BY" translatesAutoresizingMaskIntoConstraints="NO" id="FGV-rl-CBo" userLabel="PRAVO.BY"/>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.89592018236671411" blue="0.6752763714965333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="jTj-d7-wJa" secondAttribute="bottom" constant="258" id="63o-oG-aQ4"/>
-                            <constraint firstItem="jTj-d7-wJa" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="167" id="rb8-9p-Zaf"/>
-                            <constraint firstItem="jTj-d7-wJa" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="tdw-qf-aOL"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="jTj-d7-wJa" secondAttribute="trailing" id="uPm-7K-qmh"/>
+                            <constraint firstAttribute="trailing" secondItem="RlR-oV-qXF" secondAttribute="trailing" id="1ff-Eq-rjD"/>
+                            <constraint firstItem="Fki-W4-FYq" firstAttribute="height" secondItem="wtD-ex-19C" secondAttribute="height" id="4Ga-bP-v0e"/>
+                            <constraint firstItem="wtD-ex-19C" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="4uv-k3-5iN"/>
+                            <constraint firstItem="RlR-oV-qXF" firstAttribute="top" secondItem="wtD-ex-19C" secondAttribute="bottom" id="7ww-My-2DH"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="FGV-rl-CBo" secondAttribute="bottom" id="Dbi-pr-Y6W"/>
+                            <constraint firstItem="RlR-oV-qXF" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="K8a-8y-Luy"/>
+                            <constraint firstAttribute="trailing" secondItem="wtD-ex-19C" secondAttribute="trailing" id="Nbp-JM-lGF"/>
+                            <constraint firstItem="RlR-oV-qXF" firstAttribute="height" secondItem="wtD-ex-19C" secondAttribute="height" id="R46-7s-1mc"/>
+                            <constraint firstAttribute="trailing" secondItem="FGV-rl-CBo" secondAttribute="trailing" id="Spb-0W-gf6"/>
+                            <constraint firstItem="FGV-rl-CBo" firstAttribute="top" secondItem="Fki-W4-FYq" secondAttribute="bottom" id="WLS-2I-VEC"/>
+                            <constraint firstItem="Fki-W4-FYq" firstAttribute="top" secondItem="RlR-oV-qXF" secondAttribute="bottom" id="YOB-AB-hMQ"/>
+                            <constraint firstItem="FGV-rl-CBo" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="cqT-q5-fJD"/>
+                            <constraint firstItem="FGV-rl-CBo" firstAttribute="height" secondItem="wtD-ex-19C" secondAttribute="height" id="dZX-YS-nQK"/>
+                            <constraint firstItem="Fki-W4-FYq" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="dbb-S8-bfA"/>
+                            <constraint firstAttribute="trailing" secondItem="Fki-W4-FYq" secondAttribute="trailing" id="erQ-Bq-3DJ"/>
+                            <constraint firstItem="wtD-ex-19C" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="uaB-07-RpF"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon-launch-Dev.by" width="230" height="87"/>
+        <image name="icon-launch-MTS.BY" width="322" height="217"/>
+        <image name="icon-launch-PRAVO.BY" width="336" height="164"/>
+        <image name="icon-launch-TUT.BY" width="303" height="76"/>
+    </resources>
 </document>

@@ -17,10 +17,12 @@
 "No Network" = "Убедитесь, что интернет включен.";
 "We have problems" = "У нас проблемы :(";
 "OK" = "ОК";
+"Search for news..." = "Что будем искать...";
 
 "Today at" = "Сегодня в";
 
 "Profile" = "Профиль";
+"Favorites" = "Избранные";
 "Settings" = "Настройки";
 "About" = "О нас";
 "Log out" = "Выйти";

@@ -19,16 +19,19 @@ SINGLETON(RealmDataManager)
     for (NSDictionary *dict in receivedNewsArray) {
         @try {
             [realm beginWriteTransaction];
-            NewsEntity *currentNews = [[NewsEntity alloc]init];
-            currentNews.feedIdString = serviceString;
-            currentNews.titleFeed = dict[@"title"];
-            currentNews.pubDateFeed = dict[@"pubDate"];
-            currentNews.descriptionFeed = dict[@"description"];
-            currentNews.linkFeed = dict[@"link"];
-            if (dict[@"imageUrl"]) {
-                currentNews.urlImage = dict[@"imageUrl"];
+            NewsEntity *currentNews = [self RLMResultsToArray:[NewsEntity objectsWhere:@"titleFeed == %@",dict[@"title"]]].firstObject;
+            if (!currentNews) {
+                currentNews = [NewsEntity new];
+                currentNews.feedIdString = serviceString;
+                currentNews.titleFeed = dict[@"title"];
+                currentNews.pubDateFeed = dict[@"pubDate"];
+                currentNews.descriptionFeed = dict[@"description"];
+                currentNews.linkFeed = dict[@"link"];
+                if (dict[@"imageUrl"]) {
+                    currentNews.urlImage = dict[@"imageUrl"];
+                }
+                [realm addOrUpdateObject:currentNews];
             }
-            [realm addOrUpdateObject:currentNews];
             [realm commitWriteTransaction];
         }
         @catch (NSException *exception) {
@@ -38,5 +41,13 @@ SINGLETON(RealmDataManager)
             }
         }
     }
+}
+
+-(NSArray*)RLMResultsToArray:(RLMResults *)results{
+    NSMutableArray *array = [NSMutableArray array];
+    for (RLMObject *object in results) {
+        [array addObject:object];
+    }
+    return array;
 }
 @end

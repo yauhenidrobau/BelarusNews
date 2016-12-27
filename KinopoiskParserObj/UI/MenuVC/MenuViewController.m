@@ -27,12 +27,11 @@
 {
     [super viewDidLoad];
     
-    self.menuTitles = @[NSLocalizedString(@"DEV.BY",nil),
-                        NSLocalizedString(@"TUT.BY",nil),
-                        NSLocalizedString(@"YANDEX",nil),
-                        NSLocalizedString(@"MTS",nil),
-                        @"S13"];
-    self.menuImages = @[@"DEV.BY",@"TUT.BY",@"YANDEX",@"MTS.BY",@"MTS.BY"];
+    self.menuTitles = @[NSLocalizedString(@"Profile",nil),
+                        NSLocalizedString(@"Favorites",nil),
+                        NSLocalizedString(@"Settings",nil),
+                        NSLocalizedString(@"About",nil),
+                        NSLocalizedString(@"Log out",nil)];
     self.avatarImageView.clipsToBounds = YES;
     self.avatarImageView.layer.cornerRadius = 50.0;
     self.avatarImageView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -56,16 +55,12 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    UIImageView *cellImage = (UIImageView*)[cell viewWithTag:1];
-    cellImage.image = [UIImage imageNamed:self.menuImages[indexPath.row]];
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:2];
     titleLabel.text = self.menuTitles[indexPath.row];
     titleLabel.textColor = [UIColor whiteColor];
-//    cell.backgroundColor = [UIColor clearColor];
-    
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
-
 
 #pragma mark - TABLE VIEW DELEGATE
 

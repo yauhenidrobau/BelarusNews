@@ -23,6 +23,7 @@
  -(void) viewDidLoad{
      [super  viewDidLoad];
      self.webView.hidden = YES;
+     [self.navigationController setHidesBarsOnSwipe:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

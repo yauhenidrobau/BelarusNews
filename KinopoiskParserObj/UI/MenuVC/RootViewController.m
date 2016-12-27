@@ -58,7 +58,7 @@
 
 - (void)sideBarController:(LMSideBarController *)sideBarController willHideMenuViewController:(UIViewController *)menuViewController {
 //    self.prefersStatusBarHidden = NO;
-    self.mainViewController.urlIdentificator = menuViewController.title;
+    self.mainViewController.menuTitle = menuViewController.title;
     [self.mainViewController viewDidLoad];
     [self.mainViewController viewWillAppear:YES];
 }

@@ -19,6 +19,9 @@
 #import <UIAlertController+Blocks.h>
 #import "UIViewController+LMSideBarController.h"
 #import "Constants.h"
+#import "Macros.h"
+
+#import "INSSearchBar.h"
 
 #import "Masonry.h"
 #import "ZLDropDownMenuUICalc.h"
@@ -34,30 +37,34 @@ typedef enum {
     MtsByCategoryType = 3
 }CategoryTypes;
 
-@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UISearchBarDelegate, LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource>
+#define MAIN_COLOR RGB(25, 120, 137)
+
+@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIView *searchBarView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
-@property (weak, nonatomic) IBOutlet ZLDropDownMenu *menuView;
+@property (weak, nonatomic) IBOutlet UIView *menuView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) INSSearchBar *searchBarWithDelegate;
+
 @property (nonatomic) CGPoint lastContentOffset;
 @property (strong, nonatomic) NSOperationQueue * operationQueue;
 @property (strong, nonatomic) NSString *urlString;
-@property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
-@property (strong, nonatomic) NSArray *newsArray;
-@property (strong, nonatomic) NSDictionary *newsURLDict;
 @property (strong, nonatomic) NSString *titlesString;
-
-@property (strong, nonatomic) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
 @property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, strong) RLMRealm *realm;
+
+@property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
+@property (strong, nonatomic) NSArray *newsArray;
+@property (nonatomic, strong) NSArray *mainTitleArray;
+@property (nonatomic, strong) NSArray *subTitleArray;
+@property (strong, nonatomic) NSDictionary *newsURLDict;
 
 @property (nonatomic) BOOL isAlertShown;
 @property (nonatomic) BOOL isSearchStart;
+@property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
 
-@property (nonatomic, strong) NSArray *mainTitleArray;
-@property (nonatomic, strong) NSArray *subTitleArray;
 @end
 
 @implementation NewsTableView
@@ -92,21 +99,21 @@ typedef enum {
                          @"YANDEX" : @[YANDEX_NEWS],
                          @"MTS" : @[MTS_BY_NEWS]};
 
-    ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] init];
-    menu.bounds = CGRectMake(0, 0, deviceWidth(), 50);
+    ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, deviceWidth(), 44)];
     menu.delegate = self;
     menu.dataSource = self;
-    self.tableView.tableHeaderView = menu;
-//    self.menuView = menu;
-    self.userDefaults = [NSUserDefaults standardUserDefaults];
-    self.titlesString = self.mainTitleArray[0];
+    [self.menuView addSubview:menu];
+
+    
+//    self.userDefaults = [NSUserDefaults standardUserDefaults];
+    self.realm = [RLMRealm defaultRealm];
+    self.titlesString = self.subTitleArray[0][0];
     self.urlString = MAIN_NEWS;
     [self setAppierance];
-//    [self setupAppearanceNewsSegmentedControl];
     [self addPullToRefresh];
     self.isAlertShown = NO;
     self.operationQueue = [NSOperationQueue new];
-    self.urlIdentificator = self.urlIdentificator.length? self.urlIdentificator : @"DEV.BY";
+//    self.urlIdentificator = self.urlIdentificator.length? self.urlIdentificator : @"DEV.BY";
     [self setupData];
 
 }
@@ -139,32 +146,20 @@ typedef enum {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     NewsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setValue:entity.titleFeed forKey:@"titleFeed"];
-    [dict setValue:entity.feedIdString forKey:@"feedIdString"];
-    [dict setValue:entity.descriptionFeed forKey:@"descriptionFeed"];
-    [dict setValue:entity.linkFeed forKey:@"linkFeed"];
-    [dict setValue:entity.pubDateFeed forKey:@"pubDateFeed"];
-    [dict setValue:entity.urlImage forKey:@"urlImage"];
-
-    NSString *key = entity.titleFeed;
+    [self.realm beginWriteTransaction];
+    
     [cell.favoriteButton setImage:[cell.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    if ([self.userDefaults objectForKey:key]) {
+    if (entity.favorite) {
         [cell.favoriteButton setTintColor:[UIColor grayColor]];
-        [self.userDefaults removeObjectForKey:key];
-//        [cell.favoriteButton setImage:[UIImage imageNamed:@"icon-favorite-gold"] forState:UIControlStateNormal];
     } else {
         [cell.favoriteButton setTintColor:[UIColor yellowColor]];
-
-        [self.userDefaults setObject:dict forKey:key];
-//        [cell.favoriteButton setImage:[UIImage imageNamed:@"icon-favorites"] forState:UIControlStateNormal];
     }
-    [cell layoutIfNeeded];
+    entity.favorite = !entity.favorite;
+    [self.realm addOrUpdateObject:entity];
+    [self.realm commitWriteTransaction];
+    
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-//    [cell saveFavoriteNews:entity];
-    //     setImage:[UIImage imageNamed:@"YANDEX"]];
-    //    [self layoutIfNeeded];
-    //    [userDefaults setObject:entity forKey:@""];
+
 }
 
 -(void)pullToRefresh {
@@ -200,12 +195,11 @@ typedef enum {
    
     NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     NewsEntity *newsEntity = nil;
-    
+    cell.backgroundColor = MAIN_COLOR;
     cell.favoriteButton.tag = indexPath.row;
     [cell.favoriteButton addTarget:self action:@selector(onFavoriteBtnTouch:) forControlEvents:UIControlEventTouchUpInside];
     newsEntity = [self setNewsEntityForIndexPath:indexPath];
     [cell cellForNews:newsEntity];
-    NSString *key = newsEntity.titleFeed;
     [self setFavoriteButtonForCell:cell WithEntity:newsEntity];
     
     return cell;
@@ -257,7 +251,7 @@ typedef enum {
 
 -(NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
     NSString *text;
-    if (self.isSearchStart) {
+    if (self.isSearchStart || self.menuTitle.length) {
         text = @"";
     } else {
     text = NSLocalizedString(@"No Network", nil);
@@ -295,28 +289,6 @@ typedef enum {
     return NO;
 }
 
-//#pragma mark - NYSegmentedControlDataSource
-//
-//- (NSUInteger) numberOfSegmentsOfControl:(NYSegmentedControl *)control {
-//    if ([self.newsURLDict[_urlIdentificator] isKindOfClass:[NSArray class]]) {
-//        return 1;
-//    } else {
-//        NSDictionary *dict = self.newsURLDict[_urlIdentificator];
-//        return dict.allKeys.count;
-////        return [self.newsURLDict[_urlIdentificator];
-//    }
-//    return self.newsURLDict.allKeys.count;
-//}
-//- (NSString *) segmentedControl:(NYSegmentedControl *)control titleAtIndex:(NSInteger)index {
-//    if ([self.newsURLDict[_urlIdentificator] isKindOfClass:[NSArray class]]) {
-//        return @"All News";
-//    } else {
-//        NSDictionary *dict = self.newsURLDict[_urlIdentificator];
-//        return dict.allKeys[index];
-//    }
-//    return @"";
-//}
-
 #pragma mark - ZLDropDownMenuDataSource
 
 - (NSInteger)numberOfColumnsInMenu:(ZLDropDownMenu *)menu {
@@ -342,6 +314,7 @@ typedef enum {
 
 #pragma mark - ZLDropDownMenuDelegate
 - (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
+    self.menuTitle = @"";
     NSArray *array = self.subTitleArray[indexPath.column];
 //    NSLog(@"%@", array[indexPath.row]);
     if (array.count == 1) {
@@ -357,18 +330,40 @@ typedef enum {
 
 }
 
-#pragma mark - UISearchBarDelegate
+#pragma mark - INSSearchBarDelegate
 
--(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+- (CGRect)destinationFrameForSearchBar:(INSSearchBar *)searchBar
+{
+    return CGRectMake(10, 67, CGRectGetWidth(self.view.bounds) - 10.0, 38.0);
+}
+
+- (void)searchBar:(INSSearchBar *)searchBar willStartTransitioningToState:(INSSearchBarState)destinationState
+{
+    // Do whatever you deem necessary.
+}
+
+- (void)searchBar:(INSSearchBar *)searchBar didEndTransitioningFromState:(INSSearchBarState)previousState
+{
+    // Do whatever you deem necessary.
+}
+
+- (void)searchBarDidTapReturn:(INSSearchBar *)searchBar
+{
+    // Do whatever you deem necessary.
+    // Access the text from the search bar like searchBar.searchField.text
+}
+
+- (void)searchBarTextDidChange:(INSSearchBar *)searchBar {
+    NSString *searchText = searchBar.searchField.text;
     if (searchText.length > 2) {
         [self showLoadingIndicator:YES];
         self.isSearchStart = YES;
         __weak typeof (self)wself = self;
-        [[SearchManager sharedInstance]updateSearchResults:self.searchBar.text forArray:self.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
+        [[SearchManager sharedInstance]updateSearchResults:self.searchBarWithDelegate.searchField.text forArray:self.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
             wself.searchResults = searchResults;
             [wself showLoadingIndicator:NO];
             NSLog(@"Get SEARCH");
-
+            
             [wself.tableView reloadData];
         }];
     } else {
@@ -376,10 +371,6 @@ typedef enum {
         [self setupData];
         NSLog(@"Get from DataBase");
     }
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-  
 }
 
 #pragma mark UIScrollViewDelegate
@@ -401,13 +392,13 @@ typedef enum {
 -(void)timerActionRefresh {
     [self update];
 }
+
 -(void)setAppierance {
-    // auto re-sizing cell
-    self.tableView.estimatedRowHeight = 80;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    
     [self.activityInd setHidden:YES];
     self.scrollButton.hidden = YES;
+    
+    self.tableView.estimatedRowHeight = 80;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
     
@@ -415,35 +406,34 @@ typedef enum {
     UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
     self.navigationItem.rightBarButtonItem = refreshBtn;
     
-//    self.newsSegmentedControl.delegate = self;
-//    self.newsSegmentedControl.dataSource = self;
-//    self.newsSegmentedControl.bounds = CGRectMake(0, 0, deviceWidth(), 50.f);
-//    
-//    self.tableView.tableHeaderView = self.newsSegmentedControl;
-    
-    //    [self.newsSegmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(topView.mas_bottom);
-//        make.left.right.equalTo(self.view);
-//        make.height.mas_equalTo(50);
-//    }];
+    self.searchBarWithDelegate = [[INSSearchBar alloc] initWithFrame:CGRectMake(10.0, 67.0,44.0, 38.0)];
+    self.searchBarWithDelegate.delegate = self;
+    self.searchBarView.backgroundColor = MAIN_COLOR;
+    [self.view addSubview:self.searchBarWithDelegate];
     
 }
 
 -(void)setupData{
     [self showLoadingIndicator:YES];
-//    if (self.NewsSegmentedControl.selectedSegmentIndex != AllCategoryType) {
-//        RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titleString];
-//        NSArray *resultsArray = [self RLMResultsToArray:results];
-//        
-//        self.newsArray = [self sortNewsArray:resultsArray];
-//        NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
-//    } else {
+    if (!self.menuTitle.length) {
         RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesString];
         NSArray *allResultsArray = [self RLMResultsToArray:results];
-
+        
         self.newsArray = [self sortNewsArray:allResultsArray];
         NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
-//    }
+        
+    } else {
+        RLMResults *results = [NewsEntity allObjects];
+        NSArray *allResultsArray = [self RLMResultsToArray:results];
+        NSMutableArray *favoritesArray = [NSMutableArray array];
+        for (NewsEntity *entity in allResultsArray) {
+            if (entity.favorite) {
+                [favoritesArray addObject:entity];
+            }
+        }
+        self.newsArray = [self sortNewsArray:[NSArray arrayWithArray:favoritesArray]];
+        NSLog(@"Get favorites Elements  %lu",(unsigned long)self.newsArray.count);
+    }
     [self.tableView reloadData];
     [self showLoadingIndicator:NO];
 
@@ -520,8 +510,8 @@ typedef enum {
                 
 //                NSString *urlString = [self.newsURLDict[_urlIdentificator] isKindOfClass:[NSArray class]]? s
                 
-                [[DataManager sharedInstance ] updateDataWithURLArray:self.urlString AndTitle:self.titlesString WithCallBack:^(NSError *error) {
-                    __weak typeof(self) wself = self;
+                __weak typeof(self) wself = self;
+                [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlString AndTitle:wself.titlesString WithCallBack:^(NSError *error) {
 
                     [networkReachability stopNotifier];
                     if (!error) {
@@ -550,7 +540,7 @@ typedef enum {
 
 -(void)setFavoriteButtonForCell:(NewsTableViewCell *)cell WithEntity:(NewsEntity *)entity {
     [cell.favoriteButton setImage:[cell.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    if ([self.userDefaults objectForKey:entity.titleFeed]) {
+    if (entity.favorite) {
         cell.favoriteButton.tintColor = [UIColor yellowColor];
     } else {
         cell.favoriteButton.tintColor = [UIColor lightGrayColor];

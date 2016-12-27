@@ -17,16 +17,10 @@
          contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.newsURLDict[_urlIdentificator]">
+               value = "wself.urlString">
             </PersistentString>
             <PersistentString
-               value = "wself.urlArray">
-            </PersistentString>
-            <PersistentString
-               value = "self.NewsSegmentedControl.selectedSegmentIndex">
-            </PersistentString>
-            <PersistentString
-               value = "self.titlesArray">
+               value = "wself.titlesString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -48,10 +42,16 @@
          contextName = "-[NewsTableView setupData]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
+               value = "self.newsArray">
+            </PersistentString>
+            <PersistentString
                value = "self.titlesArray[0]">
             </PersistentString>
             <PersistentString
-               value = "self.newsArray">
+               value = "self.menuTitle.length">
+            </PersistentString>
+            <PersistentString
+               value = "self.titlesString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -91,6 +91,14 @@
          <PersistentStrings>
             <PersistentString
                value = "((NSArray*)self.subTitleArray[column]).count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView setFavoriteButtonForCell:WithEntity:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "entity.favorite">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -211,6 +219,9 @@
          contextName = "-[ParserManager parseXmlData:callback:]:ParserManager.m">
       </ContextState>
       <ContextState
+         contextName = "-[XMLParser getImageUrlFromDescription:]:XMLParser.m">
+      </ContextState>
+      <ContextState
          contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke_2.43:RemoteFacade.m">
          <PersistentStrings>
             <PersistentString
@@ -311,9 +322,6 @@
       <ContextState
          contextName = "-[RealmDataManager saveNews:withServiceString:]:RealmDataManager.m">
          <PersistentStrings>
-            <PersistentString
-               value = "[dict[@&quot;pubDate&quot;] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]">
-            </PersistentString>
             <PersistentString
                value = "currentNews.feedIdString">
             </PersistentString>
@@ -457,6 +465,11 @@
       </ContextState>
       <ContextState
          contextName = "-[RootViewController sideBarController:willHideMenuViewController:]:RootViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "menuViewController.title">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[RealmDataManager saveNews:withServiceArray:]:RealmDataManager.m">

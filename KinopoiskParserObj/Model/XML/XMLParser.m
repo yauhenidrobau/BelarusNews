@@ -46,10 +46,11 @@ NSMutableString * tempString;
         pubDateFeed = [[NSMutableString alloc] initWithString: @""];
         linkFeed = [NSMutableString new];
         tempString = [[NSMutableString alloc] initWithString: @""];
+        urlImage = [[NSMutableString alloc] initWithString: @""];
     }
-    if ([elementName isEqualToString:@"media:content"]) {
-        urlImage = [[NSMutableString alloc] initWithString: attributeDict[@"url"]];
-    }
+//    if ([elementName isEqualToString:@"media:content"]) {
+//        urlImage = [[NSMutableString alloc] initWithString: attributeDict[@"url"]];
+//    }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName{
@@ -67,6 +68,12 @@ NSMutableString * tempString;
         }
         if (descriptionFeed.length) {
             [currentDataDictionary  setObject:descriptionFeed forKey:@"description"];
+            NSString *temp = [self getImageUrlFromDescription:descriptionFeed];
+            if (temp.length) {
+                [urlImage appendString:temp];
+            } else {
+                urlImage = [NSMutableString stringWithString:@""];
+            }
         }
         if (urlImage.length) {
             [currentDataDictionary  setObject:urlImage forKey:@"imageUrl"];
@@ -81,8 +88,8 @@ NSMutableString * tempString;
             if (pubDate) {
                 currentDataDictionary[@"pubDate"] = pubDate;
             }
-            
         }
+        
         [dictParsedData addObject:currentDataDictionary];
         urlImage = nil;
     }
@@ -116,6 +123,24 @@ NSMutableString * tempString;
     [ _xmlParserDelegate xmlParserDidFinishParsing:parsedDataArray error:nil];
     
 }
+
+-(NSString *)getImageUrlFromDescription:(NSMutableString *)descriptionFeed {
+    NSRange range = [descriptionFeed rangeOfString:@"https://" options:NSCaseInsensitiveSearch];
+    NSRange sRange = [descriptionFeed rangeOfString:@"http://" options:NSCaseInsensitiveSearch];
+
+    NSString *finalUrlstring = @"";
+    NSString *urlString;
+    
+    if (range.location != NSNotFound && range.location < 20) {
+      urlString = [descriptionFeed substringFromIndex:range.location];
+    } else if (sRange.location != NSNotFound && sRange.location < 20) {
+         urlString = [descriptionFeed substringFromIndex:sRange.location];
+    }
+    NSArray *urlStrArray = [urlString componentsSeparatedByString:@" "];
+    finalUrlstring = [urlStrArray[0] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    return finalUrlstring;
+}
+
 /*
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 print(parseError.description);

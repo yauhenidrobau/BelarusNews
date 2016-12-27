@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */; };
 		1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */; };
+		1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2666911E127AD6001DF2A2 /* INSSearchBar.m */; };
 		1E372F851DF94C7400362CC1 /* DateFormatterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E372F821DF94C7400362CC1 /* DateFormatterManager.m */; };
 		1E372F861DF94C7400362CC1 /* SearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E372F841DF94C7400362CC1 /* SearchManager.m */; };
 		1E640B581E0A85FE00AA539C /* NSString+ZLStringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B341E0A85FC00AA539C /* NSString+ZLStringSize.m */; };
@@ -83,6 +84,8 @@
 		1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDataManager.h; sourceTree = "<group>"; };
 		1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmDataManager.m; sourceTree = "<group>"; };
 		1E1D3A9E1DE47D9F00D6C00C /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		1E2666901E127AD6001DF2A2 /* INSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSSearchBar.h; sourceTree = "<group>"; };
+		1E2666911E127AD6001DF2A2 /* INSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSSearchBar.m; sourceTree = "<group>"; };
 		1E372F811DF94C7400362CC1 /* DateFormatterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterManager.h; sourceTree = "<group>"; };
 		1E372F821DF94C7400362CC1 /* DateFormatterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterManager.m; sourceTree = "<group>"; };
 		1E372F831DF94C7400362CC1 /* SearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchManager.h; sourceTree = "<group>"; };
@@ -197,10 +200,20 @@
 		1E11C93D1DDD9E4C00D55B28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E26668F1E127AC3001DF2A2 /* CustomSearchBar */,
 				1E640B311E0A85FC00AA539C /* ZLDropDownMenu */,
 				FF0EC11EF02CB57D6640E485 /* libPods-KinopoiskParserObj.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1E26668F1E127AC3001DF2A2 /* CustomSearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				1E2666901E127AD6001DF2A2 /* INSSearchBar.h */,
+				1E2666911E127AD6001DF2A2 /* INSSearchBar.m */,
+			);
+			path = CustomSearchBar;
 			sourceTree = "<group>";
 		};
 		1E372F801DF94B8400362CC1 /* XML */ = {
@@ -649,6 +662,7 @@
 				1E640B621E0A85FE00AA539C /* ViewController+MASAdditions.m in Sources */,
 				1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */,
 				1E7329551D7848530027E46E /* DetailsViewController.m in Sources */,
+				1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */,
 				1E7328F41D7813740027E46E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
