@@ -67,7 +67,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    NewsTableView *vc = [[NewsTableView alloc]init];
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 //    vc.urlIdentificator = self.menuTitles[indexPath.row];
 //    RootViewController *rootVC = [[RootViewController alloc]init];
 //    [rootVC.mainNavigationController setViewControllers:@[vc] animated:YES];

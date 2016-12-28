@@ -121,4 +121,6 @@ typedef NS_ENUM(NSUInteger, INSSearchBarState)
 
 @property (nonatomic, weak) id<INSSearchBarDelegate>	delegate;
 
+- (void)hideSearchBar:(id)sender;
+
 @end

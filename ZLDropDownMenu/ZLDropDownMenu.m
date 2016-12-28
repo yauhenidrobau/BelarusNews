@@ -71,7 +71,7 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
         _collectionView.autoresizesSubviews = NO;
         self.autoresizesSubviews = NO;
         
-        //        _backgroundView = [[UIView alloc] init];
+//                _backgroundView = [[UIView alloc] init];
         _backgroundView = [UIButton buttonWithType:UIButtonTypeCustom];
         _backgroundView.userInteractionEnabled = YES;
         _backgroundView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.f];
@@ -105,6 +105,12 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
         
         NSString *titleString = [_dataSource menu:self titleForRowAtIndexPath:[ZLIndexPath indexPathWithColumn:index row:0]];
         ZLDropDownMenuTitleButton *titleButton = [[ZLDropDownMenuTitleButton alloc] initWithMainTitle:[_dataSource menu:self titleForColumn:index] subTitle:titleString];
+        if (index == 0) {
+            titleButton.bottomLineView.hidden = NO;
+        }
+        else {
+            titleButton.bottomLineView.hidden = YES;
+        }
         [self addSubview:titleButton];
         [_titleButtons addObject:titleButton];
         [titleButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -113,7 +119,9 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
             make.left.equalTo(lastTitleButton ? lastTitleButton.mas_right : weakSelf);
         }];
         
-        
+//        lastTitleButton.backgroundColor = [UIColor whiteColor];
+//        titleButton.backgroundColor = [UIColor redColor];
+
         lastTitleButton = titleButton;
         if (index != _numOfMenu - 1) {
             UIView *rightSeperator = [[UIView alloc] init];
@@ -139,8 +147,14 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
     if (self.selectedButton == button) {
         button.selected = isShow;
         self.coverLayerView.hidden = NO;
+        button.bottomLineView.hidden = NO;
     } else {
         button.selected = YES;
+        
+        if (button != (ZLDropDownMenuTitleButton*)self.titleButtons[0]) {
+            ((ZLDropDownMenuTitleButton*)self.titleButtons[0]).bottomLineView.hidden = YES;
+        }
+
         self.selectedButton.selected = NO;
         self.selectedButton = button;
     }

@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIColor *mainTitleColor;
 @property (nonatomic, strong) UIColor *subTitleColor;
 @property (nonatomic, copy) NSString *subTitle;
+@property (nonatomic, strong) UIView *bottomLineView;
 
 @property (nonatomic, assign) NSInteger index;
 

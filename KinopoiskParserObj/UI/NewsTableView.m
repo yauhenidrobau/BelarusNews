@@ -46,7 +46,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @property (weak, nonatomic) IBOutlet UIView *menuView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) INSSearchBar *searchBarWithDelegate;
+@property (nonatomic, strong) INSSearchBar *searchBar;
 
 @property (nonatomic) CGPoint lastContentOffset;
 @property (strong, nonatomic) NSOperationQueue * operationQueue;
@@ -99,7 +99,7 @@ typedef enum {
                          @"YANDEX" : @[YANDEX_NEWS],
                          @"MTS" : @[MTS_BY_NEWS]};
 
-    ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, deviceWidth(), 44)];
+    ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, deviceWidth(), 43)];
     menu.delegate = self;
     menu.dataSource = self;
     [self.menuView addSubview:menu];
@@ -332,23 +332,21 @@ typedef enum {
 
 #pragma mark - INSSearchBarDelegate
 
-- (CGRect)destinationFrameForSearchBar:(INSSearchBar *)searchBar
-{
+- (CGRect)destinationFrameForSearchBar:(INSSearchBar *)searchBar {
     return CGRectMake(10, 67, CGRectGetWidth(self.view.bounds) - 10.0, 38.0);
 }
 
-- (void)searchBar:(INSSearchBar *)searchBar willStartTransitioningToState:(INSSearchBarState)destinationState
-{
-    // Do whatever you deem necessary.
+- (void)searchBar:(INSSearchBar *)searchBar willStartTransitioningToState:(INSSearchBarState)destinationState {
+    if (destinationState == INSSearchBarStateSearchBarVisible) {
+        searchBar.searchField.tintColor = MAIN_COLOR;
+    }
 }
 
-- (void)searchBar:(INSSearchBar *)searchBar didEndTransitioningFromState:(INSSearchBarState)previousState
-{
-    // Do whatever you deem necessary.
+- (void)searchBar:(INSSearchBar *)searchBar didEndTransitioningFromState:(INSSearchBarState)previousState {
+    searchBar.searchField.placeholder = NSLocalizedString(@"Search for news...", nil);
 }
 
-- (void)searchBarDidTapReturn:(INSSearchBar *)searchBar
-{
+- (void)searchBarDidTapReturn:(INSSearchBar *)searchBar {
     // Do whatever you deem necessary.
     // Access the text from the search bar like searchBar.searchField.text
 }
@@ -359,7 +357,7 @@ typedef enum {
         [self showLoadingIndicator:YES];
         self.isSearchStart = YES;
         __weak typeof (self)wself = self;
-        [[SearchManager sharedInstance]updateSearchResults:self.searchBarWithDelegate.searchField.text forArray:self.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
+        [[SearchManager sharedInstance]updateSearchResults:self.searchBar.searchField.text forArray:self.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
             wself.searchResults = searchResults;
             [wself showLoadingIndicator:NO];
             NSLog(@"Get SEARCH");
@@ -377,6 +375,8 @@ typedef enum {
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     self.scrollButton.hidden = !(scrollView.contentOffset.y > 20);
+    UITapGestureRecognizer *gestureRecognizer = [UITapGestureRecognizer new];
+    [self.searchBar hideSearchBar:gestureRecognizer];
 }
 
 #pragma mark - Private methods
@@ -406,10 +406,10 @@ typedef enum {
     UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
     self.navigationItem.rightBarButtonItem = refreshBtn;
     
-    self.searchBarWithDelegate = [[INSSearchBar alloc] initWithFrame:CGRectMake(10.0, 67.0,44.0, 38.0)];
-    self.searchBarWithDelegate.delegate = self;
+    self.searchBar = [[INSSearchBar alloc] initWithFrame:CGRectMake(10.0, 67.0,44.0, 38.0)];
+    self.searchBar.delegate = self;
     self.searchBarView.backgroundColor = MAIN_COLOR;
-    [self.view addSubview:self.searchBarWithDelegate];
+    [self.view addSubview:self.searchBar];
     
 }
 

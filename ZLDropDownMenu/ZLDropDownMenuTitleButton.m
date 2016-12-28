@@ -20,7 +20,6 @@
 @property (nonatomic, weak) CAShapeLayer *shapeLayer;
 @property (nonatomic, strong) UIView *arrowView;
 
-@property (nonatomic, strong) UIView *bottomLineView;
 
 @end
 
