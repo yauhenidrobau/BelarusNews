@@ -12,10 +12,12 @@
 #import "DataManager.h"
 #import "NewsTableViewCell.h"
 #import "DetailsViewController.h"
+#import "DetailsOfflineVCViewController.h"
 #import "NewsEntity.h"
 #import "SearchManager.h"
 #import <UIKit/UIKit.h>
 #import <Reachability.h>
+#import "RealmDataManager.h"
 #import <UIAlertController+Blocks.h>
 #import "UIViewController+LMSideBarController.h"
 #import "Constants.h"
@@ -39,7 +41,7 @@ typedef enum {
 
 #define MAIN_COLOR RGB(25, 120, 137)
 
-@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate>
+@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UIView *searchBarView;
@@ -63,6 +65,8 @@ typedef enum {
 
 @property (nonatomic) BOOL isAlertShown;
 @property (nonatomic) BOOL isSearchStart;
+@property (nonatomic) BOOL isOfflineMode;
+
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
 
 @end
@@ -104,8 +108,6 @@ typedef enum {
     menu.dataSource = self;
     [self.menuView addSubview:menu];
 
-    
-//    self.userDefaults = [NSUserDefaults standardUserDefaults];
     self.realm = [RLMRealm defaultRealm];
     self.titlesString = self.subTitleArray[0][0];
     self.urlString = MAIN_NEWS;
@@ -113,8 +115,6 @@ typedef enum {
     [self addPullToRefresh];
     self.isAlertShown = NO;
     self.operationQueue = [NSOperationQueue new];
-//    self.urlIdentificator = self.urlIdentificator.length? self.urlIdentificator : @"DEV.BY";
-    [self setupData];
 
 }
 
@@ -123,6 +123,8 @@ typedef enum {
     
     [self.navigationItem setTitle:@""];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.isOfflineMode = [defaults boolForKey:@"OfflineMode"];
     [self update];
 }
 
@@ -139,27 +141,11 @@ typedef enum {
 #pragma mark - IBActions
 
 -(void)onRefreshBtnTouch {
-    [self update];
-}
-
--(void)onFavoriteBtnTouch:(UIButton *)sender {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
-    NewsTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
-    [self.realm beginWriteTransaction];
-    
-    [cell.favoriteButton setImage:[cell.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    if (entity.favorite) {
-        [cell.favoriteButton setTintColor:[UIColor grayColor]];
+    if (self.isOfflineMode) {
+        [self setupData];
     } else {
-        [cell.favoriteButton setTintColor:[UIColor yellowColor]];
+        [self update];
     }
-    entity.favorite = !entity.favorite;
-    [self.realm addOrUpdateObject:entity];
-    [self.realm commitWriteTransaction];
-    
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-
 }
 
 -(void)pullToRefresh {
@@ -194,13 +180,10 @@ typedef enum {
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    cell.cellDelegate = self;
     NewsEntity *newsEntity = nil;
-    cell.backgroundColor = MAIN_COLOR;
-    cell.favoriteButton.tag = indexPath.row;
-    [cell.favoriteButton addTarget:self action:@selector(onFavoriteBtnTouch:) forControlEvents:UIControlEventTouchUpInside];
     newsEntity = [self setNewsEntityForIndexPath:indexPath];
-    [cell cellForNews:newsEntity];
-    [self setFavoriteButtonForCell:cell WithEntity:newsEntity];
+    [cell cellForNews:newsEntity WithIndexPath:(NSIndexPath *)indexPath];
     
     return cell;
 }
@@ -219,16 +202,29 @@ typedef enum {
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString* segueId = (self.isOfflineMode) ? @"DetailsOfflineVCID" : @"DetailsVCID";
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:segueId sender:cell];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    UITableViewCell *cell = (UITableViewCell*)sender;
+    NewsEntity *newsEntity = [self setNewsEntityForIndexPath:[self.tableView indexPathForCell:cell]];
     if ([segue.identifier isEqualToString:@"DetailsVCID"]) {
-        UITableViewCell *cell = (UITableViewCell*)sender;
+        
         DetailsViewController *vc = segue.destinationViewController;
-        NewsEntity *newsEntity = self.searchResults[[self.tableView indexPathForCell:cell].row]? self.searchResults[[self.tableView indexPathForCell:cell].row] : self.newsArray[[self.tableView indexPathForCell:cell].row];
-        vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
-        [vc.navigationItem setTitle:self.mainTitleArray[[self.tableView indexPathForCell:cell].row]];
+        vc.newsUrl = [NSURL URLWithString:newsEntity.linkFeed];
+//        [vc.navigationItem setTitle:self.mainTitleArray[[self.tableView indexPathForCell:cell].row]];
+    } else if ([segue.identifier isEqualToString:@"DetailsOfflineVCID"]) {
+        DetailsOfflineVCViewController *vc = segue.destinationViewController;
+        vc.detailsTitle = newsEntity.titleFeed;
+        vc.detailsDescription = newsEntity.descriptionFeed;
+//        vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
+//        [vc.navigationItem setTitle:self.mainTitleArray[[self.tableView indexPathForCell:cell].row]];
     }
 }
 
@@ -379,6 +375,18 @@ typedef enum {
     [self.searchBar hideSearchBar:gestureRecognizer];
 }
 
+#pragma mark - NewsTableViewCellDelegate
+
+- (void)newsTableViewCell:(NewsTableViewCell*)cell didTapFavoriteButton:(UIButton*)button {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (!indexPath) {
+        return;
+    }
+    NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
+    [[RealmDataManager sharedInstance]updateEntity:entity];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+
 #pragma mark - Private methods
 
 -(void)addPullToRefresh {
@@ -413,7 +421,7 @@ typedef enum {
     
 }
 
--(void)setupData{
+-(void)setupData {
     [self showLoadingIndicator:YES];
     if (!self.menuTitle.length) {
         RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesString];
@@ -421,7 +429,6 @@ typedef enum {
         
         self.newsArray = [self sortNewsArray:allResultsArray];
         NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
-        
     } else {
         RLMResults *results = [NewsEntity allObjects];
         NSArray *allResultsArray = [self RLMResultsToArray:results];
@@ -531,21 +538,24 @@ typedef enum {
 -(NewsEntity *)setNewsEntityForIndexPath:(NSIndexPath*)indexPath {
     NewsEntity *newsEntity = nil;
     if (self.isSearchStart) {
-        newsEntity = self.searchResults.count? self.searchResults[indexPath.row] : self.newsArray[indexPath.row];
+        newsEntity = self.searchResults.count > indexPath.row ? self.searchResults[indexPath.row] : self.newsArray[indexPath.row];
     } else {
-        newsEntity = self.newsArray.count? self.newsArray[indexPath.row] : self.newsArray[indexPath.row];
-    }
+        newsEntity = self.newsArray.count ? self.newsArray[indexPath.row] : self.newsArray[indexPath.row];
+    } 
     return newsEntity;
 }
 
--(void)setFavoriteButtonForCell:(NewsTableViewCell *)cell WithEntity:(NewsEntity *)entity {
-    [cell.favoriteButton setImage:[cell.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    if (entity.favorite) {
-        cell.favoriteButton.tintColor = [UIColor yellowColor];
-    } else {
-        cell.favoriteButton.tintColor = [UIColor lightGrayColor];
-    }
-}
+//-(void)setFavoriteButtonForCell:(NewsTableViewCell *)cell WithEntity:(NewsEntity *)entity {
+//    [cell.favoriteButton setImage:[cell.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+//    if (entity.favorite) {
+//        cell.favoriteButton.tintColor = [UIColor yellowColor];
+//    } else {
+//        cell.favoriteButton.tintColor = [UIColor lightGrayColor];
+//    }
+//}
+
+
+
 //-(void)setupAppearanceNewsSegmentedControl {
 //    [self.NewsSegmentedControl layoutIfNeeded];
 //    UIColor *mainColor = [UIColor colorWithRed:253. / 255. green:253. /255. blue:253. / 255. alpha:1.0];

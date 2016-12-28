@@ -72,6 +72,7 @@
 //    RootViewController *rootVC = [[RootViewController alloc]init];
 //    [rootVC.mainNavigationController setViewControllers:@[vc] animated:YES];
     self.title = self.menuTitles[indexPath.row];
+    
     [self.sideBarController hideMenuViewController:YES];
 //    [self.sideBarController showViewController:vc sender:self];
 

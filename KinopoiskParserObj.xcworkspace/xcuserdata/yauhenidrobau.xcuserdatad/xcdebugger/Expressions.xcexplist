@@ -17,10 +17,18 @@
          contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "wself.urlString">
+               value = "wself.titlesString">
             </PersistentString>
             <PersistentString
-               value = "wself.titlesString">
+               value = "wself.urlString">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView setFavoriteButtonForCell:WithEntity:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "entity.favorite">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -35,6 +43,29 @@
             </PersistentString>
             <PersistentString
                value = "self.info">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableViewCell cellForNews:AndTitles:AndIndex:]:NewsTableViewCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[entity.pubDateFeed compare:[NSdate date]]">
+            </PersistentString>
+            <PersistentString
+               value = "entity.pubDateFeed">
+            </PersistentString>
+            <PersistentString
+               value = "entity.feedIdString">
+            </PersistentString>
+            <PersistentString
+               value = "[NSDate date]">
+            </PersistentString>
+            <PersistentString
+               value = "[formatter stringFromDate:entity.pubDateFeed]">
+            </PersistentString>
+            <PersistentString
+               value = "self.pubDateLabel.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -56,29 +87,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableViewCell cellForNews:AndTitles:AndIndex:]:NewsTableViewCell.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[NSDate date]">
-            </PersistentString>
-            <PersistentString
-               value = "entity.pubDateFeed">
-            </PersistentString>
-            <PersistentString
-               value = "entity.feedIdString">
-            </PersistentString>
-            <PersistentString
-               value = "self.pubDateLabel.text">
-            </PersistentString>
-            <PersistentString
-               value = "[formatter stringFromDate:entity.pubDateFeed]">
-            </PersistentString>
-            <PersistentString
-               value = "[entity.pubDateFeed compare:[NSdate date]]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[NewsTableView titlesString]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
@@ -91,14 +99,6 @@
          <PersistentStrings>
             <PersistentString
                value = "((NSArray*)self.subTitleArray[column]).count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[NewsTableView setFavoriteButtonForCell:WithEntity:]:NewsTableView.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "entity.favorite">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -118,13 +118,13 @@
                value = "titleFeed">
             </PersistentString>
             <PersistentString
+               value = "pubDateFeed">
+            </PersistentString>
+            <PersistentString
                value = "tempString">
             </PersistentString>
             <PersistentString
                value = "linkFeed">
-            </PersistentString>
-            <PersistentString
-               value = "pubDateFeed">
             </PersistentString>
             <PersistentString
                value = "urlImage">
@@ -162,6 +162,9 @@
                value = "self.array[self.NewsSegmentedControl.selectedSegmentIndex]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ZLDropDownMenu titleButtonDidClick:]:ZLDropDownMenu.m">
       </ContextState>
       <ContextState
          contextName = "-[NewsTableView initFetchResultController]:NewsTableView.m">
@@ -216,10 +219,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[ParserManager parseXmlData:callback:]:ParserManager.m">
+         contextName = "-[XMLParser getImageUrlFromDescription:]:XMLParser.m">
       </ContextState>
       <ContextState
-         contextName = "-[XMLParser getImageUrlFromDescription:]:XMLParser.m">
+         contextName = "-[ParserManager parseXmlData:callback:]:ParserManager.m">
       </ContextState>
       <ContextState
          contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke_2.43:RemoteFacade.m">
@@ -238,6 +241,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[NewsTableView onFavoriteBtnTouch:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "sender.tag">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[MenuViewController tableView:didSelectRowAtIndexPath:]:MenuViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -249,18 +260,21 @@
          contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke_3:RemoteFacade.m">
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableView onFavoriteBtnTouch:]:NewsTableView.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "sender.tag">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[NewsTableView tableView:didSelectRowAtIndexPath:]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
                value = "newsArray">
+            </PersistentString>
+            <PersistentString
+               value = "self.isOfflineMode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[SettingsVC settingsOfflineCell:didChangeValue:]:SettingsVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "sender.isOn">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -282,6 +296,9 @@
                value = "self.info">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[XMLParser getDescriptionString:]:XMLParser.m">
       </ContextState>
       <ContextState
          contextName = "-[DataManager updateDataWithURLArray:WithCallBack:]:DataManager.m">
@@ -326,10 +343,10 @@
                value = "currentNews.feedIdString">
             </PersistentString>
             <PersistentString
-               value = "currentNews.titleFeed">
+               value = "serviceString">
             </PersistentString>
             <PersistentString
-               value = "serviceString">
+               value = "currentNews.titleFeed">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -548,25 +565,22 @@
          contextName = "-[XMLParser parser:didEndElement:namespaceURI:qualifiedName:]:XMLParser.m">
          <PersistentStrings>
             <PersistentString
-               value = "currentDataDictionary">
-            </PersistentString>
-            <PersistentString
                value = "dictParsedData">
             </PersistentString>
             <PersistentString
                value = "descriptionFeed">
             </PersistentString>
             <PersistentString
-               value = "pubDateFeed">
-            </PersistentString>
-            <PersistentString
-               value = "tempString">
-            </PersistentString>
-            <PersistentString
                value = "urlImage">
             </PersistentString>
             <PersistentString
-               value = "[pubDateFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]">
+               value = "pubDateFeed">
+            </PersistentString>
+            <PersistentString
+               value = "currentDataDictionary">
+            </PersistentString>
+            <PersistentString
+               value = "tempString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

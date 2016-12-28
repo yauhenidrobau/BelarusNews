@@ -43,6 +43,15 @@ SINGLETON(RealmDataManager)
     }
 }
 
+-(void)updateEntity:(NewsEntity *)entity {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    entity.favorite = !entity.favorite;
+    [realm addOrUpdateObject:entity];
+    [realm commitWriteTransaction];
+    NSLog(@"Saved Successfully");
+}
+
 -(NSArray*)RLMResultsToArray:(RLMResults *)results{
     NSMutableArray *array = [NSMutableArray array];
     for (RLMObject *object in results) {

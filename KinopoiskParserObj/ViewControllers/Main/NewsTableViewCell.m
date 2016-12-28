@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pubDateLabel;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 
 @end
 
@@ -23,24 +24,26 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.textLabel.textColor = [UIColor whiteColor];
-//    self.userDefaults = [NSUserDefaults standardUserDefaults];
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
-
--(void)saveFavoriteNews:(NewsEntity*)entity {
-    
-    self.favoriteButton.imageView.image = nil;
+- (IBAction)favoriteButtonDidTap:(id)sender {
+    [self.cellDelegate newsTableViewCell:self didTapFavoriteButton:sender];    
 }
 
--(void)cellForNews:(NewsEntity *)entity {
+-(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath  {
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     self.titleLabel.text = entity.titleFeed;
     self.descriptionLabel.text = entity.descriptionFeed;
+    [self.favoriteButton setImage:[self.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    if (!entity.favorite) {
+        [self.favoriteButton setTintColor:[UIColor grayColor]];
+    } else {
+        [self.favoriteButton setTintColor:[UIColor yellowColor]];
+    }
+    
     [formatter setDateFormat:@"d MMM"];
     
     if([[formatter stringFromDate:entity.pubDateFeed] isEqualToString:[formatter stringFromDate:[NSDate date]]]) {

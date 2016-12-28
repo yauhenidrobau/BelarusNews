@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Realm/Realm.h>
 #import "Macros.h"
+#import "NewsEntity.h"
 
 #warning correct callback
 typedef void(^RealmDataManagerSaveCallback)(NSError* error);
@@ -17,4 +18,5 @@ typedef void(^RealmDataManagerSaveCallback)(NSError* error);
 + (instancetype)sharedInstance;
 
 -(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)serviceString;
+-(void)updateEntity:(NewsEntity *)entity;
 @end

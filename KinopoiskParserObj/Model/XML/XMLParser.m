@@ -67,13 +67,18 @@ NSMutableString * tempString;
             [currentDataDictionary  setObject:linkFeed forKey:@"link"];
         }
         if (descriptionFeed.length) {
-            [currentDataDictionary  setObject:descriptionFeed forKey:@"description"];
             NSString *temp = [self getImageUrlFromDescription:descriptionFeed];
             if (temp.length) {
                 [urlImage appendString:temp];
             } else {
                 urlImage = [NSMutableString stringWithString:@""];
             }
+            if (tempString.length) {
+                descriptionFeed = [NSMutableString stringWithString:tempString];
+            }
+            descriptionFeed =[NSMutableString stringWithString:[self getDescriptionString:descriptionFeed]];
+            [currentDataDictionary  setObject:descriptionFeed forKey:@"description"];
+            
         }
         if (urlImage.length) {
             [currentDataDictionary  setObject:urlImage forKey:@"imageUrl"];
@@ -139,6 +144,53 @@ NSMutableString * tempString;
     NSArray *urlStrArray = [urlString componentsSeparatedByString:@" "];
     finalUrlstring = [urlStrArray[0] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
     return finalUrlstring;
+}
+
+-(NSString *)getDescriptionString:(NSMutableString *)descriptionFeed {
+    NSString *urlString;
+    NSArray *urlStrArray;
+    //get description for TUT.BY
+    NSRange range = [descriptionFeed rangeOfString:@"/>" options:NSCaseInsensitiveSearch];
+    if (range.location < 1000) {
+
+    urlString = [descriptionFeed substringFromIndex:range.location];
+    urlString = [urlString substringFromIndex:2];
+    urlStrArray = [urlString componentsSeparatedByString:@"<br"];
+    } else if (range.location > 1000) {
+        
+        // get description for DEV.BY
+        range = [descriptionFeed rangeOfString:@"<div><p>" options:NSCaseInsensitiveSearch];
+        if (range.location > 1000) {
+            // get description for MTS.BY
+            range = [descriptionFeed rangeOfString:@"<p><b>" options:NSCaseInsensitiveSearch];
+            if (range.location > 1000) {
+                range = [descriptionFeed rangeOfString:@"<p>" options:NSCaseInsensitiveSearch];
+                if (range.location > 1000) {
+                // get description for PRAVO.BY
+                urlString = [descriptionFeed substringFromIndex:range.location];
+                urlString = [urlString substringFromIndex:0];
+                } else {
+                    // get description for MTS.BY
+                    urlString = [descriptionFeed substringFromIndex:range.location];
+                    urlString = [urlString substringFromIndex:3];
+                    urlStrArray = [urlString componentsSeparatedByString:@"</p>"];
+                }
+            } else {
+            urlString = [descriptionFeed substringFromIndex:range.location];
+            urlString = [urlString substringFromIndex:6];
+            urlStrArray = [urlString componentsSeparatedByString:@" </b></p>"];
+            }
+            
+        } else {
+            urlString = [descriptionFeed substringFromIndex:range.location];
+            urlString = [urlString substringFromIndex:8];
+            urlStrArray = [urlString componentsSeparatedByString:@", <a"];
+        }
+    }
+    
+
+    return urlStrArray[0];
+   
 }
 
 /*

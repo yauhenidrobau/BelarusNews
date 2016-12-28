@@ -42,6 +42,9 @@
 		1E73294F1D7843310027E46E /* RemoteFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73294E1D7843310027E46E /* RemoteFacade.m */; };
 		1E7329521D7845210027E46E /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329511D7845210027E46E /* DataManager.m */; };
 		1E7329551D7848530027E46E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329541D7848530027E46E /* DetailsViewController.m */; };
+		1EFD659D1E13C80000F5BA4D /* DetailsOfflineVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD659C1E13C80000F5BA4D /* DetailsOfflineVCViewController.m */; };
+		1EFD65A41E13EABE00F5BA4D /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD65A31E13EABE00F5BA4D /* SettingsVC.m */; };
+		1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD65A71E13EE4300F5BA4D /* SettingsOfflineCell.m */; };
 		3D499CCAEC00E7C593490045 /* libPods-KinopoiskParserObj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF0EC11EF02CB57D6640E485 /* libPods-KinopoiskParserObj.a */; };
 		843B7B561DF35E27001532A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B7B551DF35E27001532A4 /* RootViewController.m */; };
 		844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A9FD11DF0EE2A00917832 /* MenuViewController.m */; };
@@ -153,8 +156,15 @@
 		1E73294E1D7843310027E46E /* RemoteFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteFacade.m; sourceTree = "<group>"; };
 		1E7329501D7845210027E46E /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		1E7329511D7845210027E46E /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
-		1E7329531D7848530027E46E /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
-		1E7329541D7848530027E46E /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		1E7329531D7848530027E46E /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsViewController.h; path = KinopoiskParserObj/ViewControllers/Details/DetailsViewController.h; sourceTree = SOURCE_ROOT; };
+		1E7329541D7848530027E46E /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsViewController.m; path = KinopoiskParserObj/ViewControllers/Details/DetailsViewController.m; sourceTree = SOURCE_ROOT; };
+		1EFD659B1E13C80000F5BA4D /* DetailsOfflineVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsOfflineVCViewController.h; path = KinopoiskParserObj/ViewControllers/Details/DetailsOfflineVCViewController.h; sourceTree = SOURCE_ROOT; };
+		1EFD659C1E13C80000F5BA4D /* DetailsOfflineVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsOfflineVCViewController.m; path = KinopoiskParserObj/ViewControllers/Details/DetailsOfflineVCViewController.m; sourceTree = SOURCE_ROOT; };
+		1EFD65A21E13EABE00F5BA4D /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
+		1EFD65A31E13EABE00F5BA4D /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsVC.m; sourceTree = "<group>"; };
+		1EFD65A61E13EE4300F5BA4D /* SettingsOfflineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsOfflineCell.h; sourceTree = "<group>"; };
+		1EFD65A71E13EE4300F5BA4D /* SettingsOfflineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsOfflineCell.m; sourceTree = "<group>"; };
+		1EFD65AA1E13EEFF00F5BA4D /* SettingsCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCellDelegate.h; sourceTree = "<group>"; };
 		336B6CDD81FCEE97E5F4E57B /* Pods-KinopoiskParserObj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinopoiskParserObj.release.xcconfig"; path = "Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj.release.xcconfig"; sourceTree = "<group>"; };
 		843B7B541DF35E27001532A4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		843B7B551DF35E27001532A4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
@@ -205,6 +215,7 @@
 				FF0EC11EF02CB57D6640E485 /* libPods-KinopoiskParserObj.a */,
 			);
 			name = Frameworks;
+			path = KinopoiskParserObj/Frameworks;
 			sourceTree = "<group>";
 		};
 		1E26668F1E127AC3001DF2A2 /* CustomSearchBar */ = {
@@ -320,7 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				1E73292D1D7814340027E46E /* Model */,
-				1E73292C1D78142D0027E46E /* UI */,
+				1E73292C1D78142D0027E46E /* ViewControllers */,
 				1E7329281D7813890027E46E /* Util */,
 				1E7328F51D7813740027E46E /* AppDelegate.h */,
 				1E7328F61D7813740027E46E /* AppDelegate.m */,
@@ -370,18 +381,16 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		1E73292C1D78142D0027E46E /* UI */ = {
+		1E73292C1D78142D0027E46E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1EFD65A11E13EA9200F5BA4D /* Settings */,
+				1EFD65A01E13D78800F5BA4D /* Root */,
+				1EFD659F1E13D6EB00F5BA4D /* Details */,
+				1EFD659E1E13D54D00F5BA4D /* Main */,
 				844A9FCF1DF0EDE200917832 /* MenuVC */,
-				1E73292E1D7814620027E46E /* NewsTableView.h */,
-				1E73292F1D7814620027E46E /* NewsTableView.m */,
-				1E7329341D7814C00027E46E /* NewsTableViewCell.h */,
-				1E7329351D7814C00027E46E /* NewsTableViewCell.m */,
-				1E7329531D7848530027E46E /* DetailsViewController.h */,
-				1E7329541D7848530027E46E /* DetailsViewController.m */,
 			);
-			path = UI;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		1E73292D1D7814340027E46E /* Model */ = {
@@ -413,6 +422,57 @@
 			path = Model/Persistance;
 			sourceTree = "<group>";
 		};
+		1EFD659E1E13D54D00F5BA4D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				1E73292E1D7814620027E46E /* NewsTableView.h */,
+				1E73292F1D7814620027E46E /* NewsTableView.m */,
+				1E7329341D7814C00027E46E /* NewsTableViewCell.h */,
+				1E7329351D7814C00027E46E /* NewsTableViewCell.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		1EFD659F1E13D6EB00F5BA4D /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				1E7329531D7848530027E46E /* DetailsViewController.h */,
+				1E7329541D7848530027E46E /* DetailsViewController.m */,
+				1EFD659B1E13C80000F5BA4D /* DetailsOfflineVCViewController.h */,
+				1EFD659C1E13C80000F5BA4D /* DetailsOfflineVCViewController.m */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		1EFD65A01E13D78800F5BA4D /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				843B7B541DF35E27001532A4 /* RootViewController.h */,
+				843B7B551DF35E27001532A4 /* RootViewController.m */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		1EFD65A11E13EA9200F5BA4D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				1EFD65A51E13EDEA00F5BA4D /* Cells */,
+				1EFD65A21E13EABE00F5BA4D /* SettingsVC.h */,
+				1EFD65A31E13EABE00F5BA4D /* SettingsVC.m */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		1EFD65A51E13EDEA00F5BA4D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1EFD65AA1E13EEFF00F5BA4D /* SettingsCellDelegate.h */,
+				1EFD65A61E13EE4300F5BA4D /* SettingsOfflineCell.h */,
+				1EFD65A71E13EE4300F5BA4D /* SettingsOfflineCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		63BC8B2900C89A3FD674B9BB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,8 +487,6 @@
 			children = (
 				844A9FD01DF0EE2A00917832 /* MenuViewController.h */,
 				844A9FD11DF0EE2A00917832 /* MenuViewController.m */,
-				843B7B541DF35E27001532A4 /* RootViewController.h */,
-				843B7B551DF35E27001532A4 /* RootViewController.m */,
 			);
 			path = MenuVC;
 			sourceTree = "<group>";
@@ -636,6 +694,8 @@
 				1E640B5D1E0A85FE00AA539C /* MASViewAttribute.m in Sources */,
 				1E640B661E0A85FE00AA539C /* ZLDropDownMenuUICalc.m in Sources */,
 				1E640B5B1E0A85FE00AA539C /* MASConstraintMaker.m in Sources */,
+				1EFD659D1E13C80000F5BA4D /* DetailsOfflineVCViewController.m in Sources */,
+				1EFD65A41E13EABE00F5BA4D /* SettingsVC.m in Sources */,
 				1E640B631E0A85FE00AA539C /* ZLDropDownMenu.m in Sources */,
 				1E7329301D7814620027E46E /* NewsTableView.m in Sources */,
 				1E73292B1D7813B50027E46E /* Constants.m in Sources */,
@@ -656,6 +716,7 @@
 				843B7B561DF35E27001532A4 /* RootViewController.m in Sources */,
 				1E7329521D7845210027E46E /* DataManager.m in Sources */,
 				1E640B601E0A85FE00AA539C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */,
 				1E372F861DF94C7400362CC1 /* SearchManager.m in Sources */,
 				1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */,
 				1E640B5F1E0A85FE00AA539C /* NSArray+MASAdditions.m in Sources */,
