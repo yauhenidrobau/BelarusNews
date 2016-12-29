@@ -52,6 +52,25 @@ SINGLETON(RealmDataManager)
     NSLog(@"Saved Successfully");
 }
 
+-(NSArray*)getFavoritesArray{
+    RLMResults *results = [NewsEntity allObjects];
+    NSArray *allResultsArray = [self RLMResultsToArray:results];
+    NSMutableArray *favoritesArray = [NSMutableArray array];
+    for (NewsEntity *entity in allResultsArray) {
+        if (entity.favorite) {
+            [favoritesArray addObject:entity];
+        }
+    }
+    return favoritesArray;
+}
+
+-(NSArray*)getAllOjbects{
+    RLMResults *results = [NewsEntity allObjects];
+    NSArray *allResultsArray = [self RLMResultsToArray:results];
+    
+    return allResultsArray;
+}
+
 -(NSArray*)RLMResultsToArray:(RLMResults *)results{
     NSMutableArray *array = [NSMutableArray array];
     for (RLMObject *object in results) {

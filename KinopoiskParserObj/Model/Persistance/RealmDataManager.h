@@ -19,4 +19,7 @@ typedef void(^RealmDataManagerSaveCallback)(NSError* error);
 
 -(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)serviceString;
 -(void)updateEntity:(NewsEntity *)entity;
+-(NSArray*)getFavoritesArray;
+-(NSArray*)getAllOjbects;
+-(NSArray*)RLMResultsToArray:(RLMResults *)results;
 @end

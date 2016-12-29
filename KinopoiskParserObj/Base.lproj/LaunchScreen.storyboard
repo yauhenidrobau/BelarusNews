@@ -19,19 +19,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-launch-MTS.BY" translatesAutoresizingMaskIntoConstraints="NO" id="wtD-ex-19C" userLabel="MTS.BY"/>
+                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-launch-ONLINER" translatesAutoresizingMaskIntoConstraints="NO" id="M9I-dt-Dog" userLabel="ONLINER"/>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-launch-TUT.BY" translatesAutoresizingMaskIntoConstraints="NO" id="Fki-W4-FYq" userLabel="TUT.BY"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-launch-PRAVO.BY" translatesAutoresizingMaskIntoConstraints="NO" id="FGV-rl-CBo" userLabel="PRAVO.BY"/>
                             <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-launch-Dev.by" translatesAutoresizingMaskIntoConstraints="NO" id="RlR-oV-qXF" userLabel="Dev.BY">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-launch-TUT.BY" translatesAutoresizingMaskIntoConstraints="NO" id="Fki-W4-FYq" userLabel="TUT.BY"/>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-launch-PRAVO.BY" translatesAutoresizingMaskIntoConstraints="NO" id="FGV-rl-CBo" userLabel="PRAVO.BY"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RlR-oV-qXF" secondAttribute="trailing" id="1ff-Eq-rjD"/>
                             <constraint firstItem="Fki-W4-FYq" firstAttribute="height" secondItem="wtD-ex-19C" secondAttribute="height" id="4Ga-bP-v0e"/>
                             <constraint firstItem="wtD-ex-19C" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="4uv-k3-5iN"/>
-                            <constraint firstItem="RlR-oV-qXF" firstAttribute="top" secondItem="wtD-ex-19C" secondAttribute="bottom" id="7ww-My-2DH"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="FGV-rl-CBo" secondAttribute="bottom" id="Dbi-pr-Y6W"/>
+                            <constraint firstItem="M9I-dt-Dog" firstAttribute="top" secondItem="wtD-ex-19C" secondAttribute="bottom" id="Gel-Zf-xiS"/>
+                            <constraint firstItem="RlR-oV-qXF" firstAttribute="top" secondItem="M9I-dt-Dog" secondAttribute="bottom" id="Hwm-bg-clC"/>
+                            <constraint firstAttribute="trailing" secondItem="M9I-dt-Dog" secondAttribute="trailing" id="Jp4-Am-57T"/>
+                            <constraint firstItem="M9I-dt-Dog" firstAttribute="height" secondItem="wtD-ex-19C" secondAttribute="height" id="Jtm-an-6WK"/>
                             <constraint firstItem="RlR-oV-qXF" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="K8a-8y-Luy"/>
                             <constraint firstAttribute="trailing" secondItem="wtD-ex-19C" secondAttribute="trailing" id="Nbp-JM-lGF"/>
                             <constraint firstItem="RlR-oV-qXF" firstAttribute="height" secondItem="wtD-ex-19C" secondAttribute="height" id="R46-7s-1mc"/>
@@ -42,6 +46,7 @@
                             <constraint firstItem="FGV-rl-CBo" firstAttribute="height" secondItem="wtD-ex-19C" secondAttribute="height" id="dZX-YS-nQK"/>
                             <constraint firstItem="Fki-W4-FYq" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="dbb-S8-bfA"/>
                             <constraint firstAttribute="trailing" secondItem="Fki-W4-FYq" secondAttribute="trailing" id="erQ-Bq-3DJ"/>
+                            <constraint firstItem="M9I-dt-Dog" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ryx-qw-WEQ"/>
                             <constraint firstItem="wtD-ex-19C" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="uaB-07-RpF"/>
                         </constraints>
                     </view>
@@ -54,6 +59,7 @@
     <resources>
         <image name="icon-launch-Dev.by" width="230" height="87"/>
         <image name="icon-launch-MTS.BY" width="322" height="217"/>
+        <image name="icon-launch-ONLINER" width="125" height="94"/>
         <image name="icon-launch-PRAVO.BY" width="336" height="164"/>
         <image name="icon-launch-TUT.BY" width="303" height="76"/>
     </resources>

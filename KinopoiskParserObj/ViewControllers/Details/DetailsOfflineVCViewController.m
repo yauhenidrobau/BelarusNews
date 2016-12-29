@@ -11,7 +11,7 @@
 @interface DetailsOfflineVCViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *detailsTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *detailsDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UITextView *detailsDescriptionTV;
 
 @end
 
@@ -20,7 +20,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _detailsTitleLabel.text = self.detailsTitle;
-    _detailsDescriptionLabel.text = self.detailsDescription;
+//    NSAttributedString *attributedString = [[NSAttributedString alloc]
+//                                            initWithData: [self.detailsDescription dataUsingEncoding:NSUnicodeStringEncoding]
+//                                            options: @{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+//                                                        NSFontAttributeName: [UIFont systemFontOfSize:17]}
+//                                            documentAttributes: nil
+//                                            error: nil
+//                                            ];
+    self.detailsDescriptionTV.attributedText = self.detailsDescription;
 }
 
 - (void)didReceiveMemoryWarning {

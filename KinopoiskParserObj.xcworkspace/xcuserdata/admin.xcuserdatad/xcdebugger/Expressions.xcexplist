@@ -3,25 +3,6 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[UIViewController(LMSideBarController) sideBarController]:UIViewController+LMSideBarController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "iter.parentViewController">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[NewsTableView menu:didSelectRowAtIndexPath:]:NewsTableView.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.titlesString">
-            </PersistentString>
-            <PersistentString
-               value = "self.urlString">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
@@ -44,10 +25,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[XMLParser parser:didEndElement:namespaceURI:qualifiedName:]:XMLParser.m">
+         contextName = "__27-[NewsTableView updateData]_block_invoke_2:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "titleFeed">
+               value = "networkStatus">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[UIViewController(LMSideBarController) sideBarController]:UIViewController+LMSideBarController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "iter.parentViewController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView menu:didSelectRowAtIndexPath:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.titlesString">
+            </PersistentString>
+            <PersistentString
+               value = "self.urlString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -69,21 +69,46 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableView awakeFromNib]:NewsTableView.m">
-      </ContextState>
-      <ContextState
-         contextName = "__27-[NewsTableView updateData]_block_invoke_2:NewsTableView.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "networkStatus">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "-[NewsTableView searchBarTextDidChange:]:NewsTableView.m">
       </ContextState>
       <ContextState
          contextName = "-[DetailsViewController viewWillAppear:]:DetailsViewController.m">
          <PersistentStrings>
             <PersistentString
                value = "_newsUrl">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[XMLParser parser:foundCharacters:]:XMLParser.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentElement">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[XMLParser parser:didEndElement:namespaceURI:qualifiedName:]:XMLParser.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "descriptionFeed">
+            </PersistentString>
+            <PersistentString
+               value = "linkFeed">
+            </PersistentString>
+            <PersistentString
+               value = "titleFeed">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView awakeFromNib]:NewsTableView.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[XMLParser parser:foundCDATA:]:XMLParser.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentElement">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

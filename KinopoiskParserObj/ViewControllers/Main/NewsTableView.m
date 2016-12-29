@@ -77,9 +77,10 @@ typedef enum {
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    _mainTitleArray = @[@"TUT.BY",@"DEV.BY", @"PRAVO.BY", @"MTS"];
+    _mainTitleArray = @[@"TUT.BY",@"ONLINER.BY",@"DEV.BY", @"PRAVO.BY", @"MTS"];
     _subTitleArray = @[
                        @[@"Main", @"Economic", @"Society", @"World",@"Culture",@"Accident",@"Finance",@"Realty",@"Sport",@"Auto",@"Lady",@"Science"],
+                       @[@"People",@"Auto",@"Tech",@"Realt"],
                        @[@"All News"],
                        @[@"All News"],
                        @[@"All News"]
@@ -98,6 +99,9 @@ typedef enum {
                                      AUTO_NEWS,@"Auto",
                                      LADY_NEWS,@"Lady",
                                      SCIENCE_NEWS,@"Science", nil],
+                         @"ONLINER.BY": [NSDictionary dictionaryWithObjectsAndKeys:
+                                     PEOPLE_ONLINER_LINK,@"People",
+                                     AUTO_ONLINER_LINK,@"Auto",TECH_ONLINER_NEWS,@"Tech",REALT_ONLINER_NEWS,@"Realt", nil],
                          @"PRAVO.BY" : @[PRAVO_NEWS],
                          @"YANDEX" : @[YANDEX_NEWS],
                          @"MTS" : @[MTS_BY_NEWS]};
@@ -113,17 +117,17 @@ typedef enum {
     [self addPullToRefresh];
     self.isAlertShown = NO;
     self.operationQueue = [NSOperationQueue new];
+    [self update];
 
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationItem setTitle:@""];
+    [self.navigationItem setTitle:@"Choose Category"];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.isOfflineMode = [defaults boolForKey:@"OfflineMode"];
-    [self update];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -262,7 +266,7 @@ typedef enum {
 }
 
 -(UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
-    return [UIColor whiteColor];
+    return MAIN_COLOR;
 }
 
 #pragma mark - DZNEmptyDataSetSource Methods
@@ -339,6 +343,7 @@ typedef enum {
 }
 
 - (void)searchBarDidTapReturn:(INSSearchBar *)searchBar {
+    [self searchBarTextDidChange:searchBar];
     [self.searchBar.searchField resignFirstResponder];
 }
 
@@ -348,9 +353,13 @@ typedef enum {
         [self showLoadingIndicator:YES];
         self.isSearchStart = YES;
         __weak typeof (self)wself = self;
-        [[SearchManager sharedInstance]updateSearchResults:self.searchBar.searchField.text forArray:self.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
+        self.newsArray = [[RealmDataManager sharedInstance] getAllOjbects];
+
+        [[SearchManager sharedInstance]updateSearchResults:wself.searchBar.searchField.text forArray:wself.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
             wself.searchResults = searchResults;
-            [wself setupData];
+            [wself.tableView reloadData];
+            [self showLoadingIndicator:NO];
+
             NSLog(@"Get SEARCH %ld",wself.searchResults.count);
         }];
     } else {
@@ -398,7 +407,7 @@ typedef enum {
 -(void)setAppierance {
     [self.activityInd setHidden:YES];
     self.scrollButton.hidden = YES;
-    
+//    self.scrollButton.backgroundColor = RGB(184, 63, 75);
     self.tableView.estimatedRowHeight = 80;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.emptyDataSetSource = self;
@@ -419,20 +428,12 @@ typedef enum {
     [self showLoadingIndicator:YES];
     if (!self.menuTitle.length) {
         RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesString];
-        NSArray *allResultsArray = [self RLMResultsToArray:results];
+        NSArray *allResultsArray = [[RealmDataManager sharedInstance] RLMResultsToArray:results];
         
         self.newsArray = [self sortNewsArray:allResultsArray];
         NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
     } else {
-        RLMResults *results = [NewsEntity allObjects];
-        NSArray *allResultsArray = [self RLMResultsToArray:results];
-        NSMutableArray *favoritesArray = [NSMutableArray array];
-        for (NewsEntity *entity in allResultsArray) {
-            if (entity.favorite) {
-                [favoritesArray addObject:entity];
-            }
-        }
-        self.newsArray = [self sortNewsArray:[NSArray arrayWithArray:favoritesArray]];
+        self.newsArray = [self sortNewsArray:[NSArray arrayWithArray:[[RealmDataManager sharedInstance] getFavoritesArray]]];
         NSLog(@"Get favorites Elements  %lu",(unsigned long)self.newsArray.count);
     }
     [self.tableView reloadData];
@@ -451,13 +452,6 @@ typedef enum {
     return self.newsArray;
 }
 
--(NSArray*)RLMResultsToArray:(RLMResults *)results{
-    NSMutableArray *array = [NSMutableArray array];
-    for (RLMObject *object in results) {
-        [array addObject:object];
-    }
-    return array;
-}
 -(void)showLoadingIndicator:(BOOL)show {
     self.activityInd.hidden = !show;
     if (show) {

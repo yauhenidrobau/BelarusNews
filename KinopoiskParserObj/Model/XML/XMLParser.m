@@ -24,7 +24,7 @@ NSMutableString *descriptionFeed;
 NSMutableString *pubDateFeed;
 NSMutableString *linkFeed;
 NSMutableString *urlImage;
-NSMutableString * tempString;
+NSMutableDictionary *CDDateDict;
 
 #pragma mark - Lifecycle
 
@@ -47,12 +47,33 @@ NSMutableString * tempString;
         descriptionFeed =  [[NSMutableString alloc] initWithString: @""];
         pubDateFeed = [[NSMutableString alloc] initWithString: @""];
         linkFeed = [NSMutableString new];
-        tempString = [[NSMutableString alloc] initWithString: @""];
+        CDDateDict = [[NSMutableDictionary alloc] init];
         urlImage = [[NSMutableString alloc] initWithString: @""];
     }
-//    if ([elementName isEqualToString:@"media:content"]) {
-//        urlImage = [[NSMutableString alloc] initWithString: attributeDict[@"url"]];
-//    }
+    if ([elementName isEqualToString:@"media:thumbnail"]) {
+        urlImage = [[NSMutableString alloc] initWithString: attributeDict[@"url"]];
+    }
+}
+
+- (void)parser:(NSXMLParser *)parser foundCDATA:(NSData *)CDATABlock {
+     NSString *someString = [[NSString alloc] initWithData:CDATABlock encoding:NSUTF8StringEncoding];
+    [CDDateDict setObject:someString forKey:currentElement];
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+    NSString *temp =  CDDateDict[currentElement]? CDDateDict[currentElement] : string;
+    
+    if ([currentElement  isEqual: @"title"]) {
+        [titleFeed appendString: temp];
+    } else if ([currentElement  isEqual: @"description"]) {
+        [descriptionFeed appendString:temp];
+    } else if ([currentElement  isEqual: @"link"] && linkFeed.length == 0){
+        [linkFeed appendString:temp];
+    } else if ([currentElement  isEqual: @"pubDate"]) {
+        if (!pubDateFeed.length) {
+            [ pubDateFeed  appendString:temp ];
+        }
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName{
@@ -64,20 +85,22 @@ NSMutableString * tempString;
         }
         if (linkFeed.length) {
 #warning must get 0 element
-
+            
             // must get 0 element
             [currentDataDictionary  setObject:linkFeed forKey:@"link"];
         }
         if (descriptionFeed.length) {
             NSString *temp = [self getImageUrlFromDescription:descriptionFeed];
-            if (temp.length) {
-                [urlImage appendString:temp];
-            } else {
-                urlImage = [NSMutableString stringWithString:@""];
+            if (!urlImage.length) {
+                if (temp.length) {
+                    [urlImage appendString:temp];
+                } else {
+                    urlImage = [NSMutableString stringWithString:@""];
+                }
             }
-            if (tempString.length) {
-                descriptionFeed = [NSMutableString stringWithString:tempString];
-            }
+//            if (tempString.length) {
+//                descriptionFeed = [NSMutableString stringWithString:tempString];
+//            }
             descriptionFeed =[NSMutableString stringWithString:[self getDescriptionString:descriptionFeed]];
             [currentDataDictionary  setObject:descriptionFeed forKey:@"description"];
             
@@ -95,25 +118,6 @@ NSMutableString * tempString;
         
         [dictParsedData addObject:currentDataDictionary];
         urlImage = nil;
-    }
-}
-
-- (void)parser:(NSXMLParser *)parser foundCDATA:(NSData *)CDATABlock {
-     NSString *someString = [[NSString alloc] initWithData:CDATABlock encoding:NSUTF8StringEncoding];
-    [tempString appendString:someString];
-}
-
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    if ([currentElement  isEqual: @"title"]) {
-        [titleFeed appendString: string];
-    } else if ([currentElement  isEqual: @"description"]) {
-        [descriptionFeed appendString:string];
-    } else if ([currentElement  isEqual: @"link"] && linkFeed.length == 0){
-        [linkFeed appendString: string];
-    } else if ([currentElement  isEqual: @"pubDate"]) {
-        if (!pubDateFeed.length) {
-            [ pubDateFeed  appendString:string ];
-        }
     }
 }
 
