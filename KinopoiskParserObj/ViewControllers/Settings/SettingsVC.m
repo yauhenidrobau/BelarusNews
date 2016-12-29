@@ -101,7 +101,7 @@ typedef enum {
         SettingsOfflineCell *offlineCell = (SettingsOfflineCell *)cell;
         offlineCell.cellDelegate = self;
     } else if ([cell.reuseIdentifier isEqualToString:SOUND_CELL_TYPE]) {
-        UISwitch *vibrationSwitch = (UISwitch *)[cell viewWithTag:152];
+        UISwitch *soundSwitch = (UISwitch *)[cell viewWithTag:152];
     } 
     if ([cell.reuseIdentifier isEqualToString:SIGN_OUT_CELL_TYPE]) {
     }

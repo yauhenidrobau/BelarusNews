@@ -7,8 +7,10 @@
 //
 
 #import "XMLParser.h"
+
 #import <Foundation/Foundation.h>
 #import "Macros.h"
+#import "DateFormatterManager.h"
 
 @implementation XMLParser 
 SINGLETON(XMLParser)
@@ -84,12 +86,8 @@ NSMutableString * tempString;
             [currentDataDictionary  setObject:urlImage forKey:@"imageUrl"];
         }
         if (pubDateFeed.length) {
-#warning TODO FORMATER MANAGER
-            NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-            [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
-            [formatter setDateFormat:@"E, d MMM yyyy HH:mm:ss Z"];
-
-            NSDate *pubDate = [formatter dateFromString:[pubDateFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+            
+            NSDate *pubDate = [[DateFormatterManager sharedInstance] dateFromString:[pubDateFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] withFormat:@"E, d MMM yyyy HH:mm:ss Z"];;
             if (pubDate) {
                 currentDataDictionary[@"pubDate"] = pubDate;
             }

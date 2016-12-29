@@ -72,6 +72,8 @@
 //        [self.mainNavigationController pushViewController:self.mainViewController animated:YES];
     } else if ([menuViewController.title isEqualToString:NSLocalizedString(@"Settings",nil)]) {
         [self.mainNavigationController pushViewController:self.settingsVC animated:YES];
+    } else if ([menuViewController.title isEqualToString:NSLocalizedString(@"Log out",nil)]) {
+        exit(0);
     }
 }
 

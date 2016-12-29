@@ -68,7 +68,7 @@
 
 static CGFloat const kINSSearchBarInset = 11.0;
 static CGFloat const kINSSearchBarImageSize = 22.0;
-static NSTimeInterval const kINSSearchBarAnimationStepDuration = 0.25;
+static NSTimeInterval const kINSSearchBarAnimationStepDuration = 0.2;
 
 @implementation INSSearchBar
 
@@ -219,7 +219,7 @@ static NSTimeInterval const kINSSearchBarAnimationStepDuration = 0.25;
 			
 			[self.searchField becomeFirstResponder];
 
-			[UIView animateWithDuration:kINSSearchBarAnimationStepDuration * 2 animations:^{
+			[UIView animateWithDuration:kINSSearchBarAnimationStepDuration * 5 animations:^{
 				
 				self.searchFrame.layer.backgroundColor = [UIColor whiteColor].CGColor;
 				self.searchImageViewOff.alpha = 0.0;

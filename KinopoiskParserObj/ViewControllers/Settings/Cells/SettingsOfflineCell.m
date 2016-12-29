@@ -9,7 +9,7 @@
 #import "SettingsOfflineCell.h"
 
 
-@interface SettingsOfflineCell () <SettingsCellDelegate>
+@interface SettingsOfflineCell ()
 @property (weak, nonatomic) IBOutlet UISwitch *offlineSwitch;
 
 @end

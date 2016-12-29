@@ -376,6 +376,14 @@
          contextName = "-[Constants getURLByString:]:Constants.m">
       </ContextState>
       <ContextState
+         contextName = "-[NewsTableView setNewsEntityForIndexPath:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.isSearchStart">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke.30:RemoteFacade.m">
          <PersistentStrings>
             <PersistentString

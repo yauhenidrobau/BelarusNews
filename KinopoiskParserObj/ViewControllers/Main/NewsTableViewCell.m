@@ -9,6 +9,7 @@
 #import "NewsTableViewCell.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "DateFormatterManager.h"
 
 @interface NewsTableViewCell ()
 
@@ -34,7 +35,6 @@
 }
 
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath  {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     self.titleLabel.text = entity.titleFeed;
     self.descriptionLabel.text = entity.descriptionFeed;
     [self.favoriteButton setImage:[self.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
@@ -44,15 +44,11 @@
         [self.favoriteButton setTintColor:[UIColor yellowColor]];
     }
     
-    [formatter setDateFormat:@"d MMM"];
-    
-    if([[formatter stringFromDate:entity.pubDateFeed] isEqualToString:[formatter stringFromDate:[NSDate date]]]) {
-        [formatter setDateFormat:@"HH:mm"];
-        self.pubDateLabel.text =[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Today at", nil),[formatter stringFromDate:entity.pubDateFeed]];
+    if([[[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"d MMM"] isEqualToString:[[DateFormatterManager sharedInstance] stringFromDate:[NSDate date]]]) {
+        self.pubDateLabel.text =[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Today at", nil),[[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"HH:mm"]];
         
     } else {
-        [formatter setDateFormat:@"d MMM HH:mm:ss"];
-        self.pubDateLabel.text = [formatter stringFromDate:entity.pubDateFeed];
+        self.pubDateLabel.text = [[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"d MMM HH:mm:ss"];
 
     }
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]

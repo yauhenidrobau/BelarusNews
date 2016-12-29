@@ -55,7 +55,6 @@ typedef enum {
 @property (strong, nonatomic) NSString *urlString;
 @property (strong, nonatomic) NSString *titlesString;
 @property (nonatomic, strong) NSTimer *timer;
-@property (nonatomic, strong) RLMRealm *realm;
 
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
 @property (strong, nonatomic) NSArray *newsArray;
@@ -108,7 +107,6 @@ typedef enum {
     menu.dataSource = self;
     [self.menuView addSubview:menu];
 
-    self.realm = [RLMRealm defaultRealm];
     self.titlesString = self.subTitleArray[0][0];
     self.urlString = MAIN_NEWS;
     [self setAppierance];
@@ -141,11 +139,7 @@ typedef enum {
 #pragma mark - IBActions
 
 -(void)onRefreshBtnTouch {
-    if (self.isOfflineMode) {
-        [self setupData];
-    } else {
-        [self update];
-    }
+    [self update];
 }
 
 -(void)pullToRefresh {
@@ -311,6 +305,8 @@ typedef enum {
 #pragma mark - ZLDropDownMenuDelegate
 - (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
     self.menuTitle = @"";
+    self.isSearchStart = NO;
+
     NSArray *array = self.subTitleArray[indexPath.column];
 //    NSLog(@"%@", array[indexPath.row]);
     if (array.count == 1) {
@@ -322,14 +318,14 @@ typedef enum {
     self.urlString = dict[self.titlesString];
     }
     NSLog(@"%@ : %@", self.titlesString,self.urlString);
-    [self updateDataWithIndicator:YES];
+    [self update];
 
 }
 
 #pragma mark - INSSearchBarDelegate
 
 - (CGRect)destinationFrameForSearchBar:(INSSearchBar *)searchBar {
-    return CGRectMake(10, 67, CGRectGetWidth(self.view.bounds) - 10.0, 38.0);
+    return CGRectMake(10, 67, CGRectGetWidth(self.view.bounds) - 20.0, 38.0);
 }
 
 - (void)searchBar:(INSSearchBar *)searchBar willStartTransitioningToState:(INSSearchBarState)destinationState {
@@ -343,8 +339,7 @@ typedef enum {
 }
 
 - (void)searchBarDidTapReturn:(INSSearchBar *)searchBar {
-    // Do whatever you deem necessary.
-    // Access the text from the search bar like searchBar.searchField.text
+    [self.searchBar.searchField resignFirstResponder];
 }
 
 - (void)searchBarTextDidChange:(INSSearchBar *)searchBar {
@@ -355,10 +350,8 @@ typedef enum {
         __weak typeof (self)wself = self;
         [[SearchManager sharedInstance]updateSearchResults:self.searchBar.searchField.text forArray:self.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
             wself.searchResults = searchResults;
-            [wself showLoadingIndicator:NO];
-            NSLog(@"Get SEARCH");
-            
-            [wself.tableView reloadData];
+            [wself setupData];
+            NSLog(@"Get SEARCH %ld",wself.searchResults.count);
         }];
     } else {
         self.isSearchStart = NO;
@@ -373,6 +366,7 @@ typedef enum {
     self.scrollButton.hidden = !(scrollView.contentOffset.y > 20);
     UITapGestureRecognizer *gestureRecognizer = [UITapGestureRecognizer new];
     [self.searchBar hideSearchBar:gestureRecognizer];
+
 }
 
 #pragma mark - NewsTableViewCellDelegate
@@ -443,14 +437,12 @@ typedef enum {
     }
     [self.tableView reloadData];
     [self showLoadingIndicator:NO];
-
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
         [self.activityInd stopAnimating];
         [self.refreshControl endRefreshing];
     }
 }
-
 
 -(NSArray *)sortNewsArray:(NSArray*)newsArray {
     NSSortDescriptor * newSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"pubDateFeed" ascending:NO];
@@ -494,7 +486,11 @@ typedef enum {
 }
 
 -(void)update {
-    [self updateDataWithIndicator:YES];
+    if (self.isOfflineMode) {
+        [self setupData];
+    } else {
+        [self updateDataWithIndicator:YES];
+    }
 }
 
 -(void)updateDataWithIndicator:(BOOL)showIndicator {
@@ -514,8 +510,6 @@ typedef enum {
 //                [self setupData];
             } else {
                 self.isAlertShown = NO;
-                
-//                NSString *urlString = [self.newsURLDict[_urlIdentificator] isKindOfClass:[NSArray class]]? s
                 
                 __weak typeof(self) wself = self;
                 [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlString AndTitle:wself.titlesString WithCallBack:^(NSError *error) {
