@@ -438,15 +438,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieS-wf-chy">
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="igL-p7-ybz">
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaa-cG-6uc">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaa-cG-6uc">
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -455,23 +449,31 @@
                                 <color key="backgroundColor" red="0.66274509800000003" green="0.18823529410000001" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="uaa-cG-6uc" firstAttribute="centerY" secondItem="igL-p7-ybz" secondAttribute="centerY" id="0Ym-cU-Kn6"/>
+                                    <constraint firstItem="uaa-cG-6uc" firstAttribute="leading" secondItem="igL-p7-ybz" secondAttribute="leading" constant="10" id="4mA-Ut-m8c"/>
+                                    <constraint firstAttribute="trailing" secondItem="uaa-cG-6uc" secondAttribute="trailing" constant="10" id="ORM-Cr-XYO"/>
                                     <constraint firstItem="uaa-cG-6uc" firstAttribute="centerX" secondItem="igL-p7-ybz" secondAttribute="centerX" id="oHR-5c-sRd"/>
+                                    <constraint firstAttribute="height" constant="150" id="rRJ-Zh-bDx"/>
                                 </constraints>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAT-js-yyH">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ieS-wf-chy" secondAttribute="trailing" id="CA6-ju-1MK"/>
-                            <constraint firstItem="xIQ-CS-aZ9" firstAttribute="top" secondItem="ieS-wf-chy" secondAttribute="bottom" id="CLx-FK-dXe"/>
-                            <constraint firstItem="ieS-wf-chy" firstAttribute="leading" secondItem="5Tr-Iu-809" secondAttribute="leading" id="Eim-ni-kz7"/>
+                            <constraint firstItem="xIQ-CS-aZ9" firstAttribute="top" secondItem="EAT-js-yyH" secondAttribute="bottom" id="0jv-8C-UNM"/>
+                            <constraint firstItem="EAT-js-yyH" firstAttribute="leading" secondItem="5Tr-Iu-809" secondAttribute="leading" constant="5" id="Cy8-NB-xk7"/>
+                            <constraint firstAttribute="trailing" secondItem="EAT-js-yyH" secondAttribute="trailing" constant="5" id="FpP-1m-ebR"/>
                             <constraint firstAttribute="trailing" secondItem="igL-p7-ybz" secondAttribute="trailing" id="JdY-6J-zch"/>
+                            <constraint firstItem="EAT-js-yyH" firstAttribute="top" secondItem="igL-p7-ybz" secondAttribute="bottom" id="KtW-GH-eK8"/>
                             <constraint firstItem="igL-p7-ybz" firstAttribute="leading" secondItem="5Tr-Iu-809" secondAttribute="leading" id="TJg-Al-70w"/>
                             <constraint firstItem="igL-p7-ybz" firstAttribute="top" secondItem="Mhn-2l-mUf" secondAttribute="bottom" id="WcN-iA-jMw"/>
-                            <constraint firstItem="ieS-wf-chy" firstAttribute="top" secondItem="igL-p7-ybz" secondAttribute="bottom" id="zWr-gd-fKD"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="detailsDescriptionTV" destination="ieS-wf-chy" id="uZa-d5-u0O"/>
                         <outlet property="detailsTitleLabel" destination="uaa-cG-6uc" id="DzG-wq-PlZ"/>
                     </connections>
                 </viewController>

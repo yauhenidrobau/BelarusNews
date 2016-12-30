@@ -49,6 +49,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIView *menuView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) INSSearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic) CGPoint lastContentOffset;
 @property (strong, nonatomic) NSOperationQueue * operationQueue;
@@ -117,7 +118,6 @@ typedef enum {
     [self addPullToRefresh];
     self.isAlertShown = NO;
     self.operationQueue = [NSOperationQueue new];
-    [self update];
 
 }
 
@@ -128,6 +128,8 @@ typedef enum {
     self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.isOfflineMode = [defaults boolForKey:@"OfflineMode"];
+    [self updateWithIndicator:YES];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -143,11 +145,11 @@ typedef enum {
 #pragma mark - IBActions
 
 -(void)onRefreshBtnTouch {
-    [self update];
+    [self updateWithIndicator:YES];
 }
 
 -(void)pullToRefresh {
-    [self updateDataWithIndicator:NO];
+    [self updateWithIndicator:NO];
 }
 - (IBAction)leftBarItemTouchUpInside:(id)sender {
     [self.sideBarController showMenuViewControllerInDirection:LMSideBarControllerDirectionLeft];
@@ -322,7 +324,7 @@ typedef enum {
     self.urlString = dict[self.titlesString];
     }
     NSLog(@"%@ : %@", self.titlesString,self.urlString);
-    [self update];
+    [self updateWithIndicator:YES];
 
 }
 
@@ -401,7 +403,7 @@ typedef enum {
 }
 
 -(void)timerActionRefresh {
-    [self update];
+    [self updateWithIndicator:YES];
 }
 
 -(void)setAppierance {
@@ -425,7 +427,6 @@ typedef enum {
 }
 
 -(void)setupData {
-    [self showLoadingIndicator:YES];
     if (!self.menuTitle.length) {
         RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesString];
         NSArray *allResultsArray = [[RealmDataManager sharedInstance] RLMResultsToArray:results];
@@ -438,6 +439,7 @@ typedef enum {
     }
     [self.tableView reloadData];
     [self showLoadingIndicator:NO];
+
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
         [self.activityInd stopAnimating];
@@ -479,16 +481,19 @@ typedef enum {
     }
 }
 
--(void)update {
+-(void)updateWithIndicator:(BOOL)showIndicator {
+    [self showLoadingIndicator:showIndicator];
     if (self.isOfflineMode) {
         [self setupData];
     } else {
         [self updateDataWithIndicator:YES];
     }
+    if (self.refreshControl.isRefreshing) {
+        [self.refreshControl endRefreshing];
+    }
 }
 
 -(void)updateDataWithIndicator:(BOOL)showIndicator {
-    [self showLoadingIndicator:showIndicator];
 
     dispatch_async(dispatch_get_main_queue(), ^{
 

@@ -27,7 +27,7 @@
 //                                            documentAttributes: nil
 //                                            error: nil
 //                                            ];
-    self.detailsDescriptionTV.attributedText = self.detailsDescription;
+    self.detailsDescriptionTV.text = self.detailsDescription;
 }
 
 - (void)didReceiveMemoryWarning {

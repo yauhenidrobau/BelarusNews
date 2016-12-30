@@ -13,7 +13,6 @@
 @interface NewsTableView: UIViewController
 
 @property (strong, nonatomic) NSString *menuTitle;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 -(void)update;
 @end

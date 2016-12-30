@@ -11,6 +11,4 @@
 
 @interface RootViewController : LMSideBarController <LMSideBarControllerDelegate>
 
-@property(nonatomic,strong) UINavigationController *mainNavigationController;
-
 @end

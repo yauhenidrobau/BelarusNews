@@ -18,6 +18,7 @@
 @interface RootViewController ()
 @property(nonatomic,strong) NewsTableView *mainViewController;
 @property(nonatomic,strong) SettingsVC *settingsVC;
+@property(nonatomic,strong) UINavigationController *mainNavigationController;
 
 @end
 
