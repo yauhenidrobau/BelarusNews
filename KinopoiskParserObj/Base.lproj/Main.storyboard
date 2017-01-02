@@ -291,7 +291,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u5u-px-kF3" id="WHh-k4-cD0">
-                                            <frame key="frameInset" width="375" height="80"/>
+                                            <frame key="frameInset" width="375" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image_200_200" translatesAutoresizingMaskIntoConstraints="NO" id="Zqx-GC-hPW">
@@ -326,15 +326,28 @@
                                                         <action selector="favoriteButtonDidTap:" destination="u5u-px-kF3" eventType="touchUpInside" id="7jE-M8-U1d"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBI-or-WRg" userLabel="Share Button">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="cz6-Uk-xHF"/>
+                                                        <constraint firstAttribute="width" constant="30" id="pHE-mu-z59"/>
+                                                    </constraints>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <state key="normal" image="icon-share"/>
+                                                    <connections>
+                                                        <action selector="shareButtonTouchUpInside:" destination="sqv-9R-s6i" eventType="touchUpInside" id="glm-wC-6Kn"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="YFF-L9-PCS" firstAttribute="leading" secondItem="Zqx-GC-hPW" secondAttribute="trailing" constant="3" id="DCZ-DG-VFc"/>
                                                 <constraint firstItem="Zqx-GC-hPW" firstAttribute="centerY" secondItem="WHh-k4-cD0" secondAttribute="centerY" constant="3.5" id="Ph3-Aq-Xg4"/>
                                                 <constraint firstItem="aqv-YZ-k7z" firstAttribute="top" secondItem="WHh-k4-cD0" secondAttribute="top" constant="8" id="Tvq-IS-Fus"/>
                                                 <constraint firstItem="YFF-L9-PCS" firstAttribute="top" secondItem="WHh-k4-cD0" secondAttribute="topMargin" id="UMA-aV-55R"/>
+                                                <constraint firstItem="HBI-or-WRg" firstAttribute="top" secondItem="aqv-YZ-k7z" secondAttribute="bottom" constant="8" id="Uge-J4-SbW"/>
                                                 <constraint firstAttribute="bottom" secondItem="Xqc-xj-tJa" secondAttribute="bottom" constant="5" id="YEf-Of-eZL"/>
                                                 <constraint firstAttribute="trailing" secondItem="aqv-YZ-k7z" secondAttribute="trailing" constant="10" id="akt-As-Dby"/>
                                                 <constraint firstItem="Xqc-xj-tJa" firstAttribute="leading" secondItem="Zqx-GC-hPW" secondAttribute="trailing" constant="3" id="b0U-ep-8BU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="HBI-or-WRg" secondAttribute="trailing" constant="2" id="dAH-18-zCe"/>
                                                 <constraint firstItem="aqv-YZ-k7z" firstAttribute="leading" secondItem="YFF-L9-PCS" secondAttribute="trailing" constant="8" id="hh9-HI-pzx"/>
                                                 <constraint firstItem="Xqc-xj-tJa" firstAttribute="top" secondItem="YFF-L9-PCS" secondAttribute="bottom" id="iwP-2F-fsz"/>
                                                 <constraint firstItem="Xqc-xj-tJa" firstAttribute="width" secondItem="YFF-L9-PCS" secondAttribute="width" id="kPH-iS-fJr"/>
@@ -356,11 +369,15 @@
                                     <outlet property="delegate" destination="sqv-9R-s6i" id="chu-dd-IWR"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JS4-6j-NGK">
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JS4-6j-NGK">
                                 <color key="backgroundColor" red="0.66274509803921566" green="0.18823529411764706" blue="0.22745098039215686" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Palatino-Italic" family="Palatino" pointSize="29"/>
-                                <state key="normal" title="Наверх">
-                                    <color key="titleColor" red="0.91565492069999999" green="0.99115813689999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="C0B-85-2Fn"/>
+                                    <constraint firstAttribute="height" constant="64" id="Tbx-Jv-081"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="icon-arrow-up">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="scrollButtonTouchUpInside:" destination="sqv-9R-s6i" eventType="touchUpInside" id="2c2-2w-mzG"/>
@@ -373,30 +390,20 @@
                                 </constraints>
                                 <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mv5-Q3-5Y8">
-                                <color key="backgroundColor" red="0.098062602489999998" green="0.4689921333" blue="0.53838759820000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="jy2-2o-8ee"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="5sC-Nh-5Wq" firstAttribute="top" secondItem="40g-n2-8tM" secondAttribute="bottom" id="0J1-EG-wOZ"/>
                             <constraint firstItem="40g-n2-8tM" firstAttribute="leading" secondItem="KZF-gn-ztJ" secondAttribute="leading" id="2q8-QH-EH1"/>
                             <constraint firstItem="huB-vo-XM5" firstAttribute="top" secondItem="5sC-Nh-5Wq" secondAttribute="bottom" id="8cl-Hq-N86"/>
+                            <constraint firstItem="JS4-6j-NGK" firstAttribute="centerX" secondItem="KZF-gn-ztJ" secondAttribute="centerX" id="KQ4-il-opZ"/>
                             <constraint firstItem="9pe-Ua-hs5" firstAttribute="top" secondItem="40g-n2-8tM" secondAttribute="bottom" constant="30" id="Sds-jy-yVH"/>
-                            <constraint firstItem="JS4-6j-NGK" firstAttribute="leading" secondItem="KZF-gn-ztJ" secondAttribute="leading" id="Tfm-en-VmM"/>
                             <constraint firstAttribute="trailing" secondItem="5sC-Nh-5Wq" secondAttribute="trailing" id="bjd-EB-wrB"/>
-                            <constraint firstAttribute="trailing" secondItem="Mv5-Q3-5Y8" secondAttribute="trailing" id="e0j-03-XO2"/>
-                            <constraint firstItem="huB-vo-XM5" firstAttribute="top" secondItem="JS4-6j-NGK" secondAttribute="bottom" id="jlu-We-Lip"/>
+                            <constraint firstItem="40g-n2-8tM" firstAttribute="top" secondItem="lSt-03-hQG" secondAttribute="bottom" id="g8B-p9-vOz"/>
+                            <constraint firstItem="huB-vo-XM5" firstAttribute="top" secondItem="JS4-6j-NGK" secondAttribute="bottom" constant="10" id="jlu-We-Lip"/>
                             <constraint firstItem="9pe-Ua-hs5" firstAttribute="centerX" secondItem="KZF-gn-ztJ" secondAttribute="centerX" id="nU4-aX-IBz"/>
-                            <constraint firstAttribute="trailing" secondItem="JS4-6j-NGK" secondAttribute="trailing" id="pio-AU-FHP"/>
-                            <constraint firstItem="40g-n2-8tM" firstAttribute="top" secondItem="Mv5-Q3-5Y8" secondAttribute="bottom" id="qQ0-w0-0Hm"/>
                             <constraint firstItem="5sC-Nh-5Wq" firstAttribute="leading" secondItem="KZF-gn-ztJ" secondAttribute="leading" id="sC3-fC-YVb"/>
-                            <constraint firstItem="Mv5-Q3-5Y8" firstAttribute="leading" secondItem="KZF-gn-ztJ" secondAttribute="leading" id="soT-ZC-ObP"/>
                             <constraint firstAttribute="trailing" secondItem="40g-n2-8tM" secondAttribute="trailing" id="tsa-dT-Y0v"/>
-                            <constraint firstItem="Mv5-Q3-5Y8" firstAttribute="top" secondItem="lSt-03-hQG" secondAttribute="bottom" id="wJT-gY-baJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5CF-Mi-Afl">
@@ -416,7 +423,6 @@
                         <outlet property="activityInd" destination="9pe-Ua-hs5" id="HJm-Xs-aKI"/>
                         <outlet property="menuView" destination="40g-n2-8tM" id="uDQ-AR-Mra"/>
                         <outlet property="scrollButton" destination="JS4-6j-NGK" id="eK3-fp-fW1"/>
-                        <outlet property="searchBarView" destination="Mv5-Q3-5Y8" id="N8x-vz-OPk"/>
                         <outlet property="tableView" destination="5sC-Nh-5Wq" id="sfM-b9-EHS"/>
                         <segue destination="lMo-7K-E7m" kind="show" identifier="DetailsVCID" id="ZGG-uU-zFX"/>
                         <segue destination="sYH-30-c0i" kind="show" identifier="DetailsOfflineVCID" id="Amb-mK-u2S"/>
@@ -474,6 +480,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="detailsDescriptionTV" destination="EAT-js-yyH" id="jCH-8a-YDh"/>
                         <outlet property="detailsTitleLabel" destination="uaa-cG-6uc" id="DzG-wq-PlZ"/>
                     </connections>
                 </viewController>
@@ -497,7 +504,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WHS-qO-2kR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-580" y="385"/>
+            <point key="canvasLocation" x="-1439" y="385"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jd2-n5-V4W">
@@ -520,7 +527,9 @@
     </scenes>
     <resources>
         <image name="avatar_user" width="256" height="256"/>
+        <image name="icon-arrow-up" width="32" height="32"/>
         <image name="icon-favorites" width="256" height="256"/>
+        <image name="icon-share" width="24" height="24"/>
         <image name="icon_list" width="256" height="256"/>
         <image name="no_image_200_200" width="200" height="200"/>
     </resources>

@@ -78,44 +78,9 @@ typedef enum {
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    _mainTitleArray = @[@"TUT.BY",@"ONLINER.BY",@"DEV.BY", @"PRAVO.BY", @"MTS"];
-    _subTitleArray = @[
-                       @[@"Main", @"Economic", @"Society", @"World",@"Culture",@"Accident",@"Finance",@"Realty",@"Sport",@"Auto",@"Lady",@"Science"],
-                       @[@"People",@"Auto",@"Tech",@"Realt"],
-                       @[@"All News"],
-                       @[@"All News"],
-                       @[@"All News"]
-                       ];
-    self.newsURLDict = @{@"DEV.BY": @[DEV_BY_NEWS],
-                         @"TUT.BY": [NSDictionary dictionaryWithObjectsAndKeys:
-                                     MAIN_NEWS,@"Main",
-                                     ECONOMIC_NEWS,@"Economic",
-                                     SOCIETY_NEWS,@"Society",
-                                     WORLD_NEWS,@"World",
-                                     CULTURE_NEWS,@"Culture",
-                                     ACCIDENT_NEWS,@"Accident",
-                                     FINANCE_NEWS,@"Finance",
-                                     REALTY_NEWS,@"Realty",
-                                     SPORT_NEWS,@"Sport",
-                                     AUTO_NEWS,@"Auto",
-                                     LADY_NEWS,@"Lady",
-                                     SCIENCE_NEWS,@"Science", nil],
-                         @"ONLINER.BY": [NSDictionary dictionaryWithObjectsAndKeys:
-                                     PEOPLE_ONLINER_LINK,@"People",
-                                     AUTO_ONLINER_LINK,@"Auto",TECH_ONLINER_NEWS,@"Tech",REALT_ONLINER_NEWS,@"Realt", nil],
-                         @"PRAVO.BY" : @[PRAVO_NEWS],
-                         @"YANDEX" : @[YANDEX_NEWS],
-                         @"MTS" : @[MTS_BY_NEWS]};
-
-    ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, deviceWidth(), 43)];
-    menu.delegate = self;
-    menu.dataSource = self;
-    [self.menuView addSubview:menu];
-
-    self.titlesString = self.subTitleArray[0][0];
-    self.urlString = MAIN_NEWS;
-    [self setAppierance];
-    [self addPullToRefresh];
+    [self prepareData];
+    [self prepareAppierance];
+    [self peparePullToRefresh];
     self.isAlertShown = NO;
     self.operationQueue = [NSOperationQueue new];
 
@@ -162,6 +127,10 @@ typedef enum {
     }];
     self.scrollButton.hidden = YES;
     [self.navigationController setNavigationBarHidden:NO];
+}
+
+- (IBAction)shareButtonTouchUpInside:(id)sender {
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -330,9 +299,9 @@ typedef enum {
 
 #pragma mark - INSSearchBarDelegate
 
-- (CGRect)destinationFrameForSearchBar:(INSSearchBar *)searchBar {
-    return CGRectMake(10, 67, CGRectGetWidth(self.view.bounds) - 20.0, 38.0);
-}
+//- (CGRect)destinationFrameForSearchBar:(INSSearchBar *)searchBar {
+//    return CGRectMake(10, 5.0, CGRectGetWidth(self.view.bounds) - 20.0, 38.0);
+//}
 
 - (void)searchBar:(INSSearchBar *)searchBar willStartTransitioningToState:(INSSearchBarState)destinationState {
     if (destinationState == INSSearchBarStateSearchBarVisible) {
@@ -394,7 +363,7 @@ typedef enum {
 
 #pragma mark - Private methods
 
--(void)addPullToRefresh {
+-(void)peparePullToRefresh {
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor colorWithRed:173/255.0 green:31/255.0 blue:45/255.0 alpha:1.0];
     self.refreshControl.tintColor = [UIColor whiteColor];
@@ -406,23 +375,15 @@ typedef enum {
     [self updateWithIndicator:YES];
 }
 
--(void)setAppierance {
+-(void)prepareAppierance {
     [self.activityInd setHidden:YES];
     self.scrollButton.hidden = YES;
-//    self.scrollButton.backgroundColor = RGB(184, 63, 75);
-    self.tableView.estimatedRowHeight = 80;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.emptyDataSetSource = self;
-    self.tableView.emptyDataSetDelegate = self;
-    
-    [self.navigationItem.titleView setTintColor:[UIColor whiteColor]];
-    UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
-    self.navigationItem.rightBarButtonItem = refreshBtn;
-    
-    self.searchBar = [[INSSearchBar alloc] initWithFrame:CGRectMake(10.0, 67.0,44.0, 38.0)];
-    self.searchBar.delegate = self;
-    self.searchBarView.backgroundColor = MAIN_COLOR;
-    [self.view addSubview:self.searchBar];
+    [self.scrollButton layoutIfNeeded];
+    self.scrollButton.layer.cornerRadius = self.scrollButton.frame.size.height / 2;
+    [self prepareTableView];
+    [self prepareSearchBar];
+    [self prepareNavigationBar];
+    [self prepareDropMenu];
     
 }
 
@@ -538,6 +499,67 @@ typedef enum {
     return newsEntity;
 }
 
+-(void)prepareTableView {
+    self.tableView.estimatedRowHeight = 80;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
+}
+
+-(void)prepareNavigationBar {
+    [self.navigationItem.titleView setTintColor:[UIColor whiteColor]];
+//    UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
+//    self.navigationItem.rightBarButtonItem = refreshBtn;
+    self.navigationItem.titleView = self.searchBar;
+
+}
+
+-(void)prepareSearchBar {
+    self.searchBar = [[INSSearchBar alloc] initWithFrame:CGRectMake(20.0, 5.0, CGRectGetWidth(self.view.bounds) - 40.0, 20.0)];
+    self.searchBar.delegate = self;
+    self.searchBarView.backgroundColor = MAIN_COLOR;
+    [self.view addSubview:self.searchBar];
+}
+
+-(void)prepareData {
+    _mainTitleArray = @[@"TUT.BY",@"ONLINER.BY",@"DEV.BY", @"PRAVO.BY", @"MTS"];
+    _subTitleArray = @[
+                       @[@"Main", @"Economic", @"Society", @"World",@"Culture",@"Accident",@"Finance",@"Realty",@"Sport",@"Auto",@"Lady",@"Science"],
+                       @[@"People",@"Auto",@"Tech",@"Realt"],
+                       @[@"All News"],
+                       @[@"All News"],
+                       @[@"All News"]
+                       ];
+    self.newsURLDict = @{@"DEV.BY": @[DEV_BY_NEWS],
+                         @"TUT.BY": [NSDictionary dictionaryWithObjectsAndKeys:
+                                     MAIN_NEWS,@"Main",
+                                     ECONOMIC_NEWS,@"Economic",
+                                     SOCIETY_NEWS,@"Society",
+                                     WORLD_NEWS,@"World",
+                                     CULTURE_NEWS,@"Culture",
+                                     ACCIDENT_NEWS,@"Accident",
+                                     FINANCE_NEWS,@"Finance",
+                                     REALTY_NEWS,@"Realty",
+                                     SPORT_NEWS,@"Sport",
+                                     AUTO_NEWS,@"Auto",
+                                     LADY_NEWS,@"Lady",
+                                     SCIENCE_NEWS,@"Science", nil],
+                         @"ONLINER.BY": [NSDictionary dictionaryWithObjectsAndKeys:
+                                         PEOPLE_ONLINER_LINK,@"People",
+                                         AUTO_ONLINER_LINK,@"Auto",TECH_ONLINER_NEWS,@"Tech",REALT_ONLINER_NEWS,@"Realt", nil],
+                         @"PRAVO.BY" : @[PRAVO_NEWS],
+                         @"YANDEX" : @[YANDEX_NEWS],
+                         @"MTS" : @[MTS_BY_NEWS]};
+    self.titlesString = self.subTitleArray[0][0];
+    self.urlString = MAIN_NEWS;
+}
+
+-(void)prepareDropMenu {
+    ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, deviceWidth(), 43)];
+    menu.delegate = self;
+    menu.dataSource = self;
+    [self.menuView addSubview:menu];
+}
 //-(void)setFavoriteButtonForCell:(NewsTableViewCell *)cell WithEntity:(NewsEntity *)entity {
 //    [cell.favoriteButton setImage:[cell.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
 //    if (entity.favorite) {

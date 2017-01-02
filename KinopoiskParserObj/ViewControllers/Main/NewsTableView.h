@@ -14,5 +14,5 @@
 
 @property (strong, nonatomic) NSString *menuTitle;
 
--(void)update;
+-(void)updateWithIndicator:(BOOL)showIndicator;
 @end

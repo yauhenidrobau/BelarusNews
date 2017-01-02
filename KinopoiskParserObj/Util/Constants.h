@@ -31,7 +31,7 @@
 #define DEV_BY_NEWS @"https://dev.by/rss"
 #define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
 #define MTS_BY_NEWS @"http://www.mts.by/rss/"
-#define PRAVO_NEWS @"http://test.pravo.by/xml.aspx?guid=1142"
+#define PRAVO_NEWS @"http://test.pravo.by/xml.aspx?guid=1052"
 @interface Constants : NSObject
 
 @end

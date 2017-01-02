@@ -44,7 +44,7 @@
     static ZLDROPDOWNMENU_TITLEBUTTON_UI_VALUE titleButtonUIValue;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        titleButtonUIValue.MAINTITLELABEL_FONT = 13.f;
+        titleButtonUIValue.MAINTITLELABEL_FONT = 12.f;
         titleButtonUIValue.SUBTITLELABEL_FONT = 12.f;
         titleButtonUIValue.SUBTITLELABEL_TOPMARGIN = 2.5f;
         titleButtonUIValue.ARROWVIEW_LEFTMARGIN = 3.f;
