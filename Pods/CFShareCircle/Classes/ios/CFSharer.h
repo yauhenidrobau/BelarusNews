@@ -29,5 +29,6 @@
 + (CFSharer *)pinterest;
 + (CFSharer *)twitter;
 + (CFSharer *)airPrint;
++ (CFSharer *)vk;
 
 @end

@@ -24,6 +24,9 @@
 #import "Constants.h"
 #import "Macros.h"
 
+#import <VKSdk.h>
+#import "VKStartScreen.h"
+
 #import "INSSearchBar.h"
 #import <CFShareCircleView.h>
 #import "Masonry.h"
@@ -31,6 +34,7 @@
 #import "ZLDropDownMenuCollectionViewCell.h"
 #import "ZLDropDownMenu.h"
 #import "NSString+ZLStringSize.h"
+
 
 
 typedef void(^UpdateDataCallback)(NSError *error);
@@ -43,7 +47,7 @@ typedef enum {
 
 #define MAIN_COLOR RGB(25, 120, 137)
 
-@interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate,UIActivityItemSource>
+@interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UIView *searchBarView;
@@ -64,6 +68,8 @@ typedef enum {
 @property (strong, nonatomic) NSArray *newsArray;
 @property (nonatomic, strong) NSArray *mainTitleArray;
 @property (nonatomic, strong) NSArray *subTitleArray;
+@property (nonatomic, strong) NSArray *shareItems;
+
 @property (strong, nonatomic) NSDictionary *newsURLDict;
 
 @property (nonatomic) BOOL isAlertShown;
@@ -86,6 +92,7 @@ typedef enum {
     [self peparePullToRefresh];
     self.isAlertShown = NO;
     self.operationQueue = [NSOperationQueue new];
+    [self updateWithIndicator:YES];
 
 }
 
@@ -96,7 +103,6 @@ typedef enum {
     self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.isOfflineMode = [defaults boolForKey:@"OfflineMode"];
-    [self updateWithIndicator:YES];
 
 }
 
@@ -366,6 +372,7 @@ typedef enum {
         return;
     }
     NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
+    self.shareItems = @[entity.urlImage,entity.titleFeed,entity.pubDateFeed, [NSURL URLWithString:entity.linkFeed]];
     [self.shareCircleView showAnimated:YES];
    
     [[RealmDataManager sharedInstance] updateEntity:entity WithProperty:@"isShare"];
@@ -377,26 +384,43 @@ typedef enum {
 
 - (void)shareCircleView:(CFShareCircleView *)shareCircleView didSelectSharer:(CFSharer *)sharer {
     NSLog(@"Selected sharer: %@", sharer.name);
-    UIActivityViewController * activityVC = [[UIActivityViewController alloc]initWithActivityItems:@[sharer.name] applicationActivities:nil];
-    activityVC.completionWithItemsHandler = ^(NSString *activityType,
-                                             BOOL completed,
-                                             NSArray *returnedItems,
-                                             NSError *error){
-        // react to the completion
-        if (completed) {
-            // user shared an item
-            NSLog(@"We used activity type%@", activityType);
-        } else {
-            // user cancelled
-            NSLog(@"We didn't want to share anything after all.");
-        }
-        
-        if (error) {
-            NSLog(@"An Error occured: %@, %@", error.localizedDescription, error.localizedFailureReason);
-        }
-    };
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+                                                        initWithActivityItems:self.shareItems
+                                                        applicationActivities:@[ [VKActivity new] ] ];
+    //                if (VK_SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0") && UIUserInterfaceIdiomPad == [[UIDevice currentDevice] userInterfaceIdiom]) {
+    //                    UIPopoverPresentationController *popover = activityViewController.popoverPresentationController;
+    //                    popover.sourceView = self.view;
+    //                    popover.sourceRect = [self.tableView rectForRowAtIndexPath:indexPath];
+    //                }
+    VKStartScreen *VKVC = [[VKStartScreen alloc]init];
+    [self.navigationController pushViewController:VKVC animated:YES];
+//    [self presentViewController:activityViewController animated:YES completion:nil];
 
+//    UIActivityViewController * activityVC = [[UIActivityViewController alloc]initWithActivityItems:@[sharer.name] applicationActivities:nil];
+//    
+//    activityVC.completionWithItemsHandler = ^(NSString *activityType,
+//                                             BOOL completed,
+//                                             NSArray *returnedItems,
+//                                             NSError *error){
+//        // react to the completion
+//        if (completed) {
+//            // user shared an item
+//            NSLog(@"We used activity type%@", activityType);
+//            if ([activityType isEqualToString:@"VK"]) {
+//                
+//                            }
+//        } else {
+//            // user cancelled
+//            NSLog(@"We didn't want to share anything after all.");
+//        }
+//        
+//        if (error) {
+//            NSLog(@"An Error occured: %@, %@", error.localizedDescription, error.localizedFailureReason);
+//        }
+//    };
 //    [self presentViewController:activityVC animated:YES completion:nil];
+
 }
 
 - (void)shareCircleCanceled:(NSNotification *)notification{
@@ -602,7 +626,7 @@ typedef enum {
 }
 
 -(void)prepareShareView{
-    self.shareCircleView = [[CFShareCircleView alloc] initWithSharers:@[[CFSharer twitter], [CFSharer facebook], [CFSharer dropbox]]];
+    self.shareCircleView = [[CFShareCircleView alloc] initWithSharers:@[[CFSharer twitter], [CFSharer facebook], [CFSharer vk]]];
 ;
     self.shareCircleView.delegate = self;
 }

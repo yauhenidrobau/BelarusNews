@@ -26,6 +26,10 @@
     return [[CFSharer alloc] initWithName:@"Mail" imageName:@"mail.png"];
 }
 
++ (CFSharer *)vk {
+    return [[CFSharer alloc] initWithName:@"VK" imageName:@"ic_vk_activity_logo"];
+}
+
 + (CFSharer *)cameraRoll {
     return [[CFSharer alloc] initWithName:@"Camera Roll" imageName:@"camera_roll.png"];
 }
