@@ -9,17 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CFShareCircle.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>LMSideBarController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>NYSegmentedControl.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -52,12 +52,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>018161E7D0E0CE7D30C37D59D2316132</key>
+		<key>0F71EF4993214B40ECBA786198982A64</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>195F7B6AA04A8D60B61754F4F7818BB6</key>
+		<key>38045239C0FE5CCE9622F6B13B0A610C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,27 +67,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>4C56697355A00729FE69EFE5F860368A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>736E57AD5AEFAAF68D47AE4E8FCB8F68</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>748957441CC601D5B60099F39CBD0549</key>
+		<key>8FDA43E7F8B60F61C5AE10D411CC27B1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>831E4D67BAE7F38171D50CD417F7E3C9</key>
+		<key>BE656CE030762A5C84783B3371402CD0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9C5DC53E2A6CFCEAE071A0699254C101</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A458EBBD7B2AAA54BB03498E0AA6F7D2</key>
+		<key>C1F9872B4BA17AA6CB20BB249F05832D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

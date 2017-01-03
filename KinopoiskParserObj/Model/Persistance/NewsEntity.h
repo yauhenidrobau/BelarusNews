@@ -16,6 +16,8 @@
 @property  NSDate *pubDateFeed;
 @property  NSString *titleFeed;
 @property  BOOL favorite;
+@property  BOOL isShared;
+
 @property  NSString *urlImage;
 
 @end

@@ -14,6 +14,7 @@
 @protocol NewsTableViewCellDelegate <NSObject>
 
 - (void)newsTableViewCell:(NewsTableViewCell*)cell didTapFavoriteButton:(UIButton*)button;
+- (void)newsTableViewCell:(NewsTableViewCell*)cell didTapShareButton:(UIButton*)button;
 
 @end
 

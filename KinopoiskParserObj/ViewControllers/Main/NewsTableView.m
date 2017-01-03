@@ -13,6 +13,7 @@
 #import "NewsTableViewCell.h"
 #import "DetailsViewController.h"
 #import "DetailsOfflineVCViewController.h"
+#import "ActivityControllerManager.h"
 #import "NewsEntity.h"
 #import "SearchManager.h"
 #import <UIKit/UIKit.h>
@@ -24,12 +25,13 @@
 #import "Macros.h"
 
 #import "INSSearchBar.h"
-
+#import <CFShareCircleView.h>
 #import "Masonry.h"
 #import "ZLDropDownMenuUICalc.h"
 #import "ZLDropDownMenuCollectionViewCell.h"
 #import "ZLDropDownMenu.h"
 #import "NSString+ZLStringSize.h"
+
 
 typedef void(^UpdateDataCallback)(NSError *error);
 typedef enum {
@@ -41,7 +43,7 @@ typedef enum {
 
 #define MAIN_COLOR RGB(25, 120, 137)
 
-@interface NewsTableView () <UIScrollViewDelegate,UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate>
+@interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UIView *searchBarView;
@@ -50,6 +52,7 @@ typedef enum {
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) INSSearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) CFShareCircleView *shareCircleView;
 
 @property (nonatomic) CGPoint lastContentOffset;
 @property (strong, nonatomic) NSOperationQueue * operationQueue;
@@ -127,10 +130,6 @@ typedef enum {
     }];
     self.scrollButton.hidden = YES;
     [self.navigationController setNavigationBarHidden:NO];
-}
-
-- (IBAction)shareButtonTouchUpInside:(id)sender {
-    
 }
 
 #pragma mark - UITableViewDataSource
@@ -357,8 +356,51 @@ typedef enum {
         return;
     }
     NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
-    [[RealmDataManager sharedInstance]updateEntity:entity];
+    [[RealmDataManager sharedInstance]updateEntity:entity WithProperty:@"favorite"];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)newsTableViewCell:(NewsTableViewCell*)cell didTapShareButton:(UIButton*)button {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (!indexPath) {
+        return;
+    }
+    NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
+    [self.shareCircleView showAnimated:YES];
+
+    [[RealmDataManager sharedInstance] updateEntity:entity WithProperty:@"isShare"];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+
+}
+
+#pragma mark - CFShareCircleViewDelegate
+
+- (void)shareCircleView:(CFShareCircleView *)shareCircleView didSelectSharer:(CFSharer *)sharer {
+    NSLog(@"Selected sharer: %@", sharer.name);
+    UIActivityViewController * activityVC = [[UIActivityViewController alloc]initWithActivityItems:@[sharer.name] applicationActivities:nil];
+    activityVC.completionWithItemsHandler = ^(NSString *activityType,
+                                             BOOL completed,
+                                             NSArray *returnedItems,
+                                             NSError *error){
+        // react to the completion
+        if (completed) {
+            // user shared an item
+            NSLog(@"We used activity type%@", activityType);
+        } else {
+            // user cancelled
+            NSLog(@"We didn't want to share anything after all.");
+        }
+        
+        if (error) {
+            NSLog(@"An Error occured: %@, %@", error.localizedDescription, error.localizedFailureReason);
+        }
+    };
+
+//    [self presentViewController:activityVC animated:YES completion:nil];
+}
+
+- (void)shareCircleCanceled:(NSNotification *)notification{
+    NSLog(@"Share circle view was canceled.");
 }
 
 #pragma mark - Private methods
@@ -384,7 +426,7 @@ typedef enum {
     [self prepareSearchBar];
     [self prepareNavigationBar];
     [self prepareDropMenu];
-    
+    [self prepareShareView];
 }
 
 -(void)setupData {
@@ -508,8 +550,6 @@ typedef enum {
 
 -(void)prepareNavigationBar {
     [self.navigationItem.titleView setTintColor:[UIColor whiteColor]];
-//    UIBarButtonItem *refreshBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(onRefreshBtnTouch)];
-//    self.navigationItem.rightBarButtonItem = refreshBtn;
     self.navigationItem.titleView = self.searchBar;
 
 }
@@ -559,6 +599,12 @@ typedef enum {
     menu.delegate = self;
     menu.dataSource = self;
     [self.menuView addSubview:menu];
+}
+
+-(void)prepareShareView{
+    self.shareCircleView = [[CFShareCircleView alloc] initWithSharers:@[[CFSharer twitter], [CFSharer facebook], [CFSharer dropbox]]];
+;
+    self.shareCircleView.delegate = self;
 }
 //-(void)setFavoriteButtonForCell:(NewsTableViewCell *)cell WithEntity:(NewsEntity *)entity {
 //    [cell.favoriteButton setImage:[cell.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];

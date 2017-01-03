@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pubDateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 @end
 
@@ -34,6 +35,10 @@
     [self.cellDelegate newsTableViewCell:self didTapFavoriteButton:sender];    
 }
 
+- (IBAction)shareButtonDidTap:(id)sender {
+    [self.cellDelegate newsTableViewCell:self didTapShareButton:sender];
+}
+
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath  {
     self.titleLabel.text = entity.titleFeed;
     self.descriptionLabel.text = entity.descriptionFeed;
@@ -42,6 +47,12 @@
         [self.favoriteButton setTintColor:[UIColor grayColor]];
     } else {
         [self.favoriteButton setTintColor:[UIColor yellowColor]];
+    }
+    [self.shareButton setImage:[self.shareButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    if (!entity.isShared) {
+        [self.shareButton setTintColor:[UIColor whiteColor]];
+    } else {
+        [self.shareButton setTintColor:[UIColor blueColor]];
     }
     
     if([[[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"d MMM"] isEqualToString:[[DateFormatterManager sharedInstance] stringFromDate:[NSDate date] withFormat:@"d MMM"]]) {

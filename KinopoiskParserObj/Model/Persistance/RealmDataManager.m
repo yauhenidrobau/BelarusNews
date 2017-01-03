@@ -43,10 +43,14 @@ SINGLETON(RealmDataManager)
     }
 }
 
--(void)updateEntity:(NewsEntity *)entity {
+-(void)updateEntity:(NewsEntity *)entity WithProperty:(NSString*)property {
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
-    entity.favorite = !entity.favorite;
+    if ([property isEqualToString:@"isShare"]) {
+        entity.isShared  = !entity.isShared;
+    } else {
+        entity.favorite = !entity.favorite;
+    }
     [realm addOrUpdateObject:entity];
     [realm commitWriteTransaction];
     NSLog(@"Saved Successfully");

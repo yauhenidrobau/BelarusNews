@@ -334,7 +334,7 @@
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" image="icon-share"/>
                                                     <connections>
-                                                        <action selector="shareButtonTouchUpInside:" destination="sqv-9R-s6i" eventType="touchUpInside" id="glm-wC-6Kn"/>
+                                                        <action selector="shareButtonDidTap:" destination="u5u-px-kF3" eventType="touchUpInside" id="5Xg-h8-KIk"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -360,6 +360,7 @@
                                             <outlet property="favoriteButton" destination="aqv-YZ-k7z" id="rMU-Ia-tYo"/>
                                             <outlet property="imageNewsView" destination="Zqx-GC-hPW" id="HUU-A0-Oas"/>
                                             <outlet property="pubDateLabel" destination="Xqc-xj-tJa" id="TPI-YE-AfP"/>
+                                            <outlet property="shareButton" destination="HBI-or-WRg" id="dnm-7T-hrj"/>
                                             <outlet property="titleLabel" destination="YFF-L9-PCS" id="Obf-ld-42h"/>
                                         </connections>
                                     </tableViewCell>
