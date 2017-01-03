@@ -8,74 +8,61 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
+		</dict>
+		<key>CFShareCircle.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>LMSideBarController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>NYSegmentedControl.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-KinopoiskParserObj.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Reachability.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>Realm.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
 		<key>UIAlertController+Blocks.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>8</integer>
+		</dict>
+		<key>VK-ios-sdk-VKSdkResources.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>VK-ios-sdk.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>018161E7D0E0CE7D30C37D59D2316132</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>195F7B6AA04A8D60B61754F4F7818BB6</key>
+		<key>13879EEB819463E537EFD0F80BE3BA62</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -85,32 +72,47 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>4769B1A30706746F1AA67E2917165602</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4C56697355A00729FE69EFE5F860368A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5AF2FFE409CA031061B822166D486F8B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>729EDB0063A901C4B6D400024617A429</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>736E57AD5AEFAAF68D47AE4E8FCB8F68</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>748957441CC601D5B60099F39CBD0549</key>
+		<key>87CBBCA693E4D90A6C1BF0D7E8A9664E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>831E4D67BAE7F38171D50CD417F7E3C9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9C5DC53E2A6CFCEAE071A0699254C101</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A458EBBD7B2AAA54BB03498E0AA6F7D2</key>
+		<key>CAA699972D8331A55D49EF6E0CC366CB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>DCF7B5B39EE2E4B5CCD30C72CAD992E2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DD91A8CBF05FCED199BC1C5D89CFC274</key>
 		<dict>
 			<key>primary</key>
 			<true/>

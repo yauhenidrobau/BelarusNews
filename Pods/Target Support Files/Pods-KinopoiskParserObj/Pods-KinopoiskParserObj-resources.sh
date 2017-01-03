@@ -106,6 +106,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "CFShareCircle/Resources/twitter.png"
   install_resource "CFShareCircle/Resources/twitter@2x copy.png"
   install_resource "CFShareCircle/Resources/twitter@2x.png"
+  install_resource "$PODS_CONFIGURATION_BUILD_DIR/VK-ios-sdk/VKSdkResources.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "CFShareCircle/Resources/camera_roll.png"
@@ -134,6 +135,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "CFShareCircle/Resources/twitter.png"
   install_resource "CFShareCircle/Resources/twitter@2x copy.png"
   install_resource "CFShareCircle/Resources/twitter@2x.png"
+  install_resource "$PODS_CONFIGURATION_BUILD_DIR/VK-ios-sdk/VKSdkResources.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

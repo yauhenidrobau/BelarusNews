@@ -43,7 +43,7 @@ typedef enum {
 
 #define MAIN_COLOR RGB(25, 120, 137)
 
-@interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate>
+@interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate,UIActivityItemSource>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UIView *searchBarView;
@@ -367,7 +367,7 @@ typedef enum {
     }
     NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
     [self.shareCircleView showAnimated:YES];
-
+   
     [[RealmDataManager sharedInstance] updateEntity:entity WithProperty:@"isShare"];
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 
