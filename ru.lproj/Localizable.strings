@@ -27,3 +27,19 @@
 "Settings" = "Настройки";
 "About" = "О нас";
 "Log out" = "Выйти";
+
+//NewsTableView
+"Main" = "Главные";
+"Economic" = "Экономика";
+"Society" = "Общество";
+"World" = "Мир";
+"Culture" = "Культура";
+"Accident" = "ЧП";
+"Finance" = "Финансы";
+"Realty" = "Недвижимость";
+"Sport" = "Спорт";
+"Auto" = "Авто";
+"Lady" = "Женские";
+"Science" = "Наука";
+"People" = "Люди";
+"All News" = "Все новости";

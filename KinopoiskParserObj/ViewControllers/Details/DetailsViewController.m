@@ -35,6 +35,7 @@
     [self showLoadingIndicator:NO];
     [self.webView layoutIfNeeded];
     if (_newsUrl) {
+        NSLog(@"%@",_newsUrl);
         NSURLRequest *request = [NSURLRequest requestWithURL: _newsUrl];
         [self.webView loadRequest:request];
     }

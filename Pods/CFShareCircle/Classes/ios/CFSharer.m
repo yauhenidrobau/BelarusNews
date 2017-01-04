@@ -13,11 +13,12 @@
 @synthesize name = _name;
 @synthesize image = _image;
 
-- (id)initWithName:(NSString *)name imageName:(NSString *)imageName {
+- (id)initWithName:(NSString *)name imageName:(NSString *)imageName serviceID:(NSInteger)serviceID {
     self = [super init];
     if (self) {
         _name = name;
         _image = [UIImage imageNamed:imageName];
+        _serviceID = serviceID;
     }
     return self;    
 }
@@ -27,7 +28,7 @@
 }
 
 + (CFSharer *)vk {
-    return [[CFSharer alloc] initWithName:@"VK" imageName:@"ic_vk_activity_logo"];
+    return [[CFSharer alloc] initWithName:@"VK" imageName:@"icon-VK" serviceID:2];
 }
 
 + (CFSharer *)cameraRoll {
@@ -43,7 +44,7 @@
 }
 
 + (CFSharer *)facebook {
-    return [[CFSharer alloc] initWithName:@"Facebook" imageName:@"facebook.png"];
+    return [[CFSharer alloc] initWithName:@"Facebook" imageName:@"facebook.png" serviceID:0];
 }
 
 + (CFSharer *)googleDrive {
@@ -55,7 +56,7 @@
 }
 
 + (CFSharer *)twitter {
-    return [[CFSharer alloc] initWithName:@"Twitter" imageName:@"twitter.png"];
+    return [[CFSharer alloc] initWithName:@"Twitter" imageName:@"twitter.png" serviceID:1];
 }
 
 + (CFSharer *)airPrint {

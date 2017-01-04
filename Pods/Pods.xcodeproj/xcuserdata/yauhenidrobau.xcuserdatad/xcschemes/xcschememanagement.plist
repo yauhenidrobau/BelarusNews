@@ -49,20 +49,15 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>VK-ios-sdk-VKSdkResources.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>VK-ios-sdk.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>13879EEB819463E537EFD0F80BE3BA62</key>
+		<key>0F71EF4993214B40ECBA786198982A64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>38045239C0FE5CCE9622F6B13B0A610C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,22 +67,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4769B1A30706746F1AA67E2917165602</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>4C56697355A00729FE69EFE5F860368A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5AF2FFE409CA031061B822166D486F8B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>729EDB0063A901C4B6D400024617A429</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,22 +77,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>87CBBCA693E4D90A6C1BF0D7E8A9664E</key>
+		<key>8FDA43E7F8B60F61C5AE10D411CC27B1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CAA699972D8331A55D49EF6E0CC366CB</key>
+		<key>BE656CE030762A5C84783B3371402CD0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C1F9872B4BA17AA6CB20BB249F05832D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>DCF7B5B39EE2E4B5CCD30C72CAD992E2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DD91A8CBF05FCED199BC1C5D89CFC274</key>
 		<dict>
 			<key>primary</key>
 			<true/>

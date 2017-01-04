@@ -26,3 +26,19 @@
 "Settings" = "Settings";
 "About" = "About";
 "Log out" = "Log out";
+
+    //NewsTableView
+"Main" = "Main";
+"Economic" = "Economic";
+"Society" = "Society";
+"World" = "World";
+"Culture" = "Culture";
+"Accident" = "Accident";
+"Finance" = "Finance";
+"Realty" = "Realty";
+"Sport" = "Sport";
+"Auto" = "Auto";
+"Lady" = "Lady";
+"Science" = "Science";
+"People" = "People";
+"All News" = "All News";

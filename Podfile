@@ -12,6 +12,5 @@ target 'KinopoiskParserObj' do
 #   pod 'NYSegmentedControl'
    pod 'LMSideBarController'
    pod 'CFShareCircle'
-   pod "VK-ios-sdk"
 
 end

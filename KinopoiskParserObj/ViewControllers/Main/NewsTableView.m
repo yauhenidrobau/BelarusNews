@@ -24,9 +24,6 @@
 #import "Constants.h"
 #import "Macros.h"
 
-#import <VKSdk.h>
-#import "VKStartScreen.h"
-
 #import "INSSearchBar.h"
 #import <CFShareCircleView.h>
 #import "Masonry.h"
@@ -45,6 +42,13 @@ typedef enum {
     MtsByCategoryType = 3
 }CategoryTypes;
 
+typedef enum {
+    VMFaceBookShare,
+    VMTwitterShare,
+    VMVkontakteShare,
+    VMOdnokklShare,
+    VMGooglePlusShare
+}Services;
 #define MAIN_COLOR RGB(25, 120, 137)
 
 @interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate>
@@ -68,7 +72,7 @@ typedef enum {
 @property (strong, nonatomic) NSArray *newsArray;
 @property (nonatomic, strong) NSArray *mainTitleArray;
 @property (nonatomic, strong) NSArray *subTitleArray;
-@property (nonatomic, strong) NSArray *shareItems;
+@property (nonatomic, strong) NSMutableArray *shareItems;
 
 @property (strong, nonatomic) NSDictionary *newsURLDict;
 
@@ -90,28 +94,28 @@ typedef enum {
     [self prepareData];
     [self prepareAppierance];
     [self peparePullToRefresh];
+    [self setupData];
+    [self updateWithIndicator:YES];
     self.isAlertShown = NO;
     self.operationQueue = [NSOperationQueue new];
-    [self updateWithIndicator:YES];
 
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationItem setTitle:@"Choose Category"];
+    [self.navigationItem setTitle:NSLocalizedString(@"Choose Category",nil)];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.isOfflineMode = [defaults boolForKey:@"OfflineMode"];
-
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
+
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-
     [self.timer invalidate];
     self.timer = nil;
 }
@@ -125,6 +129,7 @@ typedef enum {
 -(void)pullToRefresh {
     [self updateWithIndicator:NO];
 }
+
 - (IBAction)leftBarItemTouchUpInside:(id)sender {
     [self.sideBarController showMenuViewControllerInDirection:LMSideBarControllerDirectionLeft];
 }
@@ -189,19 +194,17 @@ typedef enum {
     UITableViewCell *cell = (UITableViewCell*)sender;
     NewsEntity *newsEntity = [self setNewsEntityForIndexPath:[self.tableView indexPathForCell:cell]];
     if ([segue.identifier isEqualToString:@"DetailsVCID"]) {
-        
         DetailsViewController *vc = segue.destinationViewController;
         vc.newsUrl = [NSURL URLWithString:newsEntity.linkFeed];
-//        [vc.navigationItem setTitle:self.mainTitleArray[[self.tableView indexPathForCell:cell].row]];
     } else if ([segue.identifier isEqualToString:@"DetailsOfflineVCID"]) {
         DetailsOfflineVCViewController *vc = segue.destinationViewController;
         vc.detailsTitle = newsEntity.titleFeed;
         vc.detailsDescription = newsEntity.descriptionFeed;
-//        vc.newsUrl =[NSURL URLWithString:newsEntity.linkFeed];
-//        [vc.navigationItem setTitle:self.mainTitleArray[[self.tableView indexPathForCell:cell].row]];
+    } else if ([segue.identifier isEqualToString:@"ShareVCID"]) {
+        DetailsViewController *vc = segue.destinationViewController;
+        vc.newsUrl = [NSURL URLWithString:self.shareItems.lastObject];
     }
 }
-
 
 #pragma mark - DZNEmptyDataSetSource
 
@@ -328,13 +331,13 @@ typedef enum {
     if (searchText.length > 2) {
         [self showLoadingIndicator:YES];
         self.isSearchStart = YES;
-        __weak typeof (self)wself = self;
         self.newsArray = [[RealmDataManager sharedInstance] getAllOjbects];
+        __weak typeof (self)wself = self;
 
         [[SearchManager sharedInstance]updateSearchResults:wself.searchBar.searchField.text forArray:wself.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
             wself.searchResults = searchResults;
             [wself.tableView reloadData];
-            [self showLoadingIndicator:NO];
+            [wself showLoadingIndicator:NO];
 
             NSLog(@"Get SEARCH %ld",wself.searchResults.count);
         }];
@@ -372,7 +375,7 @@ typedef enum {
         return;
     }
     NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
-    self.shareItems = @[entity.urlImage,entity.titleFeed,entity.pubDateFeed, [NSURL URLWithString:entity.linkFeed]];
+    [self.shareItems addObjectsFromArray:@[entity.urlImage,entity.titleFeed,entity.pubDateFeed, [NSURL URLWithString:entity.linkFeed]]];
     [self.shareCircleView showAnimated:YES];
    
     [[RealmDataManager sharedInstance] updateEntity:entity WithProperty:@"isShare"];
@@ -383,43 +386,26 @@ typedef enum {
 #pragma mark - CFShareCircleViewDelegate
 
 - (void)shareCircleView:(CFShareCircleView *)shareCircleView didSelectSharer:(CFSharer *)sharer {
+    if (self.shareItems.count == 5) {
+        [self.shareItems removeObjectAtIndex:self.shareItems.count - 1];
+    }
+    NSString *authLink;
+    NSURL *imageUrl = [NSURL URLWithString:self.shareItems[0]];
+    NSURL *url = self.shareItems[3];
+    if (sharer.serviceID == VMFaceBookShare){
+        authLink = [NSString stringWithFormat:@"https://m.facebook.com/sharer.php?u=%@&image=%@", url,imageUrl];
+    } else if (sharer.serviceID == VMTwitterShare){
+        authLink = [NSString stringWithFormat:@"http://twitter.com/intent/tweet?source=sharethiscom&url=%@", url];
+    } else if (sharer.serviceID == VMVkontakteShare){
+        authLink = [NSString stringWithFormat:@"http://vkontakte.ru/share.php?&url=%@&image=%@&", url,imageUrl];
+    } else if (sharer.serviceID == VMOdnokklShare){
+        authLink = [NSString stringWithFormat:@"http://www.odnoklassniki.ru/dk?st.cmd=addShare&st._surl=%@", url];
+    } else if (sharer.serviceID == VMGooglePlusShare){
+        authLink = [NSString stringWithFormat:@"https://plus.google.com/share?url=%@", url];
+    }
+    [self.shareItems addObject:authLink];
+    [self performSegueWithIdentifier:@"ShareVCID" sender:self];
     NSLog(@"Selected sharer: %@", sharer.name);
-    
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
-                                                        initWithActivityItems:self.shareItems
-                                                        applicationActivities:@[ [VKActivity new] ] ];
-    //                if (VK_SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0") && UIUserInterfaceIdiomPad == [[UIDevice currentDevice] userInterfaceIdiom]) {
-    //                    UIPopoverPresentationController *popover = activityViewController.popoverPresentationController;
-    //                    popover.sourceView = self.view;
-    //                    popover.sourceRect = [self.tableView rectForRowAtIndexPath:indexPath];
-    //                }
-    VKStartScreen *VKVC = [[VKStartScreen alloc]init];
-    [self.navigationController pushViewController:VKVC animated:YES];
-//    [self presentViewController:activityViewController animated:YES completion:nil];
-
-//    UIActivityViewController * activityVC = [[UIActivityViewController alloc]initWithActivityItems:@[sharer.name] applicationActivities:nil];
-//    
-//    activityVC.completionWithItemsHandler = ^(NSString *activityType,
-//                                             BOOL completed,
-//                                             NSArray *returnedItems,
-//                                             NSError *error){
-//        // react to the completion
-//        if (completed) {
-//            // user shared an item
-//            NSLog(@"We used activity type%@", activityType);
-//            if ([activityType isEqualToString:@"VK"]) {
-//                
-//                            }
-//        } else {
-//            // user cancelled
-//            NSLog(@"We didn't want to share anything after all.");
-//        }
-//        
-//        if (error) {
-//            NSLog(@"An Error occured: %@, %@", error.localizedDescription, error.localizedFailureReason);
-//        }
-//    };
-//    [self presentViewController:activityVC animated:YES completion:nil];
 
 }
 
@@ -574,8 +560,6 @@ typedef enum {
 
 -(void)prepareNavigationBar {
     [self.navigationItem.titleView setTintColor:[UIColor whiteColor]];
-    self.navigationItem.titleView = self.searchBar;
-
 }
 
 -(void)prepareSearchBar {
@@ -583,16 +567,31 @@ typedef enum {
     self.searchBar.delegate = self;
     self.searchBarView.backgroundColor = MAIN_COLOR;
     [self.view addSubview:self.searchBar];
+    self.navigationItem.titleView = self.searchBar;
 }
 
 -(void)prepareData {
     _mainTitleArray = @[@"TUT.BY",@"ONLINER.BY",@"DEV.BY", @"PRAVO.BY", @"MTS"];
     _subTitleArray = @[
-                       @[@"Main", @"Economic", @"Society", @"World",@"Culture",@"Accident",@"Finance",@"Realty",@"Sport",@"Auto",@"Lady",@"Science"],
-                       @[@"People",@"Auto",@"Tech",@"Realt"],
-                       @[@"All News"],
-                       @[@"All News"],
-                       @[@"All News"]
+                       @[NSLocalizedString(@"Main",nil),
+                         NSLocalizedString(@"Economic",nil),
+                         NSLocalizedString(@"Society",nil),
+                         NSLocalizedString(@"World",nil),
+                         NSLocalizedString(@"Culture",nil),
+                         NSLocalizedString(@"Accident",nil),
+                         NSLocalizedString(@"Finance",nil),
+                         NSLocalizedString(@"Realty",nil),
+                         NSLocalizedString(@"Sport",nil),
+                         NSLocalizedString(@"Auto",nil),
+                         NSLocalizedString(@"Lady",nil),
+                         NSLocalizedString(@"Science",nil)],
+                       @[NSLocalizedString(@"People",nil),
+                         NSLocalizedString(@"Auto",nil),
+                         NSLocalizedString(@"Science",nil),
+                         NSLocalizedString(@"Realty",nil)],
+                       @[NSLocalizedString(@"All News",nil)],
+                       @[NSLocalizedString(@"All News",nil)],
+                       @[NSLocalizedString(@"All News",nil)]
                        ];
     self.newsURLDict = @{@"DEV.BY": @[DEV_BY_NEWS],
                          @"TUT.BY": [NSDictionary dictionaryWithObjectsAndKeys:
@@ -616,6 +615,7 @@ typedef enum {
                          @"MTS" : @[MTS_BY_NEWS]};
     self.titlesString = self.subTitleArray[0][0];
     self.urlString = MAIN_NEWS;
+    self.shareItems = [NSMutableArray new];
 }
 
 -(void)prepareDropMenu {
@@ -625,59 +625,9 @@ typedef enum {
     [self.menuView addSubview:menu];
 }
 
--(void)prepareShareView{
+-(void)prepareShareView {
     self.shareCircleView = [[CFShareCircleView alloc] initWithSharers:@[[CFSharer twitter], [CFSharer facebook], [CFSharer vk]]];
 ;
     self.shareCircleView.delegate = self;
 }
-//-(void)setFavoriteButtonForCell:(NewsTableViewCell *)cell WithEntity:(NewsEntity *)entity {
-//    [cell.favoriteButton setImage:[cell.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-//    if (entity.favorite) {
-//        cell.favoriteButton.tintColor = [UIColor yellowColor];
-//    } else {
-//        cell.favoriteButton.tintColor = [UIColor lightGrayColor];
-//    }
-//}
-
-
-
-//-(void)setupAppearanceNewsSegmentedControl {
-//    [self.NewsSegmentedControl layoutIfNeeded];
-//    UIColor *mainColor = [UIColor colorWithRed:253. / 255. green:253. /255. blue:253. / 255. alpha:1.0];
-//    self.NewsSegmentedControl.borderWidth = 0.5f;
-//    self.NewsSegmentedControl.borderColor = [UIColor colorWithWhite:227./255. alpha:1.0f];
-//    self.NewsSegmentedControl.backgroundColor = [UIColor colorWithRed:235./255. green:236./255. blue:239./255. alpha:1.0f];
-////    self.NewsSegmentedControl.layer.cornerRadius = self.NewsSegmentedControl.frame.size.height / 2;
-//    self.NewsSegmentedControl.cornerRadius = self.NewsSegmentedControl.frame.size.height / 2;
-//    self.NewsSegmentedControl.drawsGradientBackground = NO;
-//    self.NewsSegmentedControl.drawsSegmentIndicatorGradientBackground = YES;
-//    self.NewsSegmentedControl.segmentIndicatorGradientTopColor = mainColor;
-//    self.NewsSegmentedControl.segmentIndicatorGradientBottomColor = mainColor;
-//    self.NewsSegmentedControl.segmentIndicatorAnimationDuration = 0.3f;
-//    self.NewsSegmentedControl.segmentIndicatorBorderWidth = 0.0f;
-//    self.NewsSegmentedControl.selectedTitleTextColor = [UIColor colorWithRed:9. / 255. green:171. /255. blue:225. / 255. alpha:1.0];
-//    self.NewsSegmentedControl.titleTextColor = [UIColor colorWithRed:98. / 255. green:128. /255. blue:142. / 255. alpha:1.0];
-//    self.NewsSegmentedControl.dataSource = self;
-//    [self.NewsSegmentedControl addTarget:self action:@selector(changeValueSC) forControlEvents:UIControlEventValueChanged];
-//}
-
-//-(NSString *)getTitleFromNewsClass:(id)news{
-//    NSDictionary *dict = self.newsURLDict[self.urlIdentificator];
-//
-//    if ([news isKindOfClass:[NSArray class]]) {
-////        NSArray *temp = self.newsURLDict[self.urlIdentificator];
-//        return self.urlIdentificator;
-//    } else
-//       return dict.allKeys[self.NewsSegmentedControl.selectedSegmentIndex];
-//}
-//
-//-(NSString *)getUrlFromDictionary {
-//    NSDictionary *dict = self.newsURLDict[self.urlIdentificator];
-//    
-//    if ([dict isKindOfClass:[NSArray class]]) {
-//        NSArray *temp = self.newsURLDict[self.urlIdentificator];
-//        return temp[0];
-//    } else
-//        return dict.allValues[self.NewsSegmentedControl.selectedSegmentIndex];
-//}
 @end

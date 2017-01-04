@@ -13,6 +13,7 @@
 @interface CFSharer : NSObject
 
 @property NSString *name;
+@property NSInteger serviceID;
 @property UIImage *image;
 
 /**
