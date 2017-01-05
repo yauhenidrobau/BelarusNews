@@ -110,7 +110,7 @@ NSMutableDictionary *CDDateDict;
         }
         if (pubDateFeed.length) {
             
-            NSDate *pubDate = [[DateFormatterManager sharedInstance] dateFromString:[pubDateFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] withFormat:@"EEE, dd MMM y HH:mm:ss ZZZ"];
+            NSDate *pubDate = [[DateFormatterManager sharedInstance] dateFromString:[pubDateFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] withFormat:@"E, d MMM yyyy HH:mm:ss ZZZ"];
             if (pubDate) {
                 currentDataDictionary[@"pubDate"] = pubDate;
             }

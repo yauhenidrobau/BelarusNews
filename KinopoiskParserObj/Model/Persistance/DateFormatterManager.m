@@ -22,8 +22,8 @@ SINGLETON(DateFormatterManager)
 -(instancetype)init {
     self = [super init];
     if (self) {
-        [self.dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
         self.dateFormatter = [NSDateFormatter new];
+        [self.dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
     }
     return self;
 }

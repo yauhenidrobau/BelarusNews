@@ -50,10 +50,13 @@
          contextName = "-[NewsTableView menu:didSelectRowAtIndexPath:]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.titlesString">
+               value = "self.mainTitleArray[indexPath.column]">
             </PersistentString>
             <PersistentString
                value = "self.urlString">
+            </PersistentString>
+            <PersistentString
+               value = "self.titlesString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -134,6 +137,22 @@
          <PersistentStrings>
             <PersistentString
                value = "[self.dateFormatter dateFromString:dateString]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView shareCircleView:didSelectSharer:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.shareItems">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView newsTableViewCell:didTapShareButton:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.shareItemsDict">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -19,29 +19,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X0Z-aM-d6S">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReT-8A-NER">
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="lMo-7K-E7m" id="b40-4o-EMa"/>
                                 </connections>
                             </webView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zHg-Ti-C0V">
-                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="color" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="zHg-Ti-C0V" firstAttribute="centerX" secondItem="f17-h0-PjF" secondAttribute="centerX" id="F76-H5-aeY"/>
+                            <constraint firstItem="X0Z-aM-d6S" firstAttribute="leading" secondItem="f17-h0-PjF" secondAttribute="leading" id="Oha-NN-pmu"/>
+                            <constraint firstAttribute="trailing" secondItem="X0Z-aM-d6S" secondAttribute="trailing" id="Rbl-tS-wBV"/>
                             <constraint firstItem="ReT-8A-NER" firstAttribute="leading" secondItem="f17-h0-PjF" secondAttribute="leading" id="ZPd-iN-j0w"/>
+                            <constraint firstItem="nKJ-8D-lGF" firstAttribute="top" secondItem="X0Z-aM-d6S" secondAttribute="bottom" id="aNu-r6-MHk"/>
                             <constraint firstItem="ReT-8A-NER" firstAttribute="top" secondItem="f17-h0-PjF" secondAttribute="top" id="d23-fF-BSk"/>
                             <constraint firstAttribute="trailing" secondItem="ReT-8A-NER" secondAttribute="trailing" id="eMC-Nw-f2v"/>
                             <constraint firstItem="nKJ-8D-lGF" firstAttribute="top" secondItem="ReT-8A-NER" secondAttribute="bottom" id="h18-d1-3H6"/>
-                            <constraint firstItem="zHg-Ti-C0V" firstAttribute="centerY" secondItem="f17-h0-PjF" secondAttribute="centerY" id="xb9-6U-8qi"/>
+                            <constraint firstItem="X0Z-aM-d6S" firstAttribute="top" secondItem="bm2-Jc-Msp" secondAttribute="bottom" id="imB-Bz-XGY"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="activityInd" destination="zHg-Ti-C0V" id="0S5-wr-6Ku"/>
+                        <outlet property="containerView" destination="X0Z-aM-d6S" id="wD0-Tw-Ixo"/>
                         <outlet property="webView" destination="ReT-8A-NER" id="BaW-U1-ifp"/>
                     </connections>
                 </viewController>
@@ -150,7 +151,7 @@
                                         <rect key="frame" x="0.0" y="56" width="375" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cha-08-uOv" id="W0g-Jw-94N">
-                                            <frame key="frameInset" width="375" height="48"/>
+                                            <frame key="frameInset" width="375" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8H-Yb-iAC">
@@ -170,7 +171,7 @@
                                         <rect key="frame" x="0.0" y="105" width="375" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Sjq-2h-noN" id="HFM-lI-SQy">
-                                            <frame key="frameInset" width="375" height="48"/>
+                                            <frame key="frameInset" width="375" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8sc-xU-LnN">
@@ -212,7 +213,7 @@
                                         <rect key="frame" x="0.0" y="154" width="375" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4WQ-rB-nd0" id="JxJ-Ln-NF0">
-                                            <frame key="frameInset" width="375" height="48"/>
+                                            <frame key="frameInset" width="375" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" tag="152" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xQZ-br-gax"/>
@@ -291,7 +292,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u5u-px-kF3" id="WHh-k4-cD0">
-                                            <frame key="frameInset" width="375" height="79"/>
+                                            <frame key="frameInset" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image_200_200" translatesAutoresizingMaskIntoConstraints="NO" id="Zqx-GC-hPW">
@@ -481,11 +482,11 @@
                                     <constraint firstAttribute="height" constant="150" id="rRJ-Zh-bDx"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAT-js-yyH">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EAT-js-yyH">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

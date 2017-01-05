@@ -27,6 +27,7 @@
 //                                            documentAttributes: nil
 //                                            error: nil
 //                                            ];
+    self.detailsDescriptionTV.font = [UIFont systemFontOfSize:17.0];
     self.detailsDescriptionTV.text = self.detailsDescription;
 }
 

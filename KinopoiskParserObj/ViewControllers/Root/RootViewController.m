@@ -41,7 +41,6 @@
     self.settingsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsVC"];
 
     [self.mainNavigationController setViewControllers:@[leftMenuViewController, self.mainViewController] animated:YES];
-    self.mainViewController.title = @"All News";
     // Setup side bar controller
     [self setPanGestureEnabled:YES];
     [self setDelegate:self];
