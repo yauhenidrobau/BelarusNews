@@ -12,6 +12,9 @@
 #import "UIColor+flat.h"
 #import "FeSpinnerTenDot.h"
 
+#import "Macros.h"
+
+
 @interface DetailsViewController () <FeSpinnerTenDotDelegate>
 {
     NSInteger index;
@@ -33,13 +36,12 @@
      [super  viewDidLoad];
      
      self.webView.hidden = YES;
-     [self.navigationController setHidesBarsOnSwipe:YES];
-
-     self.view.backgroundColor = [UIColor colorWithHexCode:@"#019875"];
+//     self.containerView.backgroundColor = MAIN_COLOR;
+//     [UIColor colorWithHexCode:@"#019875"];
      
      //*********
      index = 0;
-     _arrTitile = @[@"LOADING",@"PLZ WAITING",@"CALM DOWN",@"SUCCESSFUL"];
+     _arrTitile = @[@"LOADING",@"PLEASE WAITING",@"CALM DOWN",@"WAITING"];
      
      // init Loader
      _spinner = [[FeSpinnerTenDot alloc] initWithView:self.view withBlur:NO];
@@ -58,7 +60,6 @@
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:(animated)];
     [self start:self];
-
     [self.webView layoutIfNeeded];
     if (_newsUrl) {
         NSLog(@"%@",_newsUrl);
@@ -68,12 +69,10 @@
     if (self.webView.hidden) {
         self.webView.hidden = NO;
     }
-    [self.navigationController setNavigationBarHidden:NO];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
 }
 
 -(void) didReceiveMemoryWarning {
@@ -95,37 +94,26 @@
     {
         _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeTitle) userInfo:nil repeats:YES];
     }
-    
-    [_spinner showWhileExecutingSelector:@selector(longTask) onTarget:self withObject:nil completion:^{
-        [_timer invalidate];
-        _timer = nil;
-        
-        index = 0;
-        _containerView.hidden = YES;
-    }];
+    [_spinner show];
 }
 
--(void) longTask
-{
-    // Do a long take
-    sleep(5);
-}
 - (IBAction)dismiss:(id)sender
 {
     [_timer invalidate];
     [_spinner dismiss];
-    
-    // pop
+    _timer = nil;
+    index = 0;
     _containerView.hidden = YES;
+
 }
 -(void) changeTitle
 {
     NSLog(@"index = %ld",index);
-    
-    if (index >= _arrTitile.count)
-        return;
-    
+    if (index >= _arrTitile.count) {
+        _spinner.titleLabelText = _arrTitile[3];
+    }else {
     _spinner.titleLabelText = _arrTitile[index];
+    }
     index++;
 }
 -(void) FeSpinnerTenDotDidDismiss:(FeSpinnerTenDot *)sender

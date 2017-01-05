@@ -10,8 +10,11 @@
 #import "FXBlurView.h"
 #import "UIColor+flat.h"
 #import "FeTenDot.h"
+#import "Macros.h"
+
 #define kMaxTenDot 10
 #define kPagingLabel 30
+#define MAIN_COLOR RGB(25, 120, 137)
 
 @interface FeSpinnerTenDot ()
 {
@@ -105,7 +108,9 @@
     {
         _backgroundBlur = [[FXBlurView alloc] initWithFrame:_containerView.bounds];
         _backgroundBlur.blurRadius = 40;
-        _backgroundBlur.tintColor = [UIColor colorWithHexCode:@"#32ce55"];
+//        _backgroundBlur.tintColor = MAIN_COLOR;
+
+        _backgroundBlur.tintColor = [UIColor colorWithHexCode:@"#55da55"];
         _backgroundBlur.dynamic = NO;
         [_backgroundBlur.layer displayIfNeeded];
         
@@ -116,7 +121,7 @@
     else
     {
         _backgroundStatic = [[UIView alloc] initWithFrame:_containerView.bounds];
-        _backgroundStatic.backgroundColor = [UIColor colorWithHexCode:@"#32ce55"];
+        _backgroundStatic.backgroundColor = MAIN_COLOR;
     }
 
 }

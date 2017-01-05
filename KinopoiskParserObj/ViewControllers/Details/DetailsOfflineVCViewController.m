@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _detailsTitleLabel.text = self.detailsTitle;
+    _detailsTitleLabel.text = [self stringByStrippingHTML:self.detailsTitle];
 //    NSAttributedString *attributedString = [[NSAttributedString alloc]
 //                                            initWithData: [self.detailsDescription dataUsingEncoding:NSUnicodeStringEncoding]
 //                                            options: @{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
@@ -28,7 +28,7 @@
 //                                            error: nil
 //                                            ];
     self.detailsDescriptionTV.font = [UIFont systemFontOfSize:17.0];
-    self.detailsDescriptionTV.text = self.detailsDescription;
+    self.detailsDescriptionTV.text = [self stringByStrippingHTML:self.detailsDescription];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,6 +36,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSString *)stringByStrippingHTML:(NSString*)str
+{
+    NSRange r;
+    while ((r = [str rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+    {
+        str = [str stringByReplacingCharactersInRange:r withString:@""];
+    }
+    return str;
+}
 /*
 #pragma mark - Navigation
 

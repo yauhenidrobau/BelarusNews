@@ -13,3 +13,12 @@
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "tVM-SA-36T"; */
 "tVM-SA-36T.text" = "Title";
+
+/* Class = "UILabel"; text = "Sign Out"; ObjectID = "h8H-Yb-iAC"; */
+"h8H-Yb-iAC.text" = "Выход";
+
+/* Class = "UILabel"; text = "Offline Mode"; ObjectID = "3Zh-gd-aGZ"; */
+"3Zh-gd-aGZ.text" = "Оффлайн режим";
+
+/* Class = "UILabel"; text = "Notifications"; ObjectID = "0Wo-Qg-wd4"; */
+"0Wo-Qg-wd4.text" = "Уведомления";
