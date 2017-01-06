@@ -9,21 +9,22 @@
 #import "NewsTableView.h"
 
 #import <Realm/Realm.h>
-#import "DataManager.h"
-#import "NewsTableViewCell.h"
-#import "DetailsViewController.h"
-#import "DetailsOfflineVCViewController.h"
-#import "ActivityControllerManager.h"
-#import "NewsEntity.h"
-#import "SearchManager.h"
-#import <UIKit/UIKit.h>
 #import <Reachability.h>
-#import "RealmDataManager.h"
+#import <AFNetworking.h>
 #import <UIAlertController+Blocks.h>
 #import "UIViewController+LMSideBarController.h"
 #import "Constants.h"
 #import "Macros.h"
+
+#import "DataManager.h"
+#import "SearchManager.h"
+#import "RealmDataManager.h"
 #import "ShareManager.h"
+#import "NewsEntity.h"
+
+#import "NewsTableViewCell.h"
+#import "DetailsViewController.h"
+#import "DetailsOfflineVCViewController.h"
 
 #import "INSSearchBar.h"
 #import <CFShareCircleView.h>
@@ -32,7 +33,6 @@
 #import "ZLDropDownMenuCollectionViewCell.h"
 #import "ZLDropDownMenu.h"
 #import "NSString+ZLStringSize.h"
-
 
 
 typedef void(^UpdateDataCallback)(NSError *error);
@@ -44,6 +44,9 @@ typedef enum {
 }CategoryTypes;
 
 #define MAIN_COLOR RGB(25, 120, 137)
+#define NO_INTERNET_KEY @"NoInternet"
+#define OFFLINE_MODE @"OfflineMode"
+#define NOTIFICATIONS_MODE @"NotificationsMode"
 
 @interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate>
 
@@ -58,8 +61,6 @@ typedef enum {
 
 @property (nonatomic) CGPoint lastContentOffset;
 @property (strong, nonatomic) NSOperationQueue * operationQueue;
-@property (strong, nonatomic) NSString *urlString;
-@property (strong, nonatomic) NSString *titlesString;
 @property (nonatomic, strong) NSTimer *timer;
 
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
@@ -69,10 +70,12 @@ typedef enum {
 @property (nonatomic, strong) NSMutableDictionary *shareItemsDict;
 
 @property (strong, nonatomic) NSDictionary *newsURLDict;
+@property (nonatomic, strong) NSUserDefaults *defaults;
 
 @property (nonatomic) BOOL isAlertShown;
 @property (nonatomic) BOOL isSearchStart;
 @property (nonatomic) BOOL isOfflineMode;
+@property (nonatomic) BOOL isNotificationMode;
 
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
 
@@ -85,22 +88,27 @@ typedef enum {
 -(void)viewDidLoad {
     [super viewDidLoad];
     
+    self.defaults = [NSUserDefaults standardUserDefaults];
+
     [self prepareData];
     [self prepareAppierance];
     [self peparePullToRefresh];
     [self setupData];
     [self updateWithIndicator:YES];
-    self.isAlertShown = NO;
     self.operationQueue = [NSOperationQueue new];
+    self.isAlertShown = [self.defaults boolForKey:NO_INTERNET_KEY];
 
+    [self configNotificationMode];
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.isOfflineMode = [defaults boolForKey:@"OfflineMode"];
+    self.isOfflineMode = [self.defaults boolForKey:OFFLINE_MODE];
+    [self configNotificationMode];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -176,7 +184,7 @@ typedef enum {
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString* segueId = (self.isOfflineMode) ? @"DetailsOfflineVCID" : @"DetailsVCID";
-    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    NewsTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     [self performSegueWithIdentifier:segueId sender:cell];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -184,15 +192,14 @@ typedef enum {
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    UITableViewCell *cell = (UITableViewCell*)sender;
+    NewsTableViewCell *cell = (NewsTableViewCell*)sender;
     NewsEntity *newsEntity = [self setNewsEntityForIndexPath:[self.tableView indexPathForCell:cell]];
     if ([segue.identifier isEqualToString:@"DetailsVCID"]) {
         DetailsViewController *vc = segue.destinationViewController;
         vc.newsUrl = [NSURL URLWithString:newsEntity.linkFeed];
     } else if ([segue.identifier isEqualToString:@"DetailsOfflineVCID"]) {
         DetailsOfflineVCViewController *vc = segue.destinationViewController;
-        vc.detailsTitle = newsEntity.titleFeed;
-        vc.detailsDescription = newsEntity.descriptionFeed;
+        vc.entity = newsEntity;
     } else if ([segue.identifier isEqualToString:@"ShareVCID"]) {
         DetailsViewController *vc = segue.destinationViewController;
         vc.newsUrl = [NSURL URLWithString:self.shareItemsDict[@"link"]];
@@ -293,6 +300,8 @@ typedef enum {
     self.urlString = dict[NSLocalizedString(self.titlesString,nil)];
     }
     NSLog(@"%@ : %@", self.titlesString,self.urlString);
+    [self.defaults setObject:self.titlesString forKey:@"CurrentTitle"];
+    [self.defaults setObject:self.urlString forKey:@"CurrentUrl"];
     [self updateWithIndicator:YES];
 
 }
@@ -427,6 +436,7 @@ typedef enum {
         self.newsArray = [self sortNewsArray:[NSArray arrayWithArray:[[RealmDataManager sharedInstance] getFavoritesArray]]];
         NSLog(@"Get favorites Elements  %lu",(unsigned long)self.newsArray.count);
     }
+   
     [self.tableView reloadData];
     [self showLoadingIndicator:NO];
     [self.refreshControl endRefreshing];
@@ -456,8 +466,6 @@ typedef enum {
 }
 
 -(void)showAlertController {
-    if (!self.isAlertShown) {
-//        [self showLoadingIndicator:YES];
         __weak typeof(self) wself = self;
         [UIAlertController  showAlertInViewController:self
                                             withTitle:NSLocalizedString(@"We have problems", nil)
@@ -469,8 +477,6 @@ typedef enum {
                                                  [wself setupData];
                                                  [wself showLoadingIndicator:NO];
                                              }];
-        self.isAlertShown = YES;
-    }
 }
 
 -(void)updateWithIndicator:(BOOL)showIndicator {
@@ -489,18 +495,19 @@ typedef enum {
 
         Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
         NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
-        if (networkStatus == NotReachable) {
+       self.isAlertShown = [[[NSUserDefaults standardUserDefaults] objectForKey:NO_INTERNET_KEY] boolValue];
+        if (networkStatus == NotReachable && !self.isAlertShown) {
             [self showAlertController];
-//            [self setupData];
+            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:NO_INTERNET_KEY];
         }else {
             [networkReachability startNotifier];
-            if(networkStatus == NotReachable) {
+            if(networkStatus == NotReachable && !self.isAlertShown) {
                 [self showAlertController];
-//                [self setupData];
+                [[NSUserDefaults standardUserDefaults]setBool:YES forKey:NO_INTERNET_KEY];
             } else {
-                self.isAlertShown = NO;
+                
                 __weak typeof(self) wself = self;
-                [[DataManager sharedInstance ] updateDataWithURLArray:wself.urlString AndTitle:wself.titlesString WithCallBack:^(NSError *error) {
+                [[DataManager sharedInstance ] updateDataWithURLString:wself.urlString AndTitle:wself.titlesString WithCallBack:^(NSError *error) {
 
                     [networkReachability stopNotifier];
                     if (!error) {
@@ -592,6 +599,8 @@ typedef enum {
                          @"MTS" : @[MTS_BY_NEWS]};
     self.titlesString = NSLocalizedString(self.subTitleArray[0][0],nil);
     self.urlString = MAIN_NEWS;
+    [self.defaults setObject:self.titlesString forKey:@"CurrentTitle"];
+    [self.defaults setObject:self.urlString forKey:@"CurrentUrl"];
     self.shareItemsDict = [NSMutableDictionary new];
 }
 
@@ -606,5 +615,10 @@ typedef enum {
     self.shareCircleView = [[CFShareCircleView alloc] initWithSharers:@[[CFSharer twitter], [CFSharer facebook], [CFSharer vk]]];
 ;
     self.shareCircleView.delegate = self;
+}
+
+-(void)configNotificationMode {
+    self.isNotificationMode = [self.defaults boolForKey:NOTIFICATIONS_MODE];
+    
 }
 @end

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewsEntity.h"
+#import "NewsTableViewCell.h"
 
 @interface DetailsOfflineVCViewController : UIViewController
 
-@property (strong, nonatomic) NSString *detailsTitle;
-@property (strong, nonatomic) NSString *detailsDescription;
+@property (nonatomic, strong) NewsEntity *entity;
 
 @end

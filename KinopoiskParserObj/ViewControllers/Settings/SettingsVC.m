@@ -9,31 +9,14 @@
 #import "SettingsVC.h"
 
 #import "SettingsOfflineCell.h"
+#import "SettingsNotificationsCell.h"
 
 #define SIGN_OUT_CELL_TYPE @"SignOutCell"
 #define OFFLINE_CELL_TYPE @"OfflineCell"
-#define SOUND_CELL_TYPE @"SoundCell"
+#define NOTIFICATION_CELL_TYPE @"NotificationCell"
 
-
-typedef enum {
-    SettingsAccountSection = 0,
-    SettingsAboutSection = 1,
-    SetingsNotificationsSection = 2,
-}SettingsSection;
-
-typedef enum {
-    SettingsChangeAccountCell = 0,
-    SettingsChangePasswordCell = 1,
-    SettingsDeleteHistoryCell = 2,
-    SettingsSignOutCell = 3,
-    SettingsPrivacyPolicyCell = 0,
-    SettingsCondotionsCell = 1,
-    SettingsContactCell = 2,
-    SettingsPushNotificationsCell = 0,
-    SettingsEmailCell = 1,
-    SettingsSMSCell = 2,
-    SettingsFrequencyCell = 3,
-}SettingsCell;
+#define OFFLINE_MODE @"OfflineMode"
+#define NOTIFICATIONS_MODE @"NotificationsMode"
 
 @interface SettingsVC () <SettingsCellDelegate>
 
@@ -52,7 +35,7 @@ typedef enum {
     if (!_cellTitleListID.count) {
         _cellTitleListID = @[@"SignOutCell",
                            @"OfflineCell",
-                           @"SoundCell"
+                           @"NotificationCell"
                            ];
     }
     return _cellTitleListID;
@@ -73,14 +56,12 @@ typedef enum {
     [super viewDidLoad];
     [self.navigationItem setTitle:NSLocalizedString(@"Settings", nil)];
     [self.navigationController.navigationBar setHidden:NO];
-//    [self.tableView registerNib:[UINib nibWithNibName:@"SettingsHeaderView" bundle:nil] forHeaderFooterViewReuseIdentifier:kTitleHeaderFooterView];
-//    self.tableView.backgroundColor = D_COLOR_WHITE;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [self.navigationController.navigationBar setTintColor:D_COLOR_LIGHT_RED];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -100,9 +81,10 @@ typedef enum {
     if ([cell.reuseIdentifier isEqualToString:OFFLINE_CELL_TYPE]) {
         SettingsOfflineCell *offlineCell = (SettingsOfflineCell *)cell;
         offlineCell.cellDelegate = self;
-    } else if ([cell.reuseIdentifier isEqualToString:SOUND_CELL_TYPE]) {
-        UISwitch *soundSwitch = (UISwitch *)[cell viewWithTag:152];
-    } 
+    } else if ([cell.reuseIdentifier isEqualToString:NOTIFICATION_CELL_TYPE]) {
+        SettingsNotificationsCell *offlineCell = (SettingsNotificationsCell *)cell;
+        offlineCell.cellDelegate = self;
+    }
     if ([cell.reuseIdentifier isEqualToString:SIGN_OUT_CELL_TYPE]) {
     }
     return cell;
@@ -114,27 +96,16 @@ typedef enum {
     return  50.0;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    if ([self.cellTitleList[indexPath.section][indexPath.row] isEqualToString:@"Sign Out"]) {
-//        [[AccountHelper sharedAccountHelper] logOut];
-//        [[NavigationHelper sharedNavigationHelper] openAuthScreen];
-//    } else {
-//        Class newClass = NSClassFromString(self.viewControllersList[indexPath.section][indexPath.row]);
-//        id myObject = [newClass newInstance];
-//        if ([myObject isKindOfClass:[XWebViewVC class]]) {
-//            [myObject setUrlLink:[NSURL URLWithString:self.sectionAboutLinkList[indexPath.row]]];
-//        }
-//        [self.navigationController pushViewController:myObject animated:YES];
-//    }
-}
-
 #pragma mark - SettingsCellDelegate
 - (void)settingsOfflineCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:sender.isOn forKey:@"OfflineMode"];
 }
 
+- (void)settingsNotificationsCell:(UITableViewCell *)cell didChangeValue:(UISwitch *)sender{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:sender.isOn forKey:@"NotificationsMode"];
+}
 #pragma mark Private
 
 

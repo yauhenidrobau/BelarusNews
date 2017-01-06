@@ -8,6 +8,7 @@
 
 #import "SettingsOfflineCell.h"
 
+#define OFFLINE_MODE @"OfflineMode"
 
 @interface SettingsOfflineCell ()
 @property (weak, nonatomic) IBOutlet UISwitch *offlineSwitch;
@@ -18,7 +19,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self.offlineSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"OfflineMode"]];
+    [self.offlineSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:OFFLINE_MODE]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -15,7 +15,10 @@
 #import "SettingsVC.h"
 #import "NewsTableView.h"
 
+#define NO_INTERNET_KEY @"NoInternet"
+
 @interface RootViewController ()
+
 @property(nonatomic,strong) NewsTableView *mainViewController;
 @property(nonatomic,strong) SettingsVC *settingsVC;
 @property(nonatomic,strong) UINavigationController *mainNavigationController;
@@ -37,7 +40,6 @@
     MenuViewController *leftMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"leftMenuViewController"];
     self.mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewsTableView"];
     self.mainNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"mainNavigationController"];
-    self.mainNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"mainNavigationController"];
     self.settingsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsVC"];
 
     [self.mainNavigationController setViewControllers:@[leftMenuViewController, self.mainViewController] animated:YES];
@@ -49,6 +51,8 @@
     [self setSideBarStyle:sideBarDepthStyle forDirection:LMSideBarControllerDirectionLeft];
     //    [self setSideBarStyle:sideBarDepthStyle forDirection:LMSideBarControllerDirectionRight];
     [self setContentViewController:self.mainNavigationController];
+    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:NO_INTERNET_KEY];
+
 }
 
 

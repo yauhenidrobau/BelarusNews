@@ -24,5 +24,6 @@
 @property (nonatomic, weak) id<NewsTableViewCellDelegate> cellDelegate;
 
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath;
+-(UIImageView*)imageFromCell;
 
 @end

@@ -11,5 +11,7 @@
 @protocol SettingsCellDelegate <NSObject>
 
 - (void)settingsOfflineCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender;
+- (void)settingsNotificationsCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender;
+
 
 @end

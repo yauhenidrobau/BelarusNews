@@ -7,11 +7,13 @@
 //
 
 #import "DetailsOfflineVCViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface DetailsOfflineVCViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *detailsTitleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *detailsDescriptionTV;
+@property (weak, nonatomic) IBOutlet UIImageView *headerImage;
 
 @end
 
@@ -19,16 +21,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _detailsTitleLabel.text = [self stringByStrippingHTML:self.detailsTitle];
-//    NSAttributedString *attributedString = [[NSAttributedString alloc]
-//                                            initWithData: [self.detailsDescription dataUsingEncoding:NSUnicodeStringEncoding]
-//                                            options: @{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-//                                                        NSFontAttributeName: [UIFont systemFontOfSize:17]}
-//                                            documentAttributes: nil
-//                                            error: nil
-//                                            ];
-    self.detailsDescriptionTV.font = [UIFont systemFontOfSize:17.0];
-    self.detailsDescriptionTV.text = [self stringByStrippingHTML:self.detailsDescription];
+    
+    [self updateData];
+    self.detailsDescriptionTV.userInteractionEnabled = NO;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,14 +44,13 @@
     }
     return str;
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)updateData {
+    [self.headerImage sd_setImageWithURL:[NSURL URLWithString:self.entity.urlImage]
+                                             placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",self.entity.feedIdString]]];
+    _detailsTitleLabel.text = [self stringByStrippingHTML:self.entity.titleFeed];
+    
+    self.detailsDescriptionTV.text = [self stringByStrippingHTML:self.entity.descriptionFeed];
+        self.detailsDescriptionTV.font = [UIFont systemFontOfSize:17.0];
 }
-*/
-
 @end

@@ -47,7 +47,7 @@
          contextName = "-[NewsTableViewCell cellForNews:AndTitles:AndIndex:]:NewsTableViewCell.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.pubDateLabel.text">
+               value = "[NSDate date]">
             </PersistentString>
             <PersistentString
                value = "[entity.pubDateFeed compare:[NSdate date]]">
@@ -56,13 +56,13 @@
                value = "entity.feedIdString">
             </PersistentString>
             <PersistentString
-               value = "entity.pubDateFeed">
+               value = "self.pubDateLabel.text">
             </PersistentString>
             <PersistentString
                value = "[formatter stringFromDate:entity.pubDateFeed]">
             </PersistentString>
             <PersistentString
-               value = "[NSDate date]">
+               value = "entity.pubDateFeed">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -70,10 +70,13 @@
          contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "wself.titlesString">
+               value = "wself.urlString">
             </PersistentString>
             <PersistentString
-               value = "wself.urlString">
+               value = "self.isAlertShown">
+            </PersistentString>
+            <PersistentString
+               value = "wself.titlesString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -117,6 +120,9 @@
                value = "currentElement">
             </PersistentString>
             <PersistentString
+               value = "isApended">
+            </PersistentString>
+            <PersistentString
                value = "currentDataDictionary">
             </PersistentString>
             <PersistentString
@@ -126,16 +132,33 @@
                value = "titleFeed">
             </PersistentString>
             <PersistentString
+               value = "temp">
+            </PersistentString>
+            <PersistentString
                value = "linkFeed">
             </PersistentString>
             <PersistentString
                value = "pubDateFeed">
             </PersistentString>
             <PersistentString
-               value = "tempString">
+               value = "urlImage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AppDelegate applicationDidBecomeActive:]:AppDelegate.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView prepareData]:NewsTableView.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[DetailsOfflineVCViewController updateDataWithCell:]:DetailsOfflineVCViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[cell imageFromCell]">
             </PersistentString>
             <PersistentString
-               value = "urlImage">
+               value = "attributedString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -160,6 +183,9 @@
          <PersistentStrings>
             <PersistentString
                value = "self.searchBar.frame">
+            </PersistentString>
+            <PersistentString
+               value = "self.isOfflineMode">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -200,6 +226,14 @@
          contextName = "__51-[DataManager updateDataWithURLArray:WithCallBack:]_block_invoke_2:DataManager.m">
       </ContextState>
       <ContextState
+         contextName = "-[NewsTableViewCell cellForNews:WithIndexPath:]:NewsTableViewCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.descriptionLabel.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[NewsTableView urlArray]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
@@ -217,6 +251,14 @@
       </ContextState>
       <ContextState
          contextName = "-[XMLParser parser:didStartElement:namespaceURI:qualifiedName:attributes:]:XMLParser.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView updateWithIndicator:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.isNotificationMode">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[NewsTableView titlesArray]:NewsTableView.m">
@@ -367,10 +409,10 @@
                value = "currentNews.feedIdString">
             </PersistentString>
             <PersistentString
-               value = "serviceString">
+               value = "currentNews.titleFeed">
             </PersistentString>
             <PersistentString
-               value = "currentNews.titleFeed">
+               value = "currentNews.descriptionFeed">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -454,6 +496,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[AppDelegate getMainController]:AppDelegate.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[NSUserDefaults standardUserDefaults]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AppDelegate applicationDidEnterBackground:]:AppDelegate.m">
+      </ContextState>
+      <ContextState
          contextName = "-[SearchResultsTableViewController tableView:cellForRowAtIndexPath:]:SearchResultsTableViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -522,6 +575,14 @@
          <PersistentStrings>
             <PersistentString
                value = "menuViewController.title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[SettingsVC tableView:cellForRowAtIndexPath:]:SettingsVC.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.cellTitleListID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -596,6 +657,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[DetailsOfflineVCViewController viewDidLoad]:DetailsOfflineVCViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke.45:RemoteFacade.m">
       </ContextState>
       <ContextState
@@ -608,13 +672,13 @@
                value = "descriptionFeed">
             </PersistentString>
             <PersistentString
-               value = "currentDataDictionary">
+               value = "pubDateFeed">
             </PersistentString>
             <PersistentString
                value = "urlImage">
             </PersistentString>
             <PersistentString
-               value = "pubDateFeed">
+               value = "currentDataDictionary">
             </PersistentString>
             <PersistentString
                value = "tempString">

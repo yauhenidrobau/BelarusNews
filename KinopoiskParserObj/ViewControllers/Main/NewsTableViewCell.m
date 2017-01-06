@@ -59,4 +59,8 @@
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
                  placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.feedIdString]]];
 }
+
+-(UIImageView*)imageFromCell {
+    return self.imageNewsView;
+}
 @end

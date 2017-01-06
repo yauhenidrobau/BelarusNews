@@ -25,7 +25,7 @@
 
 SINGLETON(DataManager)
 
--(void)updateDataWithURLArray:(NSString *)urlString AndTitle:(NSString *)title WithCallBack:(UpdateDataCallback)completionHandler {
+-(void)updateDataWithURLString:(NSString *)urlString AndTitle:(NSString *)title WithCallBack:(UpdateDataCallback)completionHandler {
     [[RemoteFacade sharedInstance] loadData:urlString callback:^(NSData *info, NSError *error) {
         if (error || !info) {
             //TODO: handle error

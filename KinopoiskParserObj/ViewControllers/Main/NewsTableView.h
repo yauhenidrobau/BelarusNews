@@ -13,6 +13,9 @@
 @interface NewsTableView: UIViewController
 
 @property (strong, nonatomic) NSString *menuTitle;
+@property (strong, nonatomic) NSString *urlString;
+@property (strong, nonatomic) NSString *titlesString;
 
 -(void)updateWithIndicator:(BOOL)showIndicator;
+
 @end

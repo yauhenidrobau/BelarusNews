@@ -36,10 +36,7 @@
      [super  viewDidLoad];
      
      self.webView.hidden = YES;
-//     self.containerView.backgroundColor = MAIN_COLOR;
-//     [UIColor colorWithHexCode:@"#019875"];
-     
-     //*********
+
      index = 0;
      _arrTitile = @[@"LOADING",@"PLEASE WAITING",@"CALM DOWN",@"WAITING"];
      
@@ -54,7 +51,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    [self performSelector:@selector(dismiss:) withObject:nil afterDelay:7.0f];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -120,13 +116,4 @@
 {
     NSLog(@"did dismiss");
 }
-//- (void)clearCookies
-//{
-//    NSHTTPCookieStorage *storage = NSHTTPCookieStorage.sharedHTTPCookieStorage;
-//    
-//    for (NSHTTPCookie *cookie in storage.cookies)
-//        [storage deleteCookie:cookie];
-//    
-//    [NSUserDefaults.standardUserDefaults synchronize];
-//}
 @end
