@@ -54,12 +54,12 @@ NSTimer *timer;
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:YES forKey:@"NotificationsMode"];
+    if([defaults boolForKey:@"NotificationsMode"]){
     timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(backgroundRefresh) userInfo:nil repeats:YES];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NotificationsMode"];
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [[self getMainController] updateWithIndicator:YES];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -73,8 +73,7 @@ NSTimer *timer;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    // Saves changes in the application's managed object context before the application terminates.
+    
 }
 
 -(void)backgroundRefresh {
@@ -84,7 +83,7 @@ NSTimer *timer;
         [[self getMainController] updateWithIndicator:NO];
         NSArray *newArray = [[RealmDataManager sharedInstance]getAllOjbects];
         if (newArray.count >= oldArray.count) {
-            NSString *alertBody = ((NewsEntity*)newArray.lastObject).titleFeed;
+            NSString *alertBody = ((NewsEntity*)newArray[0]).titleFeed;
             UILocalNotification* localNotification = [[UILocalNotification alloc] init];
             localNotification.fireDate = [[NSDate date] dateByAddingTimeInterval:1];
             localNotification.alertBody = alertBody;

@@ -70,7 +70,7 @@ SINGLETON(RealmDataManager)
 
 -(NSArray*)getAllOjbects{
     RLMResults *results = [NewsEntity allObjects];
-    NSArray *allResultsArray = [self RLMResultsToArray:results];
+    NSArray *allResultsArray = [self sortNewsArray:[self RLMResultsToArray:results]];
     
     return allResultsArray;
 }
@@ -81,5 +81,12 @@ SINGLETON(RealmDataManager)
         [array addObject:object];
     }
     return array;
+}
+
+-(NSArray *)sortNewsArray:(NSArray*)newsArray {
+    NSSortDescriptor * newSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"pubDateFeed" ascending:NO];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:newSortDescriptor];
+    NSArray *sortedArray = [newsArray sortedArrayUsingDescriptors:sortDescriptors];
+    return sortedArray;
 }
 @end
