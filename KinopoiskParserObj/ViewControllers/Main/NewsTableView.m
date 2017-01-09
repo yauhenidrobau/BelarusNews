@@ -199,7 +199,7 @@ typedef enum {
         vc.entity = newsEntity;
     } else if ([segue.identifier isEqualToString:@"ShareVCID"]) {
         DetailsViewController *vc = segue.destinationViewController;
-        vc.newsUrl = [NSURL URLWithString:self.shareItemsDict[@"link"]];
+        vc.newsUrl = [NSURL URLWithString:self.shareItemsDict[@"authLink"]];
     }
 }
 
