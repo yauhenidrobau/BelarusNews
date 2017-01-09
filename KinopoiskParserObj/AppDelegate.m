@@ -12,9 +12,9 @@
 
 #import "NewsTableView.h"
 #import "RealmDataManager.h"
+#import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate ()
-
+@interface AppDelegate () <UNUserNotificationCenterDelegate>
 
 @end
 
@@ -29,31 +29,23 @@ NSTimer *timer;
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],[UIColor whiteColor], nil]];
     
-//    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-//    if (locationNotification) {
-//        application.applicationIconBadgeNumber = 0;
-//    }
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        }];
     }
-    UILocalNotification *localNotif = [launchOptions
-                                       objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    application.applicationIconBadgeNumber = 0;
     
-    if (localNotif) {
-        // has notifications
-    }
-    else {
-        [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    }
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
 
-}
 
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-    [application registerForRemoteNotifications];
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler {
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -64,11 +56,12 @@ NSTimer *timer;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center removeAllDeliveredNotifications];
     [[self getMainController] updateWithIndicator:YES];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [timer invalidate];
     timer = nil;
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -87,13 +80,39 @@ NSTimer *timer;
     NSArray *newArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
     if (newArray.count >= oldArray.count) {
         NSString *alertBody = ((NewsEntity*)newArray[0]).titleFeed;
-        UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-        localNotification.fireDate = [[NSDate date] dateByAddingTimeInterval:1];
-        localNotification.alertBody = alertBody;
-        localNotification.timeZone = [NSTimeZone defaultTimeZone];
-        [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
-        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        UNMutableNotificationContent *localNotification = [[UNMutableNotificationContent alloc] init];
+        localNotification.title = [NSString localizedUserNotificationStringForKey:NSLocalizedString(@"Latest news",nil) arguments:nil];
+        localNotification.body = [NSString localizedUserNotificationStringForKey:alertBody arguments:nil];
+        localNotification.sound = [UNNotificationSound defaultSound];
+        UNTimeIntervalNotificationTrigger* trigger = [UNTimeIntervalNotificationTrigger 
+                                                  triggerWithTimeInterval:1 repeats:NO];
+        [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
+        localNotification.badge = @([[UIApplication sharedApplication] applicationIconBadgeNumber] + 1);
+        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"Time Down" content:localNotification trigger:trigger]; UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+            if (!error) { NSLog(@"Add NotificationRequest succeeded!");
+            }
+        }];
     }
+}
+
+- (void)enableLocalNotifications
+{
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings
+                                            settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeSound
+                                            categories:nil];
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    if ([app respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        [app registerUserNotificationSettings:settings];
+        [app registerForRemoteNotifications];
+    }
+}
+
+- (void)disablePushNotifications
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    [app unregisterForRemoteNotifications];
 }
 
 -(NewsTableView*)getMainController {
