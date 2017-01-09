@@ -55,7 +55,7 @@ NSTimer *timer;
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults boolForKey:@"NotificationsMode"]){
-    timer = [NSTimer scheduledTimerWithTimeInterval:4.0 target:self selector:@selector(backgroundRefresh) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:60*20 target:self selector:@selector(backgroundRefresh) userInfo:nil repeats:YES];
     }
 }
 
@@ -78,19 +78,17 @@ NSTimer *timer;
 
 -(void)backgroundRefresh {
     
-    if ([UIApplication sharedApplication].applicationIconBadgeNumber != 1) {
-        NSArray *oldArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
-        [[self getMainController] updateWithIndicator:NO];
-        NSArray *newArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
-        if (newArray.count >= oldArray.count) {
-            NSString *alertBody = ((NewsEntity*)newArray[0]).titleFeed;
-            UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-            localNotification.fireDate = [[NSDate date] dateByAddingTimeInterval:1];
-            localNotification.alertBody = alertBody;
-            localNotification.timeZone = [NSTimeZone defaultTimeZone];
-            [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
-            [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-        }
+    NSArray *oldArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
+    [[self getMainController] updateWithIndicator:NO];
+    NSArray *newArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
+    if (newArray.count >= oldArray.count) {
+        NSString *alertBody = ((NewsEntity*)newArray[0]).titleFeed;
+        UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+        localNotification.fireDate = [[NSDate date] dateByAddingTimeInterval:1];
+        localNotification.alertBody = alertBody;
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     }
 }
 

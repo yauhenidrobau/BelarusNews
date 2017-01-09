@@ -609,7 +609,7 @@
 						DevelopmentTeam = M2W7A5AWJY;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Push = {
 								enabled = 0;
