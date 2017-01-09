@@ -79,9 +79,9 @@ NSTimer *timer;
 -(void)backgroundRefresh {
     
     if ([UIApplication sharedApplication].applicationIconBadgeNumber != 1) {
-        NSArray *oldArray = [[RealmDataManager sharedInstance]getAllOjbects];
+        NSArray *oldArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
         [[self getMainController] updateWithIndicator:NO];
-        NSArray *newArray = [[RealmDataManager sharedInstance]getAllOjbects];
+        NSArray *newArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
         if (newArray.count >= oldArray.count) {
             NSString *alertBody = ((NewsEntity*)newArray[0]).titleFeed;
             UILocalNotification* localNotification = [[UILocalNotification alloc] init];

@@ -14,7 +14,7 @@
 
 SINGLETON(RealmDataManager)
 
--(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)serviceString{
+-(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)serviceString AndCallBack:(RealmDataManagerSaveCallback)callback{
     RLMRealm *realm = [RLMRealm defaultRealm];
     for (NSDictionary *dict in receivedNewsArray) {
         @try {
@@ -36,10 +36,15 @@ SINGLETON(RealmDataManager)
         }
         @catch (NSException *exception) {
             NSLog(@"exception");
+            NSError *error = [NSError errorWithDomain:@"exception" code:-111 userInfo:nil];
             if ([realm inWriteTransaction]) {
                 [realm cancelWriteTransaction];
             }
+            callback(error);
         }
+    }
+    if (callback) {
+        callback(nil);
     }
 }
 
@@ -70,6 +75,13 @@ SINGLETON(RealmDataManager)
 
 -(NSArray*)getAllOjbects{
     RLMResults *results = [NewsEntity allObjects];
+    NSArray *allResultsArray = [self sortNewsArray:[self RLMResultsToArray:results]];
+    
+    return allResultsArray;
+}
+
+-(NSArray *)getObjectsForEntity:(NSString *)predicat {
+    RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",predicat];
     NSArray *allResultsArray = [self sortNewsArray:[self RLMResultsToArray:results]];
     
     return allResultsArray;

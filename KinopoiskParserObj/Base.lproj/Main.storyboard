@@ -147,28 +147,8 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="20" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SignOutCell" id="cha-08-uOv">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="49"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cha-08-uOv" id="W0g-Jw-94N">
-                                            <frame key="frameInset" width="375" height="48"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8H-Yb-iAC">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.84705882349999995" green="0.25490196079999999" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="h8H-Yb-iAC" secondAttribute="bottom" constant="11" id="KtP-pN-16s"/>
-                                                <constraint firstItem="h8H-Yb-iAC" firstAttribute="top" secondItem="W0g-Jw-94N" secondAttribute="top" constant="11" id="m92-7s-fdq"/>
-                                                <constraint firstItem="h8H-Yb-iAC" firstAttribute="leading" secondItem="W0g-Jw-94N" secondAttribute="leading" constant="21" id="tfZ-P1-ZDH"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OfflineCell" id="Sjq-2h-noN" customClass="SettingsOfflineCell">
-                                        <rect key="frame" x="0.0" y="105" width="375" height="49"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Sjq-2h-noN" id="HFM-lI-SQy">
                                             <frame key="frameInset" width="375" height="48"/>
@@ -210,7 +190,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NotificationCell" id="4WQ-rB-nd0" userLabel="NotificationsCell" customClass="SettingsNotificationsCell">
-                                        <rect key="frame" x="0.0" y="154" width="375" height="49"/>
+                                        <rect key="frame" x="0.0" y="105" width="375" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4WQ-rB-nd0" id="JxJ-Ln-NF0">
                                             <frame key="frameInset" width="375" height="48"/>
@@ -251,6 +231,26 @@
                                             <outlet property="notificationSwitch" destination="xQZ-br-gax" id="DI3-YX-yrx"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SignOutCell" id="cha-08-uOv">
+                                        <rect key="frame" x="0.0" y="154" width="375" height="49"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cha-08-uOv" id="W0g-Jw-94N">
+                                            <frame key="frameInset" width="375" height="48"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8H-Yb-iAC">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.84705882349999995" green="0.25490196079999999" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="h8H-Yb-iAC" secondAttribute="bottom" constant="11" id="KtP-pN-16s"/>
+                                                <constraint firstItem="h8H-Yb-iAC" firstAttribute="top" secondItem="W0g-Jw-94N" secondAttribute="top" constant="11" id="m92-7s-fdq"/>
+                                                <constraint firstItem="h8H-Yb-iAC" firstAttribute="leading" secondItem="W0g-Jw-94N" secondAttribute="leading" constant="21" id="tfZ-P1-ZDH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="6PW-h2-XwB" id="d8U-Bd-JDd"/>
@@ -274,7 +274,7 @@
             </objects>
             <point key="canvasLocation" x="924" y="-272"/>
         </scene>
-        <!--Choose category-->
+        <!--News Table View-->
         <scene sceneID="I7p-Mj-V4s">
             <objects>
                 <viewController storyboardIdentifier="NewsTableView" id="sqv-9R-s6i" customClass="NewsTableView" sceneMemberID="viewController">
@@ -415,8 +415,8 @@
                             <constraint firstAttribute="trailing" secondItem="40g-n2-8tM" secondAttribute="trailing" id="tsa-dT-Y0v"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose category" id="5CF-Mi-Afl">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="nw2-rP-G3F">
+                    <navigationItem key="navigationItem" id="5CF-Mi-Afl">
+                        <barButtonItem key="leftBarButtonItem" style="done" id="nw2-rP-G3F">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0C1-zy-Cdb">
                                 <rect key="frame" x="16" y="4" width="36" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -439,25 +439,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rM-mF-Vgc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="928.79999999999995" y="384.55772113943033"/>
-        </scene>
-        <!--Start Screen-->
-        <scene sceneID="zBL-qF-b0b">
-            <objects>
-                <viewController id="9kL-35-ltL" customClass="VKStartScreen" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0Yn-Qd-fFd"/>
-                        <viewControllerLayoutGuide type="bottom" id="Whh-vi-COk"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="98h-MC-uBH">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X2S-0B-QHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1636" y="385"/>
+            <point key="canvasLocation" x="924" y="444"/>
         </scene>
         <!--Details OfflineVC View Controller-->
         <scene sceneID="ubM-89-L6G">
@@ -556,7 +538,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BmQ-Bw-52f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="203" y="385"/>
+            <point key="canvasLocation" x="208" y="444"/>
         </scene>
     </scenes>
     <resources>

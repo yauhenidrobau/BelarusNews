@@ -11,15 +11,16 @@
 #import "Macros.h"
 #import "NewsEntity.h"
 
-#warning correct callback
+//#warning correct callback
 typedef void(^RealmDataManagerSaveCallback)(NSError* error);
 
 @interface RealmDataManager : NSObject
 + (instancetype)sharedInstance;
 
--(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)serviceString;
+-(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)serviceString AndCallBack:(RealmDataManagerSaveCallback)callback;
 -(void)updateEntity:(NewsEntity *)entity WithProperty:(NSString*)property;
 -(NSArray*)getFavoritesArray;
 -(NSArray*)getAllOjbects;
+-(NSArray *)getObjectsForEntity:(NSString *)predicat;
 -(NSArray*)RLMResultsToArray:(RLMResults *)results;
 @end

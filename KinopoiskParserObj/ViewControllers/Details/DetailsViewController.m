@@ -36,7 +36,6 @@
      [super  viewDidLoad];
      
      self.webView.hidden = YES;
-
      index = 0;
      _arrTitile = @[@"LOADING",@"PLEASE WAITING",@"CALM DOWN",@"WAITING"];
      
@@ -69,6 +68,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self dismiss:self];
 }
 
 -(void) didReceiveMemoryWarning {

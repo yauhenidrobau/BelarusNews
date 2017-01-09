@@ -31,10 +31,14 @@ SINGLETON(DataManager)
             //TODO: handle error
         } else {
             [[ParserManager sharedInstance] parseXmlData:info callback:^(NSArray<NSDictionary *>* newsArray, NSError *error) {
-                [[RealmDataManager sharedInstance]saveNews:newsArray withServiceString:title];
-                if (completionHandler) {
-                    completionHandler(error);
-                }
+                [[RealmDataManager sharedInstance]saveNews:newsArray withServiceString:title AndCallBack:^(NSError *saveError) {
+                    if (!saveError) {
+                        if (completionHandler) {
+                            completionHandler(saveError);
+                        }
+                    }
+                }];
+                
             }];
             
         }

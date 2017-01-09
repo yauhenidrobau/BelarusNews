@@ -33,23 +33,11 @@
 
 -(NSArray *)cellTitleListID {
     if (!_cellTitleListID.count) {
-        _cellTitleListID = @[@"SignOutCell",
-                           @"OfflineCell",
-                           @"NotificationCell"
-                           ];
+        _cellTitleListID = @[@"OfflineCell",
+                           @"NotificationCell",
+                           @"SignOutCell"];
     }
     return _cellTitleListID;
-}
-
--(NSArray *)cellTitleList {
-    if (!_cellTitleList.count) {
-        _cellTitleList = @[@"SVC_SIGN_OUT",
-                           @"SVC_OffLine",
-                           @"SVC_SOUND"
-//                             @"SVC_PUSH_NOTIFICATIONS",
-                             ];
-    }
-    return _cellTitleList;
 }
 
 - (void)viewDidLoad {
@@ -73,7 +61,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.cellTitleList.count;
+    return self.cellTitleListID.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
