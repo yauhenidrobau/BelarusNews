@@ -13,5 +13,6 @@
 +(instancetype)sharedInstance;
 - (NSDate*)dateFromString:(NSString*)dateString withFormat:(NSString*)dateFormat;
 - (NSString*)stringFromDate:(NSDate*)date withFormat:(NSString*)dateFormat;
+- (NSLocale *)currentLocale;
 
 @end

@@ -81,16 +81,16 @@ NSMutableDictionary *CDDateDict;
     if ([elementName isEqualToString:@"item"] || [elementName isEqualToString:@"atom"]) {
         if (titleFeed.length) {
             titleFeed.string = [titleFeed stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            titleFeed.string = [self stringByStrippingHTML:titleFeed];
             [currentDataDictionary  setObject:titleFeed forKey:@"title"];
         }
         if (linkFeed.length) {
-#warning must get 0 element
-            
-            // must get 0 element
             [currentDataDictionary  setObject:linkFeed forKey:@"link"];
         }
         if (descriptionFeed.length) {
             NSString *temp = [self getImageUrlFromDescription:descriptionFeed];
+            descriptionFeed.string = [self stringByStrippingHTML:descriptionFeed];
+
             if (!urlImage.length) {
                 if (temp.length) {
                     [urlImage appendString:temp];
@@ -98,10 +98,7 @@ NSMutableDictionary *CDDateDict;
                     urlImage = [NSMutableString stringWithString:@""];
                 }
             }
-//            if (tempString.length) {
-//                descriptionFeed = [NSMutableString stringWithString:tempString];
-//            }
-            descriptionFeed =[NSMutableString stringWithString:[self getDescriptionString:descriptionFeed]];
+//            descriptionFeed =[NSMutableString stringWithString:[self getDescriptionString:descriptionFeed]];
             [currentDataDictionary  setObject:descriptionFeed forKey:@"description"];
             
         }
@@ -120,10 +117,6 @@ NSMutableDictionary *CDDateDict;
         urlImage = nil;
     }
 }
-
-#warning TODO what is it correct it
-//XMLParser<NSXMLParserDelegate> *parserDelegate = [parserDelegate conformsToProtocol:NSXMLParserDelegate];
-
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     NSArray<NSDictionary *> *parsedDataArray = [NSArray<NSDictionary*> arrayWithArray:dictParsedData];
@@ -190,10 +183,25 @@ NSMutableDictionary *CDDateDict;
         }
     }
     
-
-    return urlStrArray[0];
+    
+    return [self stringByStrippingHTML:urlStrArray[0]];
    
 }
+
+-(NSString *)stringByStrippingHTML:(NSString*)str
+{
+    NSRange r;
+    while ((r = [str rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+    {
+        str = [str stringByReplacingCharactersInRange:r withString:@""];
+    }
+    str = [str stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""];
+    str = [str stringByReplacingOccurrencesOfString:@"Читать далее" withString:@""];
+    
+    
+    return str;
+}
+
 
 /*
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {

@@ -229,6 +229,12 @@
          contextName = "-[NewsTableViewCell cellForNews:WithIndexPath:]:NewsTableViewCell.m">
          <PersistentStrings>
             <PersistentString
+               value = "self.pubDateLabel.text">
+            </PersistentString>
+            <PersistentString
+               value = "entity.pubDateFeed">
+            </PersistentString>
+            <PersistentString
                value = "self.descriptionLabel.text">
             </PersistentString>
          </PersistentStrings>
@@ -666,6 +672,9 @@
          contextName = "-[XMLParser parser:didEndElement:namespaceURI:qualifiedName:]:XMLParser.m">
          <PersistentStrings>
             <PersistentString
+               value = "currentDataDictionary">
+            </PersistentString>
+            <PersistentString
                value = "dictParsedData">
             </PersistentString>
             <PersistentString
@@ -675,13 +684,13 @@
                value = "pubDateFeed">
             </PersistentString>
             <PersistentString
-               value = "urlImage">
-            </PersistentString>
-            <PersistentString
-               value = "currentDataDictionary">
-            </PersistentString>
-            <PersistentString
                value = "tempString">
+            </PersistentString>
+            <PersistentString
+               value = "linkFeed">
+            </PersistentString>
+            <PersistentString
+               value = "urlImage">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

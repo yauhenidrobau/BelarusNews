@@ -8,6 +8,7 @@
 
 #import "DateFormatterManager.h"
 #import "Macros.h"
+#import "Utils.h"
 
 @interface DateFormatterManager ()
 
@@ -44,5 +45,16 @@ SINGLETON(DateFormatterManager)
     [self.dateFormatter setDateFormat:dateFormat];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
     return [self.dateFormatter stringFromDate:date];
+}
+
+- (NSLocale *)currentLocale {
+    NSString* identifier = [[NSLocale currentLocale] localeIdentifier];
+    
+    NSString *currentLanguageCode = [[[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"] firstObject];
+    if (currentLanguageCode) {
+        identifier = currentLanguageCode;
+    }
+    
+    return [NSLocale localeWithLocaleIdentifier:identifier];
 }
 @end

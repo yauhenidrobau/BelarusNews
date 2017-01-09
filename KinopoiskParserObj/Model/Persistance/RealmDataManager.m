@@ -24,7 +24,7 @@ SINGLETON(RealmDataManager)
                 currentNews = [NewsEntity new];
                 currentNews.feedIdString = serviceString;
                 currentNews.titleFeed = dict[@"title"];
-                currentNews.pubDateFeed = dict[@"pubDate"];
+                currentNews.pubDateFeed =  dict[@"pubDate"];
                 currentNews.descriptionFeed = dict[@"description"];
                 currentNews.linkFeed = dict[@"link"];
                 if (dict[@"imageUrl"]) {

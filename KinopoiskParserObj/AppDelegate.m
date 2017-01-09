@@ -97,7 +97,6 @@ NSTimer *timer;
 -(NewsTableView*)getMainController {
     
     NewsTableView *newsTableViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NewsTableView"];
-    NSString *temp = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentUrl"];
     newsTableViewController.urlString = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentUrl"];
     newsTableViewController.titlesString = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"];
 

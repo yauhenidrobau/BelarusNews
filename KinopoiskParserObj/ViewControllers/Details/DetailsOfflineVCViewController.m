@@ -35,22 +35,13 @@
     // Dispose of any resources that can be recreated.
 }
 
--(NSString *)stringByStrippingHTML:(NSString*)str
-{
-    NSRange r;
-    while ((r = [str rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
-    {
-        str = [str stringByReplacingCharactersInRange:r withString:@""];
-    }
-    return str;
-}
 
 -(void)updateData {
     [self.headerImage sd_setImageWithURL:[NSURL URLWithString:self.entity.urlImage]
                                              placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",self.entity.feedIdString]]];
-    _detailsTitleLabel.text = [self stringByStrippingHTML:self.entity.titleFeed];
+    _detailsTitleLabel.text = self.entity.titleFeed;
     
-    self.detailsDescriptionTV.text = [self stringByStrippingHTML:self.entity.descriptionFeed];
-        self.detailsDescriptionTV.font = [UIFont systemFontOfSize:17.0];
+    self.detailsDescriptionTV.text = self.entity.descriptionFeed;
+    self.detailsDescriptionTV.font = [UIFont systemFontOfSize:17.0];
 }
 @end

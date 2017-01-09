@@ -25,10 +25,25 @@
                             <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-launch-Dev.by" translatesAutoresizingMaskIntoConstraints="NO" id="RlR-oV-qXF" userLabel="Dev.BY">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <view alpha="0.97999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bct-Qt-bZD">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVk-65-2Rt">
+                                        <fontDescription key="fontDescription" name="AcademyEngravedLetPlain" family="Academy Engraved LET" pointSize="108"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.098039215686274508" green="0.47058823529411764" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="EVk-65-2Rt" firstAttribute="centerY" secondItem="bct-Qt-bZD" secondAttribute="centerY" id="SnX-FO-EzO"/>
+                                    <constraint firstItem="EVk-65-2Rt" firstAttribute="centerX" secondItem="bct-Qt-bZD" secondAttribute="centerX" id="iD7-QF-9XX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RlR-oV-qXF" secondAttribute="trailing" id="1ff-Eq-rjD"/>
+                            <constraint firstAttribute="trailing" secondItem="bct-Qt-bZD" secondAttribute="trailing" id="4CF-XC-bd2"/>
                             <constraint firstItem="Fki-W4-FYq" firstAttribute="height" secondItem="wtD-ex-19C" secondAttribute="height" id="4Ga-bP-v0e"/>
                             <constraint firstItem="wtD-ex-19C" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="4uv-k3-5iN"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="FGV-rl-CBo" secondAttribute="bottom" id="Dbi-pr-Y6W"/>
@@ -42,12 +57,15 @@
                             <constraint firstAttribute="trailing" secondItem="FGV-rl-CBo" secondAttribute="trailing" id="Spb-0W-gf6"/>
                             <constraint firstItem="FGV-rl-CBo" firstAttribute="top" secondItem="Fki-W4-FYq" secondAttribute="bottom" id="WLS-2I-VEC"/>
                             <constraint firstItem="Fki-W4-FYq" firstAttribute="top" secondItem="RlR-oV-qXF" secondAttribute="bottom" id="YOB-AB-hMQ"/>
+                            <constraint firstItem="bct-Qt-bZD" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="cGh-Vz-7co"/>
                             <constraint firstItem="FGV-rl-CBo" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="cqT-q5-fJD"/>
                             <constraint firstItem="FGV-rl-CBo" firstAttribute="height" secondItem="wtD-ex-19C" secondAttribute="height" id="dZX-YS-nQK"/>
                             <constraint firstItem="Fki-W4-FYq" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="dbb-S8-bfA"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="bct-Qt-bZD" secondAttribute="bottom" id="drb-AR-5gg"/>
                             <constraint firstAttribute="trailing" secondItem="Fki-W4-FYq" secondAttribute="trailing" id="erQ-Bq-3DJ"/>
                             <constraint firstItem="M9I-dt-Dog" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ryx-qw-WEQ"/>
                             <constraint firstItem="wtD-ex-19C" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="uaB-07-RpF"/>
+                            <constraint firstItem="bct-Qt-bZD" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ufb-qJ-oSY"/>
                         </constraints>
                     </view>
                 </viewController>
