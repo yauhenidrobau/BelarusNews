@@ -27,10 +27,11 @@
 {
     [super viewDidLoad];
     
-    self.menuTitles = @[NSLocalizedString(@"Profile",nil),
+    self.menuTitles = @[
+//                        NSLocalizedString(@"Profile",nil),
                         NSLocalizedString(@"Favorites",nil),
                         NSLocalizedString(@"Settings",nil),
-                        NSLocalizedString(@"About",nil),
+//                        NSLocalizedString(@"About",nil),
                         NSLocalizedString(@"Log out",nil)];
     self.avatarImageView.clipsToBounds = YES;
     self.avatarImageView.layer.cornerRadius = 50.0;

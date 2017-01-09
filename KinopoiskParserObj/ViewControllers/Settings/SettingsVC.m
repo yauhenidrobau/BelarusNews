@@ -96,6 +96,12 @@
     return  50.0;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        exit(0);
+    }
+}
 #pragma mark - SettingsCellDelegate
 - (void)settingsOfflineCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

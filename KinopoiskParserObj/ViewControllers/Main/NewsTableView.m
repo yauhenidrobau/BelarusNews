@@ -77,8 +77,6 @@ typedef enum {
 @property (nonatomic) BOOL isOfflineMode;
 @property (nonatomic) BOOL isNotificationMode;
 
-@property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
-
 @end
 
 @implementation NewsTableView
@@ -141,7 +139,6 @@ typedef enum {
         [wself.tableView setContentOffset:CGPointZero animated:YES];
     }];
     self.scrollButton.hidden = YES;
-    [self.navigationController setNavigationBarHidden:NO];
 }
 
 #pragma mark - UITableViewDataSource
@@ -426,6 +423,7 @@ typedef enum {
 }
 
 -(void)setupData {
+    
     if (!self.menuTitle.length) {
         RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesString];
         NSArray *allResultsArray = [[RealmDataManager sharedInstance] RLMResultsToArray:results];
@@ -515,8 +513,7 @@ typedef enum {
                         if(showIndicator) {
                         [wself showLoadingIndicator:!showIndicator];
                         }
-                        [wself.refreshControl endRefreshing];
-                        [wself.tableView reloadData];
+                        
                     }
                 }];
             }
@@ -547,7 +544,7 @@ typedef enum {
 }
 
 -(void)prepareSearchBar {
-    self.searchBar = [[INSSearchBar alloc] initWithFrame:CGRectMake(20.0, 5.0, CGRectGetWidth(self.view.bounds) - 40.0, 20.0)];
+    self.searchBar = [[INSSearchBar alloc] initWithFrame:CGRectMake(20.0, 5.0, CGRectGetWidth(self.view.bounds) - 40.0, 00.0)];
     self.searchBar.delegate = self;
     self.searchBarView.backgroundColor = MAIN_COLOR;
     [self.view addSubview:self.searchBar];
