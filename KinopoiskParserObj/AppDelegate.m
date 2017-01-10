@@ -7,12 +7,13 @@
 //
 
 #import "AppDelegate.h"
+
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-
 #import "NewsTableView.h"
 #import "RealmDataManager.h"
 #import <UserNotifications/UserNotifications.h>
+#import <UIKit/UIDevice.h>
 
 @interface AppDelegate () <UNUserNotificationCenterDelegate>
 
@@ -29,19 +30,20 @@ NSTimer *timer;
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],[UIColor whiteColor], nil]];
     
-    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
-        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        center.delegate = self;
-        [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
-        }];
+    if ([UIDevice currentDevice].systemVersion.floatValue < 10) {
+        [self enableLocalNotificationsForLowerIOS];
+    } else {
+        if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
+            UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+            center.delegate = self;
+            [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            }];
+        }
     }
     application.applicationIconBadgeNumber = 0;
     
     return YES;
 }
-
-
-
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler {
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -50,30 +52,26 @@ NSTimer *timer;
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if([defaults boolForKey:@"NotificationsMode"]){
-    timer = [NSTimer scheduledTimerWithTimeInterval:60*20 target:self selector:@selector(backgroundRefresh) userInfo:nil repeats:YES];
+    if([defaults boolForKey:@"NotificationsMode"]) {
+        if ([UIDevice currentDevice].systemVersion.floatValue < 10) {
+            timer = [NSTimer scheduledTimerWithTimeInterval:0.2*20 target:self selector:@selector(backgroundRefreshForLowerIOS) userInfo:nil repeats:YES];
+        } else {
+            timer = [NSTimer scheduledTimerWithTimeInterval:0.2*20 target:self selector:@selector(backgroundRefreshForIOS10) userInfo:nil repeats:YES];
+        }
     }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     [center removeAllDeliveredNotifications];
+    [[UIApplication sharedApplication]cancelAllLocalNotifications];;
     [[self getMainController] updateWithIndicator:YES];
     [timer invalidate];
     timer = nil;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    
-    
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    
-}
-
--(void)backgroundRefresh {
+-(void)backgroundRefreshForIOS10 {
     
     NSArray *oldArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
     [[self getMainController] updateWithIndicator:NO];
@@ -96,23 +94,34 @@ NSTimer *timer;
     }
 }
 
-- (void)enableLocalNotifications
-{
+-(void)backgroundRefreshForLowerIOS {
+    
+    NSArray *oldArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
+    [[self getMainController] updateWithIndicator:NO];
+    NSArray *newArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
+    if (newArray.count >= oldArray.count) {
+        NSString *alertBody = ((NewsEntity*)newArray[0]).titleFeed;
+        UILocalNotification *localNotification = [[UILocalNotification alloc]init];
+        localNotification.alertTitle = NSLocalizedString(@"Latest news",nil);
+        localNotification.alertBody = alertBody;
+        localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        
+        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+        [[UIApplication sharedApplication]scheduleLocalNotification:localNotification];
+    }
+}
+
+- (void)enableLocalNotificationsForLowerIOS {
     UIUserNotificationSettings *settings = [UIUserNotificationSettings
-                                            settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeSound
+                                            settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge
                                             categories:nil];
     UIApplication *app = [UIApplication sharedApplication];
     
     if ([app respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         [app registerUserNotificationSettings:settings];
-        [app registerForRemoteNotifications];
     }
-}
-
-- (void)disablePushNotifications
-{
-    UIApplication *app = [UIApplication sharedApplication];
-    [app unregisterForRemoteNotifications];
 }
 
 -(NewsTableView*)getMainController {
