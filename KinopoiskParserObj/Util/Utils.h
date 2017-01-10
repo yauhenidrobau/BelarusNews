@@ -10,6 +10,8 @@
 
 @interface Utils : NSObject
 
++(void)exitFromApplication;
+
 @end
 
 @interface NSDateFormatter (Localized)

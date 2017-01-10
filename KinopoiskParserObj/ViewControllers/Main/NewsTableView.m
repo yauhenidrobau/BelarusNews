@@ -75,7 +75,6 @@ typedef enum {
 @property (nonatomic) BOOL isAlertShown;
 @property (nonatomic) BOOL isSearchStart;
 @property (nonatomic) BOOL isOfflineMode;
-@property (nonatomic) BOOL isNotificationMode;
 
 @end
 
@@ -95,8 +94,6 @@ typedef enum {
     [self updateWithIndicator:YES];
     self.operationQueue = [NSOperationQueue new];
     self.isAlertShown = [self.defaults boolForKey:NO_INTERNET_KEY];
-
-    [self configNotificationMode];
     
 }
 
@@ -105,7 +102,6 @@ typedef enum {
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
     self.isOfflineMode = [self.defaults boolForKey:OFFLINE_MODE];
-    [self configNotificationMode];
     
 }
 
@@ -616,8 +612,4 @@ typedef enum {
     self.shareCircleView.delegate = self;
 }
 
--(void)configNotificationMode {
-    self.isNotificationMode = [self.defaults boolForKey:NOTIFICATIONS_MODE];
-    
-}
 @end

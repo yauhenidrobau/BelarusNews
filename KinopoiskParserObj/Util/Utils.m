@@ -9,9 +9,17 @@
 #import "Utils.h"
 
 #import "DateFormatterManager.h"
+#import <UserNotifications/UserNotifications.h>
+#import <UIKit/UIKit.h>
 
 @implementation Utils
 
++(void)exitFromApplication {
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center removeAllDeliveredNotifications];
+    [[UIApplication sharedApplication]cancelAllLocalNotifications];
+    exit(0);
+}
 @end
 
 @implementation NSDateFormatter (Localized)

@@ -50,6 +50,11 @@ NSTimer *timer;
     
 }
 
+
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    
+}
+
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults boolForKey:@"NotificationsMode"]) {
@@ -64,7 +69,7 @@ NSTimer *timer;
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     [center removeAllDeliveredNotifications];
-    [[UIApplication sharedApplication]cancelAllLocalNotifications];;
+    [[UIApplication sharedApplication]cancelAllLocalNotifications];
     [[self getMainController] updateWithIndicator:YES];
     [timer invalidate];
     timer = nil;

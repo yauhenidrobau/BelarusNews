@@ -10,6 +10,7 @@
 
 #import "SettingsOfflineCell.h"
 #import "SettingsNotificationsCell.h"
+#import "Utils.h"
 
 #define SIGN_OUT_CELL_TYPE @"SignOutCell"
 #define OFFLINE_CELL_TYPE @"OfflineCell"
@@ -18,6 +19,11 @@
 #define OFFLINE_MODE @"OfflineMode"
 #define NOTIFICATIONS_MODE @"NotificationsMode"
 
+typedef enum {
+    OFFLINE_CELL,
+    NOTIFICATION_CELL,
+    SIGN_OUT_CELL
+}TypeCells;
 @interface SettingsVC () <SettingsCellDelegate>
 
 @property (nonatomic, strong) NSArray *cellTitleList;
@@ -86,10 +92,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 0) {
-        exit(0);
+    if (indexPath.row == SIGN_OUT_CELL) {
+        [Utils exitFromApplication];
     }
 }
+
 #pragma mark - SettingsCellDelegate
 - (void)settingsOfflineCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
