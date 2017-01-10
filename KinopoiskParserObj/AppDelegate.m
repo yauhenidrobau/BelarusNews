@@ -59,9 +59,9 @@ NSTimer *timer;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if([defaults boolForKey:@"NotificationsMode"]) {
         if ([UIDevice currentDevice].systemVersion.floatValue < 10) {
-            timer = [NSTimer scheduledTimerWithTimeInterval:0.2*20 target:self selector:@selector(backgroundRefreshForLowerIOS) userInfo:nil repeats:YES];
+            timer = [NSTimer scheduledTimerWithTimeInterval:60*20 target:self selector:@selector(backgroundRefreshForLowerIOS) userInfo:nil repeats:YES];
         } else {
-            timer = [NSTimer scheduledTimerWithTimeInterval:0.2*20 target:self selector:@selector(backgroundRefreshForIOS10) userInfo:nil repeats:YES];
+            timer = [NSTimer scheduledTimerWithTimeInterval:60*20 target:self selector:@selector(backgroundRefreshForIOS10) userInfo:nil repeats:YES];
         }
     }
 }
@@ -81,7 +81,7 @@ NSTimer *timer;
     NSArray *oldArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
     [[self getMainController] updateWithIndicator:NO];
     NSArray *newArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
-    if (newArray.count >= oldArray.count) {
+    if (newArray.count > oldArray.count) {
         NSString *alertBody = ((NewsEntity*)newArray[0]).titleFeed;
         UNMutableNotificationContent *localNotification = [[UNMutableNotificationContent alloc] init];
         localNotification.title = [NSString localizedUserNotificationStringForKey:NSLocalizedString(@"Latest news",nil) arguments:nil];
@@ -104,7 +104,7 @@ NSTimer *timer;
     NSArray *oldArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
     [[self getMainController] updateWithIndicator:NO];
     NSArray *newArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
-    if (newArray.count >= oldArray.count) {
+    if (newArray.count > oldArray.count) {
         NSString *alertBody = ((NewsEntity*)newArray[0]).titleFeed;
         UILocalNotification *localNotification = [[UILocalNotification alloc]init];
         localNotification.alertTitle = NSLocalizedString(@"Latest news",nil);

@@ -90,8 +90,8 @@ typedef enum {
     [self prepareData];
     [self prepareAppierance];
     [self peparePullToRefresh];
-    [self setupData];
     [self updateWithIndicator:YES];
+
     self.operationQueue = [NSOperationQueue new];
     self.isAlertShown = [self.defaults boolForKey:NO_INTERNET_KEY];
     
@@ -126,6 +126,9 @@ typedef enum {
 }
 
 - (IBAction)leftBarItemTouchUpInside:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"menuTitle"];
+
     [self.sideBarController showMenuViewControllerInDirection:LMSideBarControllerDirectionLeft];
 }
 
@@ -427,6 +430,9 @@ typedef enum {
         self.newsArray = [self sortNewsArray:allResultsArray];
         NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
     } else {
+        self.menuTitle = @"";
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults removeObjectForKey:@"menuTitle"];
         self.newsArray = [self sortNewsArray:[NSArray arrayWithArray:[[RealmDataManager sharedInstance] getFavoritesArray]]];
         NSLog(@"Get favorites Elements  %lu",(unsigned long)self.newsArray.count);
     }

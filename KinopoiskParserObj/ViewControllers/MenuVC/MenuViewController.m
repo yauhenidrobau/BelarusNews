@@ -72,8 +72,9 @@
 //    vc.urlIdentificator = self.menuTitles[indexPath.row];
 //    RootViewController *rootVC = [[RootViewController alloc]init];
 //    [rootVC.mainNavigationController setViewControllers:@[vc] animated:YES];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:self.menuTitles[indexPath.row] forKey:@"menuTitle"];
     self.title = self.menuTitles[indexPath.row];
-    
     [self.sideBarController hideMenuViewController:YES];
 //    [self.sideBarController showViewController:vc sender:self];
 

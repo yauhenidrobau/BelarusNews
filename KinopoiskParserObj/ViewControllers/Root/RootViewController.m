@@ -68,18 +68,25 @@
 
 - (void)sideBarController:(LMSideBarController *)sideBarController willHideMenuViewController:(UIViewController *)menuViewController {
     [self.mainNavigationController dismissViewControllerAnimated:NO completion:nil];
-    if ([menuViewController.title isEqualToString:NSLocalizedString(@"Profile",nil)]) {
-        return;
-    } else if ([menuViewController.title isEqualToString:NSLocalizedString(@"Favorites",nil)]) {
-        self.mainViewController.menuTitle = menuViewController.title;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"menuTitle"]) {
+        if ([menuViewController.title isEqualToString:NSLocalizedString(@"Profile",nil)]) {
+            return;
+        } else if ([menuViewController.title isEqualToString:NSLocalizedString(@"Favorites",nil)]) {
+            self.mainViewController.menuTitle = menuViewController.title;
+            [self.mainViewController viewDidLoad];
+            [self.mainViewController viewWillAppear:YES];
+            //        [self.mainNavigationController pushViewController:self.mainViewController animated:YES];
+        } else if ([menuViewController.title isEqualToString:NSLocalizedString(@"Settings",nil)]) {
+            [self.mainNavigationController pushViewController:self.settingsVC animated:YES];
+        } else if ([menuViewController.title isEqualToString:NSLocalizedString(@"Log out",nil)]) {
+            [Utils exitFromApplication];
+        }
+    } else {
         [self.mainViewController viewDidLoad];
         [self.mainViewController viewWillAppear:YES];
-//        [self.mainNavigationController pushViewController:self.mainViewController animated:YES];
-    } else if ([menuViewController.title isEqualToString:NSLocalizedString(@"Settings",nil)]) {
-        [self.mainNavigationController pushViewController:self.settingsVC animated:YES];
-    } else if ([menuViewController.title isEqualToString:NSLocalizedString(@"Log out",nil)]) {
-        [Utils exitFromApplication];
     }
+    
 }
 
 - (void)sideBarController:(LMSideBarController *)sideBarController didHideMenuViewController:(UIViewController *)menuViewController {
