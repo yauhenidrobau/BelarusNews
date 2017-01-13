@@ -20,6 +20,17 @@
     [[UIApplication sharedApplication]cancelAllLocalNotifications];
     exit(0);
 }
+
++(NewsTableView*)getMainController {
+    
+    NewsTableView *newsTableViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NewsTableView"];
+    newsTableViewController.urlString = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentUrl"];
+    newsTableViewController.titlesString = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"];
+    
+    return newsTableViewController;
+}
+
+
 @end
 
 @implementation NSDateFormatter (Localized)

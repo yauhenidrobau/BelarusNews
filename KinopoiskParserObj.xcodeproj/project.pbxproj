@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */; };
 		1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */; };
+		1E1C66381E290C1300086CCC /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1C66371E290C1300086CCC /* NotificationManager.m */; };
 		1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2666911E127AD6001DF2A2 /* INSSearchBar.m */; };
 		1E372F851DF94C7400362CC1 /* DateFormatterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E372F821DF94C7400362CC1 /* DateFormatterManager.m */; };
 		1E372F861DF94C7400362CC1 /* SearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E372F841DF94C7400362CC1 /* SearchManager.m */; };
@@ -94,6 +95,8 @@
 		1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsEntity.m; sourceTree = "<group>"; };
 		1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDataManager.h; sourceTree = "<group>"; };
 		1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmDataManager.m; sourceTree = "<group>"; };
+		1E1C66361E290C1300086CCC /* NotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationManager.h; sourceTree = "<group>"; };
+		1E1C66371E290C1300086CCC /* NotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationManager.m; sourceTree = "<group>"; };
 		1E1D3A9E1DE47D9F00D6C00C /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1E2666901E127AD6001DF2A2 /* INSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSSearchBar.h; sourceTree = "<group>"; };
 		1E2666911E127AD6001DF2A2 /* INSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSSearchBar.m; sourceTree = "<group>"; };
@@ -435,6 +438,8 @@
 		1E7329491D783DFD0027E46E /* Persistance */ = {
 			isa = PBXGroup;
 			children = (
+				1E1C66361E290C1300086CCC /* NotificationManager.h */,
+				1E1C66371E290C1300086CCC /* NotificationManager.m */,
 				1E372F811DF94C7400362CC1 /* DateFormatterManager.h */,
 				1E372F821DF94C7400362CC1 /* DateFormatterManager.m */,
 				1E372F831DF94C7400362CC1 /* SearchManager.h */,
@@ -779,6 +784,7 @@
 				1E640B601E0A85FE00AA539C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */,
 				1E372F861DF94C7400362CC1 /* SearchManager.m in Sources */,
+				1E1C66381E290C1300086CCC /* NotificationManager.m in Sources */,
 				84FF33411E1DCEAC002847AB /* FXBlurView.m in Sources */,
 				1EFE917A1E237908008CA308 /* Utils.m in Sources */,
 				1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */,

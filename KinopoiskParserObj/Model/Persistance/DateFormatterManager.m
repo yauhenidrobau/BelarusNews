@@ -42,9 +42,10 @@ SINGLETON(DateFormatterManager)
     if (!date) {
         return nil;
     }
+    [self.dateFormatter setLocale:[self currentLocale]];
+
     [self.dateFormatter setDateFormat:dateFormat];
-    [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-    return [self.dateFormatter stringFromDate:date];
+    return [[self.dateFormatter stringFromDate:date]capitalizedString];
 }
 
 - (NSLocale *)currentLocale {

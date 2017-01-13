@@ -46,6 +46,7 @@
      _spinner.delegate = self;
      
      [self.view addSubview:_spinner];
+     [self start:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -54,7 +55,6 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:(animated)];
-    [self start:self];
     [self.webView layoutIfNeeded];
     if (_newsUrl) {
         NSLog(@"%@",_newsUrl);

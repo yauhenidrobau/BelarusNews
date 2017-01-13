@@ -246,7 +246,7 @@
         [_delegate FeSpinnerTenDotWillShow:self];
     }
     
-    [UIView animateWithDuration:0.5f delay:0
+    [UIView animateWithDuration:0.1f delay:0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^
     {

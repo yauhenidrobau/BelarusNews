@@ -14,6 +14,8 @@
 #import "RealmDataManager.h"
 #import <UserNotifications/UserNotifications.h>
 #import <UIKit/UIDevice.h>
+#import "NotificationManager.h"
+#import "Utils.h"
 
 @interface AppDelegate () <UNUserNotificationCenterDelegate>
 
@@ -31,7 +33,7 @@ NSTimer *timer;
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],[UIColor whiteColor], nil]];
     
     if ([UIDevice currentDevice].systemVersion.floatValue < 10) {
-        [self enableLocalNotificationsForLowerIOS];
+        [[NotificationManager sharedInstance] enableLocalNotificationsForLowerIOS];
     } else {
         if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
             UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
@@ -70,7 +72,7 @@ NSTimer *timer;
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     [center removeAllDeliveredNotifications];
     [[UIApplication sharedApplication]cancelAllLocalNotifications];
-    [[self getMainController] updateWithIndicator:YES];
+    [[Utils getMainController] updateWithIndicator:YES];
     [timer invalidate];
     timer = nil;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -78,64 +80,20 @@ NSTimer *timer;
 
 -(void)backgroundRefreshForIOS10 {
     
-    NSArray *oldArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
-    [[self getMainController] updateWithIndicator:NO];
-    NSArray *newArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
-    if (newArray.count > oldArray.count) {
-        NSString *alertBody = ((NewsEntity*)newArray[0]).titleFeed;
-        UNMutableNotificationContent *localNotification = [[UNMutableNotificationContent alloc] init];
-        localNotification.title = [NSString localizedUserNotificationStringForKey:NSLocalizedString(@"Latest news",nil) arguments:nil];
-        localNotification.body = [NSString localizedUserNotificationStringForKey:alertBody arguments:nil];
-        localNotification.sound = [UNNotificationSound defaultSound];
-        UNTimeIntervalNotificationTrigger* trigger = [UNTimeIntervalNotificationTrigger 
-                                                  triggerWithTimeInterval:1 repeats:NO];
-        [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
-        localNotification.badge = @([[UIApplication sharedApplication] applicationIconBadgeNumber] + 1);
-        UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"Time Down" content:localNotification trigger:trigger]; UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
-            if (!error) { NSLog(@"Add NotificationRequest succeeded!");
-            }
-        }];
-    }
+    [[NotificationManager sharedInstance]shouldCreateNotificalion:^(NSString *alertBody, NSError *error) {
+        if (alertBody.length) {
+            [[NotificationManager sharedInstance]createNotificationIOS10WithBody:alertBody];
+        }
+    }];
+    
 }
 
 -(void)backgroundRefreshForLowerIOS {
     
-    NSArray *oldArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
-    [[self getMainController] updateWithIndicator:NO];
-    NSArray *newArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
-    if (newArray.count > oldArray.count) {
-        NSString *alertBody = ((NewsEntity*)newArray[0]).titleFeed;
-        UILocalNotification *localNotification = [[UILocalNotification alloc]init];
-        localNotification.alertTitle = NSLocalizedString(@"Latest news",nil);
-        localNotification.alertBody = alertBody;
-        localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
-        localNotification.timeZone = [NSTimeZone defaultTimeZone];
-        localNotification.soundName = UILocalNotificationDefaultSoundName;
-        
-        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
-        [[UIApplication sharedApplication]scheduleLocalNotification:localNotification];
-    }
+    [[NotificationManager sharedInstance]shouldCreateNotificalion:^(NSString *alertBody, NSError *error) {
+        if (alertBody.length) {
+            [[NotificationManager sharedInstance]createNotificationIOSLower10WithBody:alertBody];
+        }
+    }];
 }
-
-- (void)enableLocalNotificationsForLowerIOS {
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings
-                                            settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge
-                                            categories:nil];
-    UIApplication *app = [UIApplication sharedApplication];
-    
-    if ([app respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        [app registerUserNotificationSettings:settings];
-    }
-}
-
--(NewsTableView*)getMainController {
-    
-    NewsTableView *newsTableViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NewsTableView"];
-    newsTableViewController.urlString = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentUrl"];
-    newsTableViewController.titlesString = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"];
-
-    return newsTableViewController;
-}
-
 @end

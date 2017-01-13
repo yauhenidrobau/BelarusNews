@@ -90,6 +90,7 @@ typedef enum {
     [self prepareData];
     [self prepareAppierance];
     [self peparePullToRefresh];
+    [self setupData];
     [self updateWithIndicator:YES];
 
     self.operationQueue = [NSOperationQueue new];
