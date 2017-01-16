@@ -22,6 +22,8 @@ SINGLETON(SearchManager)
     self = [super init];
     if (self) {
         self.operationQueue = [NSOperationQueue new];
+#warning comment - кое что забыл
+        self.operationQueue.maxConcurrentOperationCount = 1;
     }
     return self;
 }
@@ -31,6 +33,14 @@ SINGLETON(SearchManager)
     NSOperation *operation = [[NSOperation alloc]init];
     __weak typeof (self)wself = self;
     [operation setCompletionBlock:^{
+#warning Comment
+        /*
+         тебя не смущает, что поиск идет в главном потоке???
+         не проще так сделать 
+         [self.operationQueue addOperationWithBlock:^{
+         
+         }];
+         */
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         if (!searchText.length) {
             wself.searchResults = [newsArray mutableCopy];

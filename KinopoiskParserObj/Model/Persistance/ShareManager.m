@@ -16,6 +16,7 @@
 @implementation ShareManager
 SINGLETON(ShareManager)
 
+#warning очень плохое название метода!!!! Оно делает совсем не то, что можно ожидать из названия
 -(NSString*)setSharedDataWithServiceID:(NSInteger)serviceID AndEntity:(NewsEntity *)entity {
     
     NSString *authLink;

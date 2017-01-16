@@ -99,11 +99,13 @@ typedef enum {
 
 #pragma mark - SettingsCellDelegate
 - (void)settingsOfflineCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender {
+#warning КОПИПАСТ БЛЯТЬ!
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:sender.isOn forKey:@"OfflineMode"];
 }
 
 - (void)settingsNotificationsCell:(UITableViewCell *)cell didChangeValue:(UISwitch *)sender{
+#warning КОПИПАСТ БЛЯТЬ!
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:sender.isOn forKey:@"NotificationsMode"];
 }

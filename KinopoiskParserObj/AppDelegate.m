@@ -32,6 +32,10 @@ NSTimer *timer;
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],[UIColor whiteColor], nil]];
     
+#warning comment
+    /*
+     почему ты для < 10 в NotificationManager авторизацию запрашиваешь, а для 10 прям здесь вхуярил???
+     */
     if ([UIDevice currentDevice].systemVersion.floatValue < 10) {
         [[NotificationManager sharedInstance] enableLocalNotificationsForLowerIOS];
     } else {
@@ -59,6 +63,13 @@ NSTimer *timer;
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+#warning Comment 
+    /*
+     Я тебя просто придушу за такой код!!!
+     1. Какие юзер дефолтс по приложению??????? Сделай какой-нибудь менеджер для этого всего и вызови один метод, типа isNotificatonsEnable
+     2. Почему клюс "NotificationsMode" строкой используешь??? Почему не в константах???
+     3. Что за копи-паст???? Зачем вообще здесь проверка на иос 10? Почему не сделать один метод refreshDataInBackground и там сделать проверку на версию оси. А что будет с выходом иос 11? Ты здесь еще одну проверку впилишь???
+     */
     if([defaults boolForKey:@"NotificationsMode"]) {
         if ([UIDevice currentDevice].systemVersion.floatValue < 10) {
             timer = [NSTimer scheduledTimerWithTimeInterval:60*20 target:self selector:@selector(backgroundRefreshForLowerIOS) userInfo:nil repeats:YES];
@@ -71,12 +82,20 @@ NSTimer *timer;
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     [center removeAllDeliveredNotifications];
+#warning почему этот метод не в NotificationManager???
     [[UIApplication sharedApplication]cancelAllLocalNotifications];
     [[Utils getMainController] updateWithIndicator:YES];
+#warning почему тут вообще таймер??? почему он не в NotificationManager
     [timer invalidate];
     timer = nil;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
+
+#warning Comment
+
+/*
+Два одинаковых метода!!! Сделай один и внутри проверяй версию оси
+ */
 
 -(void)backgroundRefreshForIOS10 {
     

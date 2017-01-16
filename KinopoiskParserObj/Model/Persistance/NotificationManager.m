@@ -19,6 +19,8 @@
 
 SINGLETON(NotificationManager)
 
+#warning очень много копи-паста
+
 - (void)enableLocalNotificationsForLowerIOS {
     UIUserNotificationSettings *settings = [UIUserNotificationSettings
                                             settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge
