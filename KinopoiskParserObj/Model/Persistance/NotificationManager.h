@@ -7,22 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef void(^CreateNotificationCallback)(NSString *body,NSError *error);
 
 @interface NotificationManager : NSObject
 
 +(instancetype)sharedInstance;
-- (void)enableLocalNotificationsForLowerIOS;
+-(void)registerForPushNotificationsWithApplication:(UIApplication *)application;
 -(void)shouldCreateNotificalion:(CreateNotificationCallback)completion;
 -(void)createNotificationIOSLower10WithBody:(NSString *)body;
 -(void)createNotificationIOS10WithBody:(NSString *)body;
-
-#warning Comment
-
-/*
- что за
- 
- */
+-(void)cancellAllNotifications;
 
 @end

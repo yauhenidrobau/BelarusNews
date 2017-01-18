@@ -12,5 +12,6 @@ target 'KinopoiskParserObj' do
 #   pod 'NYSegmentedControl'
    pod 'LMSideBarController'
    pod 'CFShareCircle'
-
+   pod 'YandexMobileMetrica', '2.7.0'
+   pod 'YandexMobileMetricaPush', '0.4.0'
 end

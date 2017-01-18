@@ -32,6 +32,8 @@
 #define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
 #define MTS_BY_NEWS @"http://www.mts.by/rss/"
 #define PRAVO_NEWS @"http://test.pravo.by/xml.aspx?guid=1052"
+
+#define YANDEX_METRICE_API_KEY @"ef1d79fb-d889-4ce0-96eb-83c62a3adfd2"
 @interface Constants : NSObject
 
 @end

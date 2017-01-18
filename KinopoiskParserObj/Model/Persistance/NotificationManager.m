@@ -21,14 +21,31 @@ SINGLETON(NotificationManager)
 
 #warning очень много копи-паста
 
-- (void)enableLocalNotificationsForLowerIOS {
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings
-                                            settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge
-                                            categories:nil];
-    UIApplication *app = [UIApplication sharedApplication];
-    
-    if ([app respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        [app registerUserNotificationSettings:settings];
+- (void)registerForPushNotificationsWithApplication:(UIApplication *)application {
+
+    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
+        if (NSClassFromString(@"UNUserNotificationCenter") != Nil) {
+            // iOS 10.0 and above
+            UNAuthorizationOptions options =
+            UNAuthorizationOptionAlert |
+            UNAuthorizationOptionBadge |
+            UNAuthorizationOptionSound;
+            UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+            [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError *error) {
+                //
+            }];
+        }
+        else {
+            // iOS 8 and iOS 9
+            UIUserNotificationType userNotificationTypes =
+            UIUserNotificationTypeAlert |
+            UIUserNotificationTypeBadge |
+            UIUserNotificationTypeSound;
+            UIUserNotificationSettings *settings =
+            [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
+            [application registerUserNotificationSettings:settings];
+        }
+        [application registerForRemoteNotifications];
     }
 }
 
@@ -77,9 +94,11 @@ SINGLETON(NotificationManager)
 
     localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
     [[UIApplication sharedApplication]scheduleLocalNotification:localNotification];
-
 }
 
-
+-(void)cancellAllNotifications {
+    [[UNUserNotificationCenter currentNotificationCenter]removeAllDeliveredNotifications];
+    [[UIApplication sharedApplication]cancelAllLocalNotifications];
+}
 
 @end

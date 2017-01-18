@@ -16,6 +16,9 @@
 #import <UIKit/UIDevice.h>
 #import "NotificationManager.h"
 #import "Utils.h"
+#import "Constants.h"
+#import <YandexMobileMetrica/YandexMobileMetrica.h>
+#import <YandexMobileMetricaPush/YandexMobileMetricaPush.h>
 
 @interface AppDelegate () <UNUserNotificationCenterDelegate>
 
@@ -32,33 +35,36 @@ NSTimer *timer;
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],[UIColor whiteColor], nil]];
     
-#warning comment
-    /*
-     почему ты для < 10 в NotificationManager авторизацию запрашиваешь, а для 10 прям здесь вхуярил???
-     */
-    if ([UIDevice currentDevice].systemVersion.floatValue < 10) {
-        [[NotificationManager sharedInstance] enableLocalNotificationsForLowerIOS];
-    } else {
-        if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
-            UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-            center.delegate = self;
-            [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
-            }];
-        }
-    }
+    [YMMYandexMetrica activateWithApiKey:YANDEX_METRICE_API_KEY];
+    [[NotificationManager sharedInstance] registerForPushNotificationsWithApplication:application];
+
     application.applicationIconBadgeNumber = 0;
     
     return YES;
 }
 
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler {
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [YMPYandexMetricaPush setDeviceTokenFromData:deviceToken];
 }
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [self handleRemoteNotification:userInfo];
+}
 
--(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
+    [self handleRemoteNotification:userInfo];
+    
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)handleRemoteNotification:(NSDictionary *)userInfo {
+
+    [YMPYandexMetricaPush handleRemoteNotification:userInfo];
+    
+    // Get user data from remote notification.
+    NSString *userData = [YMPYandexMetricaPush userDataForNotification:userInfo];
+    NSLog(@"User Data: '%@'", userData);
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -80,10 +86,7 @@ NSTimer *timer;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    [center removeAllDeliveredNotifications];
-#warning почему этот метод не в NotificationManager???
-    [[UIApplication sharedApplication]cancelAllLocalNotifications];
+    [[NotificationManager sharedInstance] cancellAllNotifications];
     [[Utils getMainController] updateWithIndicator:YES];
 #warning почему тут вообще таймер??? почему он не в NotificationManager
     [timer invalidate];
@@ -91,28 +94,16 @@ NSTimer *timer;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
-#warning Comment
-
-/*
-Два одинаковых метода!!! Сделай один и внутри проверяй версию оси
- */
-
--(void)backgroundRefreshForIOS10 {
+-(void)backgroundRefresh {
     
     [[NotificationManager sharedInstance]shouldCreateNotificalion:^(NSString *alertBody, NSError *error) {
         if (alertBody.length) {
+            if ([[UIDevice currentDevice]systemVersion].integerValue < 10) {
+                [[NotificationManager sharedInstance]createNotificationIOSLower10WithBody:alertBody];
+            } else
             [[NotificationManager sharedInstance]createNotificationIOS10WithBody:alertBody];
         }
     }];
-    
 }
 
--(void)backgroundRefreshForLowerIOS {
-    
-    [[NotificationManager sharedInstance]shouldCreateNotificalion:^(NSString *alertBody, NSError *error) {
-        if (alertBody.length) {
-            [[NotificationManager sharedInstance]createNotificationIOSLower10WithBody:alertBody];
-        }
-    }];
-}
 @end
