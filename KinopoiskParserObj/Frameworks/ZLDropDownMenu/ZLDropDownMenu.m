@@ -74,7 +74,7 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
 //                _backgroundView = [[UIView alloc] init];
         _backgroundView = [UIButton buttonWithType:UIButtonTypeCustom];
         _backgroundView.userInteractionEnabled = YES;
-        _backgroundView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.f];
+        _backgroundView.backgroundColor = [UIColor blackColor];
         _backgroundView.opaque = NO;
         [_backgroundView addTarget:self action:@selector(backgroundViewDidTap:) forControlEvents:UIControlEventTouchUpInside];
         //        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundViewDidTap:)];

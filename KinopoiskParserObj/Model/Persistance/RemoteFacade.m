@@ -33,13 +33,13 @@ SINGLETON(RemoteFacade)
     self = [super init];
     if (self) {
         self.operationQueue = [NSOperationQueue new];
+        [self.operationQueue setMaxConcurrentOperationCount:1];
     }
     return self;
 }
 -(void)loadData:(NSString *)urlString callback:(DataLoadCallback)completion {
     // load data
     [self.operationQueue cancelAllOperations];
-    [self.operationQueue setMaxConcurrentOperationCount:1];
     
     NSURL *URL = [NSURL URLWithString:urlString];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:URL];

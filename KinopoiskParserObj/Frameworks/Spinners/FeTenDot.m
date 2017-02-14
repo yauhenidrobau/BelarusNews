@@ -7,6 +7,7 @@
 //
 
 #import "FeTenDot.h"
+#import "UIColor+flat.h"
 
 #define kMargeCenterX 10
 #define kMargeCenterY 10
@@ -45,7 +46,7 @@
     if (self)
     {
         // Deafault
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithHexCode:@"#51FBB7"];
         self.layer.cornerRadius = self.bounds.size.width / 2;
         self.clipsToBounds = YES;
         _isAnimating = NO;

@@ -11,7 +11,6 @@
 #import "Macros.h"
 #import "NewsEntity.h"
 
-//#warning correct callback
 typedef void(^RealmDataManagerSaveCallback)(NSError* error);
 
 @interface RealmDataManager : NSObject

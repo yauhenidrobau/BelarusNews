@@ -35,8 +35,8 @@
 
 @implementation NSDateFormatter (Localized)
 
-+ (NSDateFormatter *)newLocalized
-{
++ (NSDateFormatter *)currentLocalization {
+    
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     dateFormatter.locale = [[DateFormatterManager sharedInstance] currentLocale];
     return dateFormatter;

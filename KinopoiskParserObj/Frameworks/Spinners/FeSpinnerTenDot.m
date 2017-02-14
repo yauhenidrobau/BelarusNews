@@ -14,7 +14,7 @@
 
 #define kMaxTenDot 10
 #define kPagingLabel 30
-#define MAIN_COLOR RGB(25, 120, 137)
+#define MAIN_COLOR RGB(0,0,0)
 
 @interface FeSpinnerTenDot ()
 {
@@ -110,7 +110,7 @@
         _backgroundBlur.blurRadius = 40;
 //        _backgroundBlur.tintColor = MAIN_COLOR;
 
-        _backgroundBlur.tintColor = [UIColor colorWithHexCode:@"#55da55"];
+        _backgroundBlur.tintColor = [UIColor colorWithHexCode:@"#51FBB7"];
         _backgroundBlur.dynamic = NO;
         [_backgroundBlur.layer displayIfNeeded];
         
@@ -133,7 +133,7 @@
     UIView *centerDot = [[UIView alloc] initWithFrame:CGRectMake(center.x, center.y, 20, 20)];
     centerDot.clipsToBounds = YES;
     centerDot.layer.cornerRadius = centerDot.bounds.size.height /2;
-    centerDot.backgroundColor = [UIColor whiteColor];
+    centerDot.backgroundColor = [UIColor colorWithHexCode:@"#51FBB7"];
     centerDot.center = center;
     
     [self addSubview:centerDot];
@@ -152,7 +152,7 @@
 {
     // init Label
     _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
-    _label.textColor = [UIColor whiteColor];
+    _label.textColor = [UIColor colorWithHexCode:@"#51FBB7"];
     _label.text = _titleLabelText;
     _label.textAlignment = NSTextAlignmentCenter;
     

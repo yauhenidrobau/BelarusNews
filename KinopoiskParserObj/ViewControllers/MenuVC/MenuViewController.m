@@ -58,7 +58,7 @@
     }
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:2];
     titleLabel.text = self.menuTitles[indexPath.row];
-    titleLabel.textColor = [UIColor whiteColor];
+//    titleLabel.textColor = [UIColor whiteColor];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }

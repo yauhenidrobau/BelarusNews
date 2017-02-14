@@ -59,7 +59,6 @@ SINGLETON(SearchManager)
         }
         }];
     }];
-    [self.operationQueue addOperation:operation];
 }
 
 @end

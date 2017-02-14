@@ -50,8 +50,8 @@
         titleButtonUIValue.ARROWVIEW_LEFTMARGIN = 3.f;
         titleButtonUIValue.ARROWVIEW_WIDTH = 6.f;
         titleButtonUIValue.ARROWVIEW_HEIGHT = 3.f;
-        titleButtonUIValue.BOTTOMLINE_HEIGHT = 2.f;
-        titleButtonUIValue.BOTTOMSEPERATOR_HEIGHT = 1.f;
+        titleButtonUIValue.BOTTOMLINE_HEIGHT = 3.f;
+        titleButtonUIValue.BOTTOMSEPERATOR_HEIGHT = 5.f;
         titleButtonUIValue.RIGHTSEPERATOR_WIDTH = 1.f;
         _titleButtonUIValue = &titleButtonUIValue;
     });

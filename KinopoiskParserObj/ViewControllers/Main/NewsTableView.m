@@ -75,6 +75,7 @@ typedef enum {
 @property (nonatomic) BOOL isAlertShown;
 @property (nonatomic) BOOL isSearchStart;
 @property (nonatomic) BOOL isOfflineMode;
+@property (weak, nonatomic) IBOutlet UIButton *leftMenuButton;
 
 @end
 
@@ -103,7 +104,8 @@ typedef enum {
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
     self.isOfflineMode = [self.defaults boolForKey:OFFLINE_MODE];
-    
+    [self setupData];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -331,14 +333,20 @@ typedef enum {
         self.isSearchStart = YES;
         self.newsArray = [[RealmDataManager sharedInstance] getAllOjbects];
         __weak typeof (self)wself = self;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
 
-        [[SearchManager sharedInstance]updateSearchResults:wself.searchBar.searchField.text forArray:wself.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
-            wself.searchResults = searchResults;
-            [wself.tableView reloadData];
-            [wself showLoadingIndicator:NO];
+            [[SearchManager sharedInstance]updateSearchResults:wself.searchBar.searchField.text forArray:wself.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
 
-            NSLog(@"Get FROM SEARCH %ld",wself.searchResults.count);
-        }];
+                wself.searchResults = searchResults;
+                [wself.tableView reloadData];
+                [wself showLoadingIndicator:NO];
+
+                NSLog(@"Get FROM SEARCH %ld",wself.searchResults.count);
+                });
+            }];
+        });
     } else {
         self.isSearchStart = NO;
         [self setupData];
@@ -387,7 +395,7 @@ typedef enum {
     if (self.shareItemsDict[@"authLink"]) {
         [self.shareItemsDict removeObjectForKey:@"authLink"];
     }
-    [self.shareItemsDict setObject:[[ShareManager sharedInstance]setSharedDataWithServiceID:sharer.serviceID AndEntity:self.shareItemsDict[@"entity"]]forKey:@"authLink"];
+    [self.shareItemsDict setObject:[[ShareManager sharedInstance]shareWithServiceID:sharer.serviceID AndEntity:self.shareItemsDict[@"entity"]]forKey:@"authLink"];
     [self performSegueWithIdentifier:@"ShareVCID" sender:self];
     NSLog(@"Selected sharer: %@", sharer.name);
 }
@@ -420,6 +428,9 @@ typedef enum {
     [self prepareNavigationBar];
     [self prepareDropMenu];
     [self prepareShareView];
+    
+    self.scrollButton.imageView.image = [self.scrollButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.scrollButton setTintColor:[UIColor colorWithRed:81.0 / 255.0 green:255.0 / 255.0 blue:181.0 / 255.0 alpha:1]];
 }
 
 -(void)setupData {

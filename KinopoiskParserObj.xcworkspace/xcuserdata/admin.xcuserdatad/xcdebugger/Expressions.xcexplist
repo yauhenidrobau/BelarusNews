@@ -3,6 +3,30 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[DateFormatterManager dateFromString:withFormat:]:DateFormatterManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self.dateFormatter dateFromString:dateString]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__27-[NewsTableView updateData]_block_invoke_2:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "networkStatus">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DetailsViewController viewWillAppear:]:DetailsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_newsUrl">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
@@ -10,31 +34,6 @@
             </PersistentString>
             <PersistentString
                value = "self.titlesString">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[NewsTableView setupData]:NewsTableView.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "newsArray">
-            </PersistentString>
-            <PersistentString
-               value = "self.titlesString">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[RealmDataManager saveNews:withServiceString:]:RealmDataManager.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[DetailsOfflineVCViewController viewDidLoad]:DetailsOfflineVCViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__27-[NewsTableView updateData]_block_invoke_2:NewsTableView.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "networkStatus">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -47,18 +46,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableView menu:didSelectRowAtIndexPath:]:NewsTableView.m">
+         contextName = "-[NewsTableViewCell cellForNews:WithIndexPath:]:NewsTableViewCell.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.mainTitleArray[indexPath.column]">
-            </PersistentString>
-            <PersistentString
-               value = "self.urlString">
-            </PersistentString>
-            <PersistentString
-               value = "self.titlesString">
+               value = "entity.pubDateFeed">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView awakeFromNib]:NewsTableView.m">
       </ContextState>
       <ContextState
          contextName = "-[NewsTableViewCell cellForNews:AndTitles:AndIndex:]:NewsTableViewCell.m">
@@ -74,33 +70,6 @@
             </PersistentString>
             <PersistentString
                value = "entity.pubDateFeed">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[NewsTableView searchBarTextDidChange:]:NewsTableView.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[DetailsViewController viewWillAppear:]:DetailsViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "_newsUrl">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[NewsTableViewCell cellForNews:WithIndexPath:]:NewsTableViewCell.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "entity.pubDateFeed">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[XMLParser parser:foundCharacters:]:XMLParser.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "currentElement">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -122,7 +91,34 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableView awakeFromNib]:NewsTableView.m">
+         contextName = "-[NewsTableView newsTableViewCell:didTapShareButton:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.shareItemsDict">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView tableView:numberOfRowsInSection:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.newsArray.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView menu:didSelectRowAtIndexPath:]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.mainTitleArray[indexPath.column]">
+            </PersistentString>
+            <PersistentString
+               value = "self.urlString">
+            </PersistentString>
+            <PersistentString
+               value = "self.titlesString">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[XMLParser parser:foundCDATA:]:XMLParser.m">
@@ -133,10 +129,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[DateFormatterManager dateFromString:withFormat:]:DateFormatterManager.m">
+         contextName = "-[MenuViewController tableView:didSelectRowAtIndexPath:]:MenuViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "[self.dateFormatter dateFromString:dateString]">
+               value = "self.title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView viewDidLoad]:NewsTableView.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[DetailsOfflineVCViewController viewDidLoad]:DetailsOfflineVCViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[XMLParser parser:foundCharacters:]:XMLParser.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentElement">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -149,12 +159,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableView newsTableViewCell:didTapShareButton:]:NewsTableView.m">
+         contextName = "-[RootViewController sideBarController:willHideMenuViewController:]:RootViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.shareItemsDict">
+               value = "menuViewController.title">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView searchBarTextDidChange:]:NewsTableView.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[NewsTableView setupData]:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "newsArray">
+            </PersistentString>
+            <PersistentString
+               value = "self.titlesString">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[RealmDataManager saveNews:withServiceString:]:RealmDataManager.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

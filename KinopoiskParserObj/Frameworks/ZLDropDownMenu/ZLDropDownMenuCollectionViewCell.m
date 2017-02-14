@@ -51,8 +51,8 @@
 - (void)setSelected:(BOOL)selected
 {
     [super setSelected:selected];
-    _label.backgroundColor = selected ? kDropdownMenuSelectedCellColor : [UIColor clearColor];
-    _label.textColor = selected ? [UIColor whiteColor] : kDropdownMenuUnselectedCellTextColor;
+    _label.backgroundColor = selected ? [UIColor blackColor] : [UIColor clearColor];
+    _label.textColor = selected ? kDropdownMenuSelectedCellColor : kDropdownMenuUnselectedCellTextColor;
 }
 
 

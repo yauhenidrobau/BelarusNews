@@ -11,11 +11,11 @@
 
 #define kRGBColorFromHex(rgbValue)        [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0f green:((float)((rgbValue & 0xFF00) >> 8))/255.0f blue:((float)(rgbValue & 0xFF))/255.0f alpha:1.0f]
 
-#define kDropdownMenuSeperatorColor               kRGBColorFromHex(0xF3F3F4)
-#define kDropdownMenuSelectedCellColor            kRGBColorFromHex(0x05CBD8)
-#define kDropdownMenuUnselectedCellTextColor      kRGBColorFromHex(0x1D1D26)
-#define kDropdownMenuIndicatorColor               kRGBColorFromHex(0x02C1CD)
-#define kDropdownMenuTitleColor                   kRGBColorFromHex(0x1D1D26)
+#define kDropdownMenuSeperatorColor               kRGBColorFromHex(0x1C1C1C)
+#define kDropdownMenuSelectedCellColor            kRGBColorFromHex(0x51FBB7)
+#define kDropdownMenuUnselectedCellTextColor      kRGBColorFromHex(0x1C1C1C)
+#define kDropdownMenuIndicatorColor               kRGBColorFromHex(0x51FBB7)
+#define kDropdownMenuTitleColor                   kRGBColorFromHex(0x51FBB7)
 
 #define WS(weakSelf)                              __weak __typeof(&*self) weakSelf = self
 #define SS(strongSelf)                            __strong __typeof(&*weakSelf) strongSelf = weakSelf

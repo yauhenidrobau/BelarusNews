@@ -43,10 +43,13 @@
     self.titleLabel.text = entity.titleFeed;
     self.descriptionLabel.text = entity.descriptionFeed;
     [self.favoriteButton setImage:[self.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [self.shareButton setImage:[self.shareButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [self.shareButton setTintColor:[UIColor blackColor]];
+
     if (!entity.favorite) {
-        [self.favoriteButton setTintColor:[UIColor whiteColor]];
+        [self.favoriteButton setTintColor:[UIColor blackColor]];
     } else {
-        [self.favoriteButton setTintColor:[UIColor yellowColor]];
+        [self.favoriteButton setTintColor:[UIColor colorWithRed:81.0 / 255.0 green:255.0 /255.0  blue:181.0 /255.0 alpha:1]];
     }
     
     if([[[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"d MMM"] isEqualToString:[[DateFormatterManager sharedInstance] stringFromDate:[NSDate date] withFormat:@"d MMM"]]) {
