@@ -244,7 +244,7 @@ typedef enum {
 }
 
 -(UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
-    return MAIN_COLOR;
+    return [UIColor whiteColor];
 }
 
 #pragma mark - DZNEmptyDataSetSource Methods
@@ -517,17 +517,14 @@ typedef enum {
                 [self showAlertController];
                 [[NSUserDefaults standardUserDefaults]setBool:YES forKey:NO_INTERNET_KEY];
             } else {
-                
                 __weak typeof(self) wself = self;
                 [[DataManager sharedInstance ] updateDataWithURLString:wself.urlString AndTitle:wself.titlesString WithCallBack:^(NSError *error) {
-
                     [networkReachability stopNotifier];
                     if (!error) {
                         [wself setupData];
                         if(showIndicator) {
                         [wself showLoadingIndicator:!showIndicator];
                         }
-                        
                     }
                 }];
             }

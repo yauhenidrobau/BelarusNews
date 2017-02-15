@@ -30,7 +30,7 @@
     if (self = [super init]) {
         _mainTitle = mainTitle;
         _subTitle = subTitle;
-        self.backgroundColor = [UIColor colorWithRed:28.0 / 255.0 green:28.0 / 255.0 blue:28.0 / 255.0 alpha:1];
+        self.backgroundColor = [UIColor blackColor];
         self.adjustsImageWhenHighlighted = YES;
         [self viewConfig];
     }

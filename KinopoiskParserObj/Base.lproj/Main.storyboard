@@ -293,7 +293,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5sC-Nh-5Wq">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Mhx-ca-kiQ">
                                     <rect key="frame" x="0.0" y="108" width="375" height="1"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -330,8 +330,8 @@
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqv-YZ-k7z">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="C4L-I1-YdX"/>
-                                                        <constraint firstAttribute="height" constant="20" id="mwZ-pE-zXq"/>
+                                                        <constraint firstAttribute="width" constant="25" id="C4L-I1-YdX"/>
+                                                        <constraint firstAttribute="height" constant="25" id="mwZ-pE-zXq"/>
                                                     </constraints>
                                                     <state key="normal" image="icon-favorites"/>
                                                     <connections>
@@ -341,7 +341,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBI-or-WRg" userLabel="Share Button">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="cz6-Uk-xHF"/>
-                                                        <constraint firstAttribute="width" constant="30" id="pHE-mu-z59"/>
+                                                        <constraint firstAttribute="width" constant="25" id="pHE-mu-z59"/>
                                                     </constraints>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <state key="normal" image="icon-share"/>
@@ -404,7 +404,7 @@
                                 <color key="color" red="0.31764705882352939" green="1" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5sC-Nh-5Wq" firstAttribute="top" secondItem="40g-n2-8tM" secondAttribute="bottom" id="0J1-EG-wOZ"/>
                             <constraint firstItem="40g-n2-8tM" firstAttribute="leading" secondItem="KZF-gn-ztJ" secondAttribute="leading" id="2q8-QH-EH1"/>
@@ -431,6 +431,7 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="activityInd" destination="9pe-Ua-hs5" id="HJm-Xs-aKI"/>
@@ -534,7 +535,9 @@
             <objects>
                 <navigationController storyboardIdentifier="mainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Ygq-Mp-DCb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Go-YP-wzY">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="9Go-YP-wzY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -553,7 +556,7 @@
         <image name="icon-arrow-up" width="32" height="32"/>
         <image name="icon-favorites" width="256" height="256"/>
         <image name="icon-share" width="24" height="24"/>
-        <image name="icon_list" width="256" height="256"/>
+        <image name="icon_list" width="32" height="32"/>
         <image name="no_image_200_200" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -77,11 +77,7 @@ NSTimer *timer;
      3. Что за копи-паст???? Зачем вообще здесь проверка на иос 10? Почему не сделать один метод refreshDataInBackground и там сделать проверку на версию оси. А что будет с выходом иос 11? Ты здесь еще одну проверку впилишь???
      */
     if([defaults boolForKey:@"NotificationsMode"]) {
-        if ([UIDevice currentDevice].systemVersion.floatValue < 10) {
-            timer = [NSTimer scheduledTimerWithTimeInterval:60*20 target:self selector:@selector(backgroundRefreshForLowerIOS) userInfo:nil repeats:YES];
-        } else {
-            timer = [NSTimer scheduledTimerWithTimeInterval:60*20 target:self selector:@selector(backgroundRefreshForIOS10) userInfo:nil repeats:YES];
-        }
+        timer = [NSTimer scheduledTimerWithTimeInterval:60*20 target:self selector:@selector(backgroundRefresh) userInfo:nil repeats:YES];
     }
 }
 
