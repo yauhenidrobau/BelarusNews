@@ -41,8 +41,6 @@
 }
 
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath  {
-    [self layoutIfNeeded];
-    self.imageNewsView.layer.cornerRadius = 30;
 
     self.titleLabel.text = entity.titleFeed;
     self.descriptionLabel.text = entity.descriptionFeed;
@@ -65,6 +63,8 @@
     }
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
                  placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.feedIdString]]];
+    self.imageNewsView.layer.cornerRadius = 8;
+
 }
 
 -(UIImageView*)imageFromCell {
