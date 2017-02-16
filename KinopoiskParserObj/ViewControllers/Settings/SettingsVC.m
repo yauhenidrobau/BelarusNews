@@ -11,6 +11,7 @@
 #import "SettingsOfflineCell.h"
 #import "SettingsNotificationsCell.h"
 #import "Utils.h"
+#import "UserDefaultsManager.h"
 
 #define SIGN_OUT_CELL_TYPE @"SignOutCell"
 #define OFFLINE_CELL_TYPE @"OfflineCell"
@@ -37,6 +38,8 @@ typedef enum {
 
 @implementation SettingsVC
 
+#pragma mark - Override Properties
+
 -(NSArray *)cellTitleListID {
     if (!_cellTitleListID.count) {
         _cellTitleListID = @[@"OfflineCell",
@@ -46,6 +49,8 @@ typedef enum {
     return _cellTitleListID;
 }
 
+#pragma mark - LifeCycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationItem setTitle:NSLocalizedString(@"Settings", nil)];
@@ -54,10 +59,6 @@ typedef enum {
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - Table view data source
@@ -99,15 +100,11 @@ typedef enum {
 
 #pragma mark - SettingsCellDelegate
 - (void)settingsOfflineCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender {
-#warning КОПИПАСТ БЛЯТЬ!
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:sender.isOn forKey:@"OfflineMode"];
+    [[UserDefaultsManager sharedInstance]setBool:sender.isOn ForKey:OFFLINE_MODE];
 }
 
 - (void)settingsNotificationsCell:(UITableViewCell *)cell didChangeValue:(UISwitch *)sender{
-#warning КОПИПАСТ БЛЯТЬ!
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:sender.isOn forKey:@"NotificationsMode"];
+    [[UserDefaultsManager sharedInstance]setBool:sender.isOn ForKey:NOTIFICATIONS_MODE];
 }
 #pragma mark Private
 

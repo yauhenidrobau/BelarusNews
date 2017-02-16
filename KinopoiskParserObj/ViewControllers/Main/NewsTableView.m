@@ -43,10 +43,6 @@ typedef enum {
     MtsByCategoryType = 3
 }CategoryTypes;
 
-#define MAIN_COLOR RGB(25, 120, 137)
-#define NO_INTERNET_KEY @"NoInternet"
-#define OFFLINE_MODE @"OfflineMode"
-#define NOTIFICATIONS_MODE @"NotificationsMode"
 
 @interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate>
 
@@ -171,6 +167,10 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    return 80.f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -337,14 +337,12 @@ typedef enum {
         dispatch_async(dispatch_get_main_queue(), ^{
 
             [[SearchManager sharedInstance]updateSearchResults:wself.searchBar.searchField.text forArray:wself.newsArray withCompletion:^(NSArray *searchResults, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
 
                 wself.searchResults = searchResults;
                 [wself.tableView reloadData];
                 [wself showLoadingIndicator:NO];
 
                 NSLog(@"Get FROM SEARCH %ld",wself.searchResults.count);
-                });
             }];
         });
     } else {
@@ -395,7 +393,7 @@ typedef enum {
     if (self.shareItemsDict[@"authLink"]) {
         [self.shareItemsDict removeObjectForKey:@"authLink"];
     }
-    [self.shareItemsDict setObject:[[ShareManager sharedInstance]shareWithServiceID:sharer.serviceID AndEntity:self.shareItemsDict[@"entity"]]forKey:@"authLink"];
+    [self.shareItemsDict setObject:[[ShareManager sharedInstance]shareWithServiceID:(ShareServiceType)sharer.serviceID AndEntity:self.shareItemsDict[@"entity"]]forKey:@"authLink"];
     [self performSegueWithIdentifier:@"ShareVCID" sender:self];
     NSLog(@"Selected sharer: %@", sharer.name);
 }
@@ -408,8 +406,7 @@ typedef enum {
 
 -(void)peparePullToRefresh {
     self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.backgroundColor = [UIColor colorWithRed:173/255.0 green:31/255.0 blue:45/255.0 alpha:1.0];
-    self.refreshControl.tintColor = [UIColor whiteColor];
+    self.refreshControl.tintColor = MAIN_COLOR;
     [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
 }
@@ -419,18 +416,23 @@ typedef enum {
 }
 
 -(void)prepareAppierance {
+    
     [self.activityInd setHidden:YES];
+    
     self.scrollButton.hidden = YES;
     [self.scrollButton layoutIfNeeded];
     self.scrollButton.layer.cornerRadius = self.scrollButton.frame.size.height / 2;
+    self.scrollButton.imageView.image = [self.scrollButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.scrollButton setTintColor:MAIN_COLOR];
+    
     [self prepareTableView];
     [self prepareSearchBar];
     [self prepareNavigationBar];
     [self prepareDropMenu];
     [self prepareShareView];
-    
-    self.scrollButton.imageView.image = [self.scrollButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.scrollButton setTintColor:[UIColor colorWithRed:81.0 / 255.0 green:255.0 / 255.0 blue:181.0 / 255.0 alpha:1]];
+
+    self.leftMenuButton.imageView.image = [self.leftMenuButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.leftMenuButton setTintColor:MAIN_COLOR];
 }
 
 -(void)setupData {
@@ -474,6 +476,7 @@ typedef enum {
         [self.activityInd startAnimating];
     }else {
         [self.activityInd stopAnimating];
+        [self.refreshControl endRefreshing];
     }
 }
 
@@ -554,7 +557,7 @@ typedef enum {
     self.navigationItem.title = NSLocalizedString(@"Choose Category",nil);
 }
 
-#warning Height is not changing
+#warning SearchBar Height is not changing
 
 -(void)prepareSearchBar {
     self.searchBar = [[INSSearchBar alloc] initWithFrame:CGRectMake(20.0, 5.0, CGRectGetWidth(self.view.bounds) - 40.0, 20)];
@@ -616,6 +619,7 @@ typedef enum {
 
 -(void)prepareDropMenu {
     ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, deviceWidth(), 43)];
+    menu.customBackgroundColor = LIGHT_BLACK_COLOR;
     menu.delegate = self;
     menu.dataSource = self;
     [self.menuView addSubview:menu];

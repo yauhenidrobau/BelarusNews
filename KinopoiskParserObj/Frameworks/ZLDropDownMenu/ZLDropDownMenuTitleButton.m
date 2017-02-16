@@ -30,7 +30,7 @@
     if (self = [super init]) {
         _mainTitle = mainTitle;
         _subTitle = subTitle;
-        self.backgroundColor = [UIColor blackColor];
+//        self.backgroundColor = [UIColor blackColor];
         self.adjustsImageWhenHighlighted = YES;
         [self viewConfig];
     }
@@ -187,5 +187,9 @@
     self.subTitleLabel.text = _subTitle;
 }
 
+-(void)setCustomBackgroundColor:(UIColor *)backgroundColor {
+    self.backgroundColor = backgroundColor;
+    _customBackgroundColor = backgroundColor;
+}
 
 @end

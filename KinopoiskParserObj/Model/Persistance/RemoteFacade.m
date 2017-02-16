@@ -58,24 +58,5 @@ SINGLETON(RemoteFacade)
     [self.operationQueue addOperation:operation];
     
 }
-
-
-//    // First variant
-//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-//    
-//    AFURLConnectionOperation *operation = [[AFURLConnectionOperation alloc] initWithRequest:request];
-//    __weak __typeof(self)wself = self;
-//    __weak __typeof(operation)woperation = operation;
-//    [operation setCompletionBlock:^{
-//        wself.info = woperation.responseData;
-//        if (completion) {
-//            completion(wself.info,nil);
-//        }
-//    }];
-//    [operation start];
-    
-    
-     // Second variant
-    
-    
+  
 @end

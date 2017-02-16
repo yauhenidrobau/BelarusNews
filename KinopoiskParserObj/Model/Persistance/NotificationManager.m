@@ -15,16 +15,22 @@
 #import <UserNotifications/UserNotifications.h>
 #import "Utils.h"
 
+@interface NotificationManager ()
+
+@property (nonatomic, strong) NSTimer *timer;
+
+@end
+
 @implementation NotificationManager
 
 SINGLETON(NotificationManager)
 
-#warning очень много копи-паста
+#pragma mark - Notifications 
 
 - (void)registerForPushNotificationsWithApplication:(UIApplication *)application {
 
     if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
-        if (NSClassFromString(@"UNUserNotificationCenter") != Nil) {
+        if (NSClassFromString(@"UNUserNotificationCenter")) {
             // iOS 10.0 and above
             UNAuthorizationOptions options =
             UNAuthorizationOptionAlert |
@@ -84,10 +90,9 @@ SINGLETON(NotificationManager)
 }
 
 -(void)createNotificationIOSLower10WithBody:(NSString *)body {
-    NSString *alertBody = body;
     UILocalNotification *localNotification = [[UILocalNotification alloc]init];
     localNotification.alertTitle = NSLocalizedString(@"Latest news",nil);
-    localNotification.alertBody = alertBody;
+    localNotification.alertBody = body;
     localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     localNotification.soundName = UILocalNotificationDefaultSoundName;
@@ -99,6 +104,23 @@ SINGLETON(NotificationManager)
 -(void)cancellAllNotifications {
     [[UNUserNotificationCenter currentNotificationCenter]removeAllDeliveredNotifications];
     [[UIApplication sharedApplication]cancelAllLocalNotifications];
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
+-(void)startMonitoring {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:60*20 target:self selector:@selector(refreshDataInBackground) userInfo:nil repeats:YES];
+}
+
+-(void)refreshDataInBackground {
+    
+    [self shouldCreateNotificalion:^(NSString *alertBody, NSError *error) {
+        if (alertBody.length) {
+            if ([[UIDevice currentDevice]systemVersion].integerValue < 10) {
+                [self createNotificationIOSLower10WithBody:alertBody];
+            } else
+                [self createNotificationIOS10WithBody:alertBody];
+        }
+    }];
+}
 @end

@@ -14,4 +14,5 @@ typedef void(^UpdateDataCallback)(NSError *error);
 
 +(instancetype)sharedInstance;
 -(void)updateDataWithURLString:(NSString *)urlString AndTitle:(NSString *)title WithCallBack:(UpdateDataCallback)completionHandler;
+
 @end

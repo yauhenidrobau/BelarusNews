@@ -34,6 +34,15 @@
 #define PRAVO_NEWS @"http://test.pravo.by/xml.aspx?guid=1052"
 
 #define YANDEX_METRICE_API_KEY @"ef1d79fb-d889-4ce0-96eb-83c62a3adfd2"
+
+#define OFFLINE_MODE @"OfflineMode"
+#define NOTIFICATIONS_MODE @"NotificationsMode"
+
+#define MAIN_COLOR RGB(81,255,181)
+#define LIGHT_BLACK_COLOR RGB(28,28,28)
+
+#define NO_INTERNET_KEY @"NoInternet"
+
 @interface Constants : NSObject
 
 @end

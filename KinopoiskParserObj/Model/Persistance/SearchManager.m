@@ -9,6 +9,7 @@
 #import "SearchManager.h"
 
 #import "Macros.h"
+#import <Realm.h>
 
 @interface SearchManager ()
 @property (nonatomic, strong) NSArray *searchResults;
@@ -21,8 +22,7 @@ SINGLETON(SearchManager)
 -(instancetype)init {
     self = [super init];
     if (self) {
-        self.operationQueue = [NSOperationQueue new];
-#warning comment - кое что забыл
+        self.operationQueue = [NSOperationQueue currentQueue];
         self.operationQueue.maxConcurrentOperationCount = 1;
     }
     return self;
@@ -30,35 +30,26 @@ SINGLETON(SearchManager)
 
 -(void)updateSearchResults:(NSString *)searchText forArray:(NSArray*)newsArray withCompletion:(SearchDataCallback)completion {
     [self.operationQueue cancelAllOperations];
-    NSOperation *operation = [[NSOperation alloc]init];
     __weak typeof (self)wself = self;
-    [operation setCompletionBlock:^{
-#warning Comment
-        /*
-         тебя не смущает, что поиск идет в главном потоке???
-         не проще так сделать 
-         [self.operationQueue addOperationWithBlock:^{
-         
-         }];
-         */
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        if (!searchText.length) {
-            wself.searchResults = [newsArray mutableCopy];
-            if (completion) {
-                completion(wself.searchResults,nil);
-            }
-        } else {
-            NSArray *searchResults = [NSMutableArray new];
-
-                NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"titleFeed contains[c] %@", searchText];
-                searchResults = [newsArray filteredArrayUsingPredicate:resultPredicate];
-                wself.searchResults = searchResults;
+    
+        [self.operationQueue addOperationWithBlock:^ {
+            if (!searchText.length) {
+                wself.searchResults = [newsArray mutableCopy];
                 if (completion) {
                     completion(wself.searchResults,nil);
                 }
-        }
+            } else {
+                
+                NSArray *searchResults = [NSMutableArray new];
+
+                    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"titleFeed contains[c] %@", searchText];
+                    searchResults = [newsArray filteredArrayUsingPredicate:resultPredicate];
+                    wself.searchResults = searchResults;
+                    if (completion) {
+                        completion(wself.searchResults,nil);
+                    }
+            }
         }];
-    }];
 }
 
 @end

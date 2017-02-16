@@ -19,5 +19,6 @@ typedef void(^CreateNotificationCallback)(NSString *body,NSError *error);
 -(void)createNotificationIOSLower10WithBody:(NSString *)body;
 -(void)createNotificationIOS10WithBody:(NSString *)body;
 -(void)cancellAllNotifications;
+-(void)startMonitoring;
 
 @end

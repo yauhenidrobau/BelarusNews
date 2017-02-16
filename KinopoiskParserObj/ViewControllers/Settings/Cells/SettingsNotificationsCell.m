@@ -8,12 +8,11 @@
 
 #import "SettingsNotificationsCell.h"
 
-#define NOTIFICATIONS_MODE @"NotificationsMode"
+#import "SettingsManager.h"
 
 @interface SettingsNotificationsCell ()
 
 @property (weak, nonatomic) IBOutlet UISwitch *notificationSwitch;
-
 
 @end
 
@@ -21,17 +20,15 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self.notificationSwitch setOn:[[NSUserDefaults standardUserDefaults] boolForKey:NOTIFICATIONS_MODE]];
+    [self.notificationSwitch setOn:[SettingsManager sharedInstance].isNotificationMode];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (IBAction)NotificationsValueChanged:(UISwitch *)sender {
-    [[NSUserDefaults standardUserDefaults]setBool:sender.isOn forKey:NOTIFICATIONS_MODE];
+    [SettingsManager sharedInstance].isNotificationMode = sender.isOn;
     [self.cellDelegate settingsNotificationsCell:self didChangeValue:sender];
 }
 

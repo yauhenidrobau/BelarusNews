@@ -17,17 +17,6 @@
      ShareServiceTypeGooglePlus
  } ShareServiceType;
 
- 
-
-
-//typedef enum {
-//    VMFaceBookShare,
-//    VMTwitterShare,
-//    VMVkontakteShare,
-//    VMOdnokklShare,
-//    VMGooglePlusShare
-//}Services;
-
 @interface ShareManager : NSObject
 
 +(instancetype)sharedInstance;

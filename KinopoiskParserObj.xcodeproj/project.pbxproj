@@ -13,6 +13,8 @@
 		1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2666911E127AD6001DF2A2 /* INSSearchBar.m */; };
 		1E372F851DF94C7400362CC1 /* DateFormatterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E372F821DF94C7400362CC1 /* DateFormatterManager.m */; };
 		1E372F861DF94C7400362CC1 /* SearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E372F841DF94C7400362CC1 /* SearchManager.m */; };
+		1E4C8C5E1E55C15E00B2ED44 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C8C5D1E55C15E00B2ED44 /* SettingsManager.m */; };
+		1E4C8C611E55E46C00B2ED44 /* UserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C8C601E55E46C00B2ED44 /* UserDefaultsManager.m */; };
 		1E640B581E0A85FE00AA539C /* NSString+ZLStringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B341E0A85FC00AA539C /* NSString+ZLStringSize.m */; };
 		1E640B591E0A85FE00AA539C /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B381E0A85FC00AA539C /* MASCompositeConstraint.m */; };
 		1E640B5A1E0A85FE00AA539C /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B3B1E0A85FC00AA539C /* MASConstraint.m */; };
@@ -107,6 +109,10 @@
 		1E372F821DF94C7400362CC1 /* DateFormatterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterManager.m; sourceTree = "<group>"; };
 		1E372F831DF94C7400362CC1 /* SearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchManager.h; sourceTree = "<group>"; };
 		1E372F841DF94C7400362CC1 /* SearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchManager.m; sourceTree = "<group>"; };
+		1E4C8C5C1E55C15E00B2ED44 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
+		1E4C8C5D1E55C15E00B2ED44 /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
+		1E4C8C5F1E55E46C00B2ED44 /* UserDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsManager.h; sourceTree = "<group>"; };
+		1E4C8C601E55E46C00B2ED44 /* UserDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsManager.m; sourceTree = "<group>"; };
 		1E640B331E0A85FC00AA539C /* NSString+ZLStringSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZLStringSize.h"; sourceTree = "<group>"; };
 		1E640B341E0A85FC00AA539C /* NSString+ZLStringSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ZLStringSize.m"; sourceTree = "<group>"; };
 		1E640B371E0A85FC00AA539C /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
@@ -461,6 +467,10 @@
 				1E73294E1D7843310027E46E /* RemoteFacade.m */,
 				1E7329501D7845210027E46E /* DataManager.h */,
 				1E7329511D7845210027E46E /* DataManager.m */,
+				1E4C8C5C1E55C15E00B2ED44 /* SettingsManager.h */,
+				1E4C8C5D1E55C15E00B2ED44 /* SettingsManager.m */,
+				1E4C8C5F1E55E46C00B2ED44 /* UserDefaultsManager.h */,
+				1E4C8C601E55E46C00B2ED44 /* UserDefaultsManager.m */,
 			);
 			name = Persistance;
 			path = Model/Persistance;
@@ -775,6 +785,7 @@
 			files = (
 				1E640B5A1E0A85FE00AA539C /* MASConstraint.m in Sources */,
 				1E640B5D1E0A85FE00AA539C /* MASViewAttribute.m in Sources */,
+				1E4C8C611E55E46C00B2ED44 /* UserDefaultsManager.m in Sources */,
 				1E640B661E0A85FE00AA539C /* ZLDropDownMenuUICalc.m in Sources */,
 				1EFE91761E1FAC76008CA308 /* SettingsNotificationsCell.m in Sources */,
 				1E640B5B1E0A85FE00AA539C /* MASConstraintMaker.m in Sources */,
@@ -785,6 +796,7 @@
 				1E73292B1D7813B50027E46E /* Constants.m in Sources */,
 				1E73294F1D7843310027E46E /* RemoteFacade.m in Sources */,
 				1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */,
+				1E4C8C5E1E55C15E00B2ED44 /* SettingsManager.m in Sources */,
 				1E640B5E1E0A85FE00AA539C /* MASViewConstraint.m in Sources */,
 				1E640B611E0A85FE00AA539C /* View+MASAdditions.m in Sources */,
 				1E640B651E0A85FE00AA539C /* ZLDropDownMenuTitleButton.m in Sources */,

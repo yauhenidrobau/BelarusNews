@@ -22,7 +22,6 @@
 
 SINGLETON(ParserManager)
 
-//   how to use blocks here
 -(void) parseXmlData:(NSData *)data callback:(ParseCallback)completion {
     self.callback = completion;
     XMLParser *parser = [[XMLParser alloc]init];

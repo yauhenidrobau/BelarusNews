@@ -12,4 +12,5 @@
 @interface SettingsNotificationsCell : UITableViewCell
 
 @property (nonatomic, weak) id<SettingsCellDelegate>cellDelegate;
+
 @end

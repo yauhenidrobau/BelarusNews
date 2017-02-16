@@ -12,6 +12,8 @@
 #import "ZLDropDownMenuUICalc.h"
 #import "ZLDropDownMenuCollectionViewCell.h"
 
+#import "Constants.h"
+
 typedef void(^ZLDropDownMenuAnimateCompleteHandler)(void);
 
 @implementation ZLIndexPath
@@ -91,6 +93,10 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
     [super setFrame:frame];
 }
 
+-(void)setCustomBackgroundColor:(UIColor *)customBackgroundColor {
+    _customBackgroundColor = customBackgroundColor;
+}
+
 - (void)setDataSource:(id<ZLDropDownMenuDataSource>)dataSource
 {
     _dataSource = dataSource;
@@ -105,6 +111,7 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
         
         NSString *titleString = [_dataSource menu:self titleForRowAtIndexPath:[ZLIndexPath indexPathWithColumn:index row:0]];
         ZLDropDownMenuTitleButton *titleButton = [[ZLDropDownMenuTitleButton alloc] initWithMainTitle:[_dataSource menu:self titleForColumn:index] subTitle:titleString];
+        titleButton.backgroundColor = _customBackgroundColor;
         if (index == 0) {
             titleButton.bottomLineView.hidden = NO;
         }

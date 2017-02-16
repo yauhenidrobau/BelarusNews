@@ -13,6 +13,8 @@
 @property (nonatomic, strong) UIColor *arrowColor;
 @property (nonatomic, strong) UIColor *mainTitleColor;
 @property (nonatomic, strong) UIColor *subTitleColor;
+@property (nonatomic, strong) UIColor *customBackgroundColor;
+
 @property (nonatomic, copy) NSString *subTitle;
 @property (nonatomic, strong) UIView *bottomLineView;
 

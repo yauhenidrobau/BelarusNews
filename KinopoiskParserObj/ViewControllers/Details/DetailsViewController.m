@@ -40,7 +40,7 @@
      _arrTitile = @[@"LOADING",@"PLEASE WAITING",@"CALM DOWN",@"WAITING"];
      
      // init Loader
-     _spinner = [[FeSpinnerTenDot alloc] initWithView:self.view withBlur:NO];
+     _spinner = [[FeSpinnerTenDot alloc] initWithView:self.containerView withBlur:NO];
      _spinner.titleLabelText = _arrTitile[index];
      _spinner.fontTitleLabel = [UIFont fontWithName:@"Neou-Thin" size:36];
      _spinner.delegate = self;
