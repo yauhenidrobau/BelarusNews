@@ -22,3 +22,9 @@
 
 /* Class = "UILabel"; text = "Notifications"; ObjectID = "0Wo-Qg-wd4"; */
 "0Wo-Qg-wd4.text" = "Notifications";
+
+/* Class = "UILabel"; text = "Autoupdates"; ObjectID = "h60-fo-YzL"; */
+"h60-fo-YzL.text" = "Autoupdate news";
+
+/* Class = "UILabel"; text = "Night Mode"; ObjectID = "D7U-Vc-0Aa"; */
+"D7U-Vc-0Aa.text" = "Night Mode";

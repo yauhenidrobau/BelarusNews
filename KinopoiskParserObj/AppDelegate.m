@@ -71,7 +71,7 @@ NSTimer *timer;
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
    
-    if ([[UserDefaultsManager sharedInstance] getBoolForKey:NOTIFICATIONS_MODE]) {
+    if ([[UserDefaultsManager sharedInstance] boolForKey:NOTIFICATIONS_MODE]) {
         [[NotificationManager sharedInstance]startMonitoring];
     }
 }

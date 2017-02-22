@@ -10,6 +10,7 @@
 
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "DateFormatterManager.h"
+#import "UIColor+BelarusNews.h"
 
 @interface NewsTableViewCell ()
 
@@ -40,6 +41,25 @@
     [self.cellDelegate newsTableViewCell:self didTapShareButton:sender];
 }
 
+-(void)updateNightModeCell:(BOOL)update {
+    if (update) {
+        self.titleLabel.textColor = [UIColor bn_nightModeTitleColor];
+        self.backgroundColor = [UIColor bn_nightModeBackgroundColor];
+        self.shareButton.tintColor = [UIColor bn_nightModeTitleColor];
+        if (self.favoriteButton.tintColor == [UIColor blackColor]) {
+            self.favoriteButton.tintColor = [UIColor bn_backgroundColor];
+        }
+    } else {
+        self.titleLabel.textColor = [UIColor bn_titleColor];
+        self.backgroundColor = [UIColor bn_backgroundColor];
+        self.shareButton.tintColor = [UIColor bn_titleColor];
+        if (self.favoriteButton.tintColor == [UIColor whiteColor]) {
+            self.favoriteButton.tintColor = [UIColor bn_titleColor];
+        }
+    }
+   
+}
+
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath  {
 
     self.titleLabel.text = entity.titleFeed;
@@ -64,7 +84,8 @@
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
                  placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.feedIdString]]];
     self.imageNewsView.layer.cornerRadius = 8;
-
+    
+    [self updateNightModeCell:NO];
 }
 
 -(UIImageView*)imageFromCell {

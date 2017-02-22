@@ -39,22 +39,22 @@
          contextName = "-[NewsTableViewCell cellForNews:AndTitles:AndIndex:]:NewsTableViewCell.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.pubDateLabel.text">
-            </PersistentString>
-            <PersistentString
-               value = "[formatter stringFromDate:entity.pubDateFeed]">
-            </PersistentString>
-            <PersistentString
-               value = "entity.feedIdString">
-            </PersistentString>
-            <PersistentString
                value = "entity.pubDateFeed">
             </PersistentString>
             <PersistentString
                value = "[entity.pubDateFeed compare:[NSdate date]]">
             </PersistentString>
             <PersistentString
+               value = "entity.feedIdString">
+            </PersistentString>
+            <PersistentString
                value = "[NSDate date]">
+            </PersistentString>
+            <PersistentString
+               value = "[formatter stringFromDate:entity.pubDateFeed]">
+            </PersistentString>
+            <PersistentString
+               value = "self.pubDateLabel.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -62,13 +62,13 @@
          contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
+               value = "wself.urlString">
+            </PersistentString>
+            <PersistentString
                value = "wself.titlesString">
             </PersistentString>
             <PersistentString
                value = "self.isAlertShown">
-            </PersistentString>
-            <PersistentString
-               value = "wself.urlString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -98,30 +98,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[XMLParser parser:didEndElement:namespaceURI:qualifiedName:]:XMLParser.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "currentDataDictionary">
-            </PersistentString>
-            <PersistentString
-               value = "dictParsedData">
-            </PersistentString>
-            <PersistentString
-               value = "descriptionFeed">
-            </PersistentString>
-            <PersistentString
-               value = "linkFeed">
-            </PersistentString>
-            <PersistentString
-               value = "pubDateFeed">
-            </PersistentString>
-            <PersistentString
-               value = "tempString">
-            </PersistentString>
-            <PersistentString
-               value = "urlImage">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke.45:RemoteFacade.m">
       </ContextState>
       <ContextState
          contextName = "-[XMLParser parser:foundCharacters:]:XMLParser.m">
@@ -156,24 +133,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableView numberOfColumnsInMenu:]:NewsTableView.m">
+         contextName = "-[NewsTableView updateSearchResultsForSearchController:]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.mainTitleArray.count">
+               value = "self.searchResults">
+            </PersistentString>
+            <PersistentString
+               value = "self.searchController.searchBar.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke_2:NewsTableView.m">
+         contextName = "-[NewsTableView menu:numberOfRowsInColumns:]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.newsArray.count">
-            </PersistentString>
-            <PersistentString
-               value = "_titlesArray">
-            </PersistentString>
-            <PersistentString
-               value = "wself.urlArray">
+               value = "((NSArray*)self.subTitleArray[column]).count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -212,6 +186,17 @@
             </PersistentString>
             <PersistentString
                value = "self.isOfflineMode">
+            </PersistentString>
+            <PersistentString
+               value = " self.isNightMode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[SettingsNotificationsCell isModeEnabled]:SettingsNotificationsCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[SettingsManager sharedInstance].isNotificationMode">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -255,13 +240,21 @@
          contextName = "-[NewsTableViewCell cellForNews:WithIndexPath:]:NewsTableViewCell.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.descriptionLabel.text">
+               value = "self.pubDateLabel.text">
             </PersistentString>
             <PersistentString
                value = "entity.pubDateFeed">
             </PersistentString>
             <PersistentString
-               value = "self.pubDateLabel.text">
+               value = "self.descriptionLabel.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[SettingsOfflineCell isModeEnabled]:SettingsOfflineCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[SettingsManager sharedInstance].isOfflineMode">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -441,10 +434,10 @@
                value = "currentNews.feedIdString">
             </PersistentString>
             <PersistentString
-               value = "currentNews.descriptionFeed">
+               value = "currentNews.titleFeed">
             </PersistentString>
             <PersistentString
-               value = "currentNews.titleFeed">
+               value = "currentNews.descriptionFeed">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -520,10 +513,10 @@
          contextName = "-[NewsTableView initRealmArray]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "newsArray.count">
+               value = "self.array[self.NewsSegmentedControl.selectedSegmentIndex]">
             </PersistentString>
             <PersistentString
-               value = "self.array[self.NewsSegmentedControl.selectedSegmentIndex]">
+               value = "newsArray.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -553,10 +546,10 @@
                value = "newsEntity.titleFeed">
             </PersistentString>
             <PersistentString
-               value = "entity.titleFeed">
+               value = "newsArray.count">
             </PersistentString>
             <PersistentString
-               value = "newsArray.count">
+               value = "entity.titleFeed">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -695,24 +688,50 @@
          contextName = "-[DetailsOfflineVCViewController viewDidLoad]:DetailsOfflineVCViewController.m">
       </ContextState>
       <ContextState
-         contextName = "__34-[RemoteFacade loadData:callback:]_block_invoke.45:RemoteFacade.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[NewsTableView updateSearchResultsForSearchController:]:NewsTableView.m">
+         contextName = "-[XMLParser parser:didEndElement:namespaceURI:qualifiedName:]:XMLParser.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.searchResults">
+               value = "currentDataDictionary">
             </PersistentString>
             <PersistentString
-               value = "self.searchController.searchBar.text">
+               value = "dictParsedData">
+            </PersistentString>
+            <PersistentString
+               value = "descriptionFeed">
+            </PersistentString>
+            <PersistentString
+               value = "tempString">
+            </PersistentString>
+            <PersistentString
+               value = "pubDateFeed">
+            </PersistentString>
+            <PersistentString
+               value = "linkFeed">
+            </PersistentString>
+            <PersistentString
+               value = "urlImage">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[NewsTableView menu:numberOfRowsInColumns:]:NewsTableView.m">
+         contextName = "-[NewsTableView numberOfColumnsInMenu:]:NewsTableView.m">
          <PersistentStrings>
             <PersistentString
-               value = "((NSArray*)self.subTitleArray[column]).count">
+               value = "self.mainTitleArray.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__41-[NewsTableView updateDataWithIndicator:]_block_invoke_2:NewsTableView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "wself.urlArray">
+            </PersistentString>
+            <PersistentString
+               value = "_titlesArray">
+            </PersistentString>
+            <PersistentString
+               value = "self.newsArray.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -20,8 +20,10 @@ SINGLETON(SettingsManager)
     self = [super init];
     
     if (self) {
-        self.isOfflineMode = [[UserDefaultsManager sharedInstance]getBoolForKey:OFFLINE_MODE];
-        self.isNotificationMode = [[UserDefaultsManager sharedInstance]getBoolForKey:NOTIFICATIONS_MODE];
+        self.isOfflineMode = [[UserDefaultsManager sharedInstance]boolForKey:OFFLINE_MODE];
+        self.isNotificationMode = [[UserDefaultsManager sharedInstance]boolForKey:NOTIFICATIONS_MODE];
+        self.isAutoupdateEnabled = [[UserDefaultsManager sharedInstance]boolForKey:AUTOUPDATE_MODE];
+        self.isNightModeEnabled = [[UserDefaultsManager sharedInstance]boolForKey:NIGHT_MODE];
     }
     return self;
 }
@@ -36,4 +38,11 @@ SINGLETON(SettingsManager)
     _isNotificationMode = isNotificationMode;
 }
 
+-(void)setIsAutoupdateEnabled:(BOOL)isAutoupdateEnabled {
+    _isAutoupdateEnabled = isAutoupdateEnabled;
+}
+
+-(void)setIsNightModeEnabled:(BOOL)isNightModeEnabled {
+    _isNightModeEnabled = isNightModeEnabled;
+}
 @end

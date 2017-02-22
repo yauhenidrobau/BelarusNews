@@ -21,6 +21,7 @@
 #import "RealmDataManager.h"
 #import "ShareManager.h"
 #import "NewsEntity.h"
+#import "UserDefaultsManager.h"
 
 #import "NewsTableViewCell.h"
 #import "DetailsViewController.h"
@@ -34,6 +35,7 @@
 #import "ZLDropDownMenu.h"
 #import "NSString+ZLStringSize.h"
 
+#import "UIColor+BelarusNews.h"
 
 typedef void(^UpdateDataCallback)(NSError *error);
 typedef enum {
@@ -54,7 +56,7 @@ typedef enum {
 @property (nonatomic, strong) INSSearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) CFShareCircleView *shareCircleView;
-
+@property (nonatomic, strong) UserDefaultsManager *userDefaults;
 @property (nonatomic) CGPoint lastContentOffset;
 @property (strong, nonatomic) NSOperationQueue * operationQueue;
 @property (nonatomic, strong) NSTimer *timer;
@@ -66,11 +68,12 @@ typedef enum {
 @property (nonatomic, strong) NSMutableDictionary *shareItemsDict;
 
 @property (strong, nonatomic) NSDictionary *newsURLDict;
-@property (nonatomic, strong) NSUserDefaults *defaults;
 
 @property (nonatomic) BOOL isAlertShown;
 @property (nonatomic) BOOL isSearchStart;
 @property (nonatomic) BOOL isOfflineMode;
+@property (nonatomic) BOOL isNightMode;
+
 @property (weak, nonatomic) IBOutlet UIButton *leftMenuButton;
 
 @end
@@ -82,24 +85,30 @@ typedef enum {
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    self.defaults = [NSUserDefaults standardUserDefaults];
-
     [self prepareData];
-    [self prepareAppierance];
     [self peparePullToRefresh];
     [self setupData];
     [self updateWithIndicator:YES];
 
+    self.userDefaults = [UserDefaultsManager sharedInstance];
     self.operationQueue = [NSOperationQueue new];
-    self.isAlertShown = [self.defaults boolForKey:NO_INTERNET_KEY];
-    
+    self.isAlertShown = [self.userDefaults boolForKey:NO_INTERNET_KEY];
+
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
-    self.isOfflineMode = [self.defaults boolForKey:OFFLINE_MODE];
+    [self prepareAppierance];
+
+    if ([self.userDefaults boolForKey:AUTOUPDATE_MODE]) {
+         self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
+        NSLog(@"Autoupdates enabled");
+    } else {
+        NSLog(@"Autoupdates disabled");
+    }
+    self.isOfflineMode = [self.userDefaults boolForKey:OFFLINE_MODE];
+    self.isNightMode = [self.userDefaults boolForKey:NIGHT_MODE];
     [self setupData];
 
 }
@@ -159,7 +168,9 @@ typedef enum {
     NewsEntity *newsEntity = nil;
     newsEntity = [self setNewsEntityForIndexPath:indexPath];
     [cell cellForNews:newsEntity WithIndexPath:(NSIndexPath *)indexPath];
-    
+    if (self.isNightMode) {
+        [cell updateNightModeCell:YES];
+    }
     return cell;
 }
 
@@ -299,8 +310,8 @@ typedef enum {
     self.urlString = dict[NSLocalizedString(self.titlesString,nil)];
     }
     NSLog(@"%@ : %@", self.titlesString,self.urlString);
-    [self.defaults setObject:self.titlesString forKey:@"CurrentTitle"];
-    [self.defaults setObject:self.urlString forKey:@"CurrentUrl"];
+    [self.userDefaults setObject:self.titlesString forKey:@"CurrentTitle"];
+    [self.userDefaults setObject:self.urlString forKey:@"CurrentUrl"];
     [self updateWithIndicator:YES];
 
 }
@@ -423,8 +434,12 @@ typedef enum {
     [self.scrollButton layoutIfNeeded];
     self.scrollButton.layer.cornerRadius = self.scrollButton.frame.size.height / 2;
     self.scrollButton.imageView.image = [self.scrollButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.scrollButton setTintColor:MAIN_COLOR];
     
+    if (self.isNightMode) {
+        [self.scrollButton setTintColor:[UIColor bn_nightModeBackgroundColor]];
+    } else {
+        [self.scrollButton setTintColor:MAIN_COLOR];
+    }
     [self prepareTableView];
     [self prepareSearchBar];
     [self prepareNavigationBar];
@@ -432,7 +447,7 @@ typedef enum {
     [self prepareShareView];
 
     self.leftMenuButton.imageView.image = [self.leftMenuButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.leftMenuButton setTintColor:MAIN_COLOR];
+    [self.leftMenuButton setTintColor:[UIColor whiteColor]];
 }
 
 -(void)setupData {
@@ -443,7 +458,7 @@ typedef enum {
         
         self.newsArray = [self sortNewsArray:allResultsArray];
         NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
-    } else {
+    } else if ([self.menuTitle isEqualToString:NSLocalizedString(@"Favorites", nil)]){
         self.menuTitle = @"";
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults removeObjectForKey:@"menuTitle"];
@@ -454,7 +469,6 @@ typedef enum {
     [self.tableView reloadData];
     [self showLoadingIndicator:NO];
     [self.refreshControl endRefreshing];
-
 
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
@@ -612,8 +626,8 @@ typedef enum {
                          @"MTS" : @[MTS_BY_NEWS]};
     self.titlesString = NSLocalizedString(self.subTitleArray[0][0],nil);
     self.urlString = MAIN_NEWS;
-    [self.defaults setObject:self.titlesString forKey:@"CurrentTitle"];
-    [self.defaults setObject:self.urlString forKey:@"CurrentUrl"];
+    [self.userDefaults setObject:self.titlesString forKey:@"CurrentTitle"];
+    [self.userDefaults setObject:self.urlString forKey:@"CurrentUrl"];
     self.shareItemsDict = [NSMutableDictionary new];
 }
 

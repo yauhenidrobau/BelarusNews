@@ -9,12 +9,18 @@
 /* Begin PBXBuildFile section */
 		1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */; };
 		1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */; };
+		1E12860B1E5D6D1800D2899D /* ForecastObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E12860A1E5D6D1800D2899D /* ForecastObject.m */; };
+		1E12860E1E5D6D2900D2899D /* ForecastManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E12860D1E5D6D2900D2899D /* ForecastManager.m */; };
+		1E1286111E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1286101E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m */; };
+		1E1286181E5D850600D2899D /* UIColor+BelarusNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1286171E5D850600D2899D /* UIColor+BelarusNews.m */; };
+		1E12861B1E5D916F00D2899D /* SettingsBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E12861A1E5D916F00D2899D /* SettingsBaseCell.m */; };
 		1E1C66381E290C1300086CCC /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1C66371E290C1300086CCC /* NotificationManager.m */; };
 		1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2666911E127AD6001DF2A2 /* INSSearchBar.m */; };
 		1E372F851DF94C7400362CC1 /* DateFormatterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E372F821DF94C7400362CC1 /* DateFormatterManager.m */; };
 		1E372F861DF94C7400362CC1 /* SearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E372F841DF94C7400362CC1 /* SearchManager.m */; };
 		1E4C8C5E1E55C15E00B2ED44 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C8C5D1E55C15E00B2ED44 /* SettingsManager.m */; };
 		1E4C8C611E55E46C00B2ED44 /* UserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C8C601E55E46C00B2ED44 /* UserDefaultsManager.m */; };
+		1E4C8C641E56D8FB00B2ED44 /* SettingsAutoupdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C8C631E56D8FB00B2ED44 /* SettingsAutoupdateCell.m */; };
 		1E640B581E0A85FE00AA539C /* NSString+ZLStringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B341E0A85FC00AA539C /* NSString+ZLStringSize.m */; };
 		1E640B591E0A85FE00AA539C /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B381E0A85FC00AA539C /* MASCompositeConstraint.m */; };
 		1E640B5A1E0A85FE00AA539C /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B3B1E0A85FC00AA539C /* MASConstraint.m */; };
@@ -96,10 +102,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E11C9451DDDAA1F00D55B28 /* NewsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsEntity.h; sourceTree = "<group>"; };
-		1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsEntity.m; sourceTree = "<group>"; };
+		1E11C9451DDDAA1F00D55B28 /* NewsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsEntity.h; path = ../Persistance/NewsEntity.h; sourceTree = "<group>"; };
+		1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsEntity.m; path = ../Persistance/NewsEntity.m; sourceTree = "<group>"; };
 		1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDataManager.h; sourceTree = "<group>"; };
 		1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmDataManager.m; sourceTree = "<group>"; };
+		1E1286091E5D6D1800D2899D /* ForecastObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastObject.h; sourceTree = "<group>"; };
+		1E12860A1E5D6D1800D2899D /* ForecastObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastObject.m; sourceTree = "<group>"; };
+		1E12860C1E5D6D2900D2899D /* ForecastManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastManager.h; sourceTree = "<group>"; };
+		1E12860D1E5D6D2900D2899D /* ForecastManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastManager.m; sourceTree = "<group>"; };
+		1E12860F1E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsNightModeCellTableViewCell.h; sourceTree = "<group>"; };
+		1E1286101E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsNightModeCellTableViewCell.m; sourceTree = "<group>"; };
+		1E1286161E5D850600D2899D /* UIColor+BelarusNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BelarusNews.h"; sourceTree = "<group>"; };
+		1E1286171E5D850600D2899D /* UIColor+BelarusNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BelarusNews.m"; sourceTree = "<group>"; };
+		1E1286191E5D916F00D2899D /* SettingsBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsBaseCell.h; sourceTree = "<group>"; };
+		1E12861A1E5D916F00D2899D /* SettingsBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsBaseCell.m; sourceTree = "<group>"; };
 		1E1C66361E290C1300086CCC /* NotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationManager.h; sourceTree = "<group>"; };
 		1E1C66371E290C1300086CCC /* NotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationManager.m; sourceTree = "<group>"; };
 		1E1D3A9E1DE47D9F00D6C00C /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
@@ -113,6 +129,8 @@
 		1E4C8C5D1E55C15E00B2ED44 /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
 		1E4C8C5F1E55E46C00B2ED44 /* UserDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsManager.h; sourceTree = "<group>"; };
 		1E4C8C601E55E46C00B2ED44 /* UserDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsManager.m; sourceTree = "<group>"; };
+		1E4C8C621E56D8FB00B2ED44 /* SettingsAutoupdateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsAutoupdateCell.h; sourceTree = "<group>"; };
+		1E4C8C631E56D8FB00B2ED44 /* SettingsAutoupdateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsAutoupdateCell.m; sourceTree = "<group>"; };
 		1E640B331E0A85FC00AA539C /* NSString+ZLStringSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZLStringSize.h"; sourceTree = "<group>"; };
 		1E640B341E0A85FC00AA539C /* NSString+ZLStringSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ZLStringSize.m"; sourceTree = "<group>"; };
 		1E640B371E0A85FC00AA539C /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
@@ -258,6 +276,18 @@
 			);
 			name = Frameworks;
 			path = KinopoiskParserObj/Frameworks;
+			sourceTree = "<group>";
+		};
+		1E1286081E5D6CFA00D2899D /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				1E11C9451DDDAA1F00D55B28 /* NewsEntity.h */,
+				1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */,
+				1E1286091E5D6D1800D2899D /* ForecastObject.h */,
+				1E12860A1E5D6D1800D2899D /* ForecastObject.m */,
+			);
+			name = Entities;
+			path = Model/Entities;
 			sourceTree = "<group>";
 		};
 		1E26668F1E127AC3001DF2A2 /* CustomSearchBar */ = {
@@ -423,6 +453,8 @@
 				1E1D3A9E1DE47D9F00D6C00C /* Macros.h */,
 				1EFE91781E237908008CA308 /* Utils.h */,
 				1EFE91791E237908008CA308 /* Utils.m */,
+				1E1286161E5D850600D2899D /* UIColor+BelarusNews.h */,
+				1E1286171E5D850600D2899D /* UIColor+BelarusNews.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -442,6 +474,7 @@
 		1E73292D1D7814340027E46E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1E1286081E5D6CFA00D2899D /* Entities */,
 				1E372F801DF94B8400362CC1 /* XML */,
 				1E7329491D783DFD0027E46E /* Persistance */,
 			);
@@ -459,8 +492,6 @@
 				1E372F841DF94C7400362CC1 /* SearchManager.m */,
 				84FF33361E1DAF72002847AB /* ShareManager.h */,
 				84FF33371E1DAF72002847AB /* ShareManager.m */,
-				1E11C9451DDDAA1F00D55B28 /* NewsEntity.h */,
-				1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */,
 				1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */,
 				1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */,
 				1E73294D1D7843310027E46E /* RemoteFacade.h */,
@@ -471,6 +502,8 @@
 				1E4C8C5D1E55C15E00B2ED44 /* SettingsManager.m */,
 				1E4C8C5F1E55E46C00B2ED44 /* UserDefaultsManager.h */,
 				1E4C8C601E55E46C00B2ED44 /* UserDefaultsManager.m */,
+				1E12860C1E5D6D2900D2899D /* ForecastManager.h */,
+				1E12860D1E5D6D2900D2899D /* ForecastManager.m */,
 			);
 			name = Persistance;
 			path = Model/Persistance;
@@ -525,6 +558,12 @@
 				1EFD65A71E13EE4300F5BA4D /* SettingsOfflineCell.m */,
 				1EFE91741E1FAC76008CA308 /* SettingsNotificationsCell.h */,
 				1EFE91751E1FAC76008CA308 /* SettingsNotificationsCell.m */,
+				1E4C8C621E56D8FB00B2ED44 /* SettingsAutoupdateCell.h */,
+				1E4C8C631E56D8FB00B2ED44 /* SettingsAutoupdateCell.m */,
+				1E12860F1E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.h */,
+				1E1286101E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m */,
+				1E1286191E5D916F00D2899D /* SettingsBaseCell.h */,
+				1E12861A1E5D916F00D2899D /* SettingsBaseCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -786,6 +825,7 @@
 				1E640B5A1E0A85FE00AA539C /* MASConstraint.m in Sources */,
 				1E640B5D1E0A85FE00AA539C /* MASViewAttribute.m in Sources */,
 				1E4C8C611E55E46C00B2ED44 /* UserDefaultsManager.m in Sources */,
+				1E12860B1E5D6D1800D2899D /* ForecastObject.m in Sources */,
 				1E640B661E0A85FE00AA539C /* ZLDropDownMenuUICalc.m in Sources */,
 				1EFE91761E1FAC76008CA308 /* SettingsNotificationsCell.m in Sources */,
 				1E640B5B1E0A85FE00AA539C /* MASConstraintMaker.m in Sources */,
@@ -800,11 +840,13 @@
 				1E640B5E1E0A85FE00AA539C /* MASViewConstraint.m in Sources */,
 				1E640B611E0A85FE00AA539C /* View+MASAdditions.m in Sources */,
 				1E640B651E0A85FE00AA539C /* ZLDropDownMenuTitleButton.m in Sources */,
+				1E1286111E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m in Sources */,
 				1E640B591E0A85FE00AA539C /* MASCompositeConstraint.m in Sources */,
 				844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */,
 				84FF33381E1DAF72002847AB /* ShareManager.m in Sources */,
 				1E7329471D7836400027E46E /* ParserManager.m in Sources */,
 				1E640B641E0A85FE00AA539C /* ZLDropDownMenuCollectionViewCell.m in Sources */,
+				1E12861B1E5D916F00D2899D /* SettingsBaseCell.m in Sources */,
 				1E7329441D781E980027E46E /* XMLParser.m in Sources */,
 				1E640B5C1E0A85FE00AA539C /* MASLayoutConstraint.m in Sources */,
 				1E640B581E0A85FE00AA539C /* NSString+ZLStringSize.m in Sources */,
@@ -812,6 +854,7 @@
 				1E7328F71D7813740027E46E /* AppDelegate.m in Sources */,
 				1E372F851DF94C7400362CC1 /* DateFormatterManager.m in Sources */,
 				84FF33421E1DCEAC002847AB /* UIColor+flat.m in Sources */,
+				1E12860E1E5D6D2900D2899D /* ForecastManager.m in Sources */,
 				843B7B561DF35E27001532A4 /* RootViewController.m in Sources */,
 				1E7329521D7845210027E46E /* DataManager.m in Sources */,
 				1E640B601E0A85FE00AA539C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
@@ -825,7 +868,9 @@
 				1E640B5F1E0A85FE00AA539C /* NSArray+MASAdditions.m in Sources */,
 				1E640B621E0A85FE00AA539C /* ViewController+MASAdditions.m in Sources */,
 				1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */,
+				1E4C8C641E56D8FB00B2ED44 /* SettingsAutoupdateCell.m in Sources */,
 				1E7329551D7848530027E46E /* DetailsViewController.m in Sources */,
+				1E1286181E5D850600D2899D /* UIColor+BelarusNews.m in Sources */,
 				1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */,
 				1E7328F41D7813740027E46E /* main.m in Sources */,
 			);

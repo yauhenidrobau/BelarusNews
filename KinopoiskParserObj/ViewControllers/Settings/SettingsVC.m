@@ -10,21 +10,29 @@
 
 #import "SettingsOfflineCell.h"
 #import "SettingsNotificationsCell.h"
+#import "SettingsAutoupdateCell.h"
+#import "SettingsNightModeCellTableViewCell.h"
 #import "Utils.h"
 #import "UserDefaultsManager.h"
+#import "Constants.h"
+#import "SettingsManager.h"
+#import "UIColor+BelarusNews.h"
 
 #define SIGN_OUT_CELL_TYPE @"SignOutCell"
 #define OFFLINE_CELL_TYPE @"OfflineCell"
 #define NOTIFICATION_CELL_TYPE @"NotificationCell"
+#define AUTOUPDATES_CELL_TYPE @"AutoupdatesCell"
+#define NIGHTMODE_CELL_TYPE @"NightModeCell"
 
-#define OFFLINE_MODE @"OfflineMode"
-#define NOTIFICATIONS_MODE @"NotificationsMode"
 
 typedef enum {
     OFFLINE_CELL,
     NOTIFICATION_CELL,
+    AUTOUPDATE_CELL,
+    NIGHTMODE_CELL,
     SIGN_OUT_CELL
 }TypeCells;
+
 @interface SettingsVC () <SettingsCellDelegate>
 
 @property (nonatomic, strong) NSArray *cellTitleList;
@@ -44,6 +52,8 @@ typedef enum {
     if (!_cellTitleListID.count) {
         _cellTitleListID = @[@"OfflineCell",
                            @"NotificationCell",
+                           @"AutoupdatesCell",
+                           @"NightModeCell",
                            @"SignOutCell"];
     }
     return _cellTitleListID;
@@ -53,12 +63,16 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self.navigationItem setTitle:NSLocalizedString(@"Settings", nil)];
     [self.navigationController.navigationBar setHidden:NO];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self configNightMode];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -76,12 +90,26 @@ typedef enum {
     if ([cell.reuseIdentifier isEqualToString:OFFLINE_CELL_TYPE]) {
         SettingsOfflineCell *offlineCell = (SettingsOfflineCell *)cell;
         offlineCell.cellDelegate = self;
+        [offlineCell configCell];
+        return offlineCell;
     } else if ([cell.reuseIdentifier isEqualToString:NOTIFICATION_CELL_TYPE]) {
-        SettingsNotificationsCell *offlineCell = (SettingsNotificationsCell *)cell;
-        offlineCell.cellDelegate = self;
+        SettingsNotificationsCell *notificationCell = (SettingsNotificationsCell *)cell;
+        notificationCell.cellDelegate = self;
+        [notificationCell configCell];
+        return notificationCell;
+    } else if ([cell.reuseIdentifier isEqualToString:AUTOUPDATES_CELL_TYPE]) {
+        SettingsAutoupdateCell *autoupdateCell = (SettingsAutoupdateCell *)cell;
+        autoupdateCell.cellDelegate = self;
+        [autoupdateCell configCell];
+        return autoupdateCell;
+    } else if ([cell.reuseIdentifier isEqualToString:NIGHTMODE_CELL_TYPE]) {
+        SettingsNightModeCellTableViewCell *nightModeCell = (SettingsNightModeCellTableViewCell *)cell;
+        nightModeCell.cellDelegate = self;
+        [nightModeCell configCell];
+        return nightModeCell;
     }
     if ([cell.reuseIdentifier isEqualToString:SIGN_OUT_CELL_TYPE]) {
-    }
+    }                                                                          
     return cell;
 }
 
@@ -99,15 +127,32 @@ typedef enum {
 }
 
 #pragma mark - SettingsCellDelegate
-- (void)settingsOfflineCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender {
+-(void)settingsOfflineCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender {
     [[UserDefaultsManager sharedInstance]setBool:sender.isOn ForKey:OFFLINE_MODE];
 }
 
-- (void)settingsNotificationsCell:(UITableViewCell *)cell didChangeValue:(UISwitch *)sender{
+-(void)settingsNotificationsCell:(UITableViewCell *)cell didChangeValue:(UISwitch *)sender{
     [[UserDefaultsManager sharedInstance]setBool:sender.isOn ForKey:NOTIFICATIONS_MODE];
+}
+
+-(void)settingsAutoupdateCell:(UITableViewCell *)cell didChangeValue:(UISwitch *)sender {
+    [[UserDefaultsManager sharedInstance]setBool:sender.isOn ForKey:AUTOUPDATE_MODE];
+}
+
+-(void)settingsNightModeCell:(UITableViewCell *)cell didChangeValue:(UISwitch *)sender {
+    [[UserDefaultsManager sharedInstance]setBool:sender.isOn ForKey:NIGHT_MODE];
+    [self configNightMode];
+
 }
 #pragma mark Private
 
-
+-(void)configNightMode {
+    if ([SettingsManager sharedInstance].isNightModeEnabled) {
+        self.tableView.backgroundColor = [UIColor bn_nightModeBackgroundColor];
+    } else {
+        self.tableView.backgroundColor = [UIColor bn_settingsBackgroundColor];
+    }
+    [self.tableView setNeedsDisplay];
+}
 
 @end

@@ -7,30 +7,18 @@
 //
 
 #import "SettingsOfflineCell.h"
-
 #import "SettingsManager.h"
-#import "Constants.h"
-#import "UserDefaultsManager.h"
 
 @interface SettingsOfflineCell ()
-@property (weak, nonatomic) IBOutlet UISwitch *offlineSwitch;
 
 @end
 
 @implementation SettingsOfflineCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    [self.offlineSwitch setOn:[SettingsManager sharedInstance].isOfflineMode];
-}
+#pragma mark - Override properties
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-}
-
-- (IBAction)OfflineModeValueChanged:(UISwitch *)sender {
-    [[UserDefaultsManager sharedInstance] setBool:sender.isOn ForKey:OFFLINE_MODE];
-    [self.cellDelegate settingsOfflineCell:self didChangeValue:sender];
+-(BOOL)isModeEnabled {
+    return [SettingsManager sharedInstance].isOfflineMode;
 }
 
 @end

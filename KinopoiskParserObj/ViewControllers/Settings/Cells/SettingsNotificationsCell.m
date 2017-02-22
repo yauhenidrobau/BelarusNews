@@ -9,27 +9,16 @@
 #import "SettingsNotificationsCell.h"
 
 #import "SettingsManager.h"
+#import "UIColor+BelarusNews.h"
 
 @interface SettingsNotificationsCell ()
-
-@property (weak, nonatomic) IBOutlet UISwitch *notificationSwitch;
 
 @end
 
 @implementation SettingsNotificationsCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    [self.notificationSwitch setOn:[SettingsManager sharedInstance].isNotificationMode];
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-}
-
-- (IBAction)NotificationsValueChanged:(UISwitch *)sender {
-    [SettingsManager sharedInstance].isNotificationMode = sender.isOn;
-    [self.cellDelegate settingsNotificationsCell:self didChangeValue:sender];
+-(BOOL)isModeEnabled {
+    return [SettingsManager sharedInstance].isNotificationMode;
 }
 
 @end

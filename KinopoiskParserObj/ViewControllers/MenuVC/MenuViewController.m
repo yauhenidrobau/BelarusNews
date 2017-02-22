@@ -10,6 +10,7 @@
 
 #import "NewsTableView.h"
 #import "RootViewController.h"
+#import "UserDefaultsManager.h"
 
 @interface MenuViewController ()
 
@@ -67,13 +68,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NewsTableView *vc = [[NewsTableView alloc]init];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    vc.urlIdentificator = self.menuTitles[indexPath.row];
-//    RootViewController *rootVC = [[RootViewController alloc]init];
-//    [rootVC.mainNavigationController setViewControllers:@[vc] animated:YES];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:self.menuTitles[indexPath.row] forKey:@"menuTitle"];
+//    [[UserDefaultsManager sharedInstance] setObject:self.menuTitles[indexPath.row] forKey:@"menuTitle"];
     self.title = self.menuTitles[indexPath.row];
     [self.sideBarController hideMenuViewController:YES];
 //    [self.sideBarController showViewController:vc sender:self];

@@ -37,11 +37,20 @@
 
 #define OFFLINE_MODE @"OfflineMode"
 #define NOTIFICATIONS_MODE @"NotificationsMode"
+#define AUTOUPDATE_MODE @"Autoupdate"
+#define NIGHT_MODE @"NightMode"
 
 #define MAIN_COLOR RGB(81,255,181)
 #define LIGHT_BLACK_COLOR RGB(28,28,28)
 
 #define NO_INTERNET_KEY @"NoInternet"
+
+typedef enum {
+    SettingsCellTypeOffline = 151,
+    SettingsCellTypeNotification = 152,
+    SettingsCellTypeAutoupdate = 153,
+    SettingsCellTypeNightMode = 154
+}SettingsCells;
 
 @interface Constants : NSObject
 

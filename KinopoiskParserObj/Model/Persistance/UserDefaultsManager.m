@@ -28,7 +28,7 @@ SINGLETON(UserDefaultsManager)
     return self;
 }
 
--(BOOL)getBoolForKey:(NSString *)key {
+-(BOOL)boolForKey:(NSString *)key {
     return [self.userDefaults boolForKey:key];
 }
 
@@ -36,4 +36,11 @@ SINGLETON(UserDefaultsManager)
     [self.userDefaults setBool:boolean forKey:key];
 }
 
+-(void)setObject:(id)object forKey:(NSString *)key {
+    [self.userDefaults setObject:object forKey:key];
+}
+
+-(id)objectForKey:(NSString *)key {
+    return [self.userDefaults objectForKey:key];
+}
 @end

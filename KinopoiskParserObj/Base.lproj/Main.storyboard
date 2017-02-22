@@ -184,7 +184,7 @@
                                                     <rect key="frame" x="306" y="6" width="51" height="36.5"/>
                                                     <color key="onTintColor" red="0.31764705879999999" green="1" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
-                                                        <action selector="OfflineModeValueChanged:" destination="Sjq-2h-noN" eventType="valueChanged" id="o5b-OF-8Tr"/>
+                                                        <action selector="switchValueChanged:" destination="Sjq-2h-noN" eventType="valueChanged" id="R66-LE-Rgn"/>
                                                     </connections>
                                                 </switch>
                                             </subviews>
@@ -200,8 +200,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="offlineSwitch" destination="7DG-CY-PyC" id="CZw-o9-YKK"/>
+                                            <outlet property="cellSwitch" destination="7DG-CY-PyC" id="qlh-EY-lZS"/>
+                                            <outlet property="cellTitleLabel" destination="3Zh-gd-aGZ" id="hiY-Zv-KaF"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NotificationCell" id="4WQ-rB-nd0" userLabel="NotificationsCell" customClass="SettingsNotificationsCell">
@@ -215,7 +217,7 @@
                                                     <rect key="frame" x="306" y="6" width="51" height="36.5"/>
                                                     <color key="onTintColor" red="0.31764705879999999" green="1" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
-                                                        <action selector="NotificationsValueChanged:" destination="4WQ-rB-nd0" eventType="valueChanged" id="rMb-ws-xKH"/>
+                                                        <action selector="switchValueChanged:" destination="4WQ-rB-nd0" eventType="valueChanged" id="8Gx-Jy-SjY"/>
                                                     </connections>
                                                 </switch>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i4H-9G-zEx">
@@ -247,12 +249,112 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="notificationSwitch" destination="xQZ-br-gax" id="DI3-YX-yrx"/>
+                                            <outlet property="cellSwitch" destination="xQZ-br-gax" id="C8s-gl-80X"/>
+                                            <outlet property="cellTitleLabel" destination="0Wo-Qg-wd4" id="Zaf-ay-fxE"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SignOutCell" id="cha-08-uOv">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="AutoupdatesCell" id="LDp-l2-oOu" customClass="SettingsAutoupdateCell">
                                         <rect key="frame" x="0.0" y="154" width="375" height="49"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LDp-l2-oOu" id="egd-U8-MDM">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" tag="153" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XO0-P8-Fgn">
+                                                    <rect key="frame" x="306" y="6" width="51" height="36.5"/>
+                                                    <color key="onTintColor" red="0.31764705879999999" green="1" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="switchValueChanged:" destination="LDp-l2-oOu" eventType="valueChanged" id="MFn-Tn-CiS"/>
+                                                    </connections>
+                                                </switch>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eat-Qn-Ht9">
+                                                    <rect key="frame" x="0.0" y="0.0" width="272" height="48"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Autoupdates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h60-fo-YzL">
+                                                            <rect key="frame" x="21" y="14" width="98" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="h60-fo-YzL" firstAttribute="leading" secondItem="Eat-Qn-Ht9" secondAttribute="leading" constant="21" id="NVL-Hi-69H"/>
+                                                        <constraint firstItem="h60-fo-YzL" firstAttribute="centerY" secondItem="Eat-Qn-Ht9" secondAttribute="centerY" id="hTU-ss-Ebe"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Eat-Qn-Ht9" firstAttribute="top" secondItem="egd-U8-MDM" secondAttribute="top" id="0Ap-pT-bE4"/>
+                                                <constraint firstAttribute="trailing" secondItem="XO0-P8-Fgn" secondAttribute="trailing" constant="20" id="BJJ-cd-lYu"/>
+                                                <constraint firstItem="XO0-P8-Fgn" firstAttribute="leading" secondItem="Eat-Qn-Ht9" secondAttribute="trailing" constant="34" id="Ixl-PU-Gzm"/>
+                                                <constraint firstItem="XO0-P8-Fgn" firstAttribute="centerY" secondItem="egd-U8-MDM" secondAttribute="centerY" id="aXP-mZ-wee"/>
+                                                <constraint firstItem="XO0-P8-Fgn" firstAttribute="top" secondItem="egd-U8-MDM" secondAttribute="top" constant="6" id="an7-bd-gig"/>
+                                                <constraint firstAttribute="bottom" secondItem="XO0-P8-Fgn" secondAttribute="bottom" constant="6" id="gKp-os-vyH"/>
+                                                <constraint firstItem="Eat-Qn-Ht9" firstAttribute="leading" secondItem="egd-U8-MDM" secondAttribute="leading" id="jJ8-XC-ulQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="Eat-Qn-Ht9" secondAttribute="bottom" id="xIj-qd-ZmV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="cellSwitch" destination="XO0-P8-Fgn" id="x7v-uJ-wYU"/>
+                                            <outlet property="cellTitleLabel" destination="h60-fo-YzL" id="i2X-5l-IyJ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NightModeCell" id="yRe-uF-rdQ" customClass="SettingsNightModeCellTableViewCell">
+                                        <rect key="frame" x="0.0" y="203" width="375" height="49"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yRe-uF-rdQ" id="AzK-Og-3QR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" tag="154" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="F17-og-QEV">
+                                                    <rect key="frame" x="306" y="6" width="51" height="36.5"/>
+                                                    <color key="onTintColor" red="0.31764705879999999" green="1" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="switchValueChanged:" destination="yRe-uF-rdQ" eventType="valueChanged" id="6hb-an-ALi"/>
+                                                    </connections>
+                                                </switch>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hbz-Lz-X4h">
+                                                    <rect key="frame" x="0.0" y="0.0" width="272" height="48"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Night mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7U-Vc-0Aa">
+                                                            <rect key="frame" x="21" y="14" width="90" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="D7U-Vc-0Aa" firstAttribute="centerY" secondItem="Hbz-Lz-X4h" secondAttribute="centerY" id="XkG-u1-PNw"/>
+                                                        <constraint firstItem="D7U-Vc-0Aa" firstAttribute="leading" secondItem="Hbz-Lz-X4h" secondAttribute="leading" constant="21" id="b6g-8c-g8M"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="F17-og-QEV" secondAttribute="trailing" constant="20" id="CPk-kJ-Yef"/>
+                                                <constraint firstAttribute="bottom" secondItem="Hbz-Lz-X4h" secondAttribute="bottom" id="RgG-VY-LKn"/>
+                                                <constraint firstItem="F17-og-QEV" firstAttribute="leading" secondItem="Hbz-Lz-X4h" secondAttribute="trailing" constant="34" id="WQr-d1-WiA"/>
+                                                <constraint firstItem="F17-og-QEV" firstAttribute="centerY" secondItem="AzK-Og-3QR" secondAttribute="centerY" id="g2G-cX-ghB"/>
+                                                <constraint firstItem="F17-og-QEV" firstAttribute="top" secondItem="AzK-Og-3QR" secondAttribute="top" constant="6" id="idA-OX-W7k"/>
+                                                <constraint firstItem="Hbz-Lz-X4h" firstAttribute="top" secondItem="AzK-Og-3QR" secondAttribute="top" id="n1w-Mj-mou"/>
+                                                <constraint firstItem="Hbz-Lz-X4h" firstAttribute="leading" secondItem="AzK-Og-3QR" secondAttribute="leading" id="omK-j0-95i"/>
+                                                <constraint firstAttribute="bottom" secondItem="F17-og-QEV" secondAttribute="bottom" constant="6" id="qZK-8v-FWV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="cellSwitch" destination="F17-og-QEV" id="dmZ-cF-Wer"/>
+                                            <outlet property="cellTitleLabel" destination="D7U-Vc-0Aa" id="s48-mg-Kvm"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SignOutCell" id="cha-08-uOv" customClass="SettingsBaseCell">
+                                        <rect key="frame" x="0.0" y="252" width="375" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cha-08-uOv" id="W0g-Jw-94N">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
@@ -272,6 +374,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="cellTitleLabel" destination="h8H-Yb-iAC" id="mbq-Uh-ZWi"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -317,7 +423,7 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5sC-Nh-5Wq">
                                 <rect key="frame" x="0.0" y="44" width="375" height="559"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.47450980390000003" green="0.57254901960000004" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Mhx-ca-kiQ">
                                     <rect key="frame" x="0.0" y="108" width="375" height="1"/>
@@ -377,6 +483,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="YFF-L9-PCS" firstAttribute="leading" secondItem="Zqx-GC-hPW" secondAttribute="trailing" constant="3" id="DCZ-DG-VFc"/>
                                                 <constraint firstAttribute="bottom" secondItem="HBI-or-WRg" secondAttribute="bottom" constant="8" id="GAB-3x-v11"/>
@@ -590,7 +697,7 @@
         <image name="icon-arrow-up" width="32" height="32"/>
         <image name="icon-favorites" width="256" height="256"/>
         <image name="icon-share" width="24" height="24"/>
-        <image name="icon_list" width="16" height="16"/>
+        <image name="icon_list" width="24" height="24"/>
         <image name="no_image_200_200" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>

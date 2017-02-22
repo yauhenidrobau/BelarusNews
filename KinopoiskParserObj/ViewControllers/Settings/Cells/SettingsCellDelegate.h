@@ -12,6 +12,8 @@
 
 - (void)settingsOfflineCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender;
 - (void)settingsNotificationsCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender;
+- (void)settingsAutoupdateCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender;
+- (void)settingsNightModeCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender;
 
 
 @end

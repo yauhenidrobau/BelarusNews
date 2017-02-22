@@ -18,12 +18,12 @@
 
 @end
 
-
 @interface NewsTableViewCell : UITableViewCell
 
 @property (nonatomic, weak) id<NewsTableViewCellDelegate> cellDelegate;
 
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath;
+-(void)updateNightModeCell:(BOOL)update;
 -(UIImageView*)imageFromCell;
 
 @end

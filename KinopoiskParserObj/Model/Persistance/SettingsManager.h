@@ -12,6 +12,8 @@
 
 @property (nonatomic) BOOL isNotificationMode;
 @property (nonatomic) BOOL isOfflineMode;
+@property (nonatomic) BOOL isAutoupdateEnabled;
+@property (nonatomic) BOOL isNightModeEnabled;
 
 +(instancetype)sharedInstance;
 

@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SettingsCellDelegate.h"
+#import "SettingsBaseCell.h"
 
-@interface SettingsOfflineCell : UITableViewCell
-
-@property (nonatomic, weak) id<SettingsCellDelegate> cellDelegate;
+@interface SettingsOfflineCell : SettingsBaseCell
 
 @end

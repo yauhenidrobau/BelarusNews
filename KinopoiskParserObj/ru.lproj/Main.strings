@@ -14,6 +14,9 @@
 /* Class = "UILabel"; text = "Title"; ObjectID = "tVM-SA-36T"; */
 "tVM-SA-36T.text" = "Title";
 
+
+// SETTINGS
+
 /* Class = "UILabel"; text = "Sign Out"; ObjectID = "h8H-Yb-iAC"; */
 "h8H-Yb-iAC.text" = "Выход";
 
@@ -22,3 +25,9 @@
 
 /* Class = "UILabel"; text = "Notifications"; ObjectID = "0Wo-Qg-wd4"; */
 "0Wo-Qg-wd4.text" = "Уведомления";
+
+/* Class = "UILabel"; text = "Autoupdates"; ObjectID = "h60-fo-YzL"; */
+"h60-fo-YzL.text" = "Автообновление новостей";
+
+/* Class = "UILabel"; text = "Night Mode"; ObjectID = "D7U-Vc-0Aa"; */
+"D7U-Vc-0Aa.text" = "Ночной режим";
