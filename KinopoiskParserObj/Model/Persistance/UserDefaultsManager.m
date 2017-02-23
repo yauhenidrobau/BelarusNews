@@ -43,4 +43,9 @@ SINGLETON(UserDefaultsManager)
 -(id)objectForKey:(NSString *)key {
     return [self.userDefaults objectForKey:key];
 }
+
+- (void)removeObjectForKey:(NSString *)key {
+    [self.userDefaults removeObjectForKey:key];
+}
+
 @end

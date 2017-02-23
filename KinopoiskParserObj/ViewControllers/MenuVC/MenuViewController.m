@@ -11,6 +11,12 @@
 #import "NewsTableView.h"
 #import "RootViewController.h"
 #import "UserDefaultsManager.h"
+#import "SettingsManager.h"
+
+typedef enum {
+    CellTypeFavorite,
+    CellTypeSettings
+}CellTypes;
 
 @interface MenuViewController ()
 
@@ -18,7 +24,8 @@
 @property (nonatomic, strong) NSArray *menuImages;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
+@property (weak, nonatomic) IBOutlet UIImageView *blurImage;
 
 @end
 
@@ -31,18 +38,23 @@
     self.menuTitles = @[
 //                        NSLocalizedString(@"Profile",nil),
                         NSLocalizedString(@"Favorites",nil),
-                        NSLocalizedString(@"Settings",nil),
+                        NSLocalizedString(@"Settings",nil)];
 //                        NSLocalizedString(@"About",nil),
-                        NSLocalizedString(@"Log out",nil)];
-    self.avatarImageView.clipsToBounds = YES;
-    self.avatarImageView.layer.cornerRadius = 50.0;
-    self.avatarImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.avatarImageView.layer.borderWidth = 3.0f;
-    self.avatarImageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    self.avatarImageView.layer.shouldRasterize = YES;
+//                        NSLocalizedString(@"Log out",nil)];
+    self.logoutButton.layer.cornerRadius = 15;
+    self.logoutButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.logoutButton.layer.borderWidth = 2.0f;
 }
 
-
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if ([SettingsManager sharedInstance].isNightModeEnabled) {
+        self.blurImage.image = [UIImage imageNamed:@"black_blur"];
+    } else {
+        self.blurImage.image = [UIImage imageNamed:@"left_menu_Orange_Blur"];
+    }
+    
+}
 #pragma mark - TABLE VIEW DATASOURCE
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -59,8 +71,12 @@
     }
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:2];
     titleLabel.text = self.menuTitles[indexPath.row];
-//    titleLabel.textColor = [UIColor whiteColor];
-    cell.backgroundColor = [UIColor clearColor];
+    UIImageView *imageView = (UIImageView*)[cell viewWithTag:3];
+    if (indexPath.row == CellTypeFavorite) {
+        imageView.image = [UIImage imageNamed:@"left_menu_favorite"];
+    } else if (indexPath.row == CellTypeSettings) {
+        imageView.image = [UIImage imageNamed:@"left_menu_settings"];
+    }
     return cell;
 }
 
@@ -69,12 +85,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    [[UserDefaultsManager sharedInstance] setObject:self.menuTitles[indexPath.row] forKey:@"menuTitle"];
-    self.title = self.menuTitles[indexPath.row];
+    self.titleString = self.menuTitles[indexPath.row];
     [self.sideBarController hideMenuViewController:YES];
 //    [self.sideBarController showViewController:vc sender:self];
 
 }
 
+- (IBAction)logoutTouchUpInside:(id)sender {
+    self.titleString = NSLocalizedString(@"Log out",nil);
+    [self.sideBarController hideMenuViewController:YES];
+}
 
 @end

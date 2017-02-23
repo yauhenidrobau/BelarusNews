@@ -36,6 +36,8 @@
 #import "NSString+ZLStringSize.h"
 
 #import "UIColor+BelarusNews.h"
+#import "SettingsManager.h"
+#import "Utils.h"
 
 typedef void(^UpdateDataCallback)(NSError *error);
 typedef enum {
@@ -50,6 +52,7 @@ typedef enum {
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UIView *searchBarView;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @property (weak, nonatomic) IBOutlet UIView *menuView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
@@ -65,6 +68,7 @@ typedef enum {
 @property (strong, nonatomic) NSArray *newsArray;
 @property (nonatomic, strong) NSArray *mainTitleArray;
 @property (nonatomic, strong) NSArray *subTitleArray;
+@property (nonatomic, strong) NSArray *titlesForRequestArray;
 @property (nonatomic, strong) NSMutableDictionary *shareItemsDict;
 
 @property (strong, nonatomic) NSDictionary *newsURLDict;
@@ -93,14 +97,11 @@ typedef enum {
     self.userDefaults = [UserDefaultsManager sharedInstance];
     self.operationQueue = [NSOperationQueue new];
     self.isAlertShown = [self.userDefaults boolForKey:NO_INTERNET_KEY];
-
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self prepareAppierance];
-
     if ([self.userDefaults boolForKey:AUTOUPDATE_MODE]) {
          self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
         NSLog(@"Autoupdates enabled");
@@ -110,6 +111,7 @@ typedef enum {
     self.isOfflineMode = [self.userDefaults boolForKey:OFFLINE_MODE];
     self.isNightMode = [self.userDefaults boolForKey:NIGHT_MODE];
     [self setupData];
+    [self prepareAppierance];
 
 }
 
@@ -134,9 +136,6 @@ typedef enum {
 }
 
 - (IBAction)leftBarItemTouchUpInside:(id)sender {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"menuTitle"];
-
     [self.sideBarController showMenuViewControllerInDirection:LMSideBarControllerDirectionLeft];
 }
 
@@ -170,6 +169,8 @@ typedef enum {
     [cell cellForNews:newsEntity WithIndexPath:(NSIndexPath *)indexPath];
     if (self.isNightMode) {
         [cell updateNightModeCell:YES];
+    } else {
+        [cell updateNightModeCell:NO];
     }
     return cell;
 }
@@ -177,15 +178,26 @@ typedef enum {
 #pragma mark UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0.f;
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 20;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    return 80.f;
+    return 110;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *view = [[UIView alloc]initWithFrame:self.scrollButton.frame];
+    view.alpha = 0;
+    view.backgroundColor = [UIColor clearColor];
+    return view;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *view = [[UIView alloc]initWithFrame:CGRectZero];
     view.alpha = 0;
     view.backgroundColor = [UIColor clearColor];
     return view;
@@ -300,7 +312,7 @@ typedef enum {
     self.menuTitle = @"";
     self.isSearchStart = NO;
 
-    NSArray *array = self.subTitleArray[indexPath.column];
+    NSArray *array = self.titlesForRequestArray[indexPath.column];
     if (array.count == 1) {
         self.titlesString = self.mainTitleArray[indexPath.column];
         self.urlString = self.newsURLDict[self.titlesString][0];
@@ -313,7 +325,7 @@ typedef enum {
     [self.userDefaults setObject:self.titlesString forKey:@"CurrentTitle"];
     [self.userDefaults setObject:self.urlString forKey:@"CurrentUrl"];
     [self updateWithIndicator:YES];
-
+    
 }
 
 #pragma mark - INSSearchBarDelegate
@@ -416,9 +428,9 @@ typedef enum {
 #pragma mark - Private methods
 
 -(void)peparePullToRefresh {
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.tintColor = MAIN_COLOR;
+    self.refreshControl = [[UIRefreshControl alloc] initWithFrame:self.view.frame];
     [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl.backgroundColor = [UIColor clearColor];
     [self.tableView addSubview:self.refreshControl];
 }
 
@@ -436,9 +448,17 @@ typedef enum {
     self.scrollButton.imageView.image = [self.scrollButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
     if (self.isNightMode) {
-        [self.scrollButton setTintColor:[UIColor bn_nightModeBackgroundColor]];
-    } else {
         [self.scrollButton setTintColor:MAIN_COLOR];
+        [Utils setNightNavigationBar:self.navigationController.navigationBar];
+        self.refreshControl.tintColor = MAIN_COLOR;
+        [self.backgroundImage setImage:[UIImage imageNamed:@"black_blur"]];
+    } else {
+        [self.scrollButton setTintColor:[UIColor bn_navBarColor]];
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        self.navigationController.navigationBar.shadowImage = [UIImage new];
+        self.navigationController.navigationBar.translucent = YES;
+        self.refreshControl.tintColor = [UIColor bn_navBarColor];
+        [self.backgroundImage setImage:[UIImage imageNamed:@"main_blur"]];
     }
     [self prepareTableView];
     [self prepareSearchBar];
@@ -460,8 +480,7 @@ typedef enum {
         NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
     } else if ([self.menuTitle isEqualToString:NSLocalizedString(@"Favorites", nil)]){
         self.menuTitle = @"";
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults removeObjectForKey:@"menuTitle"];
+        [self.userDefaults removeObjectForKey:@"menuTitle"];
         self.newsArray = [self sortNewsArray:[NSArray arrayWithArray:[[RealmDataManager sharedInstance] getFavoritesArray]]];
         NSLog(@"Get favorites Elements  %lu",(unsigned long)self.newsArray.count);
     }
@@ -524,15 +543,15 @@ typedef enum {
 
         Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
         NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
-       self.isAlertShown = [[[NSUserDefaults standardUserDefaults] objectForKey:NO_INTERNET_KEY] boolValue];
+       self.isAlertShown = [[UserDefaultsManager sharedInstance] boolForKey:NO_INTERNET_KEY];
         if (networkStatus == NotReachable && !self.isAlertShown) {
             [self showAlertController];
-            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:NO_INTERNET_KEY];
+            [self.userDefaults setBool:YES ForKey:NO_INTERNET_KEY];
         }else {
             [networkReachability startNotifier];
             if(networkStatus == NotReachable && !self.isAlertShown) {
                 [self showAlertController];
-                [[NSUserDefaults standardUserDefaults]setBool:YES forKey:NO_INTERNET_KEY];
+                [self.userDefaults setBool:YES ForKey:NO_INTERNET_KEY];
             } else {
                 __weak typeof(self) wself = self;
                 [[DataManager sharedInstance ] updateDataWithURLString:wself.urlString AndTitle:wself.titlesString WithCallBack:^(NSError *error) {
@@ -604,6 +623,26 @@ typedef enum {
                        @[NSLocalizedString(@"All News",nil)],
                        @[NSLocalizedString(@"All News",nil)]
                        ];
+    _titlesForRequestArray = @[
+                       @[@"Main",
+                         @"Economic",
+                         @"Society",
+                         @"World",
+                         @"Culture",
+                         @"Accident",
+                         @"Finance",
+                         @"Realty",
+                         @"Sport",
+                         @"Auto",
+                         @"Lady",
+                         @"Science"],
+                       @[@"People",
+                         @"Auto",
+                         @"Science",
+                         @"Realty"],
+                       @[@"All News"],
+                       @[@"All News"],
+                       @[@"All News"]];
     self.newsURLDict = @{@"DEV.BY": @[DEV_BY_NEWS],
                          @"TUT.BY": [NSDictionary dictionaryWithObjectsAndKeys:
                                      MAIN_NEWS,NSLocalizedString(@"Main",nil),
@@ -624,7 +663,7 @@ typedef enum {
                          @"PRAVO.BY" : @[PRAVO_NEWS],
                          @"YANDEX" : @[YANDEX_NEWS],
                          @"MTS" : @[MTS_BY_NEWS]};
-    self.titlesString = NSLocalizedString(self.subTitleArray[0][0],nil);
+    self.titlesString = self.titlesForRequestArray[0][0];
     self.urlString = MAIN_NEWS;
     [self.userDefaults setObject:self.titlesString forKey:@"CurrentTitle"];
     [self.userDefaults setObject:self.urlString forKey:@"CurrentUrl"];
@@ -632,16 +671,25 @@ typedef enum {
 }
 
 -(void)prepareDropMenu {
+    for (ZLDropDownMenu * menu in self.menuView.subviews) {
+        [menu removeFromSuperview];
+    }
     ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, deviceWidth(), 43)];
-    menu.customBackgroundColor = LIGHT_BLACK_COLOR;
+    if (self.isNightMode) {
+        menu.customBackgroundColor = [UIColor bn_nightModeBackgroundColor];
+        menu.collectionViewColor = [UIColor bn_nightModeBackgroundColor];
+    } else {
+        menu.customBackgroundColor = [UIColor clearColor];
+        menu.collectionViewColor = [UIColor whiteColor];
+    }
     menu.delegate = self;
     menu.dataSource = self;
+    
     [self.menuView addSubview:menu];
 }
 
 -(void)prepareShareView {
     self.shareCircleView = [[CFShareCircleView alloc] initWithSharers:@[[CFSharer twitter], [CFSharer facebook], [CFSharer vk]]];
-;
     self.shareCircleView.delegate = self;
 }
 

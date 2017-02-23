@@ -15,6 +15,12 @@
 "tVM-SA-36T.text" = "Title";
 
 
+//Left Menu
+
+/* Class = "UIButton"; normalTitle = "Log out"; ObjectID = "SLt-Ud-KeY"; */
+"SLt-Ud-KeY.normalTitle" = "Выход";
+
+
 // SETTINGS
 
 /* Class = "UILabel"; text = "Sign Out"; ObjectID = "h8H-Yb-iAC"; */

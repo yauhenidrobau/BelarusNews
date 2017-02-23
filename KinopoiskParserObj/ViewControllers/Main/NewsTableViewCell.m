@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *pubDateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (weak, nonatomic) IBOutlet UIView *cellBackgroundView;
 
 @end
 
@@ -44,20 +46,24 @@
 -(void)updateNightModeCell:(BOOL)update {
     if (update) {
         self.titleLabel.textColor = [UIColor bn_nightModeTitleColor];
-        self.backgroundColor = [UIColor bn_nightModeBackgroundColor];
+        self.cellBackgroundView.backgroundColor = [UIColor bn_newsCellNightColor];
         self.shareButton.tintColor = [UIColor bn_nightModeTitleColor];
         if (self.favoriteButton.tintColor == [UIColor blackColor]) {
             self.favoriteButton.tintColor = [UIColor bn_backgroundColor];
+        } else {
+            self.favoriteButton.tintColor = [UIColor bn_lightBlueColor];
         }
+        self.pubDateLabel.textColor = [UIColor bn_lightBlueColor];
     } else {
         self.titleLabel.textColor = [UIColor bn_titleColor];
-        self.backgroundColor = [UIColor bn_backgroundColor];
+        self.cellBackgroundView.backgroundColor = [UIColor bn_newsCellColor];
         self.shareButton.tintColor = [UIColor bn_titleColor];
-        if (self.favoriteButton.tintColor == [UIColor whiteColor]) {
-            self.favoriteButton.tintColor = [UIColor bn_titleColor];
+        if (self.favoriteButton.tintColor == [UIColor blackColor]) {
+        } else {
+            self.favoriteButton.tintColor = [UIColor bn_navBarColor];
         }
+        self.pubDateLabel.textColor = [UIColor bn_newsCellDateColor];
     }
-   
 }
 
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath  {
@@ -71,7 +77,7 @@
     if (!entity.favorite) {
         [self.favoriteButton setTintColor:[UIColor blackColor]];
     } else {
-        [self.favoriteButton setTintColor:[UIColor colorWithRed:81.0 / 255.0 green:255.0 /255.0  blue:181.0 /255.0 alpha:1]];
+        [self.favoriteButton setTintColor:[UIColor bn_lightBlueColor]];
     }
     
     if([[[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"d MMM"] isEqualToString:[[DateFormatterManager sharedInstance] stringFromDate:[NSDate date] withFormat:@"d MMM"]]) {
@@ -84,9 +90,7 @@
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
                  placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.feedIdString]]];
     self.imageNewsView.layer.cornerRadius = 8;
-    
-    [self updateNightModeCell:NO];
-}
+    }
 
 -(UIImageView*)imageFromCell {
     return self.imageNewsView;

@@ -37,6 +37,7 @@
 
 @interface ZLDropDownMenu : UIView
 
+@property (nonatomic, strong) UIColor *collectionViewColor;
 @property (nonatomic, strong) UIColor *customBackgroundColor;
 @property (nonatomic, weak) id <ZLDropDownMenuDataSource>dataSource;
 @property (nonatomic, weak) id <ZLDropDownMenuDelegate>delegate;

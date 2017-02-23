@@ -16,5 +16,6 @@
 -(void)setBool:(BOOL)boolean ForKey:(NSString *)key;
 -(void)setObject:(id)object forKey:(NSString*)key;
 -(id)objectForKey:(NSString *)key;
+- (void)removeObjectForKey:(NSString *)key;
 
 @end

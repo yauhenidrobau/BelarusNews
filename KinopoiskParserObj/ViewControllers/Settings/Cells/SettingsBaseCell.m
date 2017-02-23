@@ -40,7 +40,7 @@
             break;
         case SettingsCellTypeAutoupdate:
             [[UserDefaultsManager sharedInstance] setBool:sender.isOn ForKey:AUTOUPDATE_MODE];
-            [self.cellDelegate settingsNotificationsCell:self didChangeValue:sender];
+            [self.cellDelegate settingsAutoupdateCell:self didChangeValue:sender];
             break;
         case SettingsCellTypeNightMode:
             [[UserDefaultsManager sharedInstance] setBool:sender.isOn ForKey:NIGHT_MODE];
@@ -55,8 +55,10 @@
     [self.cellSwitch setOn:self.isModeEnabled];
     if ([SettingsManager sharedInstance].isNightModeEnabled) {
         self.cellTitleLabel.textColor = [UIColor bn_nightModeTitleColor];
+        self.separatorView.backgroundColor = [UIColor bn_lightBlueColor];
     } else {
         self.cellTitleLabel.textColor = [UIColor bn_titleColor];
+        self.separatorView.backgroundColor = [UIColor lightGrayColor];
     }
 }
 @end

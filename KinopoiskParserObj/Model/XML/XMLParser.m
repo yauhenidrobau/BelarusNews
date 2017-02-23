@@ -112,7 +112,6 @@ NSMutableDictionary *CDDateDict;
                 currentDataDictionary[@"pubDate"] = pubDate;
             }
         }
-        
         [dictParsedData addObject:currentDataDictionary];
         urlImage = nil;
     }

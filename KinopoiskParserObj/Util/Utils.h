@@ -13,6 +13,8 @@
 
 +(void)exitFromApplication;
 +(NewsTableView*)getMainController;
++(void)setNightNavigationBar:(UINavigationBar*)navBar;
++(void)setDefaultNavigationBar:(UINavigationBar*)navBar;
 
 @end
 

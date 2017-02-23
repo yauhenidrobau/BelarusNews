@@ -109,7 +109,9 @@ typedef enum {
         return nightModeCell;
     }
     if ([cell.reuseIdentifier isEqualToString:SIGN_OUT_CELL_TYPE]) {
-    }                                                                          
+       SettingsBaseCell *logOutcell = (SettingsBaseCell*)cell;
+        [logOutcell configCell];
+    }
     return cell;
 }
 
@@ -129,30 +131,34 @@ typedef enum {
 #pragma mark - SettingsCellDelegate
 -(void)settingsOfflineCell:(UITableViewCell*)cell didChangeValue:(UISwitch*)sender {
     [[UserDefaultsManager sharedInstance]setBool:sender.isOn ForKey:OFFLINE_MODE];
+    [SettingsManager sharedInstance].isOfflineMode = sender.isOn;
 }
 
 -(void)settingsNotificationsCell:(UITableViewCell *)cell didChangeValue:(UISwitch *)sender{
     [[UserDefaultsManager sharedInstance]setBool:sender.isOn ForKey:NOTIFICATIONS_MODE];
+    [SettingsManager sharedInstance].isNotificationMode = sender.isOn;
 }
 
 -(void)settingsAutoupdateCell:(UITableViewCell *)cell didChangeValue:(UISwitch *)sender {
     [[UserDefaultsManager sharedInstance]setBool:sender.isOn ForKey:AUTOUPDATE_MODE];
+    [SettingsManager sharedInstance].isAutoupdateEnabled = sender.isOn;
 }
 
 -(void)settingsNightModeCell:(UITableViewCell *)cell didChangeValue:(UISwitch *)sender {
     [[UserDefaultsManager sharedInstance]setBool:sender.isOn ForKey:NIGHT_MODE];
-    [self configNightMode];
-
+    [SettingsManager sharedInstance].isNightModeEnabled = sender.isOn;
+    [self viewWillAppear:YES];
 }
 #pragma mark Private
 
 -(void)configNightMode {
     if ([SettingsManager sharedInstance].isNightModeEnabled) {
         self.tableView.backgroundColor = [UIColor bn_nightModeBackgroundColor];
+        [Utils setNightNavigationBar:self.navigationController.navigationBar];
     } else {
         self.tableView.backgroundColor = [UIColor bn_settingsBackgroundColor];
+        [Utils setDefaultNavigationBar:self.navigationController.navigationBar];
     }
-    [self.tableView setNeedsDisplay];
 }
 
 @end

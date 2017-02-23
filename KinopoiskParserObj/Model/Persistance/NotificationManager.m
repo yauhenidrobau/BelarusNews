@@ -14,10 +14,12 @@
 #import "NewsTableView.h"
 #import <UserNotifications/UserNotifications.h>
 #import "Utils.h"
+#import "UserDefaultsManager.h"
 
 @interface NotificationManager ()
 
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong)  UserDefaultsManager *userDefaults;
 
 @end
 
@@ -25,6 +27,16 @@
 
 SINGLETON(NotificationManager)
 
+
+#pragma mark - Init 
+
+-(id)init {
+    self = [super init];
+    if (self) {
+        self.userDefaults = [UserDefaultsManager sharedInstance];
+    }
+    return self;
+}
 #pragma mark - Notifications 
 
 - (void)registerForPushNotificationsWithApplication:(UIApplication *)application {
@@ -56,9 +68,9 @@ SINGLETON(NotificationManager)
 }
 
 -(void)shouldCreateNotificalion:(CreateNotificationCallback)completion {
-    NSArray *oldArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
+    NSArray *oldArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[self.userDefaults objectForKey:@"CurrentTitle"]];
     [[Utils getMainController] updateWithIndicator:NO];
-    NSArray *newArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"]];
+    NSArray *newArray = [[RealmDataManager sharedInstance]getObjectsForEntity:[self.userDefaults objectForKey:@"CurrentTitle"]];
     if (newArray.count >= oldArray.count) {
         NSString *alertBody = ((NewsEntity*)newArray[0]).titleFeed;
         if (completion) {

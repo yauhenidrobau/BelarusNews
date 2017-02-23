@@ -55,10 +55,17 @@
 
 -(void)updateForNightMode:(BOOL)update {
     if (update) {
-        self.detailsDescriptionTV.backgroundColor = [UIColor bn_nightModeBackgroundColor];
+        [self.navigationController.navigationBar setBarTintColor:[UIColor bn_navBarNightColor]];
+        [self.navigationController.navigationBar setTintColor:[UIColor bn_navBarNightTitleColor]];
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         @{NSForegroundColorAttributeName:[UIColor bn_navBarNightTitleColor]}];
+        self.view.backgroundColor = [UIColor bn_nightModeBackgroundColor];
         self.detailsDescriptionTV.textColor = [UIColor bn_backgroundColor];
     } else {
-        self.detailsDescriptionTV.backgroundColor = [UIColor bn_nightModeTitleColor];
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        self.navigationController.navigationBar.shadowImage = [UIImage new];
+        self.navigationController.navigationBar.translucent = YES;
+        self.view.backgroundColor = [UIColor bn_nightModeTitleColor];
         self.detailsDescriptionTV.textColor = [UIColor bn_titleColor];
     }
 }

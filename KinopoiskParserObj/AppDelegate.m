@@ -21,6 +21,8 @@
 #import <YandexMobileMetricaPush/YandexMobileMetricaPush.h>
 #import "UserDefaultsManager.h"
 #import "Constants.h"
+#import "UIColor+BelarusNews.h"
+#import "SettingsManager.h"
 
 @interface AppDelegate () <UNUserNotificationCenterDelegate>
 
@@ -33,13 +35,9 @@ NSTimer *timer;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [Fabric with:@[[Crashlytics class]]];
-    [[UINavigationBar appearance] setBarTintColor:LIGHT_BLACK_COLOR];
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.0 / 255.0 green:255.0 / 255.0 blue:184.0/ 255.0 alpha:1]];
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],[UIColor whiteColor], nil]];
-    
+
     [YMMYandexMetrica activateWithApiKey:YANDEX_METRICE_API_KEY];
     [[NotificationManager sharedInstance] registerForPushNotificationsWithApplication:application];
-
     application.applicationIconBadgeNumber = 0;
     
     return YES;

@@ -11,6 +11,8 @@
 #import "DateFormatterManager.h"
 #import <UserNotifications/UserNotifications.h>
 #import <UIKit/UIKit.h>
+#import "UserDefaultsManager.h"
+#import "UIColor+BelarusNews.h"
 
 @implementation Utils
 
@@ -24,12 +26,25 @@
 +(NewsTableView*)getMainController {
     
     NewsTableView *newsTableViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NewsTableView"];
-    newsTableViewController.urlString = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentUrl"];
-    newsTableViewController.titlesString = [[NSUserDefaults standardUserDefaults]objectForKey:@"CurrentTitle"];
+    newsTableViewController.urlString = [[UserDefaultsManager sharedInstance] objectForKey:@"CurrentUrl"];
+    newsTableViewController.titlesString = [[UserDefaultsManager sharedInstance] objectForKey:@"CurrentTitle"];
     
     return newsTableViewController;
 }
 
++(void)setNightNavigationBar:(UINavigationBar*)navBar {
+    [navBar setBarTintColor:[UIColor bn_navBarNightColor]];
+    [navBar setTintColor:[UIColor bn_navBarNightTitleColor]];
+    [navBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor bn_navBarNightTitleColor]}];
+}
+
++(void)setDefaultNavigationBar:(UINavigationBar*)navBar {
+    [navBar setBarTintColor:[UIColor bn_settingsBackgroundColor]];
+    [navBar setTintColor:[UIColor bn_navBarTitleColor]];
+    [navBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor bn_navBarTitleColor]}];
+}
 
 @end
 

@@ -34,7 +34,8 @@ SINGLETON(DateFormatterManager)
         return nil;
     }
     [self.dateFormatter setDateFormat:dateFormat];
-    [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+//    [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    
     return [self.dateFormatter dateFromString:dateString];
 }
 

@@ -15,6 +15,7 @@
 #import "SettingsVC.h"
 #import "NewsTableView.h"
 #import "Utils.h"
+#import "UserDefaultsManager.h"
 
 #define NO_INTERNET_KEY @"NoInternet"
 
@@ -42,7 +43,6 @@
     self.mainViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NewsTableView"];
     self.mainNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"mainNavigationController"];
     self.settingsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsVC"];
-    self.title = @"";
     [self.mainNavigationController setViewControllers:@[leftMenuViewController, self.mainViewController] animated:YES];
     // Setup side bar controller
     [self setPanGestureEnabled:YES];
@@ -52,7 +52,7 @@
     [self setSideBarStyle:sideBarDepthStyle forDirection:LMSideBarControllerDirectionLeft];
     //    [self setSideBarStyle:sideBarDepthStyle forDirection:LMSideBarControllerDirectionRight];
     [self setContentViewController:self.mainNavigationController];
-    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:NO_INTERNET_KEY];
+    [[UserDefaultsManager sharedInstance] setBool:NO ForKey:NO_INTERNET_KEY];
 
 }
 
@@ -60,30 +60,35 @@
 #pragma mark - SIDE BAR DELEGATE
 
 - (void)sideBarController:(LMSideBarController *)sideBarController willShowMenuViewController:(UIViewController *)menuViewController {
+    [menuViewController viewWillAppear:YES];
 }
 
 - (void)sideBarController:(LMSideBarController *)sideBarController didShowMenuViewController:(UIViewController *)menuViewController {
     
 }
 
-- (void)sideBarController:(LMSideBarController *)sideBarController willHideMenuViewController:(UIViewController *)menuViewController {
+- (void)sideBarController:(LMSideBarController *)sideBarController willHideMenuViewController:(MenuViewController *)menuViewController {
     [self.mainNavigationController dismissViewControllerAnimated:NO completion:nil];
-    if (menuViewController.title.length) {
-        if ([menuViewController.title isEqualToString:NSLocalizedString(@"Profile",nil)]) {
+    if (menuViewController.titleString.length) {
+        if ([menuViewController.titleString isEqualToString:NSLocalizedString(@"Profile",nil)]) {
             return;
-        } else if ([menuViewController.title isEqualToString:NSLocalizedString(@"Favorites",nil)]) {
-            self.mainViewController.menuTitle = menuViewController.title;
+        } else if ([menuViewController.titleString isEqualToString:NSLocalizedString(@"Favorites",nil)]) {
+            self.mainViewController.menuTitle = menuViewController.titleString;
+            menuViewController.titleString = @"";
             [self.mainViewController viewWillAppear:YES];
-        } else if ([menuViewController.title isEqualToString:NSLocalizedString(@"Settings",nil)]) {
+        } else if ([menuViewController.titleString isEqualToString:NSLocalizedString(@"Settings",nil)]) {
+            menuViewController.titleString = @"";
             [self.mainNavigationController pushViewController:self.settingsVC animated:YES];
-        } else if ([menuViewController.title isEqualToString:NSLocalizedString(@"Log out",nil)]) {
+        } else if ([menuViewController.titleString isEqualToString:NSLocalizedString(@"Log out",nil)]) {
+            menuViewController.titleString = @"";
             [Utils exitFromApplication];
         }
     } else {
+        NSString *titleString = self.mainViewController.titlesString;
         [self.mainViewController viewDidLoad];
+        self.mainViewController.titlesString = titleString;
         [self.mainViewController viewWillAppear:YES];
     }
-    
 }
 
 - (void)sideBarController:(LMSideBarController *)sideBarController didHideMenuViewController:(UIViewController *)menuViewController {

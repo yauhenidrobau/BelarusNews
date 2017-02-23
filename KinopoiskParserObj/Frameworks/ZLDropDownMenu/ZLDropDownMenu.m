@@ -66,7 +66,7 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
         flowLayout.minimumInteritemSpacing = dropDownMenuCollectionViewUIValue()->INTERITEMSPACING;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.collectionViewLayout = flowLayout;
-        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.backgroundColor = [UIColor clearColor];
         [_collectionView registerClass:[ZLDropDownMenuCollectionViewCell class] forCellWithReuseIdentifier:collectionCellID];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -97,6 +97,11 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
     _customBackgroundColor = customBackgroundColor;
 }
 
+-(void)setCollectionViewColor:(UIColor *)collectionViewColor {
+    _collectionView.backgroundColor = collectionViewColor;
+    _collectionViewColor = collectionViewColor;
+}
+
 - (void)setDataSource:(id<ZLDropDownMenuDataSource>)dataSource
 {
     _dataSource = dataSource;
@@ -111,7 +116,7 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
         
         NSString *titleString = [_dataSource menu:self titleForRowAtIndexPath:[ZLIndexPath indexPathWithColumn:index row:0]];
         ZLDropDownMenuTitleButton *titleButton = [[ZLDropDownMenuTitleButton alloc] initWithMainTitle:[_dataSource menu:self titleForColumn:index] subTitle:titleString];
-        titleButton.backgroundColor = _customBackgroundColor;
+        titleButton.backgroundColor = [UIColor clearColor];
         if (index == 0) {
             titleButton.bottomLineView.hidden = NO;
         }
@@ -360,6 +365,8 @@ static NSInteger clickCount;
     if ([cell.contentString isEqualToString:[self.titleButtons[self.currentSelectedMenuIndex] subTitle]]) {
         cell.selected = YES;
         self.defaultSelectedCell = cell;
+    } else {
+        cell.selected = NO;
     }
     return cell;
 }

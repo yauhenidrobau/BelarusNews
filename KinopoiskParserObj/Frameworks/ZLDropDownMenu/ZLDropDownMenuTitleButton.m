@@ -20,7 +20,6 @@
 @property (nonatomic, weak) CAShapeLayer *shapeLayer;
 @property (nonatomic, strong) UIView *arrowView;
 
-
 @end
 
 @implementation ZLDropDownMenuTitleButton
@@ -30,7 +29,7 @@
     if (self = [super init]) {
         _mainTitle = mainTitle;
         _subTitle = subTitle;
-//        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor clearColor];
         self.adjustsImageWhenHighlighted = YES;
         [self viewConfig];
     }
@@ -109,9 +108,8 @@
     }];
     _shapeLayer = [self creatArrowShapeLayer];
     [_arrowView.layer addSublayer:_shapeLayer];
-    
     UIView *bottomSeperator = [[UIView alloc] init];
-    bottomSeperator.backgroundColor = kDropdownMenuSeperatorColor;
+    bottomSeperator.backgroundColor = [UIColor clearColor];
     [self addSubview:bottomSeperator];
     [bottomSeperator mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(weakSelf);
@@ -119,7 +117,7 @@
     }];
     
     _bottomLineView = [[UIView alloc] init];
-    _bottomLineView.backgroundColor = kDropdownMenuIndicatorColor;
+    _bottomLineView.backgroundColor = kDropdownMenuBottomSeparatorColor;
     [self addSubview:_bottomLineView];
     [_bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(weakSelf);

@@ -31,7 +31,7 @@
 #define DEV_BY_NEWS @"https://dev.by/rss"
 #define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
 #define MTS_BY_NEWS @"http://www.mts.by/rss/"
-#define PRAVO_NEWS @"http://test.pravo.by/xml.aspx?guid=1052"
+#define PRAVO_NEWS @"http://www.pravo.by/novosti/obshchestvenno-politicheskie-i-v-oblasti-prava/rss/"
 
 #define YANDEX_METRICE_API_KEY @"ef1d79fb-d889-4ce0-96eb-83c62a3adfd2"
 
@@ -41,7 +41,6 @@
 #define NIGHT_MODE @"NightMode"
 
 #define MAIN_COLOR RGB(81,255,181)
-#define LIGHT_BLACK_COLOR RGB(28,28,28)
 
 #define NO_INTERNET_KEY @"NoInternet"
 
