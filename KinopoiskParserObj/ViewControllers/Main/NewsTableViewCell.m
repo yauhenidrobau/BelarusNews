@@ -27,14 +27,19 @@
 
 @implementation NewsTableViewCell
 
+#pragma mark - LifeCycle
+
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+    self.imageNewsView.clipsToBounds = YES;
+    self.imageNewsView.contentMode = UIViewContentModeScaleAspectFill;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
+
+#pragma mark - IBActions
 - (IBAction)favoriteButtonDidTap:(id)sender {
     [self.cellDelegate newsTableViewCell:self didTapFavoriteButton:sender];    
 }
@@ -43,6 +48,7 @@
     [self.cellDelegate newsTableViewCell:self didTapShareButton:sender];
 }
 
+#pragma mark - Private
 -(void)updateNightModeCell:(BOOL)update {
     if (update) {
         self.titleLabel.textColor = [UIColor bn_nightModeTitleColor];
@@ -67,7 +73,7 @@
 }
 
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath  {
-
+    [self layoutIfNeeded];
     self.titleLabel.text = entity.titleFeed;
     self.descriptionLabel.text = entity.descriptionFeed;
     [self.favoriteButton setImage:[self.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
@@ -89,7 +95,7 @@
     }
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
                  placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.feedIdString]]];
-    self.imageNewsView.layer.cornerRadius = 8;
+    self.imageNewsView.layer.cornerRadius = CGRectGetWidth(self.imageNewsView.frame) / 2;
     }
 
 -(UIImageView*)imageFromCell {

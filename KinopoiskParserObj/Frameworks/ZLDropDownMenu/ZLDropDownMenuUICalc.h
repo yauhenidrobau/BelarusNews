@@ -14,9 +14,9 @@
 #define kDropdownMenuSeperatorColor               kRGBColorFromHex(0x000000)
 #define kDropdownMenuSelectedCellColor            kRGBColorFromHex(0xF90707)  // open menu selected title
 #define kDropdownMenuUnselectedCellTextColor      kRGBColorFromHex(0xD1D1D1)  // open menu unSelected title
-#define kDropdownMenuIndicatorColor               kRGBColorFromHex(0xF90707)
-#define kDropdownMenuBottomSeparatorColor         kRGBColorFromHex(0xF90707)
-#define kDropdownMenuTitleColor                   kRGBColorFromHex(0xF90707)  
+#define kDropdownMenuIndicatorColor               kRGBColorFromHex(0xF6CF81)  // subTitle color
+#define kDropdownMenuBottomSeparatorColor         kRGBColorFromHex(0xF6CF81)
+#define kDropdownMenuTitleColor                   kRGBColorFromHex(0x000000)  
 
 #define WS(weakSelf)                              __weak __typeof(&*self) weakSelf = self
 #define SS(strongSelf)                            __strong __typeof(&*weakSelf) strongSelf = weakSelf

@@ -453,13 +453,16 @@
          contextName = "-[NewsTableViewCell cellForNews:WithIndexPath:]:NewsTableViewCell.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.pubDateLabel.text">
-            </PersistentString>
-            <PersistentString
-               value = "entity.pubDateFeed">
+               value = "self.imageView.frame">
             </PersistentString>
             <PersistentString
                value = "self.descriptionLabel.text">
+            </PersistentString>
+            <PersistentString
+               value = "self.pubDateLabel.frame">
+            </PersistentString>
+            <PersistentString
+               value = "entity.pubDateFeed">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
