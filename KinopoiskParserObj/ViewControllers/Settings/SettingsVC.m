@@ -15,7 +15,7 @@
 #import "SettingsRoundImagesCell.h"
 #import "SettingsCityCell.h"
 
-#import "SettingsCityTableVC.h"
+#import "LocationAutoCompleteController.h"
 
 #import "Utils.h"
 #import "UserDefaultsManager.h"
@@ -46,10 +46,9 @@ typedef enum {
 
 @property (nonatomic, strong) NSArray *cellTitleList;
 @property (nonatomic, strong) NSArray *cellTitleListID;
-@property (nonatomic, strong) NSArray *sectionList;
-@property (nonatomic, strong) NSArray *viewControllersList;
-@property (nonatomic, strong) NSArray *sectionAboutLinkList;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) LocationAutoCompleteController *locationController;
+@property (nonatomic, strong) NSString *cityString;
 
 @end
 
@@ -75,6 +74,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self prepareLocationController];
     [self.navigationItem setTitle:NSLocalizedString(@"Settings", nil)];
     [self.navigationController.navigationBar setHidden:NO];
 }
@@ -145,10 +145,7 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == CITY_CELL) {
-        SettingsCityTableVC *vc = [[SettingsCityTableVC alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == SIGN_OUT_CELL) {
+    if (indexPath.row == SIGN_OUT_CELL) {
         [Utils exitFromApplication];
     }
 }
@@ -174,6 +171,30 @@ typedef enum {
     [SettingsManager sharedInstance].isNightModeEnabled = sender.isOn;
     [self viewWillAppear:YES];
 }
+
+
+#pragma mark - Location
+
+- (void)prepareLocationController {
+    self.locationController = [LocationAutoCompleteController new];
+    
+    typeof(self) __weak welf = self;
+    self.locationController.didSelectPlace = ^(GMSPlace *place) {
+        welf.cityString = place.name;
+        for (GMSAddressComponent *component in place.addressComponents) {
+            if ([component.type isEqualToString:@"locality"]) {
+//                 wself.cityString = component.name;
+                break;
+            }
+        }
+    };
+}
+
+- (IBAction)didTapChooseLocation:(id)sender {
+    [self.locationController presentInController:self];
+}
+
+
 #pragma mark Private
 
 -(void)configNightMode {

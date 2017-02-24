@@ -25,6 +25,9 @@ PODS:
     - Fabric (~> 1.6.3)
   - DZNEmptyDataSet (1.8.1)
   - Fabric (1.6.11)
+  - GoogleMaps/Base (2.2.0)
+  - GooglePlaces (2.2.0):
+    - GoogleMaps/Base (= 2.2.0)
   - LMSideBarController (1.0.1)
   - Reachability (3.2)
   - Realm (2.2.0):
@@ -48,6 +51,7 @@ DEPENDENCIES:
   - Crashlytics
   - DZNEmptyDataSet
   - Fabric
+  - GooglePlaces
   - LMSideBarController
   - Reachability (~> 3.2)
   - Realm
@@ -62,6 +66,8 @@ SPEC CHECKSUMS:
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
+  GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
   LMSideBarController: bfbe56b30c76a541918b4c3f8972f64a49b295a1
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Realm: d95b8fb34c83f1e764b66d319277a62c2b6e4bf5
@@ -70,6 +76,6 @@ SPEC CHECKSUMS:
   YandexMobileMetrica: c8e9050cd23b10dee4358bdf0a5142583a63995c
   YandexMobileMetricaPush: e2787c60c8d5f3aa2feef9a57d44cfc3f3d69946
 
-PODFILE CHECKSUM: 52fd035981552e77e6cca37358695f3fdf94bc40
+PODFILE CHECKSUM: f7d5e77891e456c004154741613160deedcafeab
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.0.0

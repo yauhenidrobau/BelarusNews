@@ -52,10 +52,10 @@
 		1E7329521D7845210027E46E /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329511D7845210027E46E /* DataManager.m */; };
 		1E7329551D7848530027E46E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329541D7848530027E46E /* DetailsViewController.m */; };
 		1E91CFDF1E600F0A00CB60EB /* SettingsRoundImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFDE1E600F0A00CB60EB /* SettingsRoundImagesCell.m */; };
-		1E91CFE31E605CC100CB60EB /* SettingsCityTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFE21E605CC100CB60EB /* SettingsCityTableVC.m */; };
 		1E91CFE81E60616500CB60EB /* SettingsCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFE71E60616500CB60EB /* SettingsCityCell.m */; };
 		1E91CFEB1E6064B300CB60EB /* CityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFEA1E6064B300CB60EB /* CityObject.m */; };
 		1E91CFF31E60740100CB60EB /* city.list.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E91CFF21E60740100CB60EB /* city.list.json */; };
+		1E91CFF61E60788300CB60EB /* LocationAutoCompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFF51E60788300CB60EB /* LocationAutoCompleteController.m */; };
 		1EFD659D1E13C80000F5BA4D /* DetailsOfflineVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD659C1E13C80000F5BA4D /* DetailsOfflineVCViewController.m */; };
 		1EFD65A41E13EABE00F5BA4D /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD65A31E13EABE00F5BA4D /* SettingsVC.m */; };
 		1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD65A71E13EE4300F5BA4D /* SettingsOfflineCell.m */; };
@@ -203,13 +203,13 @@
 		1E7329541D7848530027E46E /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsViewController.m; path = KinopoiskParserObj/ViewControllers/Details/DetailsViewController.m; sourceTree = SOURCE_ROOT; };
 		1E91CFDD1E600F0A00CB60EB /* SettingsRoundImagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsRoundImagesCell.h; sourceTree = "<group>"; };
 		1E91CFDE1E600F0A00CB60EB /* SettingsRoundImagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsRoundImagesCell.m; sourceTree = "<group>"; };
-		1E91CFE11E605CC100CB60EB /* SettingsCityTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCityTableVC.h; sourceTree = "<group>"; };
-		1E91CFE21E605CC100CB60EB /* SettingsCityTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCityTableVC.m; sourceTree = "<group>"; };
 		1E91CFE61E60616500CB60EB /* SettingsCityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCityCell.h; sourceTree = "<group>"; };
 		1E91CFE71E60616500CB60EB /* SettingsCityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCityCell.m; sourceTree = "<group>"; };
 		1E91CFE91E6064B300CB60EB /* CityObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityObject.h; sourceTree = "<group>"; };
 		1E91CFEA1E6064B300CB60EB /* CityObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityObject.m; sourceTree = "<group>"; };
 		1E91CFF21E60740100CB60EB /* city.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
+		1E91CFF41E60788300CB60EB /* LocationAutoCompleteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAutoCompleteController.h; sourceTree = "<group>"; };
+		1E91CFF51E60788300CB60EB /* LocationAutoCompleteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAutoCompleteController.m; sourceTree = "<group>"; };
 		1EFD659B1E13C80000F5BA4D /* DetailsOfflineVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsOfflineVCViewController.h; path = KinopoiskParserObj/ViewControllers/Details/DetailsOfflineVCViewController.h; sourceTree = SOURCE_ROOT; };
 		1EFD659C1E13C80000F5BA4D /* DetailsOfflineVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsOfflineVCViewController.m; path = KinopoiskParserObj/ViewControllers/Details/DetailsOfflineVCViewController.m; sourceTree = SOURCE_ROOT; };
 		1EFD65A21E13EABE00F5BA4D /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
@@ -529,8 +529,8 @@
 		1E91CFE01E605CA400CB60EB /* SettingsCityTableVC */ = {
 			isa = PBXGroup;
 			children = (
-				1E91CFE11E605CC100CB60EB /* SettingsCityTableVC.h */,
-				1E91CFE21E605CC100CB60EB /* SettingsCityTableVC.m */,
+				1E91CFF41E60788300CB60EB /* LocationAutoCompleteController.h */,
+				1E91CFF51E60788300CB60EB /* LocationAutoCompleteController.m */,
 			);
 			path = SettingsCityTableVC;
 			sourceTree = "<group>";
@@ -649,6 +649,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1E73291F1D7813750027E46E /* Build configuration list for PBXNativeTarget "KinopoiskParserObj" */;
 			buildPhases = (
+				2DD2EB6E3A76160B13551EB3 /* 📦 Check Pods Manifest.lock */,
 				B755CB0345D078013C0B4EF2 /* [CP] Check Pods Manifest.lock */,
 				1E7328EB1D7813740027E46E /* Sources */,
 				1E7328EC1D7813740027E46E /* Frameworks */,
@@ -657,6 +658,8 @@
 				1E11C9441DDDA18300D55B28 /* ShellScript */,
 				5681CB03AA966031C4CA2015 /* [CP] Embed Pods Frameworks */,
 				C41DD30F770866432666F9C3 /* [CP] Copy Pods Resources */,
+				D8EB495AB9C5DF3F6625622A /* 📦 Embed Pods Frameworks */,
+				B3B6E403242390D4C54E3933 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -802,6 +805,21 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 62097d6ca68f994b2395053fe38b14f7a41edb9f 3928b85f09d78e6d9802418fd57491cd2cc0f2945bdd0346b1e2052c5b0be349";
 		};
+		2DD2EB6E3A76160B13551EB3 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		5681CB03AA966031C4CA2015 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -815,6 +833,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3B6E403242390D4C54E3933 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B755CB0345D078013C0B4EF2 /* [CP] Check Pods Manifest.lock */ = {
@@ -847,6 +880,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D8EB495AB9C5DF3F6625622A /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -858,6 +906,7 @@
 				1E640B5D1E0A85FE00AA539C /* MASViewAttribute.m in Sources */,
 				1E4C8C611E55E46C00B2ED44 /* UserDefaultsManager.m in Sources */,
 				1E12860B1E5D6D1800D2899D /* ForecastObject.m in Sources */,
+				1E91CFF61E60788300CB60EB /* LocationAutoCompleteController.m in Sources */,
 				1E640B661E0A85FE00AA539C /* ZLDropDownMenuUICalc.m in Sources */,
 				1EFE91761E1FAC76008CA308 /* SettingsNotificationsCell.m in Sources */,
 				1E640B5B1E0A85FE00AA539C /* MASConstraintMaker.m in Sources */,
@@ -868,7 +917,6 @@
 				1E7329301D7814620027E46E /* NewsTableView.m in Sources */,
 				1E73292B1D7813B50027E46E /* Constants.m in Sources */,
 				1E73294F1D7843310027E46E /* RemoteFacade.m in Sources */,
-				1E91CFE31E605CC100CB60EB /* SettingsCityTableVC.m in Sources */,
 				1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */,
 				1E4C8C5E1E55C15E00B2ED44 /* SettingsManager.m in Sources */,
 				1E640B5E1E0A85FE00AA539C /* MASViewConstraint.m in Sources */,

@@ -9,9 +9,9 @@ target 'KinopoiskParserObj' do
    pod 'Fabric'
    pod 'Crashlytics'
    pod 'AFNetworking', '~> 2.0'
-#   pod 'NYSegmentedControl'
    pod 'LMSideBarController'
    pod 'CFShareCircle'
    pod 'YandexMobileMetrica', '2.7.0'
    pod 'YandexMobileMetricaPush', '0.4.0'
+   pod 'GooglePlaces'
 end

@@ -24,6 +24,8 @@
 #import "UIColor+BelarusNews.h"
 #import "SettingsManager.h"
 
+@import GooglePlaces;
+
 @interface AppDelegate () <UNUserNotificationCenterDelegate>
 
 @end
@@ -36,6 +38,9 @@ NSTimer *timer;
     
     [Fabric with:@[[Crashlytics class]]];
 
+    [GMSPlacesClient provideAPIKey:@"AIzaSyB6SYasED7O-tRz3zEPRwHf846Q6DZfjYg"];
+
+    
     [YMMYandexMetrica activateWithApiKey:YANDEX_METRICE_API_KEY];
     [[NotificationManager sharedInstance] registerForPushNotificationsWithApplication:application];
     application.applicationIconBadgeNumber = 0;

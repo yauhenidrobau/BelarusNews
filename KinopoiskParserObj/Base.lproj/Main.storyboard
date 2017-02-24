@@ -498,7 +498,7 @@
                                             <outlet property="separatorView" destination="Lml-2l-5OS" id="Ceq-g8-rQ3"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CityCell" id="usz-ce-g5Q" customClass="SettingsCityCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CityCell" id="usz-ce-g5Q" customClass="SettingsCityCell">
                                         <rect key="frame" x="0.0" y="273" width="375" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="usz-ce-g5Q" id="WEt-AK-5By">
@@ -555,6 +555,7 @@
                                             <outlet property="cellTitleLabel" destination="FM4-UV-Bdq" id="esM-Wk-iaT"/>
                                             <outlet property="cityNameLabel" destination="szu-Wj-Me3" id="tOH-4w-7eZ"/>
                                             <outlet property="separatorView" destination="H5m-Hh-doh" id="fjZ-vG-3WL"/>
+                                            <outletCollection property="gestureRecognizers" destination="N0m-wd-XGE" appends="YES" id="Qf3-cP-VJH"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SignOutCell" id="cha-08-uOv" customClass="SettingsBaseCell">
@@ -614,6 +615,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ert-hn-XKR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="N0m-wd-XGE">
+                    <connections>
+                        <action selector="didTapChooseLocation:" destination="6PW-h2-XwB" id="nF5-45-YKc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="924" y="-272.11394302848578"/>
         </scene>

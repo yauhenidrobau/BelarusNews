@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'BE656CE030762A5C84783B3371402CD0'
+               BlueprintIdentifier = 'F33770E5ACDA27C45672C300AE6BA200'
                BlueprintName = 'Pods-KinopoiskParserObj'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libPods-KinopoiskParserObj.a'>
