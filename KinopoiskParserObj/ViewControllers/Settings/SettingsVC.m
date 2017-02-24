@@ -13,6 +13,9 @@
 #import "SettingsAutoupdateCell.h"
 #import "SettingsNightModeCellTableViewCell.h"
 #import "SettingsRoundImagesCell.h"
+#import "SettingsCityCell.h"
+
+#import "SettingsCityTableVC.h"
 
 #import "Utils.h"
 #import "UserDefaultsManager.h"
@@ -26,6 +29,7 @@
 #define AUTOUPDATES_CELL_TYPE @"AutoupdatesCell"
 #define NIGHTMODE_CELL_TYPE @"NightModeCell"
 #define ROUND_IMAGES_CELL_TYPE @"RoundImagesCell"
+#define CITY_CELL_TYPE @"CityCell"
 
 
 typedef enum {
@@ -34,6 +38,7 @@ typedef enum {
     AUTOUPDATE_CELL,
     NIGHTMODE_CELL,
     ROUND_IMAGES_CELL,
+    CITY_CELL,
     SIGN_OUT_CELL
 }TypeCells;
 
@@ -59,6 +64,7 @@ typedef enum {
                            @"AutoupdatesCell",
                            @"NightModeCell",
                            @"RoundImagesCell",
+                           @"CityCell",
                            @"SignOutCell"];
     }
     return _cellTitleListID;
@@ -118,6 +124,11 @@ typedef enum {
         [roundImagesCell configRoundImageCell];
         [roundImagesCell configCell];
         return roundImagesCell;
+    } else if ([cell.reuseIdentifier isEqualToString:CITY_CELL_TYPE]) {
+        SettingsCityCell *cityCell = (SettingsCityCell *)cell;
+        cityCell.cellDelegate = self;
+        [cityCell configCell];
+        return cityCell;
     }
     if ([cell.reuseIdentifier isEqualToString:SIGN_OUT_CELL_TYPE]) {
        SettingsBaseCell *logOutcell = (SettingsBaseCell*)cell;
@@ -134,7 +145,10 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == SIGN_OUT_CELL) {
+    if (indexPath.row == CITY_CELL) {
+        SettingsCityTableVC *vc = [[SettingsCityTableVC alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == SIGN_OUT_CELL) {
         [Utils exitFromApplication];
     }
 }

@@ -48,4 +48,11 @@ SINGLETON(UserDefaultsManager)
     [self.userDefaults removeObjectForKey:key];
 }
 
+-(NSInteger)integerForKey:(NSString*)key {
+    return [self.userDefaults integerForKey:key];
+}
+
+-(void)setInteger:(NSInteger)integer forKey:(NSString *)key {
+    [self.userDefaults setInteger:integer forKey:key];
+}
 @end

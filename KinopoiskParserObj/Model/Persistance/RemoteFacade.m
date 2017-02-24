@@ -56,7 +56,6 @@ SINGLETON(RemoteFacade)
         NSLog(@"Error: %@", error);
     }];
     [self.operationQueue addOperation:operation];
-    
 }
   
 @end

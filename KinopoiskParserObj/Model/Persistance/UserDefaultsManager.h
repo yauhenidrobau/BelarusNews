@@ -12,10 +12,13 @@
 
 +(instancetype)sharedInstance;
 
--(BOOL)boolForKey:(NSString *)key;
 -(void)setBool:(BOOL)boolean ForKey:(NSString *)key;
 -(void)setObject:(id)object forKey:(NSString*)key;
--(id)objectForKey:(NSString *)key;
+-(void)setInteger:(NSInteger)integer forKey:(NSString *)key;
 - (void)removeObjectForKey:(NSString *)key;
+
+-(BOOL)boolForKey:(NSString *)key;
+-(id)objectForKey:(NSString *)key;
+-(NSInteger)integerForKey:(NSString*)key;
 
 @end

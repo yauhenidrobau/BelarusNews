@@ -45,4 +45,14 @@ SINGLETON(DataManager)
         
     }];
 }
+
+-(NSArray*)getAllCitiesFromJSON {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"city.list" ofType:@"json"];
+    
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    NSError* error;
+    id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+    return object;
+}
+
 @end

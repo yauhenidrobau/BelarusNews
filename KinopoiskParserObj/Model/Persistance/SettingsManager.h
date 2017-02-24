@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CityObject.h"
 
 @interface SettingsManager : NSObject
 
@@ -15,6 +16,7 @@
 @property (nonatomic) BOOL isAutoupdateEnabled;
 @property (nonatomic) BOOL isNightModeEnabled;
 @property (nonatomic) BOOL isRoundImagesEnabled;
+@property (nonatomic) CityObject *currentCity;
 
 +(instancetype)sharedInstance;
 

@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+//API WEATHER
+#define API_KEY @"http://api.openweathermap.org/data/2.5/forecast/city?"
+#define APPID_KEY @"9df448a477adb11548e56edbefd9d879"
+
 // TUT.BY
 #define MAIN_NEWS @"https://news.tut.by/rss/index.rss"
 #define ECONOMIC_NEWS @"https://news.tut.by/rss/economics.rss"
@@ -40,6 +44,7 @@
 #define AUTOUPDATE_MODE @"Autoupdate"
 #define NIGHT_MODE @"NightMode"
 #define ROUND_IMAGES @"RoundImages"
+#define CURRENT_CITY @"CurrentCity"
 
 #define MAIN_COLOR RGB(81,255,181)
 
