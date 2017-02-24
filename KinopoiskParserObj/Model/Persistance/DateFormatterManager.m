@@ -24,7 +24,6 @@ SINGLETON(DateFormatterManager)
     self = [super init];
     if (self) {
         self.dateFormatter = [NSDateFormatter new];
-        [self.dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
     }
     return self;
 }
@@ -33,8 +32,10 @@ SINGLETON(DateFormatterManager)
     if (!dateString.length) {
         return nil;
     }
+    [self.dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+
     [self.dateFormatter setDateFormat:dateFormat];
-//    [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
     
     return [self.dateFormatter dateFromString:dateString];
 }

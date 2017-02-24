@@ -51,6 +51,7 @@
 		1E73294F1D7843310027E46E /* RemoteFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73294E1D7843310027E46E /* RemoteFacade.m */; };
 		1E7329521D7845210027E46E /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329511D7845210027E46E /* DataManager.m */; };
 		1E7329551D7848530027E46E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329541D7848530027E46E /* DetailsViewController.m */; };
+		1E91CFDF1E600F0A00CB60EB /* SettingsRoundImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFDE1E600F0A00CB60EB /* SettingsRoundImagesCell.m */; };
 		1EFD659D1E13C80000F5BA4D /* DetailsOfflineVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD659C1E13C80000F5BA4D /* DetailsOfflineVCViewController.m */; };
 		1EFD65A41E13EABE00F5BA4D /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD65A31E13EABE00F5BA4D /* SettingsVC.m */; };
 		1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD65A71E13EE4300F5BA4D /* SettingsOfflineCell.m */; };
@@ -196,6 +197,8 @@
 		1E7329511D7845210027E46E /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		1E7329531D7848530027E46E /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsViewController.h; path = KinopoiskParserObj/ViewControllers/Details/DetailsViewController.h; sourceTree = SOURCE_ROOT; };
 		1E7329541D7848530027E46E /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsViewController.m; path = KinopoiskParserObj/ViewControllers/Details/DetailsViewController.m; sourceTree = SOURCE_ROOT; };
+		1E91CFDD1E600F0A00CB60EB /* SettingsRoundImagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsRoundImagesCell.h; sourceTree = "<group>"; };
+		1E91CFDE1E600F0A00CB60EB /* SettingsRoundImagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsRoundImagesCell.m; sourceTree = "<group>"; };
 		1EFD659B1E13C80000F5BA4D /* DetailsOfflineVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsOfflineVCViewController.h; path = KinopoiskParserObj/ViewControllers/Details/DetailsOfflineVCViewController.h; sourceTree = SOURCE_ROOT; };
 		1EFD659C1E13C80000F5BA4D /* DetailsOfflineVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsOfflineVCViewController.m; path = KinopoiskParserObj/ViewControllers/Details/DetailsOfflineVCViewController.m; sourceTree = SOURCE_ROOT; };
 		1EFD65A21E13EABE00F5BA4D /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
@@ -562,6 +565,8 @@
 				1E4C8C631E56D8FB00B2ED44 /* SettingsAutoupdateCell.m */,
 				1E12860F1E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.h */,
 				1E1286101E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m */,
+				1E91CFDD1E600F0A00CB60EB /* SettingsRoundImagesCell.h */,
+				1E91CFDE1E600F0A00CB60EB /* SettingsRoundImagesCell.m */,
 				1E1286191E5D916F00D2899D /* SettingsBaseCell.h */,
 				1E12861A1E5D916F00D2899D /* SettingsBaseCell.m */,
 			);
@@ -841,6 +846,7 @@
 				1E640B611E0A85FE00AA539C /* View+MASAdditions.m in Sources */,
 				1E640B651E0A85FE00AA539C /* ZLDropDownMenuTitleButton.m in Sources */,
 				1E1286111E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m in Sources */,
+				1E91CFDF1E600F0A00CB60EB /* SettingsRoundImagesCell.m in Sources */,
 				1E640B591E0A85FE00AA539C /* MASCompositeConstraint.m in Sources */,
 				844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */,
 				84FF33381E1DAF72002847AB /* ShareManager.m in Sources */,

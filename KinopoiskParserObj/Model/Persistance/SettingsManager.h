@@ -14,6 +14,7 @@
 @property (nonatomic) BOOL isOfflineMode;
 @property (nonatomic) BOOL isAutoupdateEnabled;
 @property (nonatomic) BOOL isNightModeEnabled;
+@property (nonatomic) BOOL isRoundImagesEnabled;
 
 +(instancetype)sharedInstance;
 

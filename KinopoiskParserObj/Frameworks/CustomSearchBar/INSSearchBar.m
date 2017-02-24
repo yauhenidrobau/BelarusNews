@@ -68,7 +68,7 @@
 
 static CGFloat const kINSSearchBarInset = 11.0;
 static CGFloat const kINSSearchBarImageSize = 22.0;
-static NSTimeInterval const kINSSearchBarAnimationStepDuration = 0.2;
+static NSTimeInterval const kINSSearchBarAnimationStepDuration = 0;
 
 @implementation INSSearchBar
 
@@ -76,7 +76,7 @@ static NSTimeInterval const kINSSearchBarAnimationStepDuration = 0.2;
 
 - (id)initWithFrame:(CGRect)frame
 {
-    if ((self = [super initWithFrame:CGRectMake(CGRectGetMinX(frame), CGRectGetMinY(frame), CGRectGetWidth(frame), 44.0)]))
+    if ((self = [super initWithFrame:CGRectMake(CGRectGetMinX(frame), CGRectGetMinY(frame), CGRectGetWidth(frame), CGRectGetHeight(frame))]))
 	{
         // Initialization code
 		self.opaque = NO;
@@ -98,7 +98,7 @@ static NSTimeInterval const kINSSearchBarAnimationStepDuration = 0.2;
 		self.searchField.borderStyle = UITextBorderStyleNone;
 		self.searchField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		self.searchField.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0];
-		self.searchField.textColor = [UIColor colorWithRed:17.0/255.0 green:190.0/255.0 blue:227.0/255.0 alpha:1.0];
+		self.searchField.textColor = [UIColor blackColor];
 		self.searchField.alpha = 0.0;
 		self.searchField.delegate = self;
 		

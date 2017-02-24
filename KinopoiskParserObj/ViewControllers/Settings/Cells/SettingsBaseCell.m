@@ -15,6 +15,7 @@
 
 @interface SettingsBaseCell ()
 
+
 @end
 
 @implementation SettingsBaseCell
@@ -23,6 +24,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
     [self configCell];
 }
 
@@ -61,4 +63,5 @@
         self.separatorView.backgroundColor = [UIColor lightGrayColor];
     }
 }
+
 @end

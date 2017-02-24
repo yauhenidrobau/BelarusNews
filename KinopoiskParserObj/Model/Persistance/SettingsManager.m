@@ -24,6 +24,8 @@ SINGLETON(SettingsManager)
         self.isNotificationMode = [[UserDefaultsManager sharedInstance]boolForKey:NOTIFICATIONS_MODE];
         self.isAutoupdateEnabled = [[UserDefaultsManager sharedInstance]boolForKey:AUTOUPDATE_MODE];
         self.isNightModeEnabled = [[UserDefaultsManager sharedInstance]boolForKey:NIGHT_MODE];
+        self.isRoundImagesEnabled = [[UserDefaultsManager sharedInstance]boolForKey:NIGHT_MODE];
+
     }
     return self;
 }
@@ -44,5 +46,9 @@ SINGLETON(SettingsManager)
 
 -(void)setIsNightModeEnabled:(BOOL)isNightModeEnabled {
     _isNightModeEnabled = isNightModeEnabled;
+}
+
+-(void)setIsRoundImagesEnabled:(BOOL)isRoundImagesEnabled {
+    _isRoundImagesEnabled = isRoundImagesEnabled;
 }
 @end

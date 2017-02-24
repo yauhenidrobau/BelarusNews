@@ -11,6 +11,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "DateFormatterManager.h"
 #import "UIColor+BelarusNews.h"
+#import "SettingsManager.h"
 
 @interface NewsTableViewCell ()
 
@@ -31,8 +32,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
     self.imageNewsView.clipsToBounds = YES;
     self.imageNewsView.contentMode = UIViewContentModeScaleAspectFill;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -59,14 +62,14 @@
         } else {
             self.favoriteButton.tintColor = [UIColor bn_lightBlueColor];
         }
-        self.pubDateLabel.textColor = [UIColor bn_lightBlueColor];
+        self.pubDateLabel.textColor = [UIColor bn_favoriteSelectedNightColor];
     } else {
         self.titleLabel.textColor = [UIColor bn_titleColor];
         self.cellBackgroundView.backgroundColor = [UIColor bn_newsCellColor];
         self.shareButton.tintColor = [UIColor bn_titleColor];
         if (self.favoriteButton.tintColor == [UIColor blackColor]) {
         } else {
-            self.favoriteButton.tintColor = [UIColor bn_navBarColor];
+            self.favoriteButton.tintColor = [UIColor bn_favoriteSelectedColor];
         }
         self.pubDateLabel.textColor = [UIColor bn_newsCellDateColor];
     }
@@ -95,8 +98,11 @@
     }
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
                  placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.feedIdString]]];
-    self.imageNewsView.layer.cornerRadius = CGRectGetWidth(self.imageNewsView.frame) / 2;
+    self.imageNewsView.layer.cornerRadius = 0;
+    if ([SettingsManager sharedInstance].isRoundImagesEnabled) {
+        self.imageNewsView.layer.cornerRadius = CGRectGetWidth(self.imageNewsView.frame) / 2;
     }
+}
 
 -(UIImageView*)imageFromCell {
     return self.imageNewsView;

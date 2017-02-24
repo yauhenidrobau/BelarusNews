@@ -97,6 +97,7 @@ typedef enum {
     self.userDefaults = [UserDefaultsManager sharedInstance];
     self.operationQueue = [NSOperationQueue new];
     self.isAlertShown = [self.userDefaults boolForKey:NO_INTERNET_KEY];
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -336,7 +337,7 @@ typedef enum {
 
 - (void)searchBar:(INSSearchBar *)searchBar willStartTransitioningToState:(INSSearchBarState)destinationState {
     if (destinationState == INSSearchBarStateSearchBarVisible) {
-        searchBar.searchField.tintColor = MAIN_COLOR;
+        searchBar.searchField.tintColor = [UIColor blackColor];
     }
 }
 
@@ -440,8 +441,13 @@ typedef enum {
 
 -(void)prepareAppierance {
     
-    [self.activityInd setHidden:YES];
+    [self prepareTableView];
+    [self prepareSearchBar];
+    [self prepareNavigationBar];
+    [self prepareDropMenu];
+    [self prepareShareView];
     
+    [self.activityInd setHidden:YES];
     self.scrollButton.hidden = YES;
     [self.scrollButton layoutIfNeeded];
     self.scrollButton.layer.cornerRadius = self.scrollButton.frame.size.height / 2;
@@ -460,12 +466,6 @@ typedef enum {
         self.refreshControl.tintColor = [UIColor bn_navBarColor];
         [self.backgroundImage setImage:[UIImage imageNamed:@"main_blur"]];
     }
-    [self prepareTableView];
-    [self prepareSearchBar];
-    [self prepareNavigationBar];
-    [self prepareDropMenu];
-    [self prepareShareView];
-
     self.leftMenuButton.imageView.image = [self.leftMenuButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.leftMenuButton setTintColor:[UIColor whiteColor]];
 }
@@ -588,21 +588,23 @@ typedef enum {
 -(void)prepareNavigationBar {
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     self.navigationItem.title = NSLocalizedString(@"Choose Category",nil);
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
 }
 
-#warning SearchBar Height is not changing
-
 -(void)prepareSearchBar {
-    self.searchBar = [[INSSearchBar alloc] initWithFrame:CGRectMake(20.0, 5.0, CGRectGetWidth(self.view.bounds) - 40.0, 20)];
+    self.searchBar = [[INSSearchBar alloc] initWithFrame:CGRectMake(20.0, 5.0, CGRectGetWidth(self.view.bounds) - 40.0, 35)];
     self.searchBar.delegate = self;
-    self.searchBarView.backgroundColor = MAIN_COLOR;
     [self.view addSubview:self.searchBar];
     self.navigationItem.titleView = self.searchBar;
 }
 
 -(void)prepareData {
-    _mainTitleArray = @[@"TUT.BY",@"ONLINER.BY",@"DEV.BY", @"PRAVO.BY", @"MTS"];
+    _mainTitleArray = @[@"ONLINER.BY",@"TUT.BY",@"DEV.BY", @"PRAVO.BY", @"MTS"];
     _subTitleArray = @[
+                       @[NSLocalizedString(@"People",nil),
+                         NSLocalizedString(@"Auto",nil),
+                         NSLocalizedString(@"Science",nil),
+                         NSLocalizedString(@"Realty",nil)],
                        @[NSLocalizedString(@"Main",nil),
                          NSLocalizedString(@"Economic",nil),
                          NSLocalizedString(@"Society",nil),
@@ -615,15 +617,15 @@ typedef enum {
                          NSLocalizedString(@"Auto",nil),
                          NSLocalizedString(@"Lady",nil),
                          NSLocalizedString(@"Science",nil)],
-                       @[NSLocalizedString(@"People",nil),
-                         NSLocalizedString(@"Auto",nil),
-                         NSLocalizedString(@"Science",nil),
-                         NSLocalizedString(@"Realty",nil)],
                        @[NSLocalizedString(@"All News",nil)],
                        @[NSLocalizedString(@"All News",nil)],
                        @[NSLocalizedString(@"All News",nil)]
                        ];
     _titlesForRequestArray = @[
+                       @[@"People",
+                         @"Auto",
+                         @"Science",
+                         @"Realty"],
                        @[@"Main",
                          @"Economic",
                          @"Society",
@@ -636,10 +638,6 @@ typedef enum {
                          @"Auto",
                          @"Lady",
                          @"Science"],
-                       @[@"People",
-                         @"Auto",
-                         @"Science",
-                         @"Realty"],
                        @[@"All News"],
                        @[@"All News"],
                        @[@"All News"]];
@@ -664,7 +662,7 @@ typedef enum {
                          @"YANDEX" : @[YANDEX_NEWS],
                          @"MTS" : @[MTS_BY_NEWS]};
     self.titlesString = self.titlesForRequestArray[0][0];
-    self.urlString = MAIN_NEWS;
+    self.urlString = PEOPLE_ONLINER_LINK;
     [self.userDefaults setObject:self.titlesString forKey:@"CurrentTitle"];
     [self.userDefaults setObject:self.urlString forKey:@"CurrentUrl"];
     self.shareItemsDict = [NSMutableDictionary new];

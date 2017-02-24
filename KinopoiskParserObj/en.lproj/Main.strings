@@ -17,13 +17,13 @@
 //Left Menu
 
 /* Class = "UIButton"; normalTitle = "Log out"; ObjectID = "SLt-Ud-KeY"; */
-"SLt-Ud-KeY.normalTitle" = "Sign Out";
+"SLt-Ud-KeY.normalTitle" = "Exit";
 
 
 // SETTINGS
 
 /* Class = "UILabel"; text = "Sign Out"; ObjectID = "h8H-Yb-iAC"; */
-"h8H-Yb-iAC.text" = "Sign Out";
+"h8H-Yb-iAC.text" = "Exit";
 
 /* Class = "UILabel"; text = "Offline Mode"; ObjectID = "3Zh-gd-aGZ"; */
 "3Zh-gd-aGZ.text" = "Offline Mode";
@@ -36,3 +36,6 @@
 
 /* Class = "UILabel"; text = "Night Mode"; ObjectID = "D7U-Vc-0Aa"; */
 "D7U-Vc-0Aa.text" = "Night Mode";
+
+/* Class = "UILabel"; text = "Rounded Images"; ObjectID = "Zh5-Ru-0Pa"; */
+"Zh5-Ru-0Pa.text" = "Rounded images";

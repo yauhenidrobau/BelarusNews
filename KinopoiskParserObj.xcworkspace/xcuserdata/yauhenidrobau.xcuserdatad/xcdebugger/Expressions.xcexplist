@@ -65,6 +65,9 @@
          contextName = "-[DateFormatterManager dateFromString:withFormat:]:DateFormatterManager.m">
          <PersistentStrings>
             <PersistentString
+               value = "[self.dateFormatter dateFromString:dateString]">
+            </PersistentString>
+            <PersistentString
                value = "self.dateFormatter.locale">
             </PersistentString>
          </PersistentStrings>

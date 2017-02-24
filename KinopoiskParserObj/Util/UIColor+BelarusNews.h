@@ -32,4 +32,7 @@
 +(UIColor*)bn_newsCellColor;
 +(UIColor*)bn_newsCellDateColor;
 +(UIColor*)bn_newsCellNightColor;
++(UIColor*)bn_favoriteSelectedColor;
++(UIColor*)bn_favoriteSelectedNightColor;
+
 @end

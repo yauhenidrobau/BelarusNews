@@ -37,3 +37,6 @@
 
 /* Class = "UILabel"; text = "Night Mode"; ObjectID = "D7U-Vc-0Aa"; */
 "D7U-Vc-0Aa.text" = "Ночной режим";
+
+/* Class = "UILabel"; text = "Rounded Images"; ObjectID = "Zh5-Ru-0Pa"; */
+"Zh5-Ru-0Pa.text" = "Круглые изображения";

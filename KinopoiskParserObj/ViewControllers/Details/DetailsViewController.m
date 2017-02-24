@@ -13,7 +13,9 @@
 #import "FeSpinnerTenDot.h"
 
 #import "Macros.h"
-
+#import "Utils.h"
+#import "UIColor+BelarusNews.h"
+#import "SettingsManager.h"
 
 @interface DetailsViewController () <FeSpinnerTenDotDelegate>
 {
@@ -32,7 +34,7 @@
 
 #pragma mark - Lifecycle
 
- -(void) viewDidLoad{
+ -(void)viewDidLoad{
      [super  viewDidLoad];
      
      self.webView.hidden = YES;
@@ -45,6 +47,8 @@
      _spinner.fontTitleLabel = [UIFont fontWithName:@"Neou-Thin" size:36];
      _spinner.delegate = self;
      
+     self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
+     
      [self.view addSubview:_spinner];
      [self start:self];
 }
@@ -53,8 +57,9 @@
     [super viewDidAppear:animated];
 }
 
--(void) viewWillAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:(animated)];
+    
     [self.webView layoutIfNeeded];
     if (_newsUrl) {
         NSLog(@"%@",_newsUrl);
@@ -64,25 +69,29 @@
     if (self.webView.hidden) {
         self.webView.hidden = NO;
     }
+    [self updateForNightMode:NO];
+    if ([SettingsManager sharedInstance].isNightModeEnabled) {
+        [self updateForNightMode:YES];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
     [self dismiss:self];
 }
 
--(void) didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
 #pragma mark - UIWebViewDelegate
 
--(void) webViewDidStartLoad:(UIWebView*)webView {
+-(void)webViewDidStartLoad:(UIWebView*)webView {
 }
 
--(void) webViewDidFinishLoad:(UIWebView *)webView {
+-(void)webViewDidFinishLoad:(UIWebView *)webView {
     [self dismiss:self];
 }
+
+#pragma mark - IBActions 
 
 - (IBAction)start:(id)sender
 {
@@ -102,7 +111,10 @@
     _containerView.hidden = YES;
 
 }
--(void) changeTitle
+
+#pragma mark Private
+
+-(void)changeTitle
 {
     NSLog(@"index = %ld",index);
     if (index >= _arrTitile.count) {
@@ -112,8 +124,16 @@
     }
     index++;
 }
--(void) FeSpinnerTenDotDidDismiss:(FeSpinnerTenDot *)sender
+-(void)FeSpinnerTenDotDidDismiss:(FeSpinnerTenDot *)sender
 {
     NSLog(@"did dismiss");
+}
+
+-(void)updateForNightMode:(BOOL)update {
+    if (update) {
+        [Utils setNightNavigationBar:self.navigationController.navigationBar];
+    } else {
+        [Utils setDefaultNavigationBar:self.navigationController.navigationBar];
+    }
 }
 @end

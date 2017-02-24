@@ -12,9 +12,9 @@
 #define kRGBColorFromHex(rgbValue)        [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0f green:((float)((rgbValue & 0xFF00) >> 8))/255.0f blue:((float)(rgbValue & 0xFF))/255.0f alpha:1.0f]
 
 #define kDropdownMenuSeperatorColor               kRGBColorFromHex(0x000000)
-#define kDropdownMenuSelectedCellColor            kRGBColorFromHex(0xF90707)  // open menu selected title
+#define kDropdownMenuSelectedCellColor            kRGBColorFromHex(0x00FFB8)  // open menu selected title
 #define kDropdownMenuUnselectedCellTextColor      kRGBColorFromHex(0xD1D1D1)  // open menu unSelected title
-#define kDropdownMenuIndicatorColor               kRGBColorFromHex(0xF6CF81)  // subTitle color
+#define kDropdownMenuIndicatorColor               kRGBColorFromHex(0x000000)  // subTitle color
 #define kDropdownMenuBottomSeparatorColor         kRGBColorFromHex(0xF6CF81)
 #define kDropdownMenuTitleColor                   kRGBColorFromHex(0x000000)  
 

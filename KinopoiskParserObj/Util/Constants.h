@@ -39,6 +39,7 @@
 #define NOTIFICATIONS_MODE @"NotificationsMode"
 #define AUTOUPDATE_MODE @"Autoupdate"
 #define NIGHT_MODE @"NightMode"
+#define ROUND_IMAGES @"RoundImages"
 
 #define MAIN_COLOR RGB(81,255,181)
 

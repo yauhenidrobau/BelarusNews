@@ -12,6 +12,8 @@
 #import "SettingsNotificationsCell.h"
 #import "SettingsAutoupdateCell.h"
 #import "SettingsNightModeCellTableViewCell.h"
+#import "SettingsRoundImagesCell.h"
+
 #import "Utils.h"
 #import "UserDefaultsManager.h"
 #import "Constants.h"
@@ -23,6 +25,7 @@
 #define NOTIFICATION_CELL_TYPE @"NotificationCell"
 #define AUTOUPDATES_CELL_TYPE @"AutoupdatesCell"
 #define NIGHTMODE_CELL_TYPE @"NightModeCell"
+#define ROUND_IMAGES_CELL_TYPE @"RoundImagesCell"
 
 
 typedef enum {
@@ -30,6 +33,7 @@ typedef enum {
     NOTIFICATION_CELL,
     AUTOUPDATE_CELL,
     NIGHTMODE_CELL,
+    ROUND_IMAGES_CELL,
     SIGN_OUT_CELL
 }TypeCells;
 
@@ -54,6 +58,7 @@ typedef enum {
                            @"NotificationCell",
                            @"AutoupdatesCell",
                            @"NightModeCell",
+                           @"RoundImagesCell",
                            @"SignOutCell"];
     }
     return _cellTitleListID;
@@ -107,6 +112,12 @@ typedef enum {
         nightModeCell.cellDelegate = self;
         [nightModeCell configCell];
         return nightModeCell;
+    } else if ([cell.reuseIdentifier isEqualToString:ROUND_IMAGES_CELL_TYPE]) {
+        SettingsRoundImagesCell *roundImagesCell = (SettingsRoundImagesCell *)cell;
+        roundImagesCell.cellDelegate = self;
+        [roundImagesCell configRoundImageCell];
+        [roundImagesCell configCell];
+        return roundImagesCell;
     }
     if ([cell.reuseIdentifier isEqualToString:SIGN_OUT_CELL_TYPE]) {
        SettingsBaseCell *logOutcell = (SettingsBaseCell*)cell;

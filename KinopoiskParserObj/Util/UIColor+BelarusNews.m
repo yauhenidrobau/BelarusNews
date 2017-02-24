@@ -62,7 +62,7 @@
     return [UIColor colorWithRed:0.0 / 255.0 green:255.0 / 255.0 blue:184.0/ 255.0 alpha:1];
 }
 
-#pragma mark - News Cell Color
+#pragma mark - News Cell
 
 +(UIColor*)bn_newsCellColor {
     return RGBA(199, 226, 255, 0.3);
@@ -73,7 +73,14 @@
 }
 
 +(UIColor*)bn_newsCellDateColor {
-    return RGB(2,82,138);
+    return RGB(255,255,255);
 }
 
++(UIColor*)bn_favoriteSelectedColor {
+    return RGBA(255, 255, 255, 1);
+}
+
++(UIColor*)bn_favoriteSelectedNightColor {
+    return RGBA(0, 255, 184, 1);
+}
 @end
