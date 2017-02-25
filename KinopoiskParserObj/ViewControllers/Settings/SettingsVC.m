@@ -19,6 +19,7 @@
 
 #import "Utils.h"
 #import "UserDefaultsManager.h"
+#import "DataManager.h"
 #import "Constants.h"
 #import "SettingsManager.h"
 #import "UIColor+BelarusNews.h"
@@ -128,6 +129,7 @@ typedef enum {
         SettingsCityCell *cityCell = (SettingsCityCell *)cell;
         cityCell.cellDelegate = self;
         [cityCell configCell];
+        [cityCell updateCity];
         return cityCell;
     }
     if ([cell.reuseIdentifier isEqualToString:SIGN_OUT_CELL_TYPE]) {
@@ -172,7 +174,6 @@ typedef enum {
     [self viewWillAppear:YES];
 }
 
-
 #pragma mark - Location
 
 - (void)prepareLocationController {
@@ -183,7 +184,12 @@ typedef enum {
         welf.cityString = place.name;
         for (GMSAddressComponent *component in place.addressComponents) {
             if ([component.type isEqualToString:@"locality"]) {
-//                 wself.cityString = component.name;
+                 welf.cityString = component.name;
+                [[UserDefaultsManager sharedInstance] setObject:component.name forKey:CURRENT_CITY];
+                [SettingsManager sharedInstance].currentCity = component.name;
+                [[DataManager sharedInstance] updateWeatherForecastWithCallback:^(CityObject *cityObject, NSError *error) {
+                    [welf.tableView reloadData];
+                }];
                 break;
             }
         }

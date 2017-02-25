@@ -18,9 +18,7 @@
 
 @implementation SettingsCityCell
 
--(void)awakeFromNib {
-    [super awakeFromNib];
-    
+-(void)updateCity {
     self.cityNameLabel.text = [SettingsManager sharedInstance].currentCity;
 }
 

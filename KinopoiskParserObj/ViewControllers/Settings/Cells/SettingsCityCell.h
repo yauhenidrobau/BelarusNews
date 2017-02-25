@@ -10,4 +10,6 @@
 
 @interface SettingsCityCell : SettingsBaseCell
 
+-(void)updateCity;
+
 @end

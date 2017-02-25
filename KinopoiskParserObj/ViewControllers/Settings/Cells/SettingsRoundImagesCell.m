@@ -60,6 +60,7 @@
         self.roundedImages.image = [UIImage imageNamed:@"checkmark"];
         [[UserDefaultsManager sharedInstance]setBool:YES ForKey:ROUND_IMAGES];
     }
+    [self setImageColor];
 }
 
 -(void)setImageColor {

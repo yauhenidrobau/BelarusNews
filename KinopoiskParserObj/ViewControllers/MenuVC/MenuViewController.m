@@ -12,6 +12,8 @@
 #import "RootViewController.h"
 #import "UserDefaultsManager.h"
 #import "SettingsManager.h"
+#import "DataManager.h"
+#import "CityObject.h"
 
 typedef enum {
     CellTypeFavorite,
@@ -26,34 +28,47 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 @property (weak, nonatomic) IBOutlet UIImageView *blurImage;
-
+@property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *weatherDegreeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *weatherImage;
+@property (weak, nonatomic) IBOutlet UILabel *weatherDescription;
+@property (weak, nonatomic) IBOutlet UILabel *weatherWind;
+@property (strong, nonatomic) CityObject *cityObject;
 @end
 
 @implementation MenuViewController
+
+#pragma mark - LifeCycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.menuTitles = @[
-//                        NSLocalizedString(@"Profile",nil),
                         NSLocalizedString(@"Favorites",nil),
                         NSLocalizedString(@"Settings",nil)];
-//                        NSLocalizedString(@"About",nil),
-//                        NSLocalizedString(@"Log out",nil)];
     self.logoutButton.layer.cornerRadius = 15;
     self.logoutButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.logoutButton.layer.borderWidth = 2.0f;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     if ([SettingsManager sharedInstance].isNightModeEnabled) {
         self.blurImage.image = [UIImage imageNamed:@"black_blur"];
     } else {
         self.blurImage.image = [UIImage imageNamed:@"left_menu_Orange_Blur"];
     }
-    
+    self.cityObject = [SettingsManager sharedInstance].cityObject;
+    if (self.cityObject.cityID) {
+        self.cityNameLabel.text = [SettingsManager sharedInstance].currentCity;
+        self.weatherDegreeLabel.text = [NSString stringWithFormat:@"%ld",self.cityObject.temperature - 273];
+        self.weatherImage.image = [UIImage imageNamed:self.cityObject.mainWeatherIcon];
+        self.weatherWind.text = [NSString stringWithFormat:@"%@   %d m/c",NSLocalizedString(@"Wind", nil),self.cityObject.windSpeed];
+        self.weatherDescription.text = NSLocalizedString(self.cityObject.mainWeatherDescription,nil);
+    }    
 }
 #pragma mark - TABLE VIEW DATASOURCE
 
@@ -91,9 +106,10 @@ typedef enum {
 
 }
 
+#pragma mark IBActions
+
 - (IBAction)logoutTouchUpInside:(id)sender {
     self.titleString = NSLocalizedString(@"Log out",nil);
     [self.sideBarController hideMenuViewController:YES];
 }
-
 @end

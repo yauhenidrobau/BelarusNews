@@ -45,6 +45,7 @@
 #define NIGHT_MODE @"NightMode"
 #define ROUND_IMAGES @"RoundImages"
 #define CURRENT_CITY @"CurrentCity"
+#define CITY_FORECAST @"CityForecast"
 
 #define MAIN_COLOR RGB(81,255,181)
 

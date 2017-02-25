@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CityObject.h"
 
 typedef void(^UpdateDataCallback)(NSError *error);
-typedef void (^ForeCastBlock)(NSArray *weatherArray, NSError *error);
+typedef void (^UpdateWeatherForecast)(CityObject *cityObject, NSError *error);
 
 @interface DataManager : NSObject
 
 +(instancetype)sharedInstance;
 -(void)updateDataWithURLString:(NSString *)urlString AndTitle:(NSString *)title WithCallBack:(UpdateDataCallback)completionHandler;
-
--(NSArray*)getAllCitiesFromJSON;
+-(void)updateWeatherForecastWithCallback:(UpdateWeatherForecast)callBback;
 
 @end

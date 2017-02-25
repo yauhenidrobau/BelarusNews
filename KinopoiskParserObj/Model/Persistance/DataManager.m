@@ -14,6 +14,10 @@
 #import "Constants.h"
 #import "RealmDataManager.h"
 #import "Macros.h"
+#import "ForecastManager.h"
+#import "UserDefaultsManager.h"
+#import "SettingsManager.h"
+#import "Constants.h"
 
 @interface DataManager ()
 
@@ -46,13 +50,19 @@ SINGLETON(DataManager)
     }];
 }
 
--(NSArray*)getAllCitiesFromJSON {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"city.list" ofType:@"json"];
-    
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
-    NSError* error;
-    id object = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-    return object;
+-(void)updateWeatherForecastWithCallback:(UpdateWeatherForecast)callBback {
+    [[ForecastManager sharedInstance]getWeatherWithCompletion:^(CityObject *cityObject, NSError *error) {
+        if (!error) {
+            [[UserDefaultsManager sharedInstance]setObject:[NSKeyedArchiver archivedDataWithRootObject:cityObject] forKey:CITY_FORECAST];
+            [SettingsManager sharedInstance].cityObject = cityObject;
+            if (callBback) {
+                callBback(cityObject,nil);
+            }
+        } else {
+            if (callBback) {
+                callBback(nil,error);
+            }
+        }
+    }];
 }
-
 @end

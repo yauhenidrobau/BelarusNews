@@ -34,10 +34,12 @@ SINGLETON(UserDefaultsManager)
 
 -(void)setBool:(BOOL)boolean ForKey:(NSString *)key {
     [self.userDefaults setBool:boolean forKey:key];
+    [self.userDefaults synchronize];
 }
 
 -(void)setObject:(id)object forKey:(NSString *)key {
     [self.userDefaults setObject:object forKey:key];
+    [self.userDefaults synchronize];
 }
 
 -(id)objectForKey:(NSString *)key {
@@ -46,6 +48,8 @@ SINGLETON(UserDefaultsManager)
 
 - (void)removeObjectForKey:(NSString *)key {
     [self.userDefaults removeObjectForKey:key];
+    [self.userDefaults synchronize];
+
 }
 
 -(NSInteger)integerForKey:(NSString*)key {
@@ -54,5 +58,6 @@ SINGLETON(UserDefaultsManager)
 
 -(void)setInteger:(NSInteger)integer forKey:(NSString *)key {
     [self.userDefaults setInteger:integer forKey:key];
+    [self.userDefaults synchronize];
 }
 @end

@@ -16,7 +16,8 @@
 @property (nonatomic) BOOL isAutoupdateEnabled;
 @property (nonatomic) BOOL isNightModeEnabled;
 @property (nonatomic) BOOL isRoundImagesEnabled;
-@property (nonatomic) CityObject *currentCity;
+@property (nonatomic, strong) NSString *currentCity;
+@property (nonatomic, strong) CityObject *cityObject;
 
 +(instancetype)sharedInstance;
 

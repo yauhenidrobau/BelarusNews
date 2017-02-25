@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CityObject.h"
+
+typedef void (^ForeCastBlock)(CityObject *cityObject, NSError *error);
 
 @interface ForecastManager : NSObject
+
++(id)sharedInstance;
+-(void)getWeatherWithCompletion:(ForeCastBlock)completion;
 
 @end

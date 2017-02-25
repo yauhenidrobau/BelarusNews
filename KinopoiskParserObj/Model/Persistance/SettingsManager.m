@@ -26,6 +26,7 @@ SINGLETON(SettingsManager)
         self.isNightModeEnabled = [[UserDefaultsManager sharedInstance]boolForKey:NIGHT_MODE];
         self.isRoundImagesEnabled = [[UserDefaultsManager sharedInstance]boolForKey:NIGHT_MODE];
         self.currentCity = [[UserDefaultsManager sharedInstance]objectForKey:CURRENT_CITY];
+        self.cityObject = [NSKeyedUnarchiver unarchiveObjectWithData:[[UserDefaultsManager sharedInstance]objectForKey:CITY_FORECAST]];
     }
     return self;
 }
@@ -52,8 +53,11 @@ SINGLETON(SettingsManager)
     _isRoundImagesEnabled = isRoundImagesEnabled;
 }
 
--(void)setCurrentCity:(CityObject *)currentCity {
+-(void)setCurrentCity:(NSString *)currentCity {
     _currentCity = currentCity;
 }
 
+-(void)setCityObject:(CityObject *)cityObject {
+    _cityObject = cityObject;
+}
 @end

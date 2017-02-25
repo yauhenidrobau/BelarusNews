@@ -63,6 +63,7 @@ typedef enum {
 @property (nonatomic) CGPoint lastContentOffset;
 @property (strong, nonatomic) NSOperationQueue * operationQueue;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSTimer *weatherTimer;
 
 @property (nonatomic, strong) NSArray<NewsEntity *> *searchResults;
 @property (strong, nonatomic) NSArray *newsArray;
@@ -113,6 +114,7 @@ typedef enum {
     self.isNightMode = [self.userDefaults boolForKey:NIGHT_MODE];
     [self setupData];
     [self prepareAppierance];
+    self.weatherTimer = [NSTimer scheduledTimerWithTimeInterval:30 * 60 target:self selector:@selector(updateWeatherData) userInfo:nil repeats:YES];
 
 }
 
@@ -689,6 +691,20 @@ typedef enum {
 -(void)prepareShareView {
     self.shareCircleView = [[CFShareCircleView alloc] initWithSharers:@[[CFSharer twitter], [CFSharer facebook], [CFSharer vk]]];
     self.shareCircleView.delegate = self;
+}
+
+-(void)updateWeatherData {
+    [self updateWeatherWithCallback:^(NSError *error) {
+    }];
+}
+-(void)updateWeatherWithCallback:(UpdateDataCallback)callback {
+    [[DataManager sharedInstance]updateWeatherForecastWithCallback:^(CityObject *cityObject, NSError *error) {
+        if (!error) {
+            if (callback) {
+                callback(nil);
+            }
+        }
+    }];
 }
 
 @end

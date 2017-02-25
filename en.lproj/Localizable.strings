@@ -46,3 +46,13 @@
 "All News" = "All News";
 "Choose Category" = "Back";
 
+//Weather
+"clear sky" = "clear sky";
+"few clouds" = "few clouds";
+"scattered clouds" = "scattered clouds";
+"broken clouds" = "broken clouds";
+"shower rain" = "shower rain";
+"rain" = "rain";
+"thunderstorm" = "thunderstorm";
+"snow" = "snow";
+"mist" = "mist";

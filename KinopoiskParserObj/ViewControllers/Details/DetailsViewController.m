@@ -40,14 +40,14 @@
      self.webView.hidden = YES;
      index = 0;
      _arrTitile = @[@"LOADING",@"PLEASE WAITING",@"CALM DOWN",@"WAITING"];
-     
+     [self.containerView layoutIfNeeded];
      // init Loader
      _spinner = [[FeSpinnerTenDot alloc] initWithView:self.containerView withBlur:NO];
      _spinner.titleLabelText = _arrTitile[index];
      _spinner.fontTitleLabel = [UIFont fontWithName:@"Neou-Thin" size:36];
      _spinner.delegate = self;
      
-     self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
+     self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
      
      [self.view addSubview:_spinner];
      [self start:self];
@@ -89,9 +89,11 @@
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     [self dismiss:self];
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
+
 }
 
-#pragma mark - IBActions 
+#pragma mark - IBActions
 
 - (IBAction)start:(id)sender
 {
