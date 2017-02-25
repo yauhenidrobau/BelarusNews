@@ -207,9 +207,12 @@ typedef enum {
     if ([SettingsManager sharedInstance].isNightModeEnabled) {
         self.tableView.backgroundColor = [UIColor bn_nightModeBackgroundColor];
         [Utils setNightNavigationBar:self.navigationController.navigationBar];
+        [Utils setNavigationBar:self.navigationController.navigationBar light:YES];
     } else {
         self.tableView.backgroundColor = [UIColor bn_settingsBackgroundColor];
         [Utils setDefaultNavigationBar:self.navigationController.navigationBar];
+        [Utils setNavigationBar:self.navigationController.navigationBar light:NO];
+
     }
 }
 

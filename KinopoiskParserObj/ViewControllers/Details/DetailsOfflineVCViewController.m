@@ -59,10 +59,13 @@
 -(void)updateForNightMode:(BOOL)update {
     if (update) {
         [Utils setNightNavigationBar:self.navigationController.navigationBar];
+        [Utils setNavigationBar:self.navigationController.navigationBar light:YES];
         self.view.backgroundColor = [UIColor bn_nightModeBackgroundColor];
         self.detailsDescriptionTV.textColor = [UIColor bn_backgroundColor];
     } else {
         [Utils setDefaultNavigationBar:self.navigationController.navigationBar];
+        [Utils setNavigationBar:self.navigationController.navigationBar light:NO];
+
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         self.navigationController.navigationBar.shadowImage = [UIImage new];
         self.navigationController.navigationBar.translucent = YES;

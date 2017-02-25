@@ -46,6 +46,13 @@
      @{NSForegroundColorAttributeName:[UIColor bn_navBarTitleColor]}];
 }
 
++(void)setNavigationBar:(UINavigationBar*)bar light:(BOOL)light {
+    if (!light) {
+        bar.barStyle = UIStatusBarStyleDefault;
+    } else {
+        bar.barStyle = UIStatusBarStyleLightContent;
+    }
+}
 @end
 
 @implementation NSDateFormatter (Localized)

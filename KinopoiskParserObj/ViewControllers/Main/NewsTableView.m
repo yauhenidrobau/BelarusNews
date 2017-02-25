@@ -589,8 +589,7 @@ typedef enum {
 
 -(void)prepareNavigationBar {
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    self.navigationItem.title = NSLocalizedString(@"Choose Category",nil);
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
+    [Utils setNavigationBar:self.navigationController.navigationBar light:YES];
 }
 
 -(void)prepareSearchBar {

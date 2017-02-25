@@ -15,6 +15,7 @@
 +(NewsTableView*)getMainController;
 +(void)setNightNavigationBar:(UINavigationBar*)navBar;
 +(void)setDefaultNavigationBar:(UINavigationBar*)navBar;
++(void)setNavigationBar:(UINavigationBar*)bar light:(BOOL)light;
 
 @end
 

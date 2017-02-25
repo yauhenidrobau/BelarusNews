@@ -67,7 +67,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="left_menu_Orange_Blur" translatesAutoresizingMaskIntoConstraints="NO" id="x3x-79-GX6"/>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5LD-32-3eK">
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiA-lC-AA6">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiA-lC-AA6">
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -78,17 +78,17 @@
                                                     <constraint firstAttribute="width" constant="25" id="pxt-F2-oAQ"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgJ-2g-xVl">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgJ-2g-xVl">
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="чистое небо" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRS-vr-Dhf">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRS-vr-Dhf">
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ветер" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IL-ZP-vL6">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IL-ZP-vL6">
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -101,13 +101,14 @@
                                             <constraint firstItem="7IL-ZP-vL6" firstAttribute="leading" secondItem="5LD-32-3eK" secondAttribute="leading" constant="8" id="CKA-4W-lmd"/>
                                             <constraint firstAttribute="height" constant="201" id="OwZ-sf-Iwh"/>
                                             <constraint firstItem="7IL-ZP-vL6" firstAttribute="top" secondItem="KiA-lC-AA6" secondAttribute="bottom" constant="8" id="YWo-HP-I2I"/>
-                                            <constraint firstItem="xgJ-2g-xVl" firstAttribute="top" secondItem="Oel-zd-rAA" secondAttribute="bottom" constant="8" id="b44-uc-TxT"/>
+                                            <constraint firstItem="xgJ-2g-xVl" firstAttribute="top" secondItem="Oel-zd-rAA" secondAttribute="bottom" id="b44-uc-TxT"/>
                                             <constraint firstItem="KiA-lC-AA6" firstAttribute="leading" secondItem="5LD-32-3eK" secondAttribute="leading" constant="8" id="fG0-bc-JKF"/>
                                             <constraint firstItem="Oel-zd-rAA" firstAttribute="top" secondItem="5LD-32-3eK" secondAttribute="top" constant="22" id="hnn-Z7-ggj"/>
                                             <constraint firstAttribute="trailing" secondItem="Oel-zd-rAA" secondAttribute="trailing" constant="42" id="lfk-RB-QPV"/>
                                             <constraint firstAttribute="trailing" secondItem="xgJ-2g-xVl" secondAttribute="trailing" constant="20" id="nDc-ZE-g9i"/>
-                                            <constraint firstItem="KiA-lC-AA6" firstAttribute="top" secondItem="5LD-32-3eK" secondAttribute="top" constant="10" id="pFM-19-vES"/>
+                                            <constraint firstItem="KiA-lC-AA6" firstAttribute="top" secondItem="5LD-32-3eK" secondAttribute="top" constant="25" id="pFM-19-vES"/>
                                             <constraint firstAttribute="width" constant="220" id="rQe-tB-Zxw"/>
+                                            <constraint firstItem="xgJ-2g-xVl" firstAttribute="centerX" secondItem="Oel-zd-rAA" secondAttribute="centerX" id="v2s-ij-HmP"/>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="V6y-Tc-gGw">
