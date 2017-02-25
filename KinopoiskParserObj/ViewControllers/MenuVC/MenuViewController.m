@@ -34,6 +34,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UILabel *weatherDescription;
 @property (weak, nonatomic) IBOutlet UILabel *weatherWind;
 @property (strong, nonatomic) CityObject *cityObject;
+@property (weak, nonatomic) IBOutlet UIImageView *weatherBackgroundImage;
 @end
 
 @implementation MenuViewController
@@ -59,13 +60,16 @@ typedef enum {
     if ([SettingsManager sharedInstance].isNightModeEnabled) {
         self.blurImage.image = [UIImage imageNamed:@"black_blur"];
     } else {
-        self.blurImage.image = [UIImage imageNamed:@"left_menu_Orange_Blur"];
+        self.blurImage.image = [UIImage imageNamed:@"black_blur"];
+//        self.blurImage.image = [UIImage imageNamed:@"left_menu_Orange_Blur"];
     }
     self.cityObject = [SettingsManager sharedInstance].cityObject;
     if (self.cityObject.cityID) {
         self.cityNameLabel.text = [SettingsManager sharedInstance].currentCity;
-        self.weatherDegreeLabel.text = [NSString stringWithFormat:@"%ld",self.cityObject.temperature - 273];
+        self.weatherDegreeLabel.text = [NSString stringWithFormat:@"%ld°",self.cityObject.temperature - 273];
         self.weatherImage.image = [UIImage imageNamed:self.cityObject.mainWeatherIcon];
+        self.weatherBackgroundImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"Image-%@",self.cityObject.mainWeatherIcon]];
+
         self.weatherWind.text = [NSString stringWithFormat:@"%@   %d m/c",NSLocalizedString(@"Wind", nil),self.cityObject.windSpeed];
         self.weatherDescription.text = NSLocalizedString(self.cityObject.mainWeatherDescription,nil);
     }    

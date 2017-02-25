@@ -50,12 +50,14 @@
 
 
 //Weather
-"clear sky" = "clear sky";
-"few clouds" = "few clouds";
-"scattered clouds" = "scattered clouds";
-"broken clouds" = "broken clouds";
-"shower rain" = "shower rain";
-"rain" = "rain";
-"thunderstorm" = "thunderstorm";
-"snow" = "snow";
-"mist" = "mist";
+"clear sky" = "чистое небо";
+"few clouds" = "кучевые облака";
+"scattered clouds" = "рассеянные облака";
+"broken clouds" = "сплошная облачность";
+"shower rain" = "сильный дождь";
+"rain" = "дождь";
+"thunderstorm" = "гроза";
+"snow" = "снег";
+"mist" = "туман";
+
+"Wind" = "Ветер";

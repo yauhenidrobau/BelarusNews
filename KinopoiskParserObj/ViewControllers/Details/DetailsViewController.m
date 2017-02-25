@@ -50,6 +50,12 @@
      self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
      
      [self.view addSubview:_spinner];
+     [self.webView layoutIfNeeded];
+     if (_newsUrl) {
+         NSLog(@"%@",_newsUrl);
+         NSURLRequest *request = [NSURLRequest requestWithURL: _newsUrl];
+         [self.webView loadRequest:request];
+     }
      [self start:self];
 }
 
@@ -60,12 +66,7 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:(animated)];
     
-    [self.webView layoutIfNeeded];
-    if (_newsUrl) {
-        NSLog(@"%@",_newsUrl);
-        NSURLRequest *request = [NSURLRequest requestWithURL: _newsUrl];
-        [self.webView loadRequest:request];
-    }
+    
     if (self.webView.hidden) {
         self.webView.hidden = NO;
     }
@@ -89,7 +90,6 @@
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     [self dismiss:self];
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
 
 }
 
@@ -134,8 +134,10 @@
 -(void)updateForNightMode:(BOOL)update {
     if (update) {
         [Utils setNightNavigationBar:self.navigationController.navigationBar];
+        [Utils setNavigationBar:self.navigationController.navigationBar light:YES];
     } else {
         [Utils setDefaultNavigationBar:self.navigationController.navigationBar];
+        [Utils setNavigationBar:self.navigationController.navigationBar light:NO];
     }
 }
 @end
