@@ -20,6 +20,8 @@
 /* Class = "UIButton"; normalTitle = "Log out"; ObjectID = "SLt-Ud-KeY"; */
 "SLt-Ud-KeY.normalTitle" = "Выход";
 
+/* Class = "UILabel"; text = "noWeatherText"; ObjectID = "hYn-Db-pZ9"; */
+"hYn-Db-pZ9.text" = "Выберите в настройках свой город, чтобы узнать погоду";
 
 // SETTINGS
 

@@ -35,6 +35,8 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UILabel *weatherWind;
 @property (strong, nonatomic) CityObject *cityObject;
 @property (weak, nonatomic) IBOutlet UIImageView *weatherBackgroundImage;
+@property (weak, nonatomic) IBOutlet UILabel *noWeatherLabel;
+
 @end
 
 @implementation MenuViewController
@@ -65,14 +67,17 @@ typedef enum {
     }
     self.cityObject = [SettingsManager sharedInstance].cityObject;
     if (self.cityObject.cityID) {
+        self.noWeatherLabel.hidden = YES;
         self.cityNameLabel.text = [SettingsManager sharedInstance].currentCity;
         self.weatherDegreeLabel.text = [NSString stringWithFormat:@"%ld°",self.cityObject.temperature - 273];
         self.weatherImage.image = [UIImage imageNamed:self.cityObject.mainWeatherIcon];
         self.weatherBackgroundImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"Image-%@",self.cityObject.mainWeatherIcon]];
 
-        self.weatherWind.text = [NSString stringWithFormat:@"%@   %d m/c",NSLocalizedString(@"Wind", nil),self.cityObject.windSpeed];
+        self.weatherWind.text = [NSString stringWithFormat:@"%@   %ld m/c",NSLocalizedString(@"Wind", nil),self.cityObject.windSpeed];
         self.weatherDescription.text = NSLocalizedString(self.cityObject.mainWeatherDescription,nil);
-    }    
+    } else {
+        self.noWeatherLabel.hidden = NO;
+    }
 }
 #pragma mark - TABLE VIEW DATASOURCE
 

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KinopoiskParserObj/AppDelegate.m"
-            timestampString = "508883153.849852"
+            timestampString = "509761473.469827"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106">
+            startingLineNumber = "109"
+            endingLineNumber = "109">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KinopoiskParserObj/AppDelegate.m"
-            timestampString = "508883153.849852"
+            timestampString = "509761473.469827"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116">
+            startingLineNumber = "119"
+            endingLineNumber = "119">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -316,31 +316,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KinopoiskParserObj/Model/Persistance/ForecastManager.m"
-            timestampString = "509671024.907527"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "-getWeatherWithCompletion:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KinopoiskParserObj/ViewControllers/MenuVC/MenuViewController.m"
-            timestampString = "509759228.575684"
+            timestampString = "509762913.09149"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "-viewWillAppear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -352,13 +336,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KinopoiskParserObj/ViewControllers/Settings/SettingsVC.m"
-            timestampString = "509678762.171104"
+            timestampString = "509761205.162481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "-prepareLocationController"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__39-[SettingsVC prepareLocationController]_block_invoke"
+                  moduleName = "KinopoiskParserObj"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/ViewControllers/Settings/SettingsVC.m"
+                  timestampString = "509763143.404927"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "190"
+                  endingLineNumber = "190"
+                  offsetFromSymbolStart = "836">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__39-[SettingsVC prepareLocationController]_block_invoke_2"
+                  moduleName = "KinopoiskParserObj"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/ViewControllers/Settings/SettingsVC.m"
+                  timestampString = "509763143.410054"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "191"
+                  endingLineNumber = "191"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -368,13 +384,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KinopoiskParserObj/ViewControllers/Settings/SettingsVC.m"
-            timestampString = "509678532.811022"
+            timestampString = "509761205.162481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "-prepareLocationController"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__39-[SettingsVC prepareLocationController]_block_invoke"
+                  moduleName = "KinopoiskParserObj"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/ViewControllers/Settings/SettingsVC.m"
+                  timestampString = "509763143.419768"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "190"
+                  endingLineNumber = "190"
+                  offsetFromSymbolStart = "836">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__39-[SettingsVC prepareLocationController]_block_invoke_2"
+                  moduleName = "KinopoiskParserObj"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Work/Objective-C%20Parser/KinopoiskParserObj/ViewControllers/Settings/SettingsVC.m"
+                  timestampString = "509763143.424962"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "191"
+                  endingLineNumber = "191"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -384,11 +432,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KinopoiskParserObj/Model/Persistance/SettingsManager.m"
-            timestampString = "509678714.515814"
+            timestampString = "509763123.199581"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "-setCityObject:"
             landmarkType = "7">
          </BreakpointContent>
@@ -400,11 +448,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KinopoiskParserObj/Model/Persistance/SettingsManager.m"
-            timestampString = "509679182.13033"
+            timestampString = "509763123.199581"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "-init"
             landmarkType = "7">
          </BreakpointContent>

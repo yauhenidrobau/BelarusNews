@@ -26,7 +26,12 @@ SINGLETON(SettingsManager)
         self.isNightModeEnabled = [[UserDefaultsManager sharedInstance]boolForKey:NIGHT_MODE];
         self.isRoundImagesEnabled = [[UserDefaultsManager sharedInstance]boolForKey:NIGHT_MODE];
         self.currentCity = [[UserDefaultsManager sharedInstance]objectForKey:CURRENT_CITY];
-        self.cityObject = [NSKeyedUnarchiver unarchiveObjectWithData:[[UserDefaultsManager sharedInstance]objectForKey:CITY_FORECAST]];
+        NSData *cityData = [[UserDefaultsManager sharedInstance]objectForKey:CITY_FORECAST];
+        if (cityData) {
+            self.cityObject = [NSKeyedUnarchiver unarchiveObjectWithData:cityData];
+        } else {
+            self.cityObject = [CityObject new];
+        }
     }
     return self;
 }

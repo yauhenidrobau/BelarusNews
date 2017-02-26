@@ -19,22 +19,28 @@ SINGLETON(ForecastManager)
 -(void)getWeatherWithCompletion:(ForeCastBlock)completion {
     
     NSString *city = [SettingsManager sharedInstance].currentCity;
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    manager.responseSerializer = [[AFJSONResponseSerializer alloc]init];
-    NSString *requestString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather"];
-    NSDictionary *params = @{@"q" : city,
-                             @"appid" : APPID_KEY};
-    [manager GET:requestString parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
-        NSDictionary *dict = [NSDictionary dictionaryWithDictionary:responseObject];
-        CityObject *cityObject = [CityObject new];
-        [cityObject updateWithDictionary:dict];
+    if (city.length) {
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        //    manager.responseSerializer = [[AFJSONResponseSerializer alloc]init];
+        NSString *requestString = [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather"];
+        NSDictionary *params = @{@"q" : city,
+                                 @"appid" : APPID_KEY};
+        [manager GET:requestString parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+            NSDictionary *dict = [NSDictionary dictionaryWithDictionary:responseObject];
+            CityObject *cityObject = [CityObject new];
+            [cityObject updateWithDictionary:dict];
+            if (completion) {
+                completion(cityObject,nil);
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            if (completion) {
+                completion(nil,error);
+            }
+        }];
+    } else {
         if (completion) {
-            completion(cityObject,nil);
+            completion(nil,[NSError errorWithDomain:@"no City Choosen" code:-1 userInfo:nil]);
         }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (completion) {
-            completion(nil,error);
-        }
-    }];
+    }
 }
 @end

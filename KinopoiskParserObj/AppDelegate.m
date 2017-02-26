@@ -23,6 +23,7 @@
 #import "Constants.h"
 #import "UIColor+BelarusNews.h"
 #import "SettingsManager.h"
+#import "DataManager.h"
 
 @import GooglePlaces;
 
@@ -40,6 +41,8 @@ NSTimer *timer;
 
     [GMSPlacesClient provideAPIKey:@"AIzaSyB6SYasED7O-tRz3zEPRwHf846Q6DZfjYg"];
 
+    [[DataManager sharedInstance] updateWeatherForecastWithCallback:^(CityObject *cityObject, NSError *error) {
+    }];
     
     [YMMYandexMetrica activateWithApiKey:YANDEX_METRICE_API_KEY];
     [[NotificationManager sharedInstance] registerForPushNotificationsWithApplication:application];
