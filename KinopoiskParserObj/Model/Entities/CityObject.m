@@ -20,6 +20,7 @@
 #define kWeatherDescriptionKey @"weatherDescription"
 #define kIconKey @"icon"
 #define kMainWeatherKey @"mainWeather"
+#define kWeatherIDKey @"weatherID"
 
 @interface CityObject ()
 
@@ -49,6 +50,8 @@
     NSString *weatherIcon = [aDecoder decodeObjectForKey:kIconKey];
     NSString *mainWeather = [aDecoder decodeObjectForKey:kMainWeatherKey];
     NSInteger cityID = [aDecoder decodeIntegerForKey:kCityIDKey];
+    NSInteger weatherID = [aDecoder decodeIntegerForKey:kWeatherIDKey];
+
     float lat =  [aDecoder decodeFloatForKey:kLatKey];
     float lon = [aDecoder decodeFloatForKey:kLonKey];
     NSInteger humidity = [aDecoder decodeIntegerForKey:kHumidityKey];
@@ -67,6 +70,7 @@
     object.pressure = pressure;
     object.windSpeed = windSpeed;
     object.temperature = temperature;
+    object.weatherID = weatherID;
     
     return object;
 }
@@ -83,11 +87,13 @@
     [aCoder encodeInteger:_pressure forKey:kPressureKey];
     [aCoder encodeInteger:_temperature forKey:kTemperatureKey];
     [aCoder encodeInteger:_windSpeed forKey:kWinSpeedKey];
+    [aCoder encodeInteger:_weatherID forKey:kWeatherIDKey];
 }
 
 -(void)updateWithDictionary:(NSDictionary *)dict {
 
     NSNumber *ID = dict[@"id"];
+    NSNumber *weatherID = dict[@"weather"][0][@"id"];
     NSNumber * humidityNumber = dict[@"main"][@"humidity"];
     NSDictionary *coord = dict[@"coord"];
     NSNumber *lat = coord[@"lat"];
@@ -107,6 +113,6 @@
     self.mainWeatherIcon = dict[@"weather"][0][@"icon"];
     self.mainWeatherDescription = dict[@"weather"][0][@"description"];;
     self.windSpeed = windSpeedNumber.integerValue;
-
+    self.weatherID = weatherID.integerValue;
 }
 @end

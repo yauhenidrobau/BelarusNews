@@ -42,3 +42,6 @@
 
 /* Class = "UILabel"; text = "Rounded Images"; ObjectID = "Zh5-Ru-0Pa"; */
 "Zh5-Ru-0Pa.text" = "Круглые изображения";
+
+/* Class = "UILabel"; text = "Your location"; ObjectID = "FM4-UV-Bdq"; */
+"FM4-UV-Bdq.text" = "Ваше местоположение";

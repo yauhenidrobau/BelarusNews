@@ -26,7 +26,6 @@
     return self;
 }
 
-
 - (void)viewConfig
 {
     WS(weakSelf);

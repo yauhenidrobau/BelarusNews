@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSString *mainWeather;
 @property (nonatomic, strong) NSString *mainWeatherIcon;
 @property (nonatomic, strong) NSString *mainWeatherDescription;
+@property (nonatomic) NSInteger weatherID;
+
 @property (nonatomic) float lat;
 @property (nonatomic) float lon;
 

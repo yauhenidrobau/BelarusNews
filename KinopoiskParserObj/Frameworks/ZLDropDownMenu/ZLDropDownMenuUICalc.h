@@ -13,7 +13,7 @@
 
 #define kDropdownMenuSeperatorColor               kRGBColorFromHex(0x000000)
 #define kDropdownMenuSelectedCellColor            kRGBColorFromHex(0x00FFB8)  // open menu selected title
-#define kDropdownMenuUnselectedCellTextColor      kRGBColorFromHex(0xD1D1D1)  // open menu unSelected title
+#define kDropdownMenuUnselectedCellTextColor      kRGBColorFromHex(0x898A8A)  // open menu unSelected title
 #define kDropdownMenuIndicatorColor               kRGBColorFromHex(0x000000)  // subTitle color
 #define kDropdownMenuBottomSeparatorColor         kRGBColorFromHex(0xF6CF81)
 #define kDropdownMenuTitleColor                   kRGBColorFromHex(0x000000)  

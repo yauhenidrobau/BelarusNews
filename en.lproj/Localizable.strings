@@ -47,14 +47,27 @@
 "Choose Category" = "Back";
 
 //Weather
-"clear sky" = "clear sky";
+"Clear" = "Clear sky";
 "few clouds" = "few clouds";
 "scattered clouds" = "scattered clouds";
 "broken clouds" = "broken clouds";
-"shower rain" = "shower rain";
-"rain" = "rain";
-"thunderstorm" = "thunderstorm";
-"snow" = "snow";
-"mist" = "mist";
+"mist" = "Mist";
+"smoke" = "Smoke";
+"haze" = "Haze";
+"sand" = "Sand";
+"dust whirls" = "Dust whirls";
+"fog" = "Fog";
+"sand" = "Sand";
+"dust" = "Dust";
+"volcanic ash" = "Volcanic ash";
+"squalls" = "Squals";
+"tornado" = "Tornado";
+"Shower rain" = "Shower rain";
+"Drizzle rain" = "Drizzle rain";
+"Thunderstorm" = "Thunderstorm";
 
-"Wind" = "Ветер";
+"Wind" = "Wind";
+
+"Drizzle" = "Drizzle";
+"Snow" = "Snow";
+"Clear" = "Clear Sky";

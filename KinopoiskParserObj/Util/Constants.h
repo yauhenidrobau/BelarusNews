@@ -50,7 +50,7 @@
 #define MAIN_COLOR RGB(81,255,181)
 
 #define NO_INTERNET_KEY @"NoInternet"
-
+#define TEST_HOST @"http:www.google.by"
 typedef enum {
     SettingsCellTypeOffline = 151,
     SettingsCellTypeNotification = 152,

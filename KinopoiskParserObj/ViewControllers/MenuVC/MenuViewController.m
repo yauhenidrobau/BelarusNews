@@ -74,7 +74,7 @@ typedef enum {
         self.weatherBackgroundImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"Image-%@",self.cityObject.mainWeatherIcon]];
 
         self.weatherWind.text = [NSString stringWithFormat:@"%@   %ld m/c",NSLocalizedString(@"Wind", nil),self.cityObject.windSpeed];
-        self.weatherDescription.text = NSLocalizedString(self.cityObject.mainWeatherDescription,nil);
+        [self configWeatherDescription:self.cityObject.weatherID];
     } else {
         self.noWeatherLabel.hidden = NO;
     }
@@ -120,5 +120,27 @@ typedef enum {
 - (IBAction)logoutTouchUpInside:(id)sender {
     self.titleString = NSLocalizedString(@"Log out",nil);
     [self.sideBarController hideMenuViewController:YES];
+}
+
+#pragma mark - Private 
+
+-(void)configWeatherDescription:(NSInteger)weatherID {
+    if (weatherID > 199 && weatherID < 233) {
+        self.weatherDescription.text = NSLocalizedString(@"Thunderstorm",nil);
+    } else  if (weatherID > 299 && weatherID < 322) {
+        self.weatherDescription.text = NSLocalizedString(@"Drizzle rain",nil);
+    } else  if (weatherID > 499 && weatherID < 532) {
+        self.weatherDescription.text = NSLocalizedString(@"Shower rain",nil);
+    } else  if (weatherID > 599 && weatherID < 623) {
+        self.weatherDescription.text = NSLocalizedString(@"Snow",nil);
+    } else  if (weatherID > 700 && weatherID < 782) {
+        self.weatherDescription.text = NSLocalizedString(self.cityObject.mainWeatherDescription, nil);
+    } else  if (weatherID == 800) {
+        self.weatherDescription.text = NSLocalizedString(@"Clear", nil);
+    } else  if (weatherID > 800 && weatherID < 805) {
+        self.weatherDescription.text = NSLocalizedString(self.cityObject.mainWeatherDescription, nil);
+    } else {
+        self.weatherDescription.text = NSLocalizedString(self.cityObject.mainWeatherDescription, nil);
+    }
 }
 @end

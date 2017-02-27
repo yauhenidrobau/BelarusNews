@@ -40,7 +40,7 @@ NSTimer *timer;
     [Fabric with:@[[Crashlytics class]]];
 
     [GMSPlacesClient provideAPIKey:@"AIzaSyB6SYasED7O-tRz3zEPRwHf846Q6DZfjYg"];
-
+    
     [[DataManager sharedInstance] updateWeatherForecastWithCallback:^(CityObject *cityObject, NSError *error) {
     }];
     
