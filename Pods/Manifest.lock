@@ -25,9 +25,25 @@ PODS:
     - Fabric (~> 1.6.3)
   - DZNEmptyDataSet (1.8.1)
   - Fabric (1.6.11)
+  - FirebaseAnalytics (3.7.0):
+    - FirebaseCore (~> 3.5)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.5.0):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.9)
+  - Google/Analytics (3.0.3):
+    - Google/Core
+    - GoogleAnalytics (~> 3.12)
+  - Google/Core (3.0.3):
+    - FirebaseAnalytics (~> 3.2)
+  - GoogleAnalytics (3.17.0)
   - GoogleMaps/Base (2.2.0)
   - GooglePlaces (2.2.0):
     - GoogleMaps/Base (= 2.2.0)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - LMSideBarController (1.0.1)
   - Reachability (3.2)
   - Realm (2.2.0):
@@ -51,6 +67,7 @@ DEPENDENCIES:
   - Crashlytics
   - DZNEmptyDataSet
   - Fabric
+  - Google/Analytics
   - GooglePlaces
   - LMSideBarController
   - Reachability (~> 3.2)
@@ -66,8 +83,14 @@ SPEC CHECKSUMS:
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
+  FirebaseCore: 1c0a13bf59bb95cdd19577252499f0ec6a03e999
+  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
+  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
+  GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
   GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   LMSideBarController: bfbe56b30c76a541918b4c3f8972f64a49b295a1
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Realm: d95b8fb34c83f1e764b66d319277a62c2b6e4bf5
@@ -76,6 +99,6 @@ SPEC CHECKSUMS:
   YandexMobileMetrica: c8e9050cd23b10dee4358bdf0a5142583a63995c
   YandexMobileMetricaPush: e2787c60c8d5f3aa2feef9a57d44cfc3f3d69946
 
-PODFILE CHECKSUM: f7d5e77891e456c004154741613160deedcafeab
+PODFILE CHECKSUM: 871e488a1fcf42e650a1b26f8490dbf4c533b1df
 
 COCOAPODS: 1.0.0

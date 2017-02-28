@@ -38,6 +38,7 @@
 #define PRAVO_NEWS @"http://www.pravo.by/novosti/obshchestvenno-politicheskie-i-v-oblasti-prava/rss/"
 
 #define YANDEX_METRICE_API_KEY @"ef1d79fb-d889-4ce0-96eb-83c62a3adfd2"
+#define GOOGLE_PLACES_KEY @"AIzaSyB6SYasED7O-tRz3zEPRwHf846Q6DZfjYg"
 
 #define OFFLINE_MODE @"OfflineMode"
 #define NOTIFICATIONS_MODE @"NotificationsMode"

@@ -24,6 +24,7 @@
 #import "UIColor+BelarusNews.h"
 #import "SettingsManager.h"
 #import "DataManager.h"
+#import <Google/Analytics.h>
 
 @import GooglePlaces;
 
@@ -39,14 +40,18 @@ NSTimer *timer;
     
     [Fabric with:@[[Crashlytics class]]];
 
-    [GMSPlacesClient provideAPIKey:@"AIzaSyB6SYasED7O-tRz3zEPRwHf846Q6DZfjYg"];
+    [GMSPlacesClient provideAPIKey:GOOGLE_PLACES_KEY];
+    
+    [self enableGoogleAnalytics];
     
     [[DataManager sharedInstance] updateWeatherForecastWithCallback:^(CityObject *cityObject, NSError *error) {
     }];
     
-    [YMMYandexMetrica activateWithApiKey:YANDEX_METRICE_API_KEY];
     [[NotificationManager sharedInstance] registerForPushNotificationsWithApplication:application];
     application.applicationIconBadgeNumber = 0;
+    
+    [YMPYandexMetricaPush handleApplicationDidFinishLaunchingWithOptions:launchOptions];
+    [YMMYandexMetrica activateWithApiKey:YANDEX_METRICE_API_KEY];
     
     return YES;
 }
@@ -89,4 +94,18 @@ NSTimer *timer;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
+#pragma mark - Private 
+
+-(void)enableGoogleAnalytics {
+    
+    NSError *configureError;
+    [[GGLContext sharedInstance] configureWithError:&configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
+    [GAI sharedInstance].dispatchInterval = 20;
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-80107844-2"];
+    [GAI sharedInstance].defaultTracker = tracker;
+    tracker.allowIDFACollection = YES;
+}
 @end

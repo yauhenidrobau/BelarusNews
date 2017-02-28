@@ -56,7 +56,6 @@
          NSURLRequest *request = [NSURLRequest requestWithURL: _newsUrl];
          [self.webView loadRequest:request];
      }
-     [self start:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -86,6 +85,8 @@
 #pragma mark - UIWebViewDelegate
 
 -(void)webViewDidStartLoad:(UIWebView*)webView {
+    [self start:self];
+
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {

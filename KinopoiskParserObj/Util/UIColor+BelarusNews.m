@@ -65,7 +65,7 @@
 #pragma mark - News Cell
 
 +(UIColor*)bn_newsCellColor {
-    return RGBA(222,222,222, 0.3);
+    return RGBA(134,174,255, 0.3);
 }
 
 +(UIColor*)bn_newsCellNightColor {

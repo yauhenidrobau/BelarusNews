@@ -33,6 +33,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    self.backgroundColor = [UIColor clearColor];
     self.imageNewsView.clipsToBounds = YES;
     self.imageNewsView.contentMode = UIViewContentModeScaleAspectFill;
     

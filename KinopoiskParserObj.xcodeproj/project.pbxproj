@@ -56,6 +56,9 @@
 		1E91CFEB1E6064B300CB60EB /* CityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFEA1E6064B300CB60EB /* CityObject.m */; };
 		1E91CFF31E60740100CB60EB /* city.list.json in Resources */ = {isa = PBXBuildFile; fileRef = 1E91CFF21E60740100CB60EB /* city.list.json */; };
 		1E91CFF61E60788300CB60EB /* LocationAutoCompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFF51E60788300CB60EB /* LocationAutoCompleteController.m */; };
+		1E91CFF81E640C1700CB60EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E91CFF71E640C1700CB60EB /* GoogleService-Info.plist */; };
+		1E91CFFA1E6414B000CB60EB /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E91CFF91E6414B000CB60EB /* AdSupport.framework */; };
+		1E91CFFC1E64188700CB60EB /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E91CFFB1E64188700CB60EB /* iAd.framework */; };
 		1EFD659D1E13C80000F5BA4D /* DetailsOfflineVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD659C1E13C80000F5BA4D /* DetailsOfflineVCViewController.m */; };
 		1EFD65A41E13EABE00F5BA4D /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD65A31E13EABE00F5BA4D /* SettingsVC.m */; };
 		1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD65A71E13EE4300F5BA4D /* SettingsOfflineCell.m */; };
@@ -210,6 +213,9 @@
 		1E91CFF21E60740100CB60EB /* city.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
 		1E91CFF41E60788300CB60EB /* LocationAutoCompleteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAutoCompleteController.h; sourceTree = "<group>"; };
 		1E91CFF51E60788300CB60EB /* LocationAutoCompleteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAutoCompleteController.m; sourceTree = "<group>"; };
+		1E91CFF71E640C1700CB60EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1E91CFF91E6414B000CB60EB /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		1E91CFFB1E64188700CB60EB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		1EFD659B1E13C80000F5BA4D /* DetailsOfflineVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailsOfflineVCViewController.h; path = KinopoiskParserObj/ViewControllers/Details/DetailsOfflineVCViewController.h; sourceTree = SOURCE_ROOT; };
 		1EFD659C1E13C80000F5BA4D /* DetailsOfflineVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailsOfflineVCViewController.m; path = KinopoiskParserObj/ViewControllers/Details/DetailsOfflineVCViewController.m; sourceTree = SOURCE_ROOT; };
 		1EFD65A21E13EABE00F5BA4D /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
@@ -257,6 +263,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E91CFFC1E64188700CB60EB /* iAd.framework in Frameworks */,
+				1E91CFFA1E6414B000CB60EB /* AdSupport.framework in Frameworks */,
 				1EFE91851E23BF07008CA308 /* UserNotifications.framework in Frameworks */,
 				3D499CCAEC00E7C593490045 /* libPods-KinopoiskParserObj.a in Frameworks */,
 			);
@@ -282,6 +290,8 @@
 		1E11C93D1DDD9E4C00D55B28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E91CFFB1E64188700CB60EB /* iAd.framework */,
+				1E91CFF91E6414B000CB60EB /* AdSupport.framework */,
 				1EFE91841E23BF06008CA308 /* UserNotifications.framework */,
 				84FF33391E1DCD04002847AB /* Spinners */,
 				1E26668F1E127AC3001DF2A2 /* CustomSearchBar */,
@@ -437,6 +447,7 @@
 		1E7328F21D7813740027E46E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1E91CFF71E640C1700CB60EB /* GoogleService-Info.plist */,
 				1E91CFF21E60740100CB60EB /* city.list.json */,
 				843C97C61E54F75300B23E9C /* Sertificates */,
 				1E7328F31D7813740027E46E /* main.m */,
@@ -766,6 +777,7 @@
 			files = (
 				843C97CA1E54F76200B23E9C /* BelarusNewsDev.mobileprovision in Resources */,
 				1E91CFF31E60740100CB60EB /* city.list.json in Resources */,
+				1E91CFF81E640C1700CB60EB /* GoogleService-Info.plist in Resources */,
 				843C97CB1E54F76200B23E9C /* debug.p12 in Resources */,
 				843C97CC1E54F76200B23E9C /* destr.p12 in Resources */,
 				84702F881DF8887C005CE945 /* Localizable.strings in Resources */,

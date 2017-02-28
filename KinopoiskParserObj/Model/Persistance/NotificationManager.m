@@ -59,11 +59,20 @@ SINGLETON(NotificationManager)
             UIUserNotificationTypeAlert |
             UIUserNotificationTypeBadge |
             UIUserNotificationTypeSound;
-            UIUserNotificationSettings *settings =
-            [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
+            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
             [application registerUserNotificationSettings:settings];
-        }
+            [application registerForRemoteNotifications];
+            }
         [application registerForRemoteNotifications];
+    } else {
+        UNAuthorizationOptions options =
+        UNAuthorizationOptionAlert |
+        UNAuthorizationOptionBadge |
+        UNAuthorizationOptionSound;
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError *error) {
+            //
+        }];
     }
 }
 

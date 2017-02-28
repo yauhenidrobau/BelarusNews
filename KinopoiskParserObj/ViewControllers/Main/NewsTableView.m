@@ -39,6 +39,8 @@
 #import "SettingsManager.h"
 #import "Utils.h"
 
+#import <Google/Analytics.h>
+
 typedef void(^UpdateDataCallback)(NSError *error);
 typedef enum {
     AllCategoryType = 0,
@@ -328,6 +330,14 @@ typedef enum {
     [self.userDefaults setObject:self.titlesString forKey:@"CurrentTitle"];
     [self.userDefaults setObject:self.urlString forKey:@"CurrentUrl"];
     [self updateWithIndicator:YES];
+    
+    id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
+    [tracker set:kGAIScreenName value:self.titlesString];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"News Category"
+                                                          action:@"Visited"
+                                                           label:self.titlesString
+                                                           value:@1] build]];
     
 }
 
