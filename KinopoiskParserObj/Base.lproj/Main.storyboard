@@ -1034,7 +1034,7 @@
         <image name="icon-share" width="24" height="24"/>
         <image name="icon_list" width="16" height="16"/>
         <image name="left_menu_Orange_Blur" width="375" height="667"/>
-        <image name="main_blur" width="325" height="183"/>
+        <image name="main_blur" width="380" height="285"/>
         <image name="no_image_200_200" width="200" height="200"/>
         <image name="unCheck" width="16" height="16"/>
     </resources>

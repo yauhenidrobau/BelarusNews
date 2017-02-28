@@ -55,6 +55,7 @@
          NSLog(@"%@",_newsUrl);
          NSURLRequest *request = [NSURLRequest requestWithURL: _newsUrl];
          [self.webView loadRequest:request];
+         [self start:self];
      }
 }
 
@@ -69,9 +70,12 @@
     if (self.webView.hidden) {
         self.webView.hidden = NO;
     }
-    [self updateForNightMode:NO];
+    
     if ([SettingsManager sharedInstance].isNightModeEnabled) {
         [self updateForNightMode:YES];
+    } else {
+        [self updateForNightMode:NO];
+        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     }
 }
 
@@ -81,17 +85,16 @@
     [self dismiss:self];
 }
 
-
 #pragma mark - UIWebViewDelegate
 
 -(void)webViewDidStartLoad:(UIWebView*)webView {
-    [self start:self];
-
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     [self dismiss:self];
-
+    if (![SettingsManager sharedInstance].isNightModeEnabled) {
+        [self.navigationController.navigationBar setTintColor:[UIColor bn_navBarTitleColor]];
+    }
 }
 
 #pragma mark - IBActions
