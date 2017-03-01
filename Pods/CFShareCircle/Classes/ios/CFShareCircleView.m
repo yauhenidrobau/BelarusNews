@@ -375,7 +375,7 @@ static const UIWindowLevel UIWindowLevelCFShareCircle = 1999.0;  // Don't overla
     
     // Create the intro text layer to help the user.
     self.introTextLayer = [CATextLayer layer];
-    self.introTextLayer.string = @"Drag to\nShare";
+    self.introTextLayer.string = NSLocalizedString(@"Drag to\nShare",nil);
     self.introTextLayer.opacity = 1.0;
     self.introTextLayer.wrapped = YES;
     self.introTextLayer.alignmentMode = kCAAlignmentCenter;

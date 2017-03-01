@@ -44,7 +44,7 @@
 }
 
 + (CFSharer *)facebook {
-    return [[CFSharer alloc] initWithName:@"Facebook" imageName:@"facebook.png" serviceID:0];
+    return [[CFSharer alloc] initWithName:@"Facebook" imageName:@"icon-Facebook" serviceID:0];
 }
 
 + (CFSharer *)googleDrive {
@@ -56,7 +56,7 @@
 }
 
 + (CFSharer *)twitter {
-    return [[CFSharer alloc] initWithName:@"Twitter" imageName:@"twitter.png" serviceID:1];
+    return [[CFSharer alloc] initWithName:@"Twitter" imageName:@"icon-Twitter" serviceID:1];
 }
 
 + (CFSharer *)airPrint {
