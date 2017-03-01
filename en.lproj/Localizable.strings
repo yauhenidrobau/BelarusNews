@@ -46,6 +46,12 @@
 "All News" = "All News";
 "Choose Category" = "Back";
 
+
+"LOADING" = "LOADING";
+"PLEASE WAITING" = "PLEASE WAITING";
+"CALM DOWN" = "CALM DOWN";
+"WAITING" = "WAITING";
+
 //Weather
 "Clear" = "Clear sky";
 "few clouds" = "few clouds";

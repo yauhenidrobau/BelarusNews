@@ -48,6 +48,12 @@
 
 "Choose Category" = "Назад";
 
+"LOADING" = "Загрузка";
+"PLEASE WAITING" = "Пожалуйста подождите";
+"CALM DOWN" = "Немного терпения";
+"WAITING" = "Секундочку...";
+
+
 
 //Weather
 "Clear" = "Чистое небо";

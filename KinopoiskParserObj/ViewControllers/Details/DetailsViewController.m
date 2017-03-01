@@ -39,7 +39,7 @@
      
      self.webView.hidden = YES;
      index = 0;
-     _arrTitile = @[@"LOADING",@"PLEASE WAITING",@"CALM DOWN",@"WAITING"];
+     _arrTitile = @[NSLocalizedString(@"LOADING",nil),NSLocalizedString(@"PLEASE WAITING",nil),NSLocalizedString(@"CALM DOWN",nil),NSLocalizedString(@"WAITING",nil)];
      [self.containerView layoutIfNeeded];
      // init Loader
      _spinner = [[FeSpinnerTenDot alloc] initWithView:self.containerView withBlur:NO];
