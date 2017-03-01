@@ -73,7 +73,7 @@ typedef enum {
         self.weatherImage.image = [UIImage imageNamed:self.cityObject.mainWeatherIcon];
         self.weatherBackgroundImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"Image-%@",self.cityObject.mainWeatherIcon]];
 
-        self.weatherWind.text = [NSString stringWithFormat:@"%@   %ld m/c",NSLocalizedString(@"Wind", nil),self.cityObject.windSpeed];
+        self.weatherWind.text = [NSString stringWithFormat:@"%@   %ld %@",NSLocalizedString(@"Wind", nil),self.cityObject.windSpeed,NSLocalizedString(@"m/c", nil)];
         [self configWeatherDescription:self.cityObject.weatherID];
     } else {
         self.noWeatherLabel.hidden = NO;
