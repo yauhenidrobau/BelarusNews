@@ -1,6 +1,6 @@
 //
 //  Utils.m
-//  KinopoiskParserObj
+//  BelarusNews
 //
 //  Created by YAUHENI DROBAU on 09/01/2017.
 //  Copyright © 2017 YAUHENI DROBAU. All rights reserved.

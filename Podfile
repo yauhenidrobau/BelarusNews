@@ -1,6 +1,6 @@
  platform :ios, '9.0'
 
-target 'KinopoiskParserObj' do
+target ‘BelarusNews' do
    pod 'Realm'
    pod 'DZNEmptyDataSet'
    pod 'Reachability', '~> 3.2'

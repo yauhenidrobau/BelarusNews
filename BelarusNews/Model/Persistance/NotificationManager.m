@@ -1,6 +1,6 @@
 //
 //  NotificationManager.m
-//  KinopoiskParserObj
+//  BelarusNews
 //
 //  Created by YAUHENI DROBAU on 13/01/2017.
 //  Copyright © 2017 YAUHENI DROBAU. All rights reserved.

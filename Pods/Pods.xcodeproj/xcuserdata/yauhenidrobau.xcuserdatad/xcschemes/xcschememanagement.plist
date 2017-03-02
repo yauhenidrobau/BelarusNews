@@ -29,7 +29,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-KinopoiskParserObj.xcscheme</key>
+		<key>Pods-BelarusNews.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -57,7 +57,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0A5AB7197C82760CE1A0A5B953D46A05</key>
+		<key>059702104D21702DF8853D0E08F063C7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,22 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>28D4724F1D0C03FCDE1B67154846E65C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>5437890023F30CA85DFCA260CA914D48</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>60F17CB540A3DA8988E5837DE37EF7B6</key>
+		<key>57B22A7EADDCB75E307F8B2C8DBA12B3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6C5F4B824A71C6DE419B4ECA5A4EDC47</key>
+		<key>A21FED7ED24738EF2DA4044824BDF332</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A894A7BD335B795AD230E3E363F927CB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,7 +97,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C21FE2A6E10131A57339C38C1B612C75</key>
+		<key>D6FC9648BE01825412C951160B7C6FA7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

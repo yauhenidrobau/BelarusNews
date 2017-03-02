@@ -1,6 +1,6 @@
 //
 //  ShareManager.h
-//  KinopoiskParserObj
+//  BelarusNews
 //
 //  Created by Admin on 1/5/17.
 //  Copyright © 2017 YAUHENI DROBAU. All rights reserved.

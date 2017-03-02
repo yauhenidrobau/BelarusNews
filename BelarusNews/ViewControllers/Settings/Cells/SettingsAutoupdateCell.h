@@ -1,6 +1,6 @@
 //
 //  SettingsAutoupdateCell.h
-//  KinopoiskParserObj
+//  BelarusNews
 //
 //  Created by YAUHENI DROBAU on 2/17/17.
 //  Copyright © 2017 YAUHENI DROBAU. All rights reserved.
