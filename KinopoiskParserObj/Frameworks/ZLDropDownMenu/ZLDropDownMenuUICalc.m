@@ -45,7 +45,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         titleButtonUIValue.MAINTITLELABEL_FONT = 11.f;
-        titleButtonUIValue.SUBTITLELABEL_FONT = 10.f;
+        titleButtonUIValue.SUBTITLELABEL_FONT = 11.f;
         titleButtonUIValue.SUBTITLELABEL_TOPMARGIN = 2.5f;
         titleButtonUIValue.ARROWVIEW_LEFTMARGIN = 3.f;
         titleButtonUIValue.ARROWVIEW_WIDTH = 6.f;

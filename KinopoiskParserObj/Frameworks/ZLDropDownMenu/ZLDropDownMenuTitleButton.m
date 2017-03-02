@@ -73,7 +73,7 @@
         }];
     } else {
         _subTitleLabel = [[UILabel alloc] init];
-        _subTitleLabel.font = [UIFont fontWithName:@"Helvetica-Medium" size:dropDownMenuTitleButtonUIValue()->SUBTITLELABEL_FONT];
+        _subTitleLabel.font = [UIFont fontWithName:@"Helvetica" size:dropDownMenuTitleButtonUIValue()->SUBTITLELABEL_FONT];
         _subTitleLabel.textAlignment = NSTextAlignmentCenter;
         _subTitleLabel.text = _subTitle;
         _subTitleLabel.textColor = kDropdownMenuIndicatorColor;
