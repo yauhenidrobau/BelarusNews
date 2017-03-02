@@ -50,7 +50,7 @@
     
     _mainTitleLabel = [[UILabel alloc] init];
     _mainTitleLabel.text = _mainTitle;
-    _mainTitleLabel.font = [UIFont systemFontOfSize:dropDownMenuTitleButtonUIValue()->MAINTITLELABEL_FONT];
+    [_mainTitleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:dropDownMenuTitleButtonUIValue()->MAINTITLELABEL_FONT]];
     _mainTitleLabel.adjustsFontSizeToFitWidth = YES;
     _mainTitleLabel.textColor = kDropdownMenuTitleColor;
     [containerView addSubview:_mainTitleLabel];
@@ -73,7 +73,7 @@
         }];
     } else {
         _subTitleLabel = [[UILabel alloc] init];
-        _subTitleLabel.font = [UIFont systemFontOfSize:dropDownMenuTitleButtonUIValue()->SUBTITLELABEL_FONT];
+        _subTitleLabel.font = [UIFont fontWithName:@"Helvetica-Medium" size:dropDownMenuTitleButtonUIValue()->SUBTITLELABEL_FONT];
         _subTitleLabel.textAlignment = NSTextAlignmentCenter;
         _subTitleLabel.text = _subTitle;
         _subTitleLabel.textColor = kDropdownMenuIndicatorColor;

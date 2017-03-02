@@ -610,7 +610,7 @@ typedef enum {
 }
 
 -(void)prepareData {
-    _mainTitleArray = @[@"ONLINER.BY",@"TUT.BY",@"DEV.BY", @"PRAVO.BY", @"MTS"];
+    _mainTitleArray = @[@"ONLINER",@"TUT.BY",@"DEV.BY", @"PRAVO.BY", @"MTS"];
     _subTitleArray = @[
                        @[NSLocalizedString(@"People",nil),
                          NSLocalizedString(@"Auto",nil),
@@ -666,7 +666,7 @@ typedef enum {
                                      AUTO_NEWS,NSLocalizedString(@"Auto",nil),
                                      LADY_NEWS,NSLocalizedString(@"Lady",nil),
                                      SCIENCE_NEWS,NSLocalizedString(@"Science",nil), nil],
-                         @"ONLINER.BY": [NSDictionary dictionaryWithObjectsAndKeys:
+                         @"ONLINER": [NSDictionary dictionaryWithObjectsAndKeys:
                                          PEOPLE_ONLINER_LINK,NSLocalizedString(@"People",nil),
                                          AUTO_ONLINER_LINK,NSLocalizedString(@"Auto",nil),TECH_ONLINER_NEWS,NSLocalizedString(@"Science",nil),REALT_ONLINER_NEWS,NSLocalizedString(@"Realty",nil), nil],
                          @"PRAVO.BY" : @[PRAVO_NEWS],

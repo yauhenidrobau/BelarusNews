@@ -115,13 +115,6 @@ typedef enum {
 
 }
 
-#pragma mark IBActions
-
-- (IBAction)logoutTouchUpInside:(id)sender {
-    self.titleString = NSLocalizedString(@"Log out",nil);
-    [self.sideBarController hideMenuViewController:YES];
-}
-
 #pragma mark - Private 
 
 -(void)configWeatherDescription:(NSInteger)weatherID {

@@ -151,7 +151,7 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="V6y-Tc-gGw">
-                                        <rect key="frame" x="0.0" y="201" width="220" height="416"/>
+                                        <rect key="frame" x="0.0" y="251" width="220" height="416"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="220" id="JvD-9W-yHw"/>
@@ -194,34 +194,19 @@
                                             <outlet property="delegate" destination="QpU-tt-q4O" id="Quz-1a-S6W"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLt-Ud-KeY">
-                                        <rect key="frame" x="15" y="627" width="190" height="30"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Log Out">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="logoutTouchUpInside:" destination="QpU-tt-q4O" eventType="touchUpInside" id="EPg-ou-Ats"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="V6y-Tc-gGw" secondAttribute="bottom" constant="50" id="2au-Wz-Ooc"/>
+                                    <constraint firstAttribute="bottom" secondItem="V6y-Tc-gGw" secondAttribute="bottom" id="2au-Wz-Ooc"/>
                                     <constraint firstAttribute="width" constant="220" id="38z-Hk-xLc"/>
-                                    <constraint firstItem="SLt-Ud-KeY" firstAttribute="leading" secondItem="Eef-KK-Es8" secondAttribute="leading" constant="15" id="3T6-Uh-zfX"/>
-                                    <constraint firstItem="SLt-Ud-KeY" firstAttribute="centerX" secondItem="Eef-KK-Es8" secondAttribute="centerX" id="7E0-Vz-zK5"/>
-                                    <constraint firstAttribute="bottom" secondItem="SLt-Ud-KeY" secondAttribute="bottom" constant="10" id="S5M-Fa-YHx"/>
                                     <constraint firstItem="x3x-79-GX6" firstAttribute="top" secondItem="Eef-KK-Es8" secondAttribute="top" id="Upn-G2-6zt"/>
                                     <constraint firstItem="x3x-79-GX6" firstAttribute="leading" secondItem="Eef-KK-Es8" secondAttribute="leading" id="XzT-3R-4yg"/>
-                                    <constraint firstItem="V6y-Tc-gGw" firstAttribute="top" secondItem="5LD-32-3eK" secondAttribute="bottom" id="aez-ir-cI3"/>
+                                    <constraint firstItem="V6y-Tc-gGw" firstAttribute="top" secondItem="5LD-32-3eK" secondAttribute="bottom" constant="50" id="aez-ir-cI3"/>
                                     <constraint firstAttribute="trailing" secondItem="5LD-32-3eK" secondAttribute="trailing" id="aju-wS-bEo"/>
                                     <constraint firstAttribute="bottom" secondItem="x3x-79-GX6" secondAttribute="bottom" id="idM-xy-tUX"/>
                                     <constraint firstAttribute="trailing" secondItem="V6y-Tc-gGw" secondAttribute="trailing" id="mwT-Xk-npQ"/>
                                     <constraint firstAttribute="trailing" secondItem="x3x-79-GX6" secondAttribute="trailing" id="n5S-6A-AN2"/>
                                     <constraint firstItem="V6y-Tc-gGw" firstAttribute="leading" secondItem="Eef-KK-Es8" secondAttribute="leading" id="o04-PV-VdI"/>
-                                    <constraint firstItem="SLt-Ud-KeY" firstAttribute="top" secondItem="V6y-Tc-gGw" secondAttribute="bottom" constant="10" id="rKj-K3-00c"/>
-                                    <constraint firstAttribute="trailing" secondItem="SLt-Ud-KeY" secondAttribute="trailing" constant="15" id="xo1-OQ-fN4"/>
                                     <constraint firstItem="5LD-32-3eK" firstAttribute="top" secondItem="Eef-KK-Es8" secondAttribute="top" id="z3S-7M-qyW"/>
                                 </constraints>
                             </view>
@@ -237,7 +222,6 @@
                     <connections>
                         <outlet property="blurImage" destination="x3x-79-GX6" id="mBY-qy-dfP"/>
                         <outlet property="cityNameLabel" destination="KiA-lC-AA6" id="Daw-6D-qLz"/>
-                        <outlet property="logoutButton" destination="SLt-Ud-KeY" id="Rd2-tC-20V"/>
                         <outlet property="noWeatherLabel" destination="hYn-Db-pZ9" id="8Qv-qZ-78d"/>
                         <outlet property="weatherBackgroundImage" destination="mLH-10-dzF" id="bVs-cV-z5h"/>
                         <outlet property="weatherDegreeLabel" destination="xgJ-2g-xVl" id="ffd-C9-GKy"/>
@@ -626,43 +610,6 @@
                                             <outletCollection property="gestureRecognizers" destination="N0m-wd-XGE" appends="YES" id="Qf3-cP-VJH"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SignOutCell" id="cha-08-uOv" customClass="SettingsBaseCell">
-                                        <rect key="frame" x="0.0" y="322" width="375" height="49"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cha-08-uOv" id="W0g-Jw-94N">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8H-Yb-iAC">
-                                                    <rect key="frame" x="21" y="11" width="67" height="27"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.84705882349999995" green="0.25490196079999999" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1b1-ty-Y47" userLabel="SeparatorView">
-                                                    <rect key="frame" x="0.0" y="48" width="375" height="1"/>
-                                                    <color key="backgroundColor" red="0.31764705879999999" green="1" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="TAS-wC-Z6F"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="1b1-ty-Y47" secondAttribute="trailing" id="6p1-Oc-5st"/>
-                                                <constraint firstItem="1b1-ty-Y47" firstAttribute="leading" secondItem="W0g-Jw-94N" secondAttribute="leading" id="Bzl-pd-8EE"/>
-                                                <constraint firstAttribute="bottom" secondItem="h8H-Yb-iAC" secondAttribute="bottom" constant="11" id="KtP-pN-16s"/>
-                                                <constraint firstAttribute="bottom" secondItem="1b1-ty-Y47" secondAttribute="bottom" id="bX8-Bn-6DH"/>
-                                                <constraint firstItem="h8H-Yb-iAC" firstAttribute="top" secondItem="W0g-Jw-94N" secondAttribute="top" constant="11" id="m92-7s-fdq"/>
-                                                <constraint firstItem="h8H-Yb-iAC" firstAttribute="leading" secondItem="W0g-Jw-94N" secondAttribute="leading" constant="21" id="tfZ-P1-ZDH"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <connections>
-                                            <outlet property="cellTitleLabel" destination="h8H-Yb-iAC" id="mbq-Uh-ZWi"/>
-                                            <outlet property="separatorView" destination="1b1-ty-Y47" id="4re-Qb-rBO"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="6PW-h2-XwB" id="d8U-Bd-JDd"/>
@@ -737,7 +684,7 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40g-n2-8tM">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="h9K-LS-003"/>
                                 </constraints>

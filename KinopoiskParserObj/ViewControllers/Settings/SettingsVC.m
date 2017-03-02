@@ -24,7 +24,6 @@
 #import "SettingsManager.h"
 #import "UIColor+BelarusNews.h"
 
-#define SIGN_OUT_CELL_TYPE @"SignOutCell"
 #define OFFLINE_CELL_TYPE @"OfflineCell"
 #define NOTIFICATION_CELL_TYPE @"NotificationCell"
 #define AUTOUPDATES_CELL_TYPE @"AutoupdatesCell"
@@ -39,8 +38,7 @@ typedef enum {
     AUTOUPDATE_CELL,
     NIGHTMODE_CELL,
     ROUND_IMAGES_CELL,
-    CITY_CELL,
-    SIGN_OUT_CELL
+    CITY_CELL
 }TypeCells;
 
 @interface SettingsVC () <SettingsCellDelegate>
@@ -64,8 +62,7 @@ typedef enum {
                            @"AutoupdatesCell",
                            @"NightModeCell",
                            @"RoundImagesCell",
-                           @"CityCell",
-                           @"SignOutCell"];
+                           @"CityCell"];
     }
     return _cellTitleListID;
 }
@@ -132,10 +129,6 @@ typedef enum {
         [cityCell updateCity];
         return cityCell;
     }
-    if ([cell.reuseIdentifier isEqualToString:SIGN_OUT_CELL_TYPE]) {
-       SettingsBaseCell *logOutcell = (SettingsBaseCell*)cell;
-        [logOutcell configCell];
-    }
     return cell;
 }
 
@@ -147,9 +140,6 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == SIGN_OUT_CELL) {
-        [Utils exitFromApplication];
-    }
 }
 
 #pragma mark - SettingsCellDelegate
