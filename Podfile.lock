@@ -53,13 +53,6 @@ PODS:
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
   - UIAlertController+Blocks (0.9.2)
-  - YandexMobileMetrica (2.7.0):
-    - YandexMobileMetrica/Static (= 2.7.0)
-  - YandexMobileMetrica/Static (2.7.0)
-  - YandexMobileMetricaPush (0.4.0):
-    - YandexMobileMetricaPush/Static (= 0.4.0)
-  - YandexMobileMetricaPush/Static (0.4.0):
-    - YandexMobileMetrica (< 3.0.0, >= 2.6.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -74,8 +67,6 @@ DEPENDENCIES:
   - Realm
   - SDWebImage (~> 3.7.6)
   - UIAlertController+Blocks
-  - YandexMobileMetrica (= 2.7.0)
-  - YandexMobileMetricaPush (= 0.4.0)
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
@@ -96,9 +87,7 @@ SPEC CHECKSUMS:
   Realm: d95b8fb34c83f1e764b66d319277a62c2b6e4bf5
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   UIAlertController+Blocks: 80e28b92523fb58aba4d1bccec013d5a0b0bddb2
-  YandexMobileMetrica: c8e9050cd23b10dee4358bdf0a5142583a63995c
-  YandexMobileMetricaPush: e2787c60c8d5f3aa2feef9a57d44cfc3f3d69946
 
-PODFILE CHECKSUM: 871e488a1fcf42e650a1b26f8490dbf4c533b1df
+PODFILE CHECKSUM: 4a927e4ce307349b79079946b80e65062acc5532
 
 COCOAPODS: 1.0.0

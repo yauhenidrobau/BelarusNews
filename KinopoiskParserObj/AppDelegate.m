@@ -17,8 +17,6 @@
 #import "NotificationManager.h"
 #import "Utils.h"
 #import "Constants.h"
-#import <YandexMobileMetrica/YandexMobileMetrica.h>
-#import <YandexMobileMetricaPush/YandexMobileMetricaPush.h>
 #import "UserDefaultsManager.h"
 #import "Constants.h"
 #import "UIColor+BelarusNews.h"
@@ -28,7 +26,7 @@
 
 @import GooglePlaces;
 
-@interface AppDelegate () <UNUserNotificationCenterDelegate>
+@interface AppDelegate ()
 
 @end
 
@@ -50,34 +48,18 @@ NSTimer *timer;
     [[NotificationManager sharedInstance] registerForPushNotificationsWithApplication:application];
     application.applicationIconBadgeNumber = 0;
     
-    [YMPYandexMetricaPush handleApplicationDidFinishLaunchingWithOptions:launchOptions];
-    [YMMYandexMetrica activateWithApiKey:YANDEX_METRICE_API_KEY];
-    
     return YES;
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [YMPYandexMetricaPush setDeviceTokenFromData:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [self handleRemoteNotification:userInfo];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
-    [self handleRemoteNotification:userInfo];
-    
     completionHandler(UIBackgroundFetchResultNewData);
-}
-
-- (void)handleRemoteNotification:(NSDictionary *)userInfo {
-
-    [YMPYandexMetricaPush handleRemoteNotification:userInfo];
-    
-    // Get user data from remote notification.
-    NSString *userData = [YMPYandexMetricaPush userDataForNotification:userInfo];
-    NSLog(@"User Data: '%@'", userData);
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {

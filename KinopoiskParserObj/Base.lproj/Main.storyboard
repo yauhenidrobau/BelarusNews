@@ -521,7 +521,7 @@
                                                         <constraint firstAttribute="height" constant="1" id="7Rd-U6-qiv"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unCheck" translatesAutoresizingMaskIntoConstraints="NO" id="kup-3L-Ivd">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kup-3L-Ivd">
                                                     <rect key="frame" x="325" y="10" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="Dgk-HD-ZTX"/>
@@ -651,7 +651,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gGA-yv-vcW" id="XXj-ux-paR">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -983,7 +983,6 @@
         <image name="left_menu_Orange_Blur" width="375" height="667"/>
         <image name="main_blur" width="960" height="540"/>
         <image name="no_image_200_200" width="200" height="200"/>
-        <image name="unCheck" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ZGG-uU-zFX"/>

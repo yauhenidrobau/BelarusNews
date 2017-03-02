@@ -65,6 +65,10 @@
 
 -(void)setImageColor {
     self.roundedImages.image = [self.roundedImages.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.roundedImages setTintColor:[UIColor bn_lightBlueColor]];
+    if ([SettingsManager sharedInstance].isRoundImagesEnabled) {
+        [self.roundedImages setTintColor:[UIColor bn_lightBlueColor]];
+    } else {
+        [self.roundedImages setTintColor:[UIColor lightGrayColor]];
+    }
 }
 @end
