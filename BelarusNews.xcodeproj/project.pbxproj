@@ -828,7 +828,7 @@
 		};
 		5681CB03AA966031C4CA2015 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -836,10 +836,9 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews/Pods-BelarusNews-frameworks.sh\"\n";
 		};
 		B3B6E403242390D4C54E3933 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -873,7 +872,7 @@
 		};
 		C41DD30F770866432666F9C3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -881,10 +880,9 @@
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KinopoiskParserObj/Pods-KinopoiskParserObj-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews//Pods-BelarusNews-resources.sh";
 		};
 		D8EB495AB9C5DF3F6625622A /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
