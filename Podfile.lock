@@ -46,9 +46,9 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - LMSideBarController (1.0.1)
   - Reachability (3.2)
-  - Realm (2.2.0):
-    - Realm/Headers (= 2.2.0)
-  - Realm/Headers (2.2.0)
+  - Realm (2.4.2):
+    - Realm/Headers (= 2.4.2)
+  - Realm/Headers (2.4.2)
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
@@ -84,7 +84,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   LMSideBarController: bfbe56b30c76a541918b4c3f8972f64a49b295a1
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  Realm: d95b8fb34c83f1e764b66d319277a62c2b6e4bf5
+  Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   UIAlertController+Blocks: 80e28b92523fb58aba4d1bccec013d5a0b0bddb2
 

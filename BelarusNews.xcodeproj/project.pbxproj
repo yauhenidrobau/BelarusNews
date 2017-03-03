@@ -662,10 +662,8 @@
 				1E7328ED1D7813740027E46E /* Resources */,
 				1E11C9431DDDA10200D55B28 /* Embed Frameworks */,
 				1E11C9441DDDA18300D55B28 /* ShellScript */,
-				5681CB03AA966031C4CA2015 /* [CP] Embed Pods Frameworks */,
-				C41DD30F770866432666F9C3 /* [CP] Copy Pods Resources */,
-				D8EB495AB9C5DF3F6625622A /* 📦 Embed Pods Frameworks */,
-				B3B6E403242390D4C54E3933 /* 📦 Copy Pods Resources */,
+				6193891DC832A29260385156 /* 📦 Embed Pods Frameworks */,
+				EBDBDDC4A686BF906565B232 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -826,33 +824,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		5681CB03AA966031C4CA2015 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews/Pods-BelarusNews-frameworks.sh\"\n";
-		};
-		B3B6E403242390D4C54E3933 /* 📦 Copy Pods Resources */ = {
+		6193891DC832A29260385156 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews/Pods-BelarusNews-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews/Pods-BelarusNews-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B755CB0345D078013C0B4EF2 /* [CP] Check Pods Manifest.lock */ = {
@@ -870,33 +854,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C41DD30F770866432666F9C3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews//Pods-BelarusNews-resources.sh";
-		};
-		D8EB495AB9C5DF3F6625622A /* 📦 Embed Pods Frameworks */ = {
+		EBDBDDC4A686BF906565B232 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews/Pods-BelarusNews-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews/Pods-BelarusNews-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1152,8 +1122,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drobov.news;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "d29c2f04-d54e-4b6d-905d-eefe3f5aa1e4";
+				PROVISIONING_PROFILE_SPECIFIER = "BelarusNewsProd(2)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
