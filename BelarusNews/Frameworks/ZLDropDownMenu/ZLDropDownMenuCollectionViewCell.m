@@ -51,7 +51,11 @@
 {
     [super setSelected:selected];
     _label.backgroundColor = selected ? [UIColor colorWithRed:255.0 / 255.0 green:255.0 / 255.0 blue:255.0 / 255.0 alpha:1.0] : [UIColor clearColor];
+    if (self.isNightMode) {
+        _label.textColor = selected ? kDropdownMenuSelectedCellColor : kDropdownMenuUnselectedNightCellTextColor;
+    } else {
     _label.textColor = selected ? kDropdownMenuSelectedCellColor : kDropdownMenuUnselectedCellTextColor;
+    }
 }
 
 

@@ -363,9 +363,11 @@ static NSInteger clickCount;
     NSAssert([self.dataSource respondsToSelector:@selector(menu:titleForRowAtIndexPath:)], @"does not respond the 'menu:titleForRowAtIndexPath:' method");
     cell.contentString = [self.dataSource menu:self titleForRowAtIndexPath:[ZLIndexPath indexPathWithColumn:self.currentSelectedMenuIndex row:indexPath.row]];
     if ([cell.contentString isEqualToString:[self.titleButtons[self.currentSelectedMenuIndex] subTitle]]) {
+        self.defaultSelectedCell.isNightMode = self.isNightMode;
         cell.selected = YES;
         self.defaultSelectedCell = cell;
     } else {
+        cell.isNightMode = self.isNightMode;
         cell.selected = NO;
     }
     return cell;

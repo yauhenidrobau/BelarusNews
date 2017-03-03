@@ -12,6 +12,7 @@
 #import "DateFormatterManager.h"
 #import "UIColor+BelarusNews.h"
 #import "SettingsManager.h"
+#import "Constants.h"
 
 @interface NewsTableViewCell ()
 
@@ -103,9 +104,33 @@
     if ([SettingsManager sharedInstance].isRoundImagesEnabled) {
         self.imageNewsView.layer.cornerRadius = CGRectGetWidth(self.imageNewsView.frame) / 2;
     }
+    [self updateFontSize];
 }
 
 -(UIImageView*)imageFromCell {
     return self.imageNewsView;
+}
+
+-(void)updateFontSize {
+    float fontSize = 14;
+    if (IS_IPHONE_4_OR_LESS) {
+        float fontSize = 12;
+
+        self.titleLabel.font = [UIFont systemFontOfSize:fontSize];
+        self.pubDateLabel.font = [UIFont systemFontOfSize:fontSize-1];
+    } else  if (IS_IPHONE_5) {
+        float fontSize = 13;
+        
+        self.titleLabel.font = [UIFont systemFontOfSize:fontSize];
+        self.pubDateLabel.font = [UIFont systemFontOfSize:fontSize-1];
+    } else if (IS_IPHONE_6 || IS_IPHONE_6P){
+        float fontSize = 15;
+        
+        self.titleLabel.font = [UIFont systemFontOfSize:fontSize];
+        self.pubDateLabel.font = [UIFont systemFontOfSize:fontSize-2];
+    } else {
+        self.titleLabel.font = [UIFont systemFontOfSize:fontSize];
+        self.pubDateLabel.font = [UIFont systemFontOfSize:fontSize-2];
+    }
 }
 @end

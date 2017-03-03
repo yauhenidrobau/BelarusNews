@@ -684,6 +684,7 @@ typedef enum {
         [menu removeFromSuperview];
     }
     ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, deviceWidth(), 43)];
+    menu.isNightMode = self.isNightMode;
     if (self.isNightMode) {
         menu.customBackgroundColor = [UIColor bn_nightModeBackgroundColor];
         menu.collectionViewColor = [UIColor bn_nightModeBackgroundColor];

@@ -41,5 +41,5 @@
 @property (nonatomic, strong) UIColor *customBackgroundColor;
 @property (nonatomic, weak) id <ZLDropDownMenuDataSource>dataSource;
 @property (nonatomic, weak) id <ZLDropDownMenuDelegate>delegate;
-
+@property (nonatomic) BOOL isNightMode;
 @end
