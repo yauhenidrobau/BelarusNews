@@ -57,6 +57,7 @@
 "few clouds" = "few clouds";
 "scattered clouds" = "scattered clouds";
 "broken clouds" = "broken clouds";
+"overcast clouds" = "overcast clouds";
 "mist" = "Mist";
 "smoke" = "Smoke";
 "haze" = "Haze";
@@ -81,3 +82,4 @@
 
 "Drag to\nShare" = "Drag to\nShare";
 "m/c" = "m/c";
+"Source link" = "Source";

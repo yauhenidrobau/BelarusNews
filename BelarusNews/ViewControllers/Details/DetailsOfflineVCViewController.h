@@ -13,5 +13,6 @@
 @interface DetailsOfflineVCViewController : UIViewController
 
 @property (nonatomic, strong) NewsEntity *entity;
+@property (nonatomic, strong) NSString *sourceLink;
 
 @end

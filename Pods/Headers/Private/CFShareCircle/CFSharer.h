@@ -1,1 +1,0 @@
-../../../CFShareCircle/Classes/ios/CFSharer.h

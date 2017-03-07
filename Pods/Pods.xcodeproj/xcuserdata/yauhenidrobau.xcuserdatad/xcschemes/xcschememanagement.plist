@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>CFShareCircle.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>DZNEmptyDataSet.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,12 +52,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>059702104D21702DF8853D0E08F063C7</key>
+		<key>233D1657FDB4F70BD92D819250ECD05F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>233D1657FDB4F70BD92D819250ECD05F</key>
+		<key>276E7290570EB630596B76E28129C9CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,22 +67,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>57B22A7EADDCB75E307F8B2C8DBA12B3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A21FED7ED24738EF2DA4044824BDF332</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A894A7BD335B795AD230E3E363F927CB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A9423AE566D8994AA12F99B88EBEE9DE</key>
+		<key>9EF222F9493AAD10E703C5A7A5F8F987</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,7 +77,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D6FC9648BE01825412C951160B7C6FA7</key>
+		<key>B162F943D3F4D34AF0CE01B35831307E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B39FC414063078D7DFFAFBD2A11F4C4E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE916AF2F8EA6C8471E9C132E2F5F1A2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

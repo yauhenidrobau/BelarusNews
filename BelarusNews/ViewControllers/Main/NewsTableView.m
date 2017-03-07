@@ -28,7 +28,7 @@
 #import "DetailsOfflineVCViewController.h"
 
 #import "INSSearchBar.h"
-#import <CFShareCircleView.h>
+#import "CFShareCircleView.h"
 #import "Masonry.h"
 #import "ZLDropDownMenuUICalc.h"
 #import "ZLDropDownMenuCollectionViewCell.h"
@@ -223,13 +223,24 @@ typedef enum {
     NewsEntity *newsEntity = [self setNewsEntityForIndexPath:[self.tableView indexPathForCell:cell]];
     if ([segue.identifier isEqualToString:@"DetailsVCID"]) {
         DetailsViewController *vc = segue.destinationViewController;
-        vc.newsUrl = [NSURL URLWithString:newsEntity.linkFeed];
+        vc.sourceLink = [NSString stringWithString:newsEntity.linkFeed];
     } else if ([segue.identifier isEqualToString:@"DetailsOfflineVCID"]) {
         DetailsOfflineVCViewController *vc = segue.destinationViewController;
+        if ([self.titlesString isEqualToString:@"S13"]) {
+            vc.sourceLink = S13_RU;
+        } else if ([self.titlesString isEqualToString:@"Новый-Час"]) {
+            vc.sourceLink = NOVYCHAS_BY;
+        } else if ([self.urlString containsString:@"onliner"]) {
+            vc.sourceLink = ONLINER_BY;
+        } else if ([self.urlString containsString:@"tut.by"]) {
+            vc.sourceLink = TUT_BY;
+        } else if ([self.titlesString isEqualToString:@"DEV.BY"]) {
+            vc.sourceLink = DEV_BY;
+        }
         vc.entity = newsEntity;
     } else if ([segue.identifier isEqualToString:@"ShareVCID"]) {
         DetailsViewController *vc = segue.destinationViewController;
-        vc.newsUrl = [NSURL URLWithString:self.shareItemsDict[@"authLink"]];
+        vc.sourceLink = self.shareItemsDict[@"authLink"];
     }
 }
 
@@ -378,7 +389,7 @@ typedef enum {
                 [wself.tableView reloadData];
                 [wself showLoadingIndicator:NO];
 
-                NSLog(@"Get FROM SEARCH %ld",wself.searchResults.count);
+                NSLog(@"Get FROM SEARCH %ld",(unsigned long)wself.searchResults.count);
             }];
         });
     } else {
@@ -610,7 +621,7 @@ typedef enum {
 }
 
 -(void)prepareData {
-    _mainTitleArray = @[@"ONLINER",@"TUT.BY",@"DEV.BY", @"PRAVO.BY", @"MTS"];
+    _mainTitleArray = @[@"ONLINER",@"TUT.BY",@"DEV.BY", @"S13", @"Новый-Час"];
     _subTitleArray = @[
                        @[NSLocalizedString(@"People",nil),
                          NSLocalizedString(@"Auto",nil),
@@ -669,9 +680,8 @@ typedef enum {
                          @"ONLINER": [NSDictionary dictionaryWithObjectsAndKeys:
                                          PEOPLE_ONLINER_LINK,NSLocalizedString(@"People",nil),
                                          AUTO_ONLINER_LINK,NSLocalizedString(@"Auto",nil),TECH_ONLINER_NEWS,NSLocalizedString(@"Science",nil),REALT_ONLINER_NEWS,NSLocalizedString(@"Realty",nil), nil],
-                         @"PRAVO.BY" : @[PRAVO_NEWS],
-                         @"YANDEX" : @[YANDEX_NEWS],
-                         @"MTS" : @[MTS_BY_NEWS]};
+                         @"Новый-Час" : @[NOVY_CHAS_NEWS],
+                        @"S13" : @[S13_NEWS]};
     self.titlesString = self.titlesForRequestArray[0][0];
     self.urlString = PEOPLE_ONLINER_LINK;
     [self.userDefaults setObject:self.titlesString forKey:@"CurrentTitle"];
