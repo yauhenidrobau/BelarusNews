@@ -85,12 +85,16 @@ NSMutableDictionary *CDDateDict;
             [currentDataDictionary  setObject:titleFeed forKey:@"title"];
         }
         if (linkFeed.length) {
+            linkFeed = [NSMutableString stringWithFormat:@"%@",[linkFeed stringByReplacingOccurrencesOfString:@";" withString:@""]];
+            linkFeed = [NSMutableString stringWithFormat:@"%@",[linkFeed stringByTrimmingCharactersInSet:[NSCharacterSet
+                                                       whitespaceCharacterSet]]];
             [currentDataDictionary  setObject:linkFeed forKey:@"link"];
+
         }
         if (descriptionFeed.length) {
             NSString *temp = [self getImageUrlFromDescription:descriptionFeed];
             descriptionFeed.string = [self stringByStrippingHTML:descriptionFeed];
-
+            descriptionFeed.string = [descriptionFeed stringByReplacingOccurrencesOfString:@"[&#8230;]" withString:@""];
             if (!urlImage.length) {
                 if (temp.length) {
                     [urlImage appendString:temp];

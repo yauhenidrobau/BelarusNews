@@ -34,8 +34,8 @@
 
 #define DEV_BY_NEWS @"https://dev.by/rss"
 #define YANDEX_NEWS @"https://st.kp.yandex.net/rss/news_premiers.rss"
-#define MTS_BY_NEWS @"http://www.mts.by/rss/"
-#define PRAVO_NEWS @"http://www.pravo.by/novosti/obshchestvenno-politicheskie-i-v-oblasti-prava/rss/"
+#define S13_NEWS @"http://megacat.by/rss-109"
+#define NOVY_CHAS_NEWS @"http://megacat.by/rss-465"
 
 #define YANDEX_METRICE_API_KEY @"ef1d79fb-d889-4ce0-96eb-83c62a3adfd2"
 #define GOOGLE_PLACES_KEY @"AIzaSyB6SYasED7O-tRz3zEPRwHf846Q6DZfjYg"
