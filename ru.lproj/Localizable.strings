@@ -60,6 +60,8 @@
 "few clouds" = "Кучевые облака";
 "scattered clouds" = "Рассеянные облака";
 "broken clouds" = "Сплошная облачность";
+"overcast clouds" = "Пасмурные облака";
+
 "mist" = "Туман";
 "smoke" = "Дым";
 "haze" = "Дымка";

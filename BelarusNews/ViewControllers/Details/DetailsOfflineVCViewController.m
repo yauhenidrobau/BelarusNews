@@ -41,7 +41,6 @@
     if ([SettingsManager sharedInstance].isNightModeEnabled) {
         [self updateForNightMode:YES];
     }
-    
 }
 
 #pragma mark - Private
@@ -51,7 +50,7 @@
     [self.headerImage sd_setImageWithURL:[NSURL URLWithString:self.entity.urlImage]
                                              placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",self.entity.feedIdString]]];
     _detailsTitleLabel.text = self.entity.titleFeed;
-        NSString *linkString = [NSString stringWithFormat:@"%@ : %@ \n\n\n ",NSLocalizedString(@"Source link", nil),self.entity.linkFeed];
+        NSString *linkString = [NSString stringWithFormat:@"%@ : %@ \n\n\n ",NSLocalizedString(@"Source link", nil),self.sourceLink];
 
     self.detailsDescriptionTV.text = linkString;
 

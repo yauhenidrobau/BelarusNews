@@ -853,7 +853,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qkC-mA-D1j">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="133"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="uaa-cG-6uc">
                                         <rect key="frame" x="0.0" y="133" width="375" height="17"/>
@@ -865,6 +865,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="uaa-cG-6uc" firstAttribute="top" secondItem="qkC-mA-D1j" secondAttribute="bottom" id="C1D-5n-eNk"/>
                                     <constraint firstItem="uaa-cG-6uc" firstAttribute="leading" secondItem="igL-p7-ybz" secondAttribute="leading" id="DB3-lv-iJZ"/>
                                     <constraint firstItem="qkC-mA-D1j" firstAttribute="top" secondItem="igL-p7-ybz" secondAttribute="top" id="Daa-Xe-gff"/>
                                     <constraint firstItem="qkC-mA-D1j" firstAttribute="leading" secondItem="igL-p7-ybz" secondAttribute="leading" id="GWM-ti-qxd"/>
@@ -872,7 +873,6 @@
                                     <constraint firstAttribute="trailing" secondItem="qkC-mA-D1j" secondAttribute="trailing" id="Q5q-LN-gAF"/>
                                     <constraint firstAttribute="trailing" secondItem="uaa-cG-6uc" secondAttribute="trailing" id="QSK-fG-ANB"/>
                                     <constraint firstAttribute="height" constant="150" id="rRJ-Zh-bDx"/>
-                                    <constraint firstAttribute="bottom" secondItem="qkC-mA-D1j" secondAttribute="bottom" id="y7S-rm-bAm"/>
                                 </constraints>
                             </view>
                             <textView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAT-js-yyH">

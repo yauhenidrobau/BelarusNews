@@ -224,9 +224,19 @@ typedef enum {
     if ([segue.identifier isEqualToString:@"DetailsVCID"]) {
         DetailsViewController *vc = segue.destinationViewController;
         vc.sourceLink = [NSString stringWithString:newsEntity.linkFeed];
-        NSString *dd;
     } else if ([segue.identifier isEqualToString:@"DetailsOfflineVCID"]) {
         DetailsOfflineVCViewController *vc = segue.destinationViewController;
+        if ([self.titlesString isEqualToString:@"S13"]) {
+            vc.sourceLink = S13_RU;
+        } else if ([self.titlesString isEqualToString:@"Новый-Час"]) {
+            vc.sourceLink = NOVYCHAS_BY;
+        } else if ([self.urlString containsString:@"onliner"]) {
+            vc.sourceLink = ONLINER_BY;
+        } else if ([self.urlString containsString:@"tut.by"]) {
+            vc.sourceLink = TUT_BY;
+        } else if ([self.titlesString isEqualToString:@"DEV.BY"]) {
+            vc.sourceLink = DEV_BY;
+        }
         vc.entity = newsEntity;
     } else if ([segue.identifier isEqualToString:@"ShareVCID"]) {
         DetailsViewController *vc = segue.destinationViewController;
@@ -671,8 +681,7 @@ typedef enum {
                                          PEOPLE_ONLINER_LINK,NSLocalizedString(@"People",nil),
                                          AUTO_ONLINER_LINK,NSLocalizedString(@"Auto",nil),TECH_ONLINER_NEWS,NSLocalizedString(@"Science",nil),REALT_ONLINER_NEWS,NSLocalizedString(@"Realty",nil), nil],
                          @"Новый-Час" : @[NOVY_CHAS_NEWS],
-                         @"YANDEX" : @[YANDEX_NEWS],
-                         @"S13" : @[S13_NEWS]};
+                        @"S13" : @[S13_NEWS]};
     self.titlesString = self.titlesForRequestArray[0][0];
     self.urlString = PEOPLE_ONLINER_LINK;
     [self.userDefaults setObject:self.titlesString forKey:@"CurrentTitle"];
