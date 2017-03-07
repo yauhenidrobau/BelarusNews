@@ -51,13 +51,7 @@
      
      [self.view addSubview:_spinner];
      [self.webView layoutIfNeeded];
-     if (_newsUrl) {
-         NSLog(@"%@",_newsUrl);
-         NSURLRequest *request = [NSURLRequest requestWithURL: _newsUrl];
-         [self.webView loadRequest:request];
-         [self start:self];
      }
-}
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -66,7 +60,12 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:(animated)];
     
-    
+    if (_sourceLink.length) {
+        NSLog(@"%@",_sourceLink);
+        NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:_sourceLink]];
+        [self.webView loadRequest:request];
+        [self start:self];
+    }
     if (self.webView.hidden) {
         self.webView.hidden = NO;
     }
@@ -122,7 +121,7 @@
 
 -(void)changeTitle
 {
-    NSLog(@"index = %ld",index);
+    NSLog(@"index = %ld",(long)index);
     if (index >= _arrTitile.count) {
         _spinner.titleLabelText = _arrTitile[3];
     }else {

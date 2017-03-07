@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailsViewController : UIViewController <UIWebViewDelegate>
-@property(nonatomic, strong) NSURL *newsUrl;
+@property(nonatomic, strong) NSString *sourceLink;
 
 @end

@@ -69,11 +69,11 @@ typedef enum {
     if (self.cityObject.cityID) {
         self.noWeatherLabel.hidden = YES;
         self.cityNameLabel.text = [SettingsManager sharedInstance].currentCity;
-        self.weatherDegreeLabel.text = [NSString stringWithFormat:@"%ld°",self.cityObject.temperature - 273];
+        self.weatherDegreeLabel.text = [NSString stringWithFormat:@"%d°",self.cityObject.temperature - 273];
         self.weatherImage.image = [UIImage imageNamed:self.cityObject.mainWeatherIcon];
         self.weatherBackgroundImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"Image-%@",self.cityObject.mainWeatherIcon]];
 
-        self.weatherWind.text = [NSString stringWithFormat:@"%@   %ld %@",NSLocalizedString(@"Wind", nil),self.cityObject.windSpeed,NSLocalizedString(@"m/c", nil)];
+        self.weatherWind.text = [NSString stringWithFormat:@"%@   %ld %@",NSLocalizedString(@"Wind", nil),(long)self.cityObject.windSpeed,NSLocalizedString(@"m/c", nil)];
         [self configWeatherDescription:self.cityObject.weatherID];
     } else {
         self.noWeatherLabel.hidden = NO;

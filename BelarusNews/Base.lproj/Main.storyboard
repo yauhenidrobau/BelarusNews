@@ -78,7 +78,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5LD-32-3eK">
                                         <rect key="frame" x="0.0" y="0.0" width="220" height="201"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mLH-10-dzF">
+                                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mLH-10-dzF">
                                                 <rect key="frame" x="0.0" y="0.0" width="220" height="201"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KiA-lC-AA6">
@@ -709,7 +709,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="73R-Gn-Dl2">
                                                     <rect key="frame" x="8" y="0.0" width="357" height="85"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image_200_200" translatesAutoresizingMaskIntoConstraints="NO" id="Zqx-GC-hPW">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image_200_200" translatesAutoresizingMaskIntoConstraints="NO" id="Zqx-GC-hPW">
                                                             <rect key="frame" x="3" y="8" width="70" height="70"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="70" id="MrA-ac-44C"/>
@@ -885,14 +885,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="uaa-cG-6uc">
-                                        <rect key="frame" x="0.0" y="129.5" width="375" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="133" width="375" height="17"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.031372549020000001" green="0.98039215690000003" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.66274509800000003" green="0.18823529410000001" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="uaa-cG-6uc" firstAttribute="leading" secondItem="igL-p7-ybz" secondAttribute="leading" id="DB3-lv-iJZ"/>
                                     <constraint firstItem="qkC-mA-D1j" firstAttribute="top" secondItem="igL-p7-ybz" secondAttribute="top" id="Daa-Xe-gff"/>
@@ -904,12 +904,13 @@
                                     <constraint firstAttribute="bottom" secondItem="qkC-mA-D1j" secondAttribute="bottom" id="y7S-rm-bAm"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAT-js-yyH">
+                            <textView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAT-js-yyH">
                                 <rect key="frame" x="0.0" y="214" width="375" height="453"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
