@@ -28,7 +28,7 @@
 #import "DetailsOfflineVCViewController.h"
 
 #import "INSSearchBar.h"
-#import <CFShareCircleView.h>
+#import "CFShareCircleView.h"
 #import "Masonry.h"
 #import "ZLDropDownMenuUICalc.h"
 #import "ZLDropDownMenuCollectionViewCell.h"

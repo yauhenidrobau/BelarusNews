@@ -17,8 +17,8 @@
 #define W(a)                                (a.frame.size.width)
 #define H(a)                                (a.frame.size.height)
 
-#define kDefaultAnimationDuration           0.37
-#define kDefaultDepthStyleClosedScale       0.5
+#define kDefaultAnimationDuration           0.6
+#define kDefaultDepthStyleClosedScale       0.8
 #define kDefaultBlurRadius                  5
 #define kDefaultBlackMaskAlpha              0.4
 #define kDefaultAnimationBounceScale        0.05
