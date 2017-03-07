@@ -20,6 +20,36 @@
 		1E0FE36D1E6EB1460009BC26 /* CityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3681E6EB1460009BC26 /* CityObject.m */; };
 		1E0FE36E1E6EB1460009BC26 /* ForecastObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE36A1E6EB1460009BC26 /* ForecastObject.m */; };
 		1E0FE36F1E6EB1460009BC26 /* NewsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE36C1E6EB1460009BC26 /* NewsEntity.m */; };
+		1E0FE39C1E6EE73A0009BC26 /* CFShareCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE37C1E6EE73A0009BC26 /* CFShareCircleView.m */; };
+		1E0FE39D1E6EE73A0009BC26 /* CFSharer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE37E1E6EE73A0009BC26 /* CFSharer.m */; };
+		1E0FE39E1E6EE73A0009BC26 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE37F1E6EE73A0009BC26 /* LICENSE */; };
+		1E0FE39F1E6EE73A0009BC26 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3801E6EE73A0009BC26 /* README.md */; };
+		1E0FE3A01E6EE73A0009BC26 /* camera_roll.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3821E6EE73A0009BC26 /* camera_roll.png */; };
+		1E0FE3A11E6EE73A0009BC26 /* camera_roll@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3831E6EE73A0009BC26 /* camera_roll@2x.png */; };
+		1E0FE3A21E6EE73A0009BC26 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3841E6EE73A0009BC26 /* close.png */; };
+		1E0FE3A31E6EE73A0009BC26 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3851E6EE73A0009BC26 /* close@2x.png */; };
+		1E0FE3A41E6EE73A0009BC26 /* dropbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3861E6EE73A0009BC26 /* dropbox.png */; };
+		1E0FE3A51E6EE73A0009BC26 /* dropbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3871E6EE73A0009BC26 /* dropbox@2x.png */; };
+		1E0FE3A61E6EE73A0009BC26 /* evernote.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3881E6EE73A0009BC26 /* evernote.png */; };
+		1E0FE3A71E6EE73A0009BC26 /* evernote@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3891E6EE73A0009BC26 /* evernote@2x.png */; };
+		1E0FE3A81E6EE73A0009BC26 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE38A1E6EE73A0009BC26 /* facebook.png */; };
+		1E0FE3A91E6EE73A0009BC26 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE38B1E6EE73A0009BC26 /* facebook@2x.png */; };
+		1E0FE3AA1E6EE73A0009BC26 /* google_drive.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE38C1E6EE73A0009BC26 /* google_drive.png */; };
+		1E0FE3AB1E6EE73A0009BC26 /* google_drive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE38D1E6EE73A0009BC26 /* google_drive@2x.png */; };
+		1E0FE3AC1E6EE73A0009BC26 /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE38E1E6EE73A0009BC26 /* mail.png */; };
+		1E0FE3AD1E6EE73A0009BC26 /* mail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE38F1E6EE73A0009BC26 /* mail@2x.png */; };
+		1E0FE3AE1E6EE73A0009BC26 /* more copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3901E6EE73A0009BC26 /* more copy.png */; };
+		1E0FE3AF1E6EE73A0009BC26 /* more@2x copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3911E6EE73A0009BC26 /* more@2x copy.png */; };
+		1E0FE3B01E6EE73A0009BC26 /* pinterest copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3921E6EE73A0009BC26 /* pinterest copy.png */; };
+		1E0FE3B11E6EE73A0009BC26 /* pinterest.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3931E6EE73A0009BC26 /* pinterest.png */; };
+		1E0FE3B21E6EE73A0009BC26 /* pinterest@2x copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3941E6EE73A0009BC26 /* pinterest@2x copy.png */; };
+		1E0FE3B31E6EE73A0009BC26 /* pinterest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3951E6EE73A0009BC26 /* pinterest@2x.png */; };
+		1E0FE3B41E6EE73A0009BC26 /* print.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3961E6EE73A0009BC26 /* print.png */; };
+		1E0FE3B51E6EE73A0009BC26 /* print@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3971E6EE73A0009BC26 /* print@2x.png */; };
+		1E0FE3B61E6EE73A0009BC26 /* twitter copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3981E6EE73A0009BC26 /* twitter copy.png */; };
+		1E0FE3B71E6EE73A0009BC26 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE3991E6EE73A0009BC26 /* twitter.png */; };
+		1E0FE3B81E6EE73A0009BC26 /* twitter@2x copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE39A1E6EE73A0009BC26 /* twitter@2x copy.png */; };
+		1E0FE3B91E6EE73A0009BC26 /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0FE39B1E6EE73A0009BC26 /* twitter@2x.png */; };
 		1E1286111E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1286101E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m */; };
 		1E1286181E5D850600D2899D /* UIColor+BelarusNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1286171E5D850600D2899D /* UIColor+BelarusNews.m */; };
 		1E12861B1E5D916F00D2899D /* SettingsBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E12861A1E5D916F00D2899D /* SettingsBaseCell.m */; };
@@ -135,6 +165,38 @@
 		1E0FE36A1E6EB1460009BC26 /* ForecastObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastObject.m; sourceTree = "<group>"; };
 		1E0FE36B1E6EB1460009BC26 /* NewsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsEntity.h; sourceTree = "<group>"; };
 		1E0FE36C1E6EB1460009BC26 /* NewsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsEntity.m; sourceTree = "<group>"; };
+		1E0FE37B1E6EE73A0009BC26 /* CFShareCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFShareCircleView.h; sourceTree = "<group>"; };
+		1E0FE37C1E6EE73A0009BC26 /* CFShareCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFShareCircleView.m; sourceTree = "<group>"; };
+		1E0FE37D1E6EE73A0009BC26 /* CFSharer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFSharer.h; sourceTree = "<group>"; };
+		1E0FE37E1E6EE73A0009BC26 /* CFSharer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFSharer.m; sourceTree = "<group>"; };
+		1E0FE37F1E6EE73A0009BC26 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		1E0FE3801E6EE73A0009BC26 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1E0FE3821E6EE73A0009BC26 /* camera_roll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_roll.png; sourceTree = "<group>"; };
+		1E0FE3831E6EE73A0009BC26 /* camera_roll@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_roll@2x.png"; sourceTree = "<group>"; };
+		1E0FE3841E6EE73A0009BC26 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		1E0FE3851E6EE73A0009BC26 /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
+		1E0FE3861E6EE73A0009BC26 /* dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropbox.png; sourceTree = "<group>"; };
+		1E0FE3871E6EE73A0009BC26 /* dropbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dropbox@2x.png"; sourceTree = "<group>"; };
+		1E0FE3881E6EE73A0009BC26 /* evernote.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evernote.png; sourceTree = "<group>"; };
+		1E0FE3891E6EE73A0009BC26 /* evernote@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "evernote@2x.png"; sourceTree = "<group>"; };
+		1E0FE38A1E6EE73A0009BC26 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		1E0FE38B1E6EE73A0009BC26 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
+		1E0FE38C1E6EE73A0009BC26 /* google_drive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = google_drive.png; sourceTree = "<group>"; };
+		1E0FE38D1E6EE73A0009BC26 /* google_drive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "google_drive@2x.png"; sourceTree = "<group>"; };
+		1E0FE38E1E6EE73A0009BC26 /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
+		1E0FE38F1E6EE73A0009BC26 /* mail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mail@2x.png"; sourceTree = "<group>"; };
+		1E0FE3901E6EE73A0009BC26 /* more copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more copy.png"; sourceTree = "<group>"; };
+		1E0FE3911E6EE73A0009BC26 /* more@2x copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@2x copy.png"; sourceTree = "<group>"; };
+		1E0FE3921E6EE73A0009BC26 /* pinterest copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinterest copy.png"; sourceTree = "<group>"; };
+		1E0FE3931E6EE73A0009BC26 /* pinterest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinterest.png; sourceTree = "<group>"; };
+		1E0FE3941E6EE73A0009BC26 /* pinterest@2x copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinterest@2x copy.png"; sourceTree = "<group>"; };
+		1E0FE3951E6EE73A0009BC26 /* pinterest@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinterest@2x.png"; sourceTree = "<group>"; };
+		1E0FE3961E6EE73A0009BC26 /* print.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = print.png; sourceTree = "<group>"; };
+		1E0FE3971E6EE73A0009BC26 /* print@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "print@2x.png"; sourceTree = "<group>"; };
+		1E0FE3981E6EE73A0009BC26 /* twitter copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter copy.png"; sourceTree = "<group>"; };
+		1E0FE3991E6EE73A0009BC26 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
+		1E0FE39A1E6EE73A0009BC26 /* twitter@2x copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x copy.png"; sourceTree = "<group>"; };
+		1E0FE39B1E6EE73A0009BC26 /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
 		1E12860F1E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsNightModeCellTableViewCell.h; sourceTree = "<group>"; };
 		1E1286101E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsNightModeCellTableViewCell.m; sourceTree = "<group>"; };
 		1E1286161E5D850600D2899D /* UIColor+BelarusNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BelarusNews.h"; sourceTree = "<group>"; };
@@ -334,12 +396,76 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		1E0FE3781E6EE73A0009BC26 /* CFShareCircle */ = {
+			isa = PBXGroup;
+			children = (
+				1E0FE3791E6EE73A0009BC26 /* Classes */,
+				1E0FE37F1E6EE73A0009BC26 /* LICENSE */,
+				1E0FE3801E6EE73A0009BC26 /* README.md */,
+				1E0FE3811E6EE73A0009BC26 /* Resources */,
+			);
+			path = CFShareCircle;
+			sourceTree = "<group>";
+		};
+		1E0FE3791E6EE73A0009BC26 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1E0FE37A1E6EE73A0009BC26 /* ios */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		1E0FE37A1E6EE73A0009BC26 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				1E0FE37B1E6EE73A0009BC26 /* CFShareCircleView.h */,
+				1E0FE37C1E6EE73A0009BC26 /* CFShareCircleView.m */,
+				1E0FE37D1E6EE73A0009BC26 /* CFSharer.h */,
+				1E0FE37E1E6EE73A0009BC26 /* CFSharer.m */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		1E0FE3811E6EE73A0009BC26 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1E0FE3821E6EE73A0009BC26 /* camera_roll.png */,
+				1E0FE3831E6EE73A0009BC26 /* camera_roll@2x.png */,
+				1E0FE3841E6EE73A0009BC26 /* close.png */,
+				1E0FE3851E6EE73A0009BC26 /* close@2x.png */,
+				1E0FE3861E6EE73A0009BC26 /* dropbox.png */,
+				1E0FE3871E6EE73A0009BC26 /* dropbox@2x.png */,
+				1E0FE3881E6EE73A0009BC26 /* evernote.png */,
+				1E0FE3891E6EE73A0009BC26 /* evernote@2x.png */,
+				1E0FE38A1E6EE73A0009BC26 /* facebook.png */,
+				1E0FE38B1E6EE73A0009BC26 /* facebook@2x.png */,
+				1E0FE38C1E6EE73A0009BC26 /* google_drive.png */,
+				1E0FE38D1E6EE73A0009BC26 /* google_drive@2x.png */,
+				1E0FE38E1E6EE73A0009BC26 /* mail.png */,
+				1E0FE38F1E6EE73A0009BC26 /* mail@2x.png */,
+				1E0FE3901E6EE73A0009BC26 /* more copy.png */,
+				1E0FE3911E6EE73A0009BC26 /* more@2x copy.png */,
+				1E0FE3921E6EE73A0009BC26 /* pinterest copy.png */,
+				1E0FE3931E6EE73A0009BC26 /* pinterest.png */,
+				1E0FE3941E6EE73A0009BC26 /* pinterest@2x copy.png */,
+				1E0FE3951E6EE73A0009BC26 /* pinterest@2x.png */,
+				1E0FE3961E6EE73A0009BC26 /* print.png */,
+				1E0FE3971E6EE73A0009BC26 /* print@2x.png */,
+				1E0FE3981E6EE73A0009BC26 /* twitter copy.png */,
+				1E0FE3991E6EE73A0009BC26 /* twitter.png */,
+				1E0FE39A1E6EE73A0009BC26 /* twitter@2x copy.png */,
+				1E0FE39B1E6EE73A0009BC26 /* twitter@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		1E11C93D1DDD9E4C00D55B28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				1E91CFFB1E64188700CB60EB /* iAd.framework */,
 				1E91CFF91E6414B000CB60EB /* AdSupport.framework */,
 				1EFE91841E23BF06008CA308 /* UserNotifications.framework */,
+				1E0FE3781E6EE73A0009BC26 /* CFShareCircle */,
 				84FF33391E1DCD04002847AB /* Spinners */,
 				1E26668F1E127AC3001DF2A2 /* CustomSearchBar */,
 				1E640B311E0A85FC00AA539C /* ZLDropDownMenu */,
@@ -670,10 +796,8 @@
 				1E7328ED1D7813740027E46E /* Resources */,
 				1E11C9431DDDA10200D55B28 /* Embed Frameworks */,
 				1E11C9441DDDA18300D55B28 /* ShellScript */,
-				5681CB03AA966031C4CA2015 /* [CP] Embed Pods Frameworks */,
-				C41DD30F770866432666F9C3 /* [CP] Copy Pods Resources */,
-				D8EB495AB9C5DF3F6625622A /* 📦 Embed Pods Frameworks */,
-				B3B6E403242390D4C54E3933 /* 📦 Copy Pods Resources */,
+				786C8BF0529FC78B61A36423 /* 📦 Embed Pods Frameworks */,
+				650FD198D3BDD2473FDE2E0F /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -778,14 +902,41 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E0FE3B01E6EE73A0009BC26 /* pinterest copy.png in Resources */,
 				843C97CA1E54F76200B23E9C /* BelarusNewsDev.mobileprovision in Resources */,
+				1E0FE3A01E6EE73A0009BC26 /* camera_roll.png in Resources */,
+				1E0FE3AD1E6EE73A0009BC26 /* mail@2x.png in Resources */,
+				1E0FE3A71E6EE73A0009BC26 /* evernote@2x.png in Resources */,
+				1E0FE3A41E6EE73A0009BC26 /* dropbox.png in Resources */,
+				1E0FE3B71E6EE73A0009BC26 /* twitter.png in Resources */,
+				1E0FE3A51E6EE73A0009BC26 /* dropbox@2x.png in Resources */,
 				1E91CFF81E640C1700CB60EB /* GoogleService-Info.plist in Resources */,
+				1E0FE3AC1E6EE73A0009BC26 /* mail.png in Resources */,
+				1E0FE3AF1E6EE73A0009BC26 /* more@2x copy.png in Resources */,
+				1E0FE3A11E6EE73A0009BC26 /* camera_roll@2x.png in Resources */,
 				843C97CB1E54F76200B23E9C /* debug.p12 in Resources */,
+				1E0FE3A61E6EE73A0009BC26 /* evernote.png in Resources */,
+				1E0FE3B11E6EE73A0009BC26 /* pinterest.png in Resources */,
 				843C97CC1E54F76200B23E9C /* destr.p12 in Resources */,
+				1E0FE3A21E6EE73A0009BC26 /* close.png in Resources */,
+				1E0FE3B51E6EE73A0009BC26 /* print@2x.png in Resources */,
+				1E0FE3B61E6EE73A0009BC26 /* twitter copy.png in Resources */,
+				1E0FE3B31E6EE73A0009BC26 /* pinterest@2x.png in Resources */,
+				1E0FE3B91E6EE73A0009BC26 /* twitter@2x.png in Resources */,
+				1E0FE3B41E6EE73A0009BC26 /* print.png in Resources */,
 				84702F881DF8887C005CE945 /* Localizable.strings in Resources */,
+				1E0FE3AE1E6EE73A0009BC26 /* more copy.png in Resources */,
+				1E0FE3AB1E6EE73A0009BC26 /* google_drive@2x.png in Resources */,
+				1E0FE3B81E6EE73A0009BC26 /* twitter@2x copy.png in Resources */,
+				1E0FE3B21E6EE73A0009BC26 /* pinterest@2x copy.png in Resources */,
 				1E7329051D7813740027E46E /* LaunchScreen.storyboard in Resources */,
+				1E0FE3A81E6EE73A0009BC26 /* facebook.png in Resources */,
+				1E0FE3A31E6EE73A0009BC26 /* close@2x.png in Resources */,
+				1E0FE39E1E6EE73A0009BC26 /* LICENSE in Resources */,
 				1E7329021D7813740027E46E /* Assets.xcassets in Resources */,
+				1E0FE3AA1E6EE73A0009BC26 /* google_drive.png in Resources */,
 				1E7328FD1D7813740027E46E /* Main.storyboard in Resources */,
+				1E0FE3A91E6EE73A0009BC26 /* facebook@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,21 +985,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		5681CB03AA966031C4CA2015 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews/Pods-BelarusNews-frameworks.sh\"\n";
-		};
-		B3B6E403242390D4C54E3933 /* 📦 Copy Pods Resources */ = {
+		650FD198D3BDD2473FDE2E0F /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -861,6 +998,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews/Pods-BelarusNews-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		786C8BF0529FC78B61A36423 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews/Pods-BelarusNews-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B755CB0345D078013C0B4EF2 /* [CP] Check Pods Manifest.lock */ = {
@@ -876,35 +1028,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C41DD30F770866432666F9C3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews//Pods-BelarusNews-resources.sh";
-		};
-		D8EB495AB9C5DF3F6625622A /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BelarusNews/Pods-BelarusNews-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -942,6 +1065,7 @@
 				1E12861B1E5D916F00D2899D /* SettingsBaseCell.m in Sources */,
 				1E7329441D781E980027E46E /* XMLParser.m in Sources */,
 				1E640B5C1E0A85FE00AA539C /* MASLayoutConstraint.m in Sources */,
+				1E0FE39D1E6EE73A0009BC26 /* CFSharer.m in Sources */,
 				1E640B581E0A85FE00AA539C /* NSString+ZLStringSize.m in Sources */,
 				84FF33451E1DD00F002847AB /* FeSpinnerTenDot.m in Sources */,
 				1E7328F71D7813740027E46E /* AppDelegate.m in Sources */,
@@ -953,7 +1077,9 @@
 				1E0FE3601E6EB1300009BC26 /* RemoteFacade.m in Sources */,
 				1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */,
 				84FF33411E1DCEAC002847AB /* FXBlurView.m in Sources */,
+				1E0FE39C1E6EE73A0009BC26 /* CFShareCircleView.m in Sources */,
 				1EFE917A1E237908008CA308 /* Utils.m in Sources */,
+				1E0FE39F1E6EE73A0009BC26 /* README.md in Sources */,
 				84FF333C1E1DCE0B002847AB /* FeTenDot.m in Sources */,
 				1E0FE36E1E6EB1460009BC26 /* ForecastObject.m in Sources */,
 				1E640B5F1E0A85FE00AA539C /* NSArray+MASAdditions.m in Sources */,
@@ -1160,8 +1286,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drobov.news;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "d29c2f04-d54e-4b6d-905d-eefe3f5aa1e4";
+				PROVISIONING_PROFILE_SPECIFIER = "BelarusNewsProd(2)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

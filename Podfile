@@ -10,7 +10,6 @@ target ‘BelarusNews' do
    pod 'Crashlytics'
    pod 'AFNetworking', '~> 2.0'
    pod 'LMSideBarController'
-   pod 'CFShareCircle'
    pod 'GooglePlaces'
    pod 'Google/Analytics'
 
