@@ -7,19 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */; };
-		1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */; };
-		1E12860B1E5D6D1800D2899D /* ForecastObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E12860A1E5D6D1800D2899D /* ForecastObject.m */; };
-		1E12860E1E5D6D2900D2899D /* ForecastManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E12860D1E5D6D2900D2899D /* ForecastManager.m */; };
+		1E0FE35B1E6EB1300009BC26 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3481E6EB1300009BC26 /* DataManager.m */; };
+		1E0FE35C1E6EB1300009BC26 /* DateFormatterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE34A1E6EB1300009BC26 /* DateFormatterManager.m */; };
+		1E0FE35D1E6EB1300009BC26 /* ForecastManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE34C1E6EB1300009BC26 /* ForecastManager.m */; };
+		1E0FE35E1E6EB1300009BC26 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE34E1E6EB1300009BC26 /* NotificationManager.m */; };
+		1E0FE35F1E6EB1300009BC26 /* RealmDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3501E6EB1300009BC26 /* RealmDataManager.m */; };
+		1E0FE3601E6EB1300009BC26 /* RemoteFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3521E6EB1300009BC26 /* RemoteFacade.m */; };
+		1E0FE3611E6EB1300009BC26 /* SearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3541E6EB1300009BC26 /* SearchManager.m */; };
+		1E0FE3621E6EB1300009BC26 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3561E6EB1300009BC26 /* SettingsManager.m */; };
+		1E0FE3631E6EB1300009BC26 /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3581E6EB1300009BC26 /* ShareManager.m */; };
+		1E0FE3641E6EB1300009BC26 /* UserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE35A1E6EB1300009BC26 /* UserDefaultsManager.m */; };
+		1E0FE36D1E6EB1460009BC26 /* CityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3681E6EB1460009BC26 /* CityObject.m */; };
+		1E0FE36E1E6EB1460009BC26 /* ForecastObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE36A1E6EB1460009BC26 /* ForecastObject.m */; };
+		1E0FE36F1E6EB1460009BC26 /* NewsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE36C1E6EB1460009BC26 /* NewsEntity.m */; };
 		1E1286111E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1286101E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m */; };
 		1E1286181E5D850600D2899D /* UIColor+BelarusNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1286171E5D850600D2899D /* UIColor+BelarusNews.m */; };
 		1E12861B1E5D916F00D2899D /* SettingsBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E12861A1E5D916F00D2899D /* SettingsBaseCell.m */; };
-		1E1C66381E290C1300086CCC /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1C66371E290C1300086CCC /* NotificationManager.m */; };
 		1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2666911E127AD6001DF2A2 /* INSSearchBar.m */; };
-		1E372F851DF94C7400362CC1 /* DateFormatterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E372F821DF94C7400362CC1 /* DateFormatterManager.m */; };
-		1E372F861DF94C7400362CC1 /* SearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E372F841DF94C7400362CC1 /* SearchManager.m */; };
-		1E4C8C5E1E55C15E00B2ED44 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C8C5D1E55C15E00B2ED44 /* SettingsManager.m */; };
-		1E4C8C611E55E46C00B2ED44 /* UserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C8C601E55E46C00B2ED44 /* UserDefaultsManager.m */; };
 		1E4C8C641E56D8FB00B2ED44 /* SettingsAutoupdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C8C631E56D8FB00B2ED44 /* SettingsAutoupdateCell.m */; };
 		1E640B581E0A85FE00AA539C /* NSString+ZLStringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B341E0A85FC00AA539C /* NSString+ZLStringSize.m */; };
 		1E640B591E0A85FE00AA539C /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B381E0A85FC00AA539C /* MASCompositeConstraint.m */; };
@@ -48,12 +52,9 @@
 		1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329351D7814C00027E46E /* NewsTableViewCell.m */; };
 		1E7329441D781E980027E46E /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329431D781E980027E46E /* XMLParser.m */; };
 		1E7329471D7836400027E46E /* ParserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329461D7836400027E46E /* ParserManager.m */; };
-		1E73294F1D7843310027E46E /* RemoteFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E73294E1D7843310027E46E /* RemoteFacade.m */; };
-		1E7329521D7845210027E46E /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329511D7845210027E46E /* DataManager.m */; };
 		1E7329551D7848530027E46E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329541D7848530027E46E /* DetailsViewController.m */; };
 		1E91CFDF1E600F0A00CB60EB /* SettingsRoundImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFDE1E600F0A00CB60EB /* SettingsRoundImagesCell.m */; };
 		1E91CFE81E60616500CB60EB /* SettingsCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFE71E60616500CB60EB /* SettingsCityCell.m */; };
-		1E91CFEB1E6064B300CB60EB /* CityObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFEA1E6064B300CB60EB /* CityObject.m */; };
 		1E91CFF61E60788300CB60EB /* LocationAutoCompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFF51E60788300CB60EB /* LocationAutoCompleteController.m */; };
 		1E91CFF81E640C1700CB60EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E91CFF71E640C1700CB60EB /* GoogleService-Info.plist */; };
 		1E91CFFA1E6414B000CB60EB /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E91CFF91E6414B000CB60EB /* AdSupport.framework */; };
@@ -71,7 +72,6 @@
 		843C97CC1E54F76200B23E9C /* destr.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 843C97C91E54F76200B23E9C /* destr.p12 */; };
 		844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A9FD11DF0EE2A00917832 /* MenuViewController.m */; };
 		84702F881DF8887C005CE945 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84702F8A1DF8887C005CE945 /* Localizable.strings */; };
-		84FF33381E1DAF72002847AB /* ShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF33371E1DAF72002847AB /* ShareManager.m */; };
 		84FF333C1E1DCE0B002847AB /* FeTenDot.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF333B1E1DCE0B002847AB /* FeTenDot.m */; };
 		84FF33411E1DCEAC002847AB /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF333E1E1DCEAC002847AB /* FXBlurView.m */; };
 		84FF33421E1DCEAC002847AB /* UIColor+flat.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF33401E1DCEAC002847AB /* UIColor+flat.m */; };
@@ -109,33 +109,41 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1E11C9451DDDAA1F00D55B28 /* NewsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsEntity.h; path = ../Persistance/NewsEntity.h; sourceTree = "<group>"; };
-		1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsEntity.m; path = ../Persistance/NewsEntity.m; sourceTree = "<group>"; };
-		1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDataManager.h; sourceTree = "<group>"; };
-		1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmDataManager.m; sourceTree = "<group>"; };
-		1E1286091E5D6D1800D2899D /* ForecastObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastObject.h; sourceTree = "<group>"; };
-		1E12860A1E5D6D1800D2899D /* ForecastObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastObject.m; sourceTree = "<group>"; };
-		1E12860C1E5D6D2900D2899D /* ForecastManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastManager.h; sourceTree = "<group>"; };
-		1E12860D1E5D6D2900D2899D /* ForecastManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastManager.m; sourceTree = "<group>"; };
+		1E0FE3471E6EB1300009BC26 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		1E0FE3481E6EB1300009BC26 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		1E0FE3491E6EB1300009BC26 /* DateFormatterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterManager.h; sourceTree = "<group>"; };
+		1E0FE34A1E6EB1300009BC26 /* DateFormatterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterManager.m; sourceTree = "<group>"; };
+		1E0FE34B1E6EB1300009BC26 /* ForecastManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastManager.h; sourceTree = "<group>"; };
+		1E0FE34C1E6EB1300009BC26 /* ForecastManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastManager.m; sourceTree = "<group>"; };
+		1E0FE34D1E6EB1300009BC26 /* NotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationManager.h; sourceTree = "<group>"; };
+		1E0FE34E1E6EB1300009BC26 /* NotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationManager.m; sourceTree = "<group>"; };
+		1E0FE34F1E6EB1300009BC26 /* RealmDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDataManager.h; sourceTree = "<group>"; };
+		1E0FE3501E6EB1300009BC26 /* RealmDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmDataManager.m; sourceTree = "<group>"; };
+		1E0FE3511E6EB1300009BC26 /* RemoteFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteFacade.h; sourceTree = "<group>"; };
+		1E0FE3521E6EB1300009BC26 /* RemoteFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteFacade.m; sourceTree = "<group>"; };
+		1E0FE3531E6EB1300009BC26 /* SearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchManager.h; sourceTree = "<group>"; };
+		1E0FE3541E6EB1300009BC26 /* SearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchManager.m; sourceTree = "<group>"; };
+		1E0FE3551E6EB1300009BC26 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
+		1E0FE3561E6EB1300009BC26 /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
+		1E0FE3571E6EB1300009BC26 /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareManager.h; sourceTree = "<group>"; };
+		1E0FE3581E6EB1300009BC26 /* ShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareManager.m; sourceTree = "<group>"; };
+		1E0FE3591E6EB1300009BC26 /* UserDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsManager.h; sourceTree = "<group>"; };
+		1E0FE35A1E6EB1300009BC26 /* UserDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsManager.m; sourceTree = "<group>"; };
+		1E0FE3671E6EB1460009BC26 /* CityObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityObject.h; sourceTree = "<group>"; };
+		1E0FE3681E6EB1460009BC26 /* CityObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityObject.m; sourceTree = "<group>"; };
+		1E0FE3691E6EB1460009BC26 /* ForecastObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastObject.h; sourceTree = "<group>"; };
+		1E0FE36A1E6EB1460009BC26 /* ForecastObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastObject.m; sourceTree = "<group>"; };
+		1E0FE36B1E6EB1460009BC26 /* NewsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsEntity.h; sourceTree = "<group>"; };
+		1E0FE36C1E6EB1460009BC26 /* NewsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsEntity.m; sourceTree = "<group>"; };
 		1E12860F1E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsNightModeCellTableViewCell.h; sourceTree = "<group>"; };
 		1E1286101E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsNightModeCellTableViewCell.m; sourceTree = "<group>"; };
 		1E1286161E5D850600D2899D /* UIColor+BelarusNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BelarusNews.h"; sourceTree = "<group>"; };
 		1E1286171E5D850600D2899D /* UIColor+BelarusNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BelarusNews.m"; sourceTree = "<group>"; };
 		1E1286191E5D916F00D2899D /* SettingsBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsBaseCell.h; sourceTree = "<group>"; };
 		1E12861A1E5D916F00D2899D /* SettingsBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsBaseCell.m; sourceTree = "<group>"; };
-		1E1C66361E290C1300086CCC /* NotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationManager.h; sourceTree = "<group>"; };
-		1E1C66371E290C1300086CCC /* NotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationManager.m; sourceTree = "<group>"; };
 		1E1D3A9E1DE47D9F00D6C00C /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1E2666901E127AD6001DF2A2 /* INSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSSearchBar.h; sourceTree = "<group>"; };
 		1E2666911E127AD6001DF2A2 /* INSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSSearchBar.m; sourceTree = "<group>"; };
-		1E372F811DF94C7400362CC1 /* DateFormatterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormatterManager.h; sourceTree = "<group>"; };
-		1E372F821DF94C7400362CC1 /* DateFormatterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterManager.m; sourceTree = "<group>"; };
-		1E372F831DF94C7400362CC1 /* SearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchManager.h; sourceTree = "<group>"; };
-		1E372F841DF94C7400362CC1 /* SearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchManager.m; sourceTree = "<group>"; };
-		1E4C8C5C1E55C15E00B2ED44 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
-		1E4C8C5D1E55C15E00B2ED44 /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
-		1E4C8C5F1E55E46C00B2ED44 /* UserDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsManager.h; sourceTree = "<group>"; };
-		1E4C8C601E55E46C00B2ED44 /* UserDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsManager.m; sourceTree = "<group>"; };
 		1E4C8C621E56D8FB00B2ED44 /* SettingsAutoupdateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsAutoupdateCell.h; sourceTree = "<group>"; };
 		1E4C8C631E56D8FB00B2ED44 /* SettingsAutoupdateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsAutoupdateCell.m; sourceTree = "<group>"; };
 		1E640B331E0A85FC00AA539C /* NSString+ZLStringSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZLStringSize.h"; sourceTree = "<group>"; };
@@ -197,18 +205,12 @@
 		1E7329431D781E980027E46E /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; };
 		1E7329451D7836400027E46E /* ParserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserManager.h; sourceTree = "<group>"; };
 		1E7329461D7836400027E46E /* ParserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserManager.m; sourceTree = "<group>"; };
-		1E73294D1D7843310027E46E /* RemoteFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteFacade.h; sourceTree = "<group>"; };
-		1E73294E1D7843310027E46E /* RemoteFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteFacade.m; sourceTree = "<group>"; };
-		1E7329501D7845210027E46E /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
-		1E7329511D7845210027E46E /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		1E7329531D7848530027E46E /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		1E7329541D7848530027E46E /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		1E91CFDD1E600F0A00CB60EB /* SettingsRoundImagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsRoundImagesCell.h; sourceTree = "<group>"; };
 		1E91CFDE1E600F0A00CB60EB /* SettingsRoundImagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsRoundImagesCell.m; sourceTree = "<group>"; };
 		1E91CFE61E60616500CB60EB /* SettingsCityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCityCell.h; sourceTree = "<group>"; };
 		1E91CFE71E60616500CB60EB /* SettingsCityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCityCell.m; sourceTree = "<group>"; };
-		1E91CFE91E6064B300CB60EB /* CityObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityObject.h; sourceTree = "<group>"; };
-		1E91CFEA1E6064B300CB60EB /* CityObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityObject.m; sourceTree = "<group>"; };
 		1E91CFF41E60788300CB60EB /* LocationAutoCompleteController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAutoCompleteController.h; sourceTree = "<group>"; };
 		1E91CFF51E60788300CB60EB /* LocationAutoCompleteController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAutoCompleteController.m; sourceTree = "<group>"; };
 		1E91CFF71E640C1700CB60EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -241,8 +243,6 @@
 		84702F8C1DF8888F005CE945 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84702F911DF88B5A005CE945 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		84702F931DF88B6C005CE945 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		84FF33361E1DAF72002847AB /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareManager.h; sourceTree = "<group>"; };
-		84FF33371E1DAF72002847AB /* ShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareManager.m; sourceTree = "<group>"; };
 		84FF333A1E1DCE0B002847AB /* FeTenDot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeTenDot.h; sourceTree = "<group>"; };
 		84FF333B1E1DCE0B002847AB /* FeTenDot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeTenDot.m; sourceTree = "<group>"; };
 		84FF333D1E1DCEAC002847AB /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
@@ -284,6 +284,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E0FE3461E6EB1300009BC26 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1E0FE3471E6EB1300009BC26 /* DataManager.h */,
+				1E0FE3481E6EB1300009BC26 /* DataManager.m */,
+				1E0FE3491E6EB1300009BC26 /* DateFormatterManager.h */,
+				1E0FE34A1E6EB1300009BC26 /* DateFormatterManager.m */,
+				1E0FE34B1E6EB1300009BC26 /* ForecastManager.h */,
+				1E0FE34C1E6EB1300009BC26 /* ForecastManager.m */,
+				1E0FE34D1E6EB1300009BC26 /* NotificationManager.h */,
+				1E0FE34E1E6EB1300009BC26 /* NotificationManager.m */,
+				1E0FE34F1E6EB1300009BC26 /* RealmDataManager.h */,
+				1E0FE3501E6EB1300009BC26 /* RealmDataManager.m */,
+				1E0FE3511E6EB1300009BC26 /* RemoteFacade.h */,
+				1E0FE3521E6EB1300009BC26 /* RemoteFacade.m */,
+				1E0FE3531E6EB1300009BC26 /* SearchManager.h */,
+				1E0FE3541E6EB1300009BC26 /* SearchManager.m */,
+				1E0FE3551E6EB1300009BC26 /* SettingsManager.h */,
+				1E0FE3561E6EB1300009BC26 /* SettingsManager.m */,
+				1E0FE3571E6EB1300009BC26 /* ShareManager.h */,
+				1E0FE3581E6EB1300009BC26 /* ShareManager.m */,
+				1E0FE3591E6EB1300009BC26 /* UserDefaultsManager.h */,
+				1E0FE35A1E6EB1300009BC26 /* UserDefaultsManager.m */,
+			);
+			name = Managers;
+			path = Model/Managers;
+			sourceTree = "<group>";
+		};
+		1E0FE3651E6EB1460009BC26 /* Persistance */ = {
+			isa = PBXGroup;
+			children = (
+				1E0FE3661E6EB1460009BC26 /* Entities */,
+			);
+			name = Persistance;
+			path = Model/Persistance;
+			sourceTree = "<group>";
+		};
+		1E0FE3661E6EB1460009BC26 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				1E0FE3671E6EB1460009BC26 /* CityObject.h */,
+				1E0FE3681E6EB1460009BC26 /* CityObject.m */,
+				1E0FE3691E6EB1460009BC26 /* ForecastObject.h */,
+				1E0FE36A1E6EB1460009BC26 /* ForecastObject.m */,
+				1E0FE36B1E6EB1460009BC26 /* NewsEntity.h */,
+				1E0FE36C1E6EB1460009BC26 /* NewsEntity.m */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		1E11C93D1DDD9E4C00D55B28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,20 +347,6 @@
 			);
 			name = Frameworks;
 			path = BelarusNews/Frameworks;
-			sourceTree = "<group>";
-		};
-		1E1286081E5D6CFA00D2899D /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				1E11C9451DDDAA1F00D55B28 /* NewsEntity.h */,
-				1E11C9461DDDAA1F00D55B28 /* NewsEntity.m */,
-				1E1286091E5D6D1800D2899D /* ForecastObject.h */,
-				1E12860A1E5D6D1800D2899D /* ForecastObject.m */,
-				1E91CFE91E6064B300CB60EB /* CityObject.h */,
-				1E91CFEA1E6064B300CB60EB /* CityObject.m */,
-			);
-			name = Entities;
-			path = Model/Entities;
 			sourceTree = "<group>";
 		};
 		1E26668F1E127AC3001DF2A2 /* CustomSearchBar */ = {
@@ -497,39 +533,11 @@
 		1E73292D1D7814340027E46E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1E1286081E5D6CFA00D2899D /* Entities */,
+				1E0FE3651E6EB1460009BC26 /* Persistance */,
+				1E0FE3461E6EB1300009BC26 /* Managers */,
 				1E372F801DF94B8400362CC1 /* XML */,
-				1E7329491D783DFD0027E46E /* Persistance */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		1E7329491D783DFD0027E46E /* Persistance */ = {
-			isa = PBXGroup;
-			children = (
-				1E1C66361E290C1300086CCC /* NotificationManager.h */,
-				1E1C66371E290C1300086CCC /* NotificationManager.m */,
-				1E372F811DF94C7400362CC1 /* DateFormatterManager.h */,
-				1E372F821DF94C7400362CC1 /* DateFormatterManager.m */,
-				1E372F831DF94C7400362CC1 /* SearchManager.h */,
-				1E372F841DF94C7400362CC1 /* SearchManager.m */,
-				84FF33361E1DAF72002847AB /* ShareManager.h */,
-				84FF33371E1DAF72002847AB /* ShareManager.m */,
-				1E11C9481DDDE9E600D55B28 /* RealmDataManager.h */,
-				1E11C9491DDDE9E600D55B28 /* RealmDataManager.m */,
-				1E73294D1D7843310027E46E /* RemoteFacade.h */,
-				1E73294E1D7843310027E46E /* RemoteFacade.m */,
-				1E7329501D7845210027E46E /* DataManager.h */,
-				1E7329511D7845210027E46E /* DataManager.m */,
-				1E4C8C5C1E55C15E00B2ED44 /* SettingsManager.h */,
-				1E4C8C5D1E55C15E00B2ED44 /* SettingsManager.m */,
-				1E4C8C5F1E55E46C00B2ED44 /* UserDefaultsManager.h */,
-				1E4C8C601E55E46C00B2ED44 /* UserDefaultsManager.m */,
-				1E12860C1E5D6D2900D2899D /* ForecastManager.h */,
-				1E12860D1E5D6D2900D2899D /* ForecastManager.m */,
-			);
-			name = Persistance;
-			path = Model/Persistance;
 			sourceTree = "<group>";
 		};
 		1E91CFE01E605CA400CB60EB /* SettingsCityTableVC */ = {
@@ -908,8 +916,6 @@
 			files = (
 				1E640B5A1E0A85FE00AA539C /* MASConstraint.m in Sources */,
 				1E640B5D1E0A85FE00AA539C /* MASViewAttribute.m in Sources */,
-				1E4C8C611E55E46C00B2ED44 /* UserDefaultsManager.m in Sources */,
-				1E12860B1E5D6D1800D2899D /* ForecastObject.m in Sources */,
 				1E91CFF61E60788300CB60EB /* LocationAutoCompleteController.m in Sources */,
 				1E640B661E0A85FE00AA539C /* ZLDropDownMenuUICalc.m in Sources */,
 				1EFE91761E1FAC76008CA308 /* SettingsNotificationsCell.m in Sources */,
@@ -917,22 +923,21 @@
 				1EFD659D1E13C80000F5BA4D /* DetailsOfflineVCViewController.m in Sources */,
 				1EFD65A41E13EABE00F5BA4D /* SettingsVC.m in Sources */,
 				1E640B631E0A85FE00AA539C /* ZLDropDownMenu.m in Sources */,
-				1E91CFEB1E6064B300CB60EB /* CityObject.m in Sources */,
 				1E7329301D7814620027E46E /* NewsTableView.m in Sources */,
 				1E73292B1D7813B50027E46E /* Constants.m in Sources */,
-				1E73294F1D7843310027E46E /* RemoteFacade.m in Sources */,
-				1E11C94A1DDDE9E600D55B28 /* RealmDataManager.m in Sources */,
-				1E4C8C5E1E55C15E00B2ED44 /* SettingsManager.m in Sources */,
 				1E640B5E1E0A85FE00AA539C /* MASViewConstraint.m in Sources */,
 				1E640B611E0A85FE00AA539C /* View+MASAdditions.m in Sources */,
 				1E640B651E0A85FE00AA539C /* ZLDropDownMenuTitleButton.m in Sources */,
+				1E0FE35C1E6EB1300009BC26 /* DateFormatterManager.m in Sources */,
 				1E1286111E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m in Sources */,
+				1E0FE3641E6EB1300009BC26 /* UserDefaultsManager.m in Sources */,
 				1E91CFDF1E600F0A00CB60EB /* SettingsRoundImagesCell.m in Sources */,
+				1E0FE3631E6EB1300009BC26 /* ShareManager.m in Sources */,
 				1E640B591E0A85FE00AA539C /* MASCompositeConstraint.m in Sources */,
 				844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */,
 				1E91CFE81E60616500CB60EB /* SettingsCityCell.m in Sources */,
-				84FF33381E1DAF72002847AB /* ShareManager.m in Sources */,
 				1E7329471D7836400027E46E /* ParserManager.m in Sources */,
+				1E0FE35D1E6EB1300009BC26 /* ForecastManager.m in Sources */,
 				1E640B641E0A85FE00AA539C /* ZLDropDownMenuCollectionViewCell.m in Sources */,
 				1E12861B1E5D916F00D2899D /* SettingsBaseCell.m in Sources */,
 				1E7329441D781E980027E46E /* XMLParser.m in Sources */,
@@ -940,27 +945,30 @@
 				1E640B581E0A85FE00AA539C /* NSString+ZLStringSize.m in Sources */,
 				84FF33451E1DD00F002847AB /* FeSpinnerTenDot.m in Sources */,
 				1E7328F71D7813740027E46E /* AppDelegate.m in Sources */,
-				1E372F851DF94C7400362CC1 /* DateFormatterManager.m in Sources */,
+				1E0FE3621E6EB1300009BC26 /* SettingsManager.m in Sources */,
 				84FF33421E1DCEAC002847AB /* UIColor+flat.m in Sources */,
-				1E12860E1E5D6D2900D2899D /* ForecastManager.m in Sources */,
+				1E0FE35B1E6EB1300009BC26 /* DataManager.m in Sources */,
 				843B7B561DF35E27001532A4 /* RootViewController.m in Sources */,
-				1E7329521D7845210027E46E /* DataManager.m in Sources */,
 				1E640B601E0A85FE00AA539C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				1E0FE3601E6EB1300009BC26 /* RemoteFacade.m in Sources */,
 				1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */,
-				1E372F861DF94C7400362CC1 /* SearchManager.m in Sources */,
-				1E1C66381E290C1300086CCC /* NotificationManager.m in Sources */,
 				84FF33411E1DCEAC002847AB /* FXBlurView.m in Sources */,
 				1EFE917A1E237908008CA308 /* Utils.m in Sources */,
-				1E11C9471DDDAA1F00D55B28 /* NewsEntity.m in Sources */,
 				84FF333C1E1DCE0B002847AB /* FeTenDot.m in Sources */,
+				1E0FE36E1E6EB1460009BC26 /* ForecastObject.m in Sources */,
 				1E640B5F1E0A85FE00AA539C /* NSArray+MASAdditions.m in Sources */,
 				1E640B621E0A85FE00AA539C /* ViewController+MASAdditions.m in Sources */,
+				1E0FE3611E6EB1300009BC26 /* SearchManager.m in Sources */,
+				1E0FE35E1E6EB1300009BC26 /* NotificationManager.m in Sources */,
 				1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */,
 				1E4C8C641E56D8FB00B2ED44 /* SettingsAutoupdateCell.m in Sources */,
 				1E7329551D7848530027E46E /* DetailsViewController.m in Sources */,
 				1E1286181E5D850600D2899D /* UIColor+BelarusNews.m in Sources */,
 				1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */,
 				1E7328F41D7813740027E46E /* main.m in Sources */,
+				1E0FE35F1E6EB1300009BC26 /* RealmDataManager.m in Sources */,
+				1E0FE36D1E6EB1460009BC26 /* CityObject.m in Sources */,
+				1E0FE36F1E6EB1460009BC26 /* NewsEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
