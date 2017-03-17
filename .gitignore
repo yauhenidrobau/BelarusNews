@@ -17,3 +17,6 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+Cert/BelarusNewsDev.mobileprovision
+Cert/debug.p12
+Cert/destr.p12
