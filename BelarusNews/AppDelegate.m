@@ -36,24 +36,32 @@ NSTimer *timer;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    /*
+     Fabric
+     */
     [Fabric with:@[[Crashlytics class]]];
 
+    /*
+     Google Autocomletor
+     */
     [GMSPlacesClient provideAPIKey:GOOGLE_PLACES_KEY];
     
+    /*
+     Google Analytics
+     */
     [self enableGoogleAnalytics];
     
+    /*
+     Weather
+     */
     [[DataManager sharedInstance] updateWeatherForecastWithCallback:^(CityObject *cityObject, NSError *error) {
     }];
     
     return YES;
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-}
-
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [[Utils getMainController] updateWithIndicator:YES];
-    
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
