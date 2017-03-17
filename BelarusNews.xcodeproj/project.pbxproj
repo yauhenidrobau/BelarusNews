@@ -97,9 +97,6 @@
 		1EFE91851E23BF07008CA308 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EFE91841E23BF06008CA308 /* UserNotifications.framework */; };
 		664E982BCAA093BEE2B33250 /* libPods-BelarusNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D68C11FB67ED6A701E3F2D2 /* libPods-BelarusNews.a */; };
 		843B7B561DF35E27001532A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B7B551DF35E27001532A4 /* RootViewController.m */; };
-		843C97CA1E54F76200B23E9C /* BelarusNewsDev.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = 843C97C71E54F76200B23E9C /* BelarusNewsDev.mobileprovision */; };
-		843C97CB1E54F76200B23E9C /* debug.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 843C97C81E54F76200B23E9C /* debug.p12 */; };
-		843C97CC1E54F76200B23E9C /* destr.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 843C97C91E54F76200B23E9C /* destr.p12 */; };
 		844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A9FD11DF0EE2A00917832 /* MenuViewController.m */; };
 		84702F881DF8887C005CE945 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84702F8A1DF8887C005CE945 /* Localizable.strings */; };
 		84FF333C1E1DCE0B002847AB /* FeTenDot.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF333B1E1DCE0B002847AB /* FeTenDot.m */; };
@@ -295,9 +292,6 @@
 		3D68C11FB67ED6A701E3F2D2 /* libPods-BelarusNews.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BelarusNews.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		843B7B541DF35E27001532A4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		843B7B551DF35E27001532A4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		843C97C71E54F76200B23E9C /* BelarusNewsDev.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = BelarusNewsDev.mobileprovision; sourceTree = "<group>"; };
-		843C97C81E54F76200B23E9C /* debug.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = debug.p12; sourceTree = "<group>"; };
-		843C97C91E54F76200B23E9C /* destr.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = destr.p12; sourceTree = "<group>"; };
 		844A9FD01DF0EE2A00917832 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		844A9FD11DF0EE2A00917832 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		84702F891DF8887C005CE945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -606,7 +600,6 @@
 			isa = PBXGroup;
 			children = (
 				1E91CFF71E640C1700CB60EB /* GoogleService-Info.plist */,
-				843C97C61E54F75300B23E9C /* Sertificates */,
 				1E7328F31D7813740027E46E /* main.m */,
 			);
 			name = "Supporting Files";
@@ -746,16 +739,6 @@
 				E7A01196E7BF962BC35997F6 /* Pods-BelarusNews.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		843C97C61E54F75300B23E9C /* Sertificates */ = {
-			isa = PBXGroup;
-			children = (
-				843C97C71E54F76200B23E9C /* BelarusNewsDev.mobileprovision */,
-				843C97C81E54F76200B23E9C /* debug.p12 */,
-				843C97C91E54F76200B23E9C /* destr.p12 */,
-			);
-			path = Sertificates;
 			sourceTree = "<group>";
 		};
 		844A9FCF1DF0EDE200917832 /* MenuVC */ = {
@@ -903,7 +886,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E0FE3B01E6EE73A0009BC26 /* pinterest copy.png in Resources */,
-				843C97CA1E54F76200B23E9C /* BelarusNewsDev.mobileprovision in Resources */,
 				1E0FE3A01E6EE73A0009BC26 /* camera_roll.png in Resources */,
 				1E0FE3AD1E6EE73A0009BC26 /* mail@2x.png in Resources */,
 				1E0FE3A71E6EE73A0009BC26 /* evernote@2x.png in Resources */,
@@ -914,10 +896,8 @@
 				1E0FE3AC1E6EE73A0009BC26 /* mail.png in Resources */,
 				1E0FE3AF1E6EE73A0009BC26 /* more@2x copy.png in Resources */,
 				1E0FE3A11E6EE73A0009BC26 /* camera_roll@2x.png in Resources */,
-				843C97CB1E54F76200B23E9C /* debug.p12 in Resources */,
 				1E0FE3A61E6EE73A0009BC26 /* evernote.png in Resources */,
 				1E0FE3B11E6EE73A0009BC26 /* pinterest.png in Resources */,
-				843C97CC1E54F76200B23E9C /* destr.p12 in Resources */,
 				1E0FE3A21E6EE73A0009BC26 /* close.png in Resources */,
 				1E0FE3B51E6EE73A0009BC26 /* print@2x.png in Resources */,
 				1E0FE3B61E6EE73A0009BC26 /* twitter copy.png in Resources */,
@@ -1266,7 +1246,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5c0ccce3-5a65-4396-98c8-300bae6fe54f";
 				PROVISIONING_PROFILE_SPECIFIER = BelarusNewsDev;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1288,7 +1268,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d29c2f04-d54e-4b6d-905d-eefe3f5aa1e4";
 				PROVISIONING_PROFILE_SPECIFIER = "BelarusNewsProd(2)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
