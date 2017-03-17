@@ -15,7 +15,7 @@ typedef void (^UpdateWeatherForecast)(CityObject *cityObject, NSError *error);
 @interface DataManager : NSObject
 
 +(instancetype)sharedInstance;
--(void)updateDataWithURLString:(NSString *)urlString AndTitle:(NSString *)title WithCallBack:(UpdateDataCallback)completionHandler;
+-(void)updateDataWithURLString:(NSString *)urlString andCategory:(NSString *)title andSource:(NSString *)source WithCallBack:(UpdateDataCallback)completionHandler;
 -(void)updateWeatherForecastWithCallback:(UpdateWeatherForecast)callBback;
 
 @end

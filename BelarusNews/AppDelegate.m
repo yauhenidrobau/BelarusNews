@@ -45,32 +45,13 @@ NSTimer *timer;
     [[DataManager sharedInstance] updateWeatherForecastWithCallback:^(CityObject *cityObject, NSError *error) {
     }];
     
-    [[NotificationManager sharedInstance] registerForPushNotificationsWithApplication:application];
-    application.applicationIconBadgeNumber = 0;
-    
     return YES;
 }
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    
-    completionHandler(UIBackgroundFetchResultNewData);
-}
-
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-   
-    if ([[UserDefaultsManager sharedInstance] boolForKey:NOTIFICATIONS_MODE]) {
-        [[NotificationManager sharedInstance]startMonitoring];
-    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    [[NotificationManager sharedInstance] cancellAllNotifications];
     [[Utils getMainController] updateWithIndicator:YES];
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -86,7 +67,17 @@ NSTimer *timer;
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
     [GAI sharedInstance].dispatchInterval = 20;
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-80107844-2"];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    
+    [tracker set:kGAIUserId
+           value:@"80107844"];
+
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"            // Event category (required)
+                                                      action:@"User Sign In"  // Event action (required)
+                                                       label:nil              // Event label
+                                                       value:nil] build]];    // Event value
+    tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-80107844-2"];
     [GAI sharedInstance].defaultTracker = tracker;
     tracker.allowIDFACollection = YES;
 }

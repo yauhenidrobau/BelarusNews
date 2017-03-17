@@ -34,7 +34,7 @@
 
 typedef enum {
     OFFLINE_CELL,
-    NOTIFICATION_CELL,
+//    NOTIFICATION_CELL,
     AUTOUPDATE_CELL,
     NIGHTMODE_CELL,
     ROUND_IMAGES_CELL,
@@ -58,7 +58,7 @@ typedef enum {
 -(NSArray *)cellTitleListID {
     if (!_cellTitleListID.count) {
         _cellTitleListID = @[@"OfflineCell",
-                           @"NotificationCell",
+//                           @"NotificationCell",
                            @"AutoupdatesCell",
                            @"NightModeCell",
                            @"RoundImagesCell",

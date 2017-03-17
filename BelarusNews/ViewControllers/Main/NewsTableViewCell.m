@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UIView *cellBackgroundView;
+@property (weak, nonatomic) IBOutlet UILabel *sourceLabel;
 
 @end
 
@@ -79,6 +80,8 @@
 
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath  {
     [self layoutIfNeeded];
+    
+    self.sourceLabel.text = entity.sourceName;
     self.titleLabel.text = entity.titleFeed;
     self.descriptionLabel.text = entity.descriptionFeed;
     [self.favoriteButton setImage:[self.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
@@ -99,7 +102,7 @@
 
     }
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
-                 placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.feedIdString]]];
+                 placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.category]]];
     self.imageNewsView.layer.cornerRadius = 0;
     if ([SettingsManager sharedInstance].isRoundImagesEnabled) {
         self.imageNewsView.layer.cornerRadius = CGRectGetWidth(self.imageNewsView.frame) / 2;

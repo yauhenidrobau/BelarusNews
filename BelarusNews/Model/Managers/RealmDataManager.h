@@ -16,7 +16,7 @@ typedef void(^RealmDataManagerSaveCallback)(NSError* error);
 @interface RealmDataManager : NSObject
 + (instancetype)sharedInstance;
 
--(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)serviceString AndCallBack:(RealmDataManagerSaveCallback)callback;
+-(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withCategory:(NSString *)category andSource:(NSString*)source andCallBack:(RealmDataManagerSaveCallback)callback;
 -(void)updateEntity:(NewsEntity *)entity WithProperty:(NSString*)property;
 -(NSArray*)getFavoritesArray;
 -(NSArray*)getAllOjbects;

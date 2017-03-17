@@ -19,7 +19,7 @@ typedef void(^DataLoadCallback)(NSData *info, NSError* error);
 @interface RemoteFacade ()
 
 @property (nonatomic, strong) NSData *info;
-@property (nonatomic, strong) NSString *feedIdString;
+@property (nonatomic, strong) NSString *category;
 @property (nonatomic, strong) NSOperationQueue *operationQueue;
 
 

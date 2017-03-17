@@ -9,7 +9,8 @@
 #import <Realm/Realm.h>
 
 @interface NewsEntity : RLMObject
-@property  NSString *feedIdString;
+@property  NSString *category;
+@property  NSString *sourceName;
 @property  NSInteger newsID;
 @property  NSString *descriptionFeed;
 @property  NSString *linkFeed;

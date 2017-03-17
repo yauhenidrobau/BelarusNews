@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) NSString *menuTitle;
 @property (strong, nonatomic) NSString *urlString;
-@property (strong, nonatomic) NSString *titlesString;
+@property (strong, nonatomic) NSString *categoryString;
 
 -(void)updateWithIndicator:(BOOL)showIndicator;
 

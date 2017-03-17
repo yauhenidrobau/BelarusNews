@@ -48,7 +48,7 @@
 -(void)updateData {
     
     [self.headerImage sd_setImageWithURL:[NSURL URLWithString:self.entity.urlImage]
-                                             placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",self.entity.feedIdString]]];
+                                             placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",self.entity.category]]];
     _detailsTitleLabel.text = self.entity.titleFeed;
         NSString *linkString = [NSString stringWithFormat:@"%@ : %@ \n\n\n ",NSLocalizedString(@"Source link", nil),self.sourceLink];
 

@@ -83,9 +83,9 @@
             [Utils exitFromApplication];
         }
     } else {
-        NSString *titleString = self.mainViewController.titlesString;
+        NSString *titleString = self.mainViewController.categoryString;
         [self.mainViewController viewDidLoad];
-        self.mainViewController.titlesString = titleString;
+        self.mainViewController.categoryString = titleString;
         [self.mainViewController viewWillAppear:YES];
     }
 }

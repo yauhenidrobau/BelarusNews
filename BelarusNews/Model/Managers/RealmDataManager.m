@@ -14,7 +14,7 @@
 
 SINGLETON(RealmDataManager)
 
--(void)saveNews:(NSArray<NSDictionary *>*)receivedNewsArray withServiceString:(NSString *)serviceString AndCallBack:(RealmDataManagerSaveCallback)callback{
+-(void)saveNews:(NSArray<NSDictionary *> *)receivedNewsArray withCategory:(NSString *)category andSource:(NSString *)source andCallBack:(RealmDataManagerSaveCallback)callback {
     RLMRealm *realm = [RLMRealm defaultRealm];
     for (NSDictionary *dict in receivedNewsArray) {
         @try {
@@ -22,7 +22,8 @@ SINGLETON(RealmDataManager)
             NewsEntity *currentNews = [self RLMResultsToArray:[NewsEntity objectsWhere:@"titleFeed == %@",dict[@"title"]]].firstObject;
             if (!currentNews) {
                 currentNews = [NewsEntity new];
-                currentNews.feedIdString = serviceString;
+                currentNews.category = category;
+                currentNews.sourceName = source;
                 currentNews.titleFeed = dict[@"title"];
                 currentNews.pubDateFeed =  dict[@"pubDate"];
                 currentNews.descriptionFeed = dict[@"description"];
@@ -81,7 +82,7 @@ SINGLETON(RealmDataManager)
 }
 
 -(NSArray *)getObjectsForEntity:(NSString *)predicat {
-    RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",predicat];
+    RLMResults *results = [NewsEntity objectsWhere:@"category == %@",predicat];
     NSArray *allResultsArray = [self sortNewsArray:[self RLMResultsToArray:results]];
     
     return allResultsArray;

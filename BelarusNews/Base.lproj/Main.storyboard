@@ -311,7 +311,7 @@
                                             <outlet property="separatorView" destination="gA7-SX-krY" id="2Z1-XU-I95"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NotificationCell" id="4WQ-rB-nd0" userLabel="NotificationsCell" customClass="SettingsNotificationsCell">
+                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NotificationCell" id="4WQ-rB-nd0" userLabel="NotificationsCell" customClass="SettingsNotificationsCell">
                                         <rect key="frame" x="0.0" y="77" width="375" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4WQ-rB-nd0" id="JxJ-Ln-NF0">
@@ -693,8 +693,8 @@
                                                             <color key="textColor" red="0.0078431372550000003" green="0.32156862749999998" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitleLabel TitleLabel TitleLabel TitleLabel TitleLabel TitleLabel TitleLabel" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFF-L9-PCS">
-                                                            <rect key="frame" x="76" y="8" width="245" height="55"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitleLabel TitleLabel TitleLabel TitleLabel TitleLabel TitleLabel TitleLabel" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFF-L9-PCS">
+                                                            <rect key="frame" x="76" y="8" width="245" height="40"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -721,20 +721,32 @@
                                                                 <action selector="shareButtonDidTap:" destination="u5u-px-kF3" eventType="touchUpInside" id="5Xg-h8-KIk"/>
                                                             </connections>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oh5-3d-yBO">
+                                                            <rect key="frame" x="76" y="48" width="233" height="15"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="15" id="iBl-ob-2bn"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                                                            <color key="textColor" red="0.31764705879999999" green="1" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="HBI-or-WRg" secondAttribute="bottom" constant="3" id="2wF-Id-LpF"/>
                                                         <constraint firstItem="YFF-L9-PCS" firstAttribute="top" secondItem="Zqx-GC-hPW" secondAttribute="top" id="AZ8-IN-wNk"/>
                                                         <constraint firstAttribute="height" constant="85" id="CAe-sE-GFF"/>
-                                                        <constraint firstItem="Xqc-xj-tJa" firstAttribute="top" secondItem="YFF-L9-PCS" secondAttribute="bottom" id="DXJ-Fk-psd"/>
+                                                        <constraint firstItem="oh5-3d-yBO" firstAttribute="top" secondItem="YFF-L9-PCS" secondAttribute="bottom" id="CPY-pj-i4f"/>
                                                         <constraint firstItem="Zqx-GC-hPW" firstAttribute="centerY" secondItem="73R-Gn-Dl2" secondAttribute="centerY" id="DrE-NJ-PC5"/>
+                                                        <constraint firstItem="oh5-3d-yBO" firstAttribute="leading" secondItem="Zqx-GC-hPW" secondAttribute="trailing" constant="3" id="FMa-cU-t1G"/>
+                                                        <constraint firstItem="HBI-or-WRg" firstAttribute="leading" secondItem="oh5-3d-yBO" secondAttribute="trailing" constant="20" id="Hhk-BV-FdP"/>
                                                         <constraint firstItem="aqv-YZ-k7z" firstAttribute="leading" secondItem="YFF-L9-PCS" secondAttribute="trailing" constant="8" id="LkO-bL-V5b"/>
                                                         <constraint firstItem="YFF-L9-PCS" firstAttribute="leading" secondItem="Zqx-GC-hPW" secondAttribute="trailing" constant="3" id="SGH-NV-wfL"/>
                                                         <constraint firstAttribute="trailing" secondItem="aqv-YZ-k7z" secondAttribute="trailing" constant="3" id="X0g-nu-z2z"/>
                                                         <constraint firstAttribute="trailing" secondItem="HBI-or-WRg" secondAttribute="trailing" constant="3" id="cQg-KH-ysH"/>
                                                         <constraint firstItem="Xqc-xj-tJa" firstAttribute="leading" secondItem="Zqx-GC-hPW" secondAttribute="trailing" constant="3" id="dhZ-1W-h4a"/>
                                                         <constraint firstItem="aqv-YZ-k7z" firstAttribute="top" secondItem="73R-Gn-Dl2" secondAttribute="top" constant="8" id="e7j-q8-PDf"/>
+                                                        <constraint firstItem="Xqc-xj-tJa" firstAttribute="top" secondItem="oh5-3d-yBO" secondAttribute="bottom" id="f9X-PF-HSE"/>
                                                         <constraint firstItem="Zqx-GC-hPW" firstAttribute="leading" secondItem="73R-Gn-Dl2" secondAttribute="leading" constant="3" id="iO9-aQ-P9W"/>
                                                         <constraint firstItem="Xqc-xj-tJa" firstAttribute="bottom" secondItem="Zqx-GC-hPW" secondAttribute="bottom" id="waH-5J-tEI"/>
                                                     </constraints>
@@ -755,6 +767,7 @@
                                             <outlet property="imageNewsView" destination="Zqx-GC-hPW" id="HUU-A0-Oas"/>
                                             <outlet property="pubDateLabel" destination="Xqc-xj-tJa" id="TPI-YE-AfP"/>
                                             <outlet property="shareButton" destination="HBI-or-WRg" id="dnm-7T-hrj"/>
+                                            <outlet property="sourceLabel" destination="oh5-3d-yBO" id="hiT-ch-gq9"/>
                                             <outlet property="titleLabel" destination="YFF-L9-PCS" id="Obf-ld-42h"/>
                                         </connections>
                                     </tableViewCell>

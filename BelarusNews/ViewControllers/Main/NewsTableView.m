@@ -71,8 +71,10 @@ typedef enum {
 @property (strong, nonatomic) NSArray *newsArray;
 @property (nonatomic, strong) NSArray *mainTitleArray;
 @property (nonatomic, strong) NSArray *subTitleArray;
+@property (nonatomic, strong) NSArray *sourceArray;
 @property (nonatomic, strong) NSArray *titlesForRequestArray;
 @property (nonatomic, strong) NSMutableDictionary *shareItemsDict;
+@property (nonatomic, strong) NSString *source;
 
 @property (strong, nonatomic) NSDictionary *newsURLDict;
 
@@ -226,15 +228,15 @@ typedef enum {
         vc.sourceLink = [NSString stringWithString:newsEntity.linkFeed];
     } else if ([segue.identifier isEqualToString:@"DetailsOfflineVCID"]) {
         DetailsOfflineVCViewController *vc = segue.destinationViewController;
-        if ([self.titlesString isEqualToString:@"S13"]) {
+        if ([self.categoryString isEqualToString:@"S13"]) {
             vc.sourceLink = S13_RU;
-        } else if ([self.titlesString isEqualToString:@"Новый-Час"]) {
+        } else if ([self.categoryString isEqualToString:@"Новый-Час"]) {
             vc.sourceLink = NOVYCHAS_BY;
         } else if ([self.urlString containsString:@"onliner"]) {
             vc.sourceLink = ONLINER_BY;
         } else if ([self.urlString containsString:@"tut.by"]) {
             vc.sourceLink = TUT_BY;
-        } else if ([self.titlesString isEqualToString:@"DEV.BY"]) {
+        } else if ([self.categoryString isEqualToString:@"DEV.BY"]) {
             vc.sourceLink = DEV_BY;
         }
         vc.entity = newsEntity;
@@ -330,24 +332,24 @@ typedef enum {
 
     NSArray *array = self.titlesForRequestArray[indexPath.column];
     if (array.count == 1) {
-        self.titlesString = self.mainTitleArray[indexPath.column];
-        self.urlString = self.newsURLDict[self.titlesString][0];
+        self.categoryString = self.mainTitleArray[indexPath.column];
+        self.urlString = self.newsURLDict[self.categoryString][0];
     } else {
-    self.titlesString = array[indexPath.row];
+    self.categoryString = array[indexPath.row];
     NSDictionary *dict = self.newsURLDict[self.mainTitleArray[indexPath.column]];
-    self.urlString = dict[NSLocalizedString(self.titlesString,nil)];
+    self.urlString = dict[NSLocalizedString(self.categoryString,nil)];
     }
-    NSLog(@"%@ : %@", self.titlesString,self.urlString);
-    [self.userDefaults setObject:self.titlesString forKey:@"CurrentTitle"];
+    NSLog(@"%@ : %@", self.categoryString,self.urlString);
+    [self.userDefaults setObject:self.categoryString forKey:@"CurrentTitle"];
     [self.userDefaults setObject:self.urlString forKey:@"CurrentUrl"];
     [self updateWithIndicator:YES];
     
     id<GAITracker> tracker = [GAI sharedInstance].defaultTracker;
-    [tracker set:kGAIScreenName value:self.titlesString];
+    [tracker set:kGAIScreenName value:self.categoryString];
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"News Category"
                                                           action:@"Visited"
-                                                           label:self.titlesString
+                                                           label:self.categoryString
                                                            value:@1] build]];
     
 }
@@ -496,7 +498,7 @@ typedef enum {
 -(void)setupData {
     
     if (!self.menuTitle.length) {
-        RLMResults *results = [NewsEntity objectsWhere:@"feedIdString == %@",self.titlesString];
+        RLMResults *results = [NewsEntity objectsWhere:@"category == %@",self.categoryString];
         NSArray *allResultsArray = [[RealmDataManager sharedInstance] RLMResultsToArray:results];
         
         self.newsArray = [self sortNewsArray:allResultsArray];
@@ -577,7 +579,7 @@ typedef enum {
                 [self.userDefaults setBool:YES ForKey:NO_INTERNET_KEY];
             } else {
                 __weak typeof(self) wself = self;
-                [[DataManager sharedInstance ] updateDataWithURLString:wself.urlString AndTitle:wself.titlesString WithCallBack:^(NSError *error) {
+                [[DataManager sharedInstance ] updateDataWithURLString:wself.urlString andCategory:wself.categoryString andSource:wself.source WithCallBack:^(NSError *error) {
                     [networkReachability stopNotifier];
                     if (!error) {
                         [wself setupData];
@@ -622,6 +624,7 @@ typedef enum {
 
 -(void)prepareData {
     _mainTitleArray = @[@"ONLINER",@"TUT.BY",@"DEV.BY", @"S13", @"Новый-Час"];
+    _sourceArray = @[ONLINER_BY,TUT_BY,DEV_BY,S13_RU,NOVYCHAS_BY];
     _subTitleArray = @[
                        @[NSLocalizedString(@"People",nil),
                          NSLocalizedString(@"Auto",nil),
@@ -682,9 +685,11 @@ typedef enum {
                                          AUTO_ONLINER_LINK,NSLocalizedString(@"Auto",nil),TECH_ONLINER_NEWS,NSLocalizedString(@"Science",nil),REALT_ONLINER_NEWS,NSLocalizedString(@"Realty",nil), nil],
                          @"Новый-Час" : @[NOVY_CHAS_NEWS],
                         @"S13" : @[S13_NEWS]};
-    self.titlesString = self.titlesForRequestArray[0][0];
+    self.categoryString = self.titlesForRequestArray[0][0];
+    self.source = self.sourceArray[0];
+
     self.urlString = PEOPLE_ONLINER_LINK;
-    [self.userDefaults setObject:self.titlesString forKey:@"CurrentTitle"];
+    [self.userDefaults setObject:self.categoryString forKey:@"CurrentTitle"];
     [self.userDefaults setObject:self.urlString forKey:@"CurrentUrl"];
     self.shareItemsDict = [NSMutableDictionary new];
 }

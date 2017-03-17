@@ -27,7 +27,7 @@
     
     NewsTableView *newsTableViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NewsTableView"];
     newsTableViewController.urlString = [[UserDefaultsManager sharedInstance] objectForKey:@"CurrentUrl"];
-    newsTableViewController.titlesString = [[UserDefaultsManager sharedInstance] objectForKey:@"CurrentTitle"];
+    newsTableViewController.categoryString = [[UserDefaultsManager sharedInstance] objectForKey:@"CurrentTitle"];
     
     return newsTableViewController;
 }

@@ -40,11 +40,11 @@
 #define YANDEX_METRICE_API_KEY @"ef1d79fb-d889-4ce0-96eb-83c62a3adfd2"
 #define GOOGLE_PLACES_KEY @"AIzaSyB6SYasED7O-tRz3zEPRwHf846Q6DZfjYg"
 
-#define S13_RU @"http://s13.ru/"
-#define TUT_BY @"https://www.tut.by/"
-#define DEV_BY @"https://dev.by/"
-#define ONLINER_BY @"https://www.onliner.by/"
-#define NOVYCHAS_BY @"http://novychas.by/"
+#define S13_RU @"http://s13.ru"
+#define TUT_BY @"https://www.tut.by"
+#define DEV_BY @"https://dev.by"
+#define ONLINER_BY @"https://www.onliner.by"
+#define NOVYCHAS_BY @"http://novychas.by"
 
 #define OFFLINE_MODE @"OfflineMode"
 #define NOTIFICATIONS_MODE @"NotificationsMode"
