@@ -1266,7 +1266,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5c0ccce3-5a65-4396-98c8-300bae6fe54f";
 				PROVISIONING_PROFILE_SPECIFIER = BelarusNewsDev;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1288,7 +1288,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d29c2f04-d54e-4b6d-905d-eefe3f5aa1e4";
 				PROVISIONING_PROFILE_SPECIFIER = "BelarusNewsProd(2)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
