@@ -10,7 +10,6 @@
 		1E0FE35B1E6EB1300009BC26 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3481E6EB1300009BC26 /* DataManager.m */; };
 		1E0FE35C1E6EB1300009BC26 /* DateFormatterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE34A1E6EB1300009BC26 /* DateFormatterManager.m */; };
 		1E0FE35D1E6EB1300009BC26 /* ForecastManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE34C1E6EB1300009BC26 /* ForecastManager.m */; };
-		1E0FE35E1E6EB1300009BC26 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE34E1E6EB1300009BC26 /* NotificationManager.m */; };
 		1E0FE35F1E6EB1300009BC26 /* RealmDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3501E6EB1300009BC26 /* RealmDataManager.m */; };
 		1E0FE3601E6EB1300009BC26 /* RemoteFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3521E6EB1300009BC26 /* RemoteFacade.m */; };
 		1E0FE3611E6EB1300009BC26 /* SearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0FE3541E6EB1300009BC26 /* SearchManager.m */; };
@@ -146,8 +145,6 @@
 		1E0FE34A1E6EB1300009BC26 /* DateFormatterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormatterManager.m; sourceTree = "<group>"; };
 		1E0FE34B1E6EB1300009BC26 /* ForecastManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForecastManager.h; sourceTree = "<group>"; };
 		1E0FE34C1E6EB1300009BC26 /* ForecastManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForecastManager.m; sourceTree = "<group>"; };
-		1E0FE34D1E6EB1300009BC26 /* NotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationManager.h; sourceTree = "<group>"; };
-		1E0FE34E1E6EB1300009BC26 /* NotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationManager.m; sourceTree = "<group>"; };
 		1E0FE34F1E6EB1300009BC26 /* RealmDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmDataManager.h; sourceTree = "<group>"; };
 		1E0FE3501E6EB1300009BC26 /* RealmDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmDataManager.m; sourceTree = "<group>"; };
 		1E0FE3511E6EB1300009BC26 /* RemoteFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteFacade.h; sourceTree = "<group>"; };
@@ -362,8 +359,6 @@
 				1E0FE34A1E6EB1300009BC26 /* DateFormatterManager.m */,
 				1E0FE34B1E6EB1300009BC26 /* ForecastManager.h */,
 				1E0FE34C1E6EB1300009BC26 /* ForecastManager.m */,
-				1E0FE34D1E6EB1300009BC26 /* NotificationManager.h */,
-				1E0FE34E1E6EB1300009BC26 /* NotificationManager.m */,
 				1E0FE34F1E6EB1300009BC26 /* RealmDataManager.h */,
 				1E0FE3501E6EB1300009BC26 /* RealmDataManager.m */,
 				1E0FE3511E6EB1300009BC26 /* RemoteFacade.h */,
@@ -1097,7 +1092,6 @@
 				1E640B5F1E0A85FE00AA539C /* NSArray+MASAdditions.m in Sources */,
 				1E640B621E0A85FE00AA539C /* ViewController+MASAdditions.m in Sources */,
 				1E0FE3611E6EB1300009BC26 /* SearchManager.m in Sources */,
-				1E0FE35E1E6EB1300009BC26 /* NotificationManager.m in Sources */,
 				1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */,
 				1E4C8C641E56D8FB00B2ED44 /* SettingsAutoupdateCell.m in Sources */,
 				1E7329551D7848530027E46E /* DetailsViewController.m in Sources */,

@@ -86,14 +86,16 @@
 -(void)setupAppearance {
     if ([SettingsManager sharedInstance].isNightModeEnabled) {
         self.mainView.layer.borderColor = [UIColor bn_mainNightColor].CGColor;
-        self.titleLabel.textColor = [UIColor bn_mainNightColor];
         self.articleLinkLabel.textColor = [UIColor bn_mainNightColor];
         self.mainBackgroundView.backgroundColor = [UIColor blackColor];
+        [self.ButtonYES setBackgroundColor:[UIColor bn_mainNightColor]];
+        [self.buttonNO setBackgroundColor:[UIColor bn_mainNightColor]];
     } else {
         self.mainView.layer.borderColor = [UIColor bn_mainColor].CGColor;
-        self.titleLabel.textColor = [UIColor bn_mainColor];
         self.articleLinkLabel.textColor = [UIColor bn_mainColor];
-        self.mainBackgroundView.backgroundColor = RGB(242, 255, 255);
+        self.mainBackgroundView.backgroundColor = [UIColor bn_newsCellColor];
+        [self.ButtonYES setBackgroundColor:[UIColor bn_mainColor]];
+        [self.buttonNO setBackgroundColor:[UIColor bn_mainColor]];
     }
 }
 - (void)closeTapped {

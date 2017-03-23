@@ -48,9 +48,9 @@
 
 
 "LOADING" = "LOADING";
-"PLEASE WAITING" = "PLEASE WAITING";
+"PLEASE WAITING" = "PLEASE WAIT";
 "CALM DOWN" = "CALM DOWN";
-"WAITING" = "WAITING";
+"WAITING" = "WAIT";
 
 //Weather
 "Clear" = "Clear sky";

@@ -14,7 +14,6 @@
 #import "RealmDataManager.h"
 #import <UserNotifications/UserNotifications.h>
 #import <UIKit/UIDevice.h>
-#import "NotificationManager.h"
 #import "Utils.h"
 #import "Constants.h"
 #import "UserDefaultsManager.h"

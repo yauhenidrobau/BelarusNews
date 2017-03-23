@@ -13,7 +13,7 @@
 @implementation UIColor (BelarusNews)
 
 +(UIColor*)bn_mainColor {
-    return [UIColor yellowColor];
+    return RGB(224, 217, 66);
 }
 
 +(UIColor*)bn_mainNightColor {
@@ -69,7 +69,7 @@
 #pragma mark - News Cell
 
 +(UIColor*)bn_newsCellColor {
-    return RGBA(191,191,191, 0.6);
+    return RGBA(65,65,65, 1);
 }
 
 +(UIColor*)bn_newsCellNightColor {
