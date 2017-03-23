@@ -989,13 +989,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background" width="375" height="667"/>
+        <image name="background" width="1000" height="500"/>
         <image name="icon-arrow-up" width="32" height="32"/>
         <image name="icon-favorites" width="256" height="256"/>
         <image name="icon-share" width="24" height="24"/>
         <image name="icon_list" width="16" height="16"/>
         <image name="left_menu_Orange_Blur" width="375" height="667"/>
-        <image name="main_blur" width="1728" height="2304"/>
+        <image name="main_blur" width="621" height="1104"/>
         <image name="no_image_200_200" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>

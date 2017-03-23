@@ -53,6 +53,10 @@
 		1E1286111E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1286101E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m */; };
 		1E1286181E5D850600D2899D /* UIColor+BelarusNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1286171E5D850600D2899D /* UIColor+BelarusNews.m */; };
 		1E12861B1E5D916F00D2899D /* SettingsBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E12861A1E5D916F00D2899D /* SettingsBaseCell.m */; };
+		1E1505051E83EC56009F235E /* UIViewController+ShowModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1505041E83EC56009F235E /* UIViewController+ShowModal.m */; };
+		1E1505081E83ECAF009F235E /* WebLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1505071E83ECAF009F235E /* WebLinkViewController.m */; };
+		1E15050B1E83ECD7009F235E /* ModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15050A1E83ECD7009F235E /* ModalViewController.m */; };
+		1E15050E1E83EDC4009F235E /* Modals.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E1505101E83EDC4009F235E /* Modals.storyboard */; };
 		1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2666911E127AD6001DF2A2 /* INSSearchBar.m */; };
 		1E4C8C641E56D8FB00B2ED44 /* SettingsAutoupdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C8C631E56D8FB00B2ED44 /* SettingsAutoupdateCell.m */; };
 		1E640B581E0A85FE00AA539C /* NSString+ZLStringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B341E0A85FC00AA539C /* NSString+ZLStringSize.m */; };
@@ -200,6 +204,15 @@
 		1E1286171E5D850600D2899D /* UIColor+BelarusNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BelarusNews.m"; sourceTree = "<group>"; };
 		1E1286191E5D916F00D2899D /* SettingsBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsBaseCell.h; sourceTree = "<group>"; };
 		1E12861A1E5D916F00D2899D /* SettingsBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsBaseCell.m; sourceTree = "<group>"; };
+		1E1505031E83EC56009F235E /* UIViewController+ShowModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+ShowModal.h"; path = "../../../../../Helpers/ModalController/UIViewController+ShowModal.h"; sourceTree = "<group>"; };
+		1E1505041E83EC56009F235E /* UIViewController+ShowModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+ShowModal.m"; path = "../../../../../Helpers/ModalController/UIViewController+ShowModal.m"; sourceTree = "<group>"; };
+		1E1505061E83ECAF009F235E /* WebLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebLinkViewController.h; sourceTree = "<group>"; };
+		1E1505071E83ECAF009F235E /* WebLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebLinkViewController.m; sourceTree = "<group>"; };
+		1E1505091E83ECD7009F235E /* ModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModalViewController.h; path = ../../../../../Helpers/ModalController/ModalViewController.h; sourceTree = "<group>"; };
+		1E15050A1E83ECD7009F235E /* ModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModalViewController.m; path = ../../../../../Helpers/ModalController/ModalViewController.m; sourceTree = "<group>"; };
+		1E15050F1E83EDC4009F235E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Modals.storyboard; sourceTree = "<group>"; };
+		1E1505121E83EDCF009F235E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Modals.strings; sourceTree = "<group>"; };
+		1E1505141E83EDD1009F235E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Modals.strings; sourceTree = "<group>"; };
 		1E1D3A9E1DE47D9F00D6C00C /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1E2666901E127AD6001DF2A2 /* INSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSSearchBar.h; sourceTree = "<group>"; };
 		1E2666911E127AD6001DF2A2 /* INSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSSearchBar.m; sourceTree = "<group>"; };
@@ -469,6 +482,20 @@
 			path = BelarusNews/Frameworks;
 			sourceTree = "<group>";
 		};
+		1E1505021E83EC45009F235E /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				1E1505091E83ECD7009F235E /* ModalViewController.h */,
+				1E15050A1E83ECD7009F235E /* ModalViewController.m */,
+				1E1505031E83EC56009F235E /* UIViewController+ShowModal.h */,
+				1E1505041E83EC56009F235E /* UIViewController+ShowModal.m */,
+				1E1505061E83ECAF009F235E /* WebLinkViewController.h */,
+				1E1505071E83ECAF009F235E /* WebLinkViewController.m */,
+				1E1505101E83EDC4009F235E /* Modals.storyboard */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
 		1E26668F1E127AC3001DF2A2 /* CustomSearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,6 +667,7 @@
 		1E73292C1D78142D0027E46E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1E1505021E83EC45009F235E /* Modals */,
 				1EFD65A11E13EA9200F5BA4D /* Settings */,
 				1EFD65A01E13D78800F5BA4D /* Root */,
 				1EFD659F1E13D6EB00F5BA4D /* Details */,
@@ -842,7 +870,7 @@
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 0;
@@ -898,6 +926,7 @@
 				1E0FE3A11E6EE73A0009BC26 /* camera_roll@2x.png in Resources */,
 				1E0FE3A61E6EE73A0009BC26 /* evernote.png in Resources */,
 				1E0FE3B11E6EE73A0009BC26 /* pinterest.png in Resources */,
+				1E15050E1E83EDC4009F235E /* Modals.storyboard in Resources */,
 				1E0FE3A21E6EE73A0009BC26 /* close.png in Resources */,
 				1E0FE3B51E6EE73A0009BC26 /* print@2x.png in Resources */,
 				1E0FE3B61E6EE73A0009BC26 /* twitter copy.png in Resources */,
@@ -1034,12 +1063,14 @@
 				1E0FE35C1E6EB1300009BC26 /* DateFormatterManager.m in Sources */,
 				1E1286111E5D6E4B00D2899D /* SettingsNightModeCellTableViewCell.m in Sources */,
 				1E0FE3641E6EB1300009BC26 /* UserDefaultsManager.m in Sources */,
+				1E1505081E83ECAF009F235E /* WebLinkViewController.m in Sources */,
 				1E91CFDF1E600F0A00CB60EB /* SettingsRoundImagesCell.m in Sources */,
 				1E0FE3631E6EB1300009BC26 /* ShareManager.m in Sources */,
 				1E640B591E0A85FE00AA539C /* MASCompositeConstraint.m in Sources */,
 				844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */,
 				1E91CFE81E60616500CB60EB /* SettingsCityCell.m in Sources */,
 				1E7329471D7836400027E46E /* ParserManager.m in Sources */,
+				1E1505051E83EC56009F235E /* UIViewController+ShowModal.m in Sources */,
 				1E0FE35D1E6EB1300009BC26 /* ForecastManager.m in Sources */,
 				1E640B641E0A85FE00AA539C /* ZLDropDownMenuCollectionViewCell.m in Sources */,
 				1E12861B1E5D916F00D2899D /* SettingsBaseCell.m in Sources */,
@@ -1056,6 +1087,7 @@
 				1E640B601E0A85FE00AA539C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				1E0FE3601E6EB1300009BC26 /* RemoteFacade.m in Sources */,
 				1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */,
+				1E15050B1E83ECD7009F235E /* ModalViewController.m in Sources */,
 				84FF33411E1DCEAC002847AB /* FXBlurView.m in Sources */,
 				1E0FE39C1E6EE73A0009BC26 /* CFShareCircleView.m in Sources */,
 				1EFE917A1E237908008CA308 /* Utils.m in Sources */,
@@ -1110,6 +1142,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1E1505101E83EDC4009F235E /* Modals.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E15050F1E83EDC4009F235E /* Base */,
+				1E1505121E83EDCF009F235E /* en */,
+				1E1505141E83EDD1009F235E /* ru */,
+			);
+			name = Modals.storyboard;
+			sourceTree = "<group>";
+		};
 		1E7328FB1D7813740027E46E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

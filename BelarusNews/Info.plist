@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>0.0.5</string>
+	<string>0.0.7</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -70,10 +70,6 @@
 	<array>
 		<string>knile-regularitalic-webfont.ttf</string>
 		<string>knile-regular-webfont.ttf</string>
-	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

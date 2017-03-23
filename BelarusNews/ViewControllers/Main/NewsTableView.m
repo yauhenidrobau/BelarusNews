@@ -39,6 +39,9 @@
 #import "SettingsManager.h"
 #import "Utils.h"
 
+#import "UIViewController+ShowModal.h"
+#import "WebLinkViewController.h"
+
 #import <Google/Analytics.h>
 
 typedef void(^UpdateDataCallback)(NSError *error);
@@ -82,6 +85,8 @@ typedef enum {
 @property (nonatomic) BOOL isSearchStart;
 @property (nonatomic) BOOL isOfflineMode;
 @property (nonatomic) BOOL isNightMode;
+@property (nonatomic) BOOL isNotAskEnable;
+@property (nonatomic) BOOL openLink;
 
 @property (weak, nonatomic) IBOutlet UIButton *leftMenuButton;
 
@@ -130,6 +135,15 @@ typedef enum {
     [super viewWillDisappear:animated];
     [self.timer invalidate];
     self.timer = nil;
+}
+
+#pragma mark - Override Properties
+-(BOOL)isNotAskEnable {
+    return [[NSUserDefaults standardUserDefaults]boolForKey:@"isNotAskEnable"];
+}
+
+-(BOOL)openLink {
+    return [[NSUserDefaults standardUserDefaults]boolForKey:@"openLink"];
 }
 
 #pragma mark - IBActions
@@ -211,12 +225,29 @@ typedef enum {
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     NSString* segueId = (![[Reachability reachabilityWithHostName:TEST_HOST] isReachable] || self.isOfflineMode) ? @"DetailsOfflineVCID" : @"DetailsVCID";
     NewsTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:segueId sender:cell];
+    NewsEntity *newsEntity = [self setNewsEntityForIndexPath:[self.tableView indexPathForCell:cell]];
+
+    if (self.isNotAskEnable) {
+        if (self.openLink) {
+            [self performSegueWithIdentifier:segueId sender:cell];
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }
+    } else {
+    [self showModalViewControllerWithIdentifier:@"WebLinkViewController" setupBlock:^(ModalViewController *modal) {
+        WebLinkViewController *vc = (WebLinkViewController*)modal;
+        vc.link = newsEntity.linkFeed;
+        vc.closed = ^(BOOL isNotAskEnable,BOOL openLink) {
+            if (self.openLink) {
+                [self performSegueWithIdentifier:segueId sender:cell];
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            }
+        };
+    } animated:YES];
+    }
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+   
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
