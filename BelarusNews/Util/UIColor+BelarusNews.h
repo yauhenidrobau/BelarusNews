@@ -10,7 +10,9 @@
 
 @interface UIColor (BelarusNews)
 
-+(UIColor*)bn_titleColor;
++(UIColor*)bn_mainColor;
++(UIColor*)bn_mainNightColor;
+
 +(UIColor*)bn_backgroundColor;
 +(UIColor*)bn_lightBlueColor;
 

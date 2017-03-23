@@ -47,7 +47,6 @@
      _spinner.fontTitleLabel = [UIFont fontWithName:@"Neou-Thin" size:36];
      _spinner.delegate = self;
      
-     self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
      
      [self.view addSubview:_spinner];
      [self.webView layoutIfNeeded];
@@ -87,9 +86,13 @@
 #pragma mark - UIWebViewDelegate
 
 -(void)webViewDidStartLoad:(UIWebView*)webView {
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
+
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
+
     [self dismiss:self];
     if (![SettingsManager sharedInstance].isNightModeEnabled) {
         [self.navigationController.navigationBar setTintColor:[UIColor bn_navBarTitleColor]];

@@ -56,11 +56,17 @@
 -(void)configCell {
     [self.cellSwitch setOn:self.isModeEnabled];
     if ([SettingsManager sharedInstance].isNightModeEnabled) {
+        [self.cellSwitch setOnTintColor:[UIColor  bn_mainNightColor]];
         self.cellTitleLabel.textColor = [UIColor bn_nightModeTitleColor];
+        self.cityNameLabel.textColor = [UIColor  bn_nightModeTitleColor];
         self.separatorView.backgroundColor = [UIColor bn_lightBlueColor];
     } else {
-        self.cellTitleLabel.textColor = [UIColor bn_titleColor];
-        self.separatorView.backgroundColor = [UIColor lightGrayColor];
+        [self.cellSwitch setOnTintColor:[UIColor  bn_mainColor]];
+        
+        self.cellTitleLabel.textColor = [UIColor  bn_mainColor];
+        self.cityNameLabel
+        .textColor = [UIColor  bn_mainColor];
+        self.separatorView.backgroundColor = [UIColor  bn_mainColor];
     }
 }
 

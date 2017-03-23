@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailsTitleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *detailsDescriptionTV;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImage;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 
 @end
 
@@ -50,13 +51,13 @@
     [self.headerImage sd_setImageWithURL:[NSURL URLWithString:self.entity.urlImage]
                                              placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",self.entity.category]]];
     _detailsTitleLabel.text = self.entity.titleFeed;
-        NSString *linkString = [NSString stringWithFormat:@"%@ : %@ \n\n\n ",NSLocalizedString(@"Source link", nil),self.sourceLink];
+        NSString *linkString = [NSString stringWithFormat:@"%@ : %@ \n\n\n ",NSLocalizedString(@"Source link", nil),self.entity.linkFeed];
 
     self.detailsDescriptionTV.text = linkString;
 
     NSMutableAttributedString *text= [[NSMutableAttributedString alloc]initWithString:[self.detailsDescriptionTV.text stringByAppendingString:self.entity.descriptionFeed]];
-    [text addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(text.length  - linkString.length, linkString.length)];
-    [text addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10.0f] range:NSMakeRange(0, linkString.length)];
+    [text addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, linkString.length)];
+    [text addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0f] range:NSMakeRange(0, linkString.length)];
     [text addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15.0f] range:NSMakeRange(linkString.length,text.length - linkString.length)];
     self.detailsDescriptionTV.attributedText = text;
     [self.detailsDescriptionTV setContentSize:CGSizeMake(CGRectGetWidth(self.detailsDescriptionTV.frame), CGRectGetHeight(self.detailsDescriptionTV.frame))];
@@ -66,19 +67,24 @@
 
 -(void)updateForNightMode:(BOOL)update {
     if (update) {
+        self.detailsTitleLabel.textColor = [UIColor bn_mainNightColor];
+        self.backgroundImage.image = [UIImage imageNamed:@"background-night"];
         [Utils setNightNavigationBar:self.navigationController.navigationBar];
         [Utils setNavigationBar:self.navigationController.navigationBar light:YES];
         self.view.backgroundColor = [UIColor bn_nightModeBackgroundColor];
         self.detailsDescriptionTV.textColor = [UIColor bn_backgroundColor];
     } else {
+        self.backgroundImage.image = [UIImage imageNamed:@"background"];
         [Utils setDefaultNavigationBar:self.navigationController.navigationBar];
         [Utils setNavigationBar:self.navigationController.navigationBar light:NO];
+        self.detailsTitleLabel.textColor = [UIColor bn_mainColor];
 
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         self.navigationController.navigationBar.shadowImage = [UIImage new];
         self.navigationController.navigationBar.translucent = YES;
         self.view.backgroundColor = [UIColor colorWithRed:239.0 / 255.0 green:239.0 / 255.0 blue:243.0 / 255.0 alpha:1.];
-        self.detailsDescriptionTV.textColor = [UIColor bn_titleColor];
+        [self.navigationController.navigationBar setTintColor:[UIColor bn_mainColor]];
+        self.detailsDescriptionTV.textColor = [UIColor blackColor];
     }
 }
 @end

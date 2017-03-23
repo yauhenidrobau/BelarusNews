@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *cellTitleLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *cellSwitch;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
+@property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
+
 @property (nonatomic, readonly) BOOL isModeEnabled;
 
 -(void)configCell;

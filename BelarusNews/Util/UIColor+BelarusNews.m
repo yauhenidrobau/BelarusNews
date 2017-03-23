@@ -12,8 +12,12 @@
 
 @implementation UIColor (BelarusNews)
 
-+(UIColor*)bn_titleColor {
-    return [UIColor blackColor];
++(UIColor*)bn_mainColor {
+    return [UIColor yellowColor];
+}
+
++(UIColor*)bn_mainNightColor {
+    return RGBA(0, 255, 184, 1);
 }
 
 +(UIColor*)bn_nightModeBackgroundColor {

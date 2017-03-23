@@ -57,7 +57,7 @@
 #pragma mark - Private
 -(void)updateNightModeCell:(BOOL)update {
     if (update) {
-        self.titleLabel.textColor = [UIColor bn_nightModeTitleColor];
+        self.titleLabel.textColor = [UIColor bn_mainNightColor];
         self.cellBackgroundView.backgroundColor = [UIColor bn_newsCellNightColor];
         self.shareButton.tintColor = [UIColor bn_nightModeTitleColor];
         if (self.favoriteButton.tintColor == [UIColor blackColor]) {
@@ -67,21 +67,22 @@
         }
         self.pubDateLabel.textColor = [UIColor bn_favoriteSelectedNightColor];
     } else {
-        self.titleLabel.textColor = [UIColor bn_titleColor];
+        self.titleLabel.textColor = [UIColor bn_mainColor];
         self.cellBackgroundView.backgroundColor = [UIColor bn_newsCellColor];
-        self.shareButton.tintColor = [UIColor bn_titleColor];
+        self.shareButton.tintColor = [UIColor blackColor];
         if (self.favoriteButton.tintColor == [UIColor blackColor]) {
         } else {
             self.favoriteButton.tintColor = [UIColor bn_favoriteSelectedColor];
         }
-        self.pubDateLabel.textColor = [UIColor bn_newsCellDateColor];
+        self.pubDateLabel.textColor = [UIColor bn_mainColor];
+        
     }
 }
 
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath  {
     [self layoutIfNeeded];
     
-    self.sourceLabel.text = entity.sourceName;
+    self.sourceLabel.text = entity.linkFeed;
     self.titleLabel.text = entity.titleFeed;
     self.descriptionLabel.text = entity.descriptionFeed;
     [self.favoriteButton setImage:[self.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];

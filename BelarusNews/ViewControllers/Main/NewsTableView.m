@@ -108,6 +108,8 @@ typedef enum {
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
+
     if ([self.userDefaults boolForKey:AUTOUPDATE_MODE]) {
          self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
         NSLog(@"Autoupdates enabled");
@@ -130,6 +132,7 @@ typedef enum {
     [super viewWillDisappear:animated];
     [self.timer invalidate];
     self.timer = nil;
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 #pragma mark - IBActions
@@ -228,17 +231,6 @@ typedef enum {
         vc.sourceLink = [NSString stringWithString:newsEntity.linkFeed];
     } else if ([segue.identifier isEqualToString:@"DetailsOfflineVCID"]) {
         DetailsOfflineVCViewController *vc = segue.destinationViewController;
-        if ([self.categoryString isEqualToString:@"S13"]) {
-            vc.sourceLink = S13_RU;
-        } else if ([self.categoryString isEqualToString:@"Новый-Час"]) {
-            vc.sourceLink = NOVYCHAS_BY;
-        } else if ([self.urlString containsString:@"onliner"]) {
-            vc.sourceLink = ONLINER_BY;
-        } else if ([self.urlString containsString:@"tut.by"]) {
-            vc.sourceLink = TUT_BY;
-        } else if ([self.categoryString isEqualToString:@"DEV.BY"]) {
-            vc.sourceLink = DEV_BY;
-        }
         vc.entity = newsEntity;
     } else if ([segue.identifier isEqualToString:@"ShareVCID"]) {
         DetailsViewController *vc = segue.destinationViewController;
@@ -453,6 +445,31 @@ typedef enum {
 
 #pragma mark - Private methods
 
+- (void)orientationChanged:(NSNotification *)notification{
+    [self adjustViewsForOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+}
+
+- (void) adjustViewsForOrientation:(UIInterfaceOrientation) orientation {
+    
+    switch (orientation)
+    {
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown:
+        {
+            //load the portrait view
+        }
+            
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+        {
+            //load the landscape view
+        }
+            break;
+        case UIInterfaceOrientationUnknown:break;
+    }
+}
+
 -(void)peparePullToRefresh {
     self.refreshControl = [[UIRefreshControl alloc] initWithFrame:self.view.frame];
     [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
@@ -479,16 +496,19 @@ typedef enum {
     self.scrollButton.imageView.image = [self.scrollButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
     if (self.isNightMode) {
+        [self.searchBar.searchField setTintColor:[UIColor bn_mainColor]];
+
         [self.scrollButton setTintColor:MAIN_COLOR];
         [Utils setNightNavigationBar:self.navigationController.navigationBar];
         self.refreshControl.tintColor = MAIN_COLOR;
         [self.backgroundImage setImage:[UIImage imageNamed:@"black_blur"]];
     } else {
-        [self.scrollButton setTintColor:[UIColor bn_navBarColor]];
+        [self.searchBar.searchField setTintColor:[UIColor bn_mainColor]];
+        [self.scrollButton setTintColor:[UIColor bn_mainColor]];
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         self.navigationController.navigationBar.shadowImage = [UIImage new];
         self.navigationController.navigationBar.translucent = YES;
-        self.refreshControl.tintColor = [UIColor bn_navBarColor];
+        self.refreshControl.tintColor = [UIColor bn_mainColor];
         [self.backgroundImage setImage:[UIImage imageNamed:@"main_blur"]];
     }
     self.leftMenuButton.imageView.image = [self.leftMenuButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];

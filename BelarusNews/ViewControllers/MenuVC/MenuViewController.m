@@ -60,9 +60,9 @@ typedef enum {
     [super viewWillAppear:animated];
     
     if ([SettingsManager sharedInstance].isNightModeEnabled) {
-        self.blurImage.image = [UIImage imageNamed:@"black_blur"];
+        self.blurImage.image = [UIImage imageNamed:@"menu_night_blur"];
     } else {
-        self.blurImage.image = [UIImage imageNamed:@"black_blur"];
+        self.blurImage.image = [UIImage imageNamed:@"menu_blur"];
 //        self.blurImage.image = [UIImage imageNamed:@"left_menu_Orange_Blur"];
     }
     self.cityObject = [SettingsManager sharedInstance].cityObject;

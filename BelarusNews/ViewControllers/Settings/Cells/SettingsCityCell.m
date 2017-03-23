@@ -12,8 +12,6 @@
 
 @interface SettingsCityCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
-
 @end
 
 @implementation SettingsCityCell

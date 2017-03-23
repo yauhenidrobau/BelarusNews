@@ -46,6 +46,7 @@ typedef enum {
 @property (nonatomic, strong) NSArray *cellTitleList;
 @property (nonatomic, strong) NSArray *cellTitleListID;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIImageView *settingsBackgroundImage;
 @property (nonatomic, strong) LocationAutoCompleteController *locationController;
 @property (nonatomic, strong) NSString *cityString;
 
@@ -190,19 +191,30 @@ typedef enum {
     [self.locationController presentInController:self];
 }
 
-
 #pragma mark Private
 
 -(void)configNightMode {
+    
     if ([SettingsManager sharedInstance].isNightModeEnabled) {
-        self.tableView.backgroundColor = [UIColor bn_nightModeBackgroundColor];
-        [Utils setNightNavigationBar:self.navigationController.navigationBar];
-        [Utils setNavigationBar:self.navigationController.navigationBar light:YES];
-    } else {
-        self.tableView.backgroundColor = [UIColor bn_settingsBackgroundColor];
-        [Utils setDefaultNavigationBar:self.navigationController.navigationBar];
-        [Utils setNavigationBar:self.navigationController.navigationBar light:NO];
+        self.settingsBackgroundImage.image = [UIImage imageNamed:@"main-background-night"];
 
+        [Utils setNightNavigationBar:self.navigationController.navigationBar];
+        self.navigationController.navigationBar.shadowImage = [UIImage new];
+        self.navigationController.navigationBar.translucent = YES;
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        [Utils setNavigationBar:self.navigationController.navigationBar light:YES];
+        [self.navigationController.navigationBar setTintColor:[UIColor bn_navBarNightTitleColor]];
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         @{NSForegroundColorAttributeName:[UIColor bn_navBarNightTitleColor]}];
+    } else {
+        self.settingsBackgroundImage.image = [UIImage imageNamed:@"main-background"];
+        self.navigationController.navigationBar.shadowImage = [UIImage new];
+        self.navigationController.navigationBar.translucent = YES;
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        [Utils setNavigationBar:self.navigationController.navigationBar light:NO];
+        [self.navigationController.navigationBar setTintColor:[UIColor bn_mainColor]];
+        [self.navigationController.navigationBar setTitleTextAttributes:
+         @{NSForegroundColorAttributeName:[UIColor bn_mainColor]}];
     }
 }
 

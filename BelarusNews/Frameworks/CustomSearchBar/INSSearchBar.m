@@ -99,6 +99,7 @@ static NSTimeInterval const kINSSearchBarAnimationStepDuration = 0;
 		self.searchField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		self.searchField.font = [UIFont fontWithName:@"AvenirNext-Regular" size:16.0];
 		self.searchField.textColor = [UIColor blackColor];
+        self.searchField.tintColor = [UIColor redColor];
 		self.searchField.alpha = 0.0;
 		self.searchField.delegate = self;
 		

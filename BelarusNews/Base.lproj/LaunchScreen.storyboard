@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,17 +22,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bct-Qt-bZD">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVk-65-2Rt">
+                                    <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-news" translatesAutoresizingMaskIntoConstraints="NO" id="aqB-ef-YPo">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Belarus News" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVk-65-2Rt">
+                                        <rect key="frame" x="5" y="205.5" width="365" height="256"/>
                                         <fontDescription key="fontDescription" name="AcademyEngravedLetPlain" family="Academy Engraved LET" pointSize="108"/>
-                                        <color key="textColor" red="0.031372549020000001" green="0.98039215690000003" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.019924866381600639" green="0.040831684789361611" blue="0.11126893939393945" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.36687728905711064" green="0.60345602317717284" blue="0.76857998704663211" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="EVk-65-2Rt" firstAttribute="leading" secondItem="bct-Qt-bZD" secondAttribute="leading" constant="5" id="43Q-EW-497"/>
                                     <constraint firstItem="EVk-65-2Rt" firstAttribute="centerY" secondItem="bct-Qt-bZD" secondAttribute="centerY" id="SnX-FO-EzO"/>
+                                    <constraint firstItem="aqB-ef-YPo" firstAttribute="top" secondItem="bct-Qt-bZD" secondAttribute="top" id="VPV-7o-ixE"/>
                                     <constraint firstItem="EVk-65-2Rt" firstAttribute="centerX" secondItem="bct-Qt-bZD" secondAttribute="centerX" id="iD7-QF-9XX"/>
+                                    <constraint firstAttribute="bottom" secondItem="aqB-ef-YPo" secondAttribute="bottom" id="qmk-hB-A0C"/>
+                                    <constraint firstItem="aqB-ef-YPo" firstAttribute="leading" secondItem="bct-Qt-bZD" secondAttribute="leading" id="qp3-Uy-zGg"/>
+                                    <constraint firstAttribute="trailing" secondItem="EVk-65-2Rt" secondAttribute="trailing" constant="5" id="sob-cq-HdY"/>
+                                    <constraint firstAttribute="trailing" secondItem="aqB-ef-YPo" secondAttribute="trailing" id="wCT-UM-VOD"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -48,4 +62,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="launch-news" width="500" height="375"/>
+    </resources>
 </document>
