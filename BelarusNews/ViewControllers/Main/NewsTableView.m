@@ -108,8 +108,6 @@ typedef enum {
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(orientationChanged:)    name:UIDeviceOrientationDidChangeNotification  object:nil];
-
     if ([self.userDefaults boolForKey:AUTOUPDATE_MODE]) {
          self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
         NSLog(@"Autoupdates enabled");
@@ -132,7 +130,6 @@ typedef enum {
     [super viewWillDisappear:animated];
     [self.timer invalidate];
     self.timer = nil;
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 #pragma mark - IBActions
@@ -445,31 +442,6 @@ typedef enum {
 
 #pragma mark - Private methods
 
-- (void)orientationChanged:(NSNotification *)notification{
-    [self adjustViewsForOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
-}
-
-- (void) adjustViewsForOrientation:(UIInterfaceOrientation) orientation {
-    
-    switch (orientation)
-    {
-        case UIInterfaceOrientationPortrait:
-        case UIInterfaceOrientationPortraitUpsideDown:
-        {
-            //load the portrait view
-        }
-            
-            break;
-        case UIInterfaceOrientationLandscapeLeft:
-        case UIInterfaceOrientationLandscapeRight:
-        {
-            //load the landscape view
-        }
-            break;
-        case UIInterfaceOrientationUnknown:break;
-    }
-}
-
 -(void)peparePullToRefresh {
     self.refreshControl = [[UIRefreshControl alloc] initWithFrame:self.view.frame];
     [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
@@ -552,7 +524,7 @@ typedef enum {
     self.activityInd.hidden = !show;
     if (show) {
         [self.activityInd startAnimating];
-    }else {
+    } else {
         [self.activityInd stopAnimating];
         [self.refreshControl endRefreshing];
     }
@@ -603,6 +575,7 @@ typedef enum {
                     [networkReachability stopNotifier];
                     if (!error) {
                         [wself setupData];
+                        [wself.refreshControl endRefreshing];
                         if(showIndicator) {
                         [wself showLoadingIndicator:!showIndicator];
                         }

@@ -47,7 +47,7 @@
         titleButtonUIValue.MAINTITLELABEL_FONT = 11.f;
         titleButtonUIValue.SUBTITLELABEL_FONT = 11.f;
         titleButtonUIValue.SUBTITLELABEL_TOPMARGIN = 2.5f;
-        titleButtonUIValue.ARROWVIEW_LEFTMARGIN = 3.f;
+        titleButtonUIValue.ARROWVIEW_LEFTMARGIN = 1.f;
         titleButtonUIValue.ARROWVIEW_WIDTH = 6.f;
         titleButtonUIValue.ARROWVIEW_HEIGHT = 3.f;
         titleButtonUIValue.BOTTOMLINE_HEIGHT = 3.f;
