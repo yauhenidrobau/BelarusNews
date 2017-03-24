@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UIView *cellBackgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *sourceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastArticlesLabel;
 
 @end
 
@@ -66,15 +67,17 @@
             self.favoriteButton.tintColor = [UIColor bn_lightBlueColor];
         }
         self.pubDateLabel.textColor = [UIColor bn_favoriteSelectedNightColor];
+        self.sourceLabel.textColor = [UIColor whiteColor];
     } else {
-        self.titleLabel.textColor = [UIColor bn_mainColor];
+        self.sourceLabel.textColor = [UIColor bn_mainColor];
+        self.titleLabel.textColor = [UIColor whiteColor];
         self.cellBackgroundView.backgroundColor = [UIColor bn_newsCellColor];
         self.shareButton.tintColor = [UIColor blackColor];
         if (self.favoriteButton.tintColor == [UIColor blackColor]) {
         } else {
             self.favoriteButton.tintColor = [UIColor bn_favoriteSelectedColor];
         }
-        self.pubDateLabel.textColor = [UIColor bn_mainColor];
+        self.pubDateLabel.textColor = [UIColor whiteColor];
         
     }
 }
@@ -97,9 +100,11 @@
     
     if([[[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"d MMM"] isEqualToString:[[DateFormatterManager sharedInstance] stringFromDate:[NSDate date] withFormat:@"d MMM"]]) {
         self.pubDateLabel.text =[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Today at", nil),[[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"HH:mm"]];
+        [self showNewArticles:YES];
         
     } else {
         self.pubDateLabel.text = [[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"d MMM HH:mm:ss"];
+        [self showNewArticles:NO];
 
     }
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
@@ -113,6 +118,14 @@
 
 -(UIImageView*)imageFromCell {
     return self.imageNewsView;
+}
+
+-(void)showNewArticles:(BOOL)show {
+    if (show) {
+        self.lastArticlesLabel.hidden = NO;
+    } else {
+        self.lastArticlesLabel.hidden = YES;
+    }
 }
 
 -(void)updateFontSize {

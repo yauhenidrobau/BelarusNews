@@ -77,13 +77,13 @@
         self.backgroundImage.image = [UIImage imageNamed:@"background"];
         [Utils setDefaultNavigationBar:self.navigationController.navigationBar];
         [Utils setNavigationBar:self.navigationController.navigationBar light:NO];
-        self.detailsTitleLabel.textColor = [UIColor bn_mainColor];
+        self.detailsTitleLabel.textColor = [UIColor whiteColor];
 
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         self.navigationController.navigationBar.shadowImage = [UIImage new];
         self.navigationController.navigationBar.translucent = YES;
         self.view.backgroundColor = [UIColor colorWithRed:239.0 / 255.0 green:239.0 / 255.0 blue:243.0 / 255.0 alpha:1.];
-        [self.navigationController.navigationBar setTintColor:[UIColor bn_mainColor]];
+        [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
         self.detailsDescriptionTV.textColor = [UIColor blackColor];
     }
 }

@@ -500,18 +500,21 @@ typedef enum {
     
     if (self.isNightMode) {
         [self.searchBar.searchField setTintColor:[UIColor bn_mainColor]];
-
-        [self.scrollButton setTintColor:MAIN_COLOR];
+        self.activityInd.tintColor = [UIColor bn_mainNightColor];
+        [self.scrollButton setTintColor:[UIColor bn_mainNightColor]];
         [Utils setNightNavigationBar:self.navigationController.navigationBar];
-        self.refreshControl.tintColor = MAIN_COLOR;
+        self.refreshControl.tintColor = [UIColor bn_mainNightColor];
         [self.backgroundImage setImage:[UIImage imageNamed:@"black_blur"]];
     } else {
+        [self.scrollButton setTintColor:[UIColor bn_mainColor]];
+        self.activityInd.tintColor = [UIColor bn_mainColor];
+
         [self.searchBar.searchField setTintColor:[UIColor bn_mainColor]];
         [self.scrollButton setTintColor:[UIColor bn_mainColor]];
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         self.navigationController.navigationBar.shadowImage = [UIImage new];
         self.navigationController.navigationBar.translucent = YES;
-        self.refreshControl.tintColor = [UIColor bn_mainColor];
+        self.refreshControl.tintColor = [UIColor yellowColor];
         [self.backgroundImage setImage:[UIImage imageNamed:@"main_blur"]];
     }
     self.leftMenuButton.imageView.image = [self.leftMenuButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];

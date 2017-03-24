@@ -51,6 +51,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Yk4-6i-mD6"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="ДА">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -64,6 +65,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="SPD-aI-nEM"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="НЕТ">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
