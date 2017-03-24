@@ -742,7 +742,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oh5-3d-yBO">
-                                                            <rect key="frame" x="76" y="47" width="30" height="15"/>
+                                                            <rect key="frame" x="76" y="47" width="276" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="iBl-ob-2bn"/>
                                                             </constraints>
@@ -766,6 +766,7 @@
                                                         <constraint firstItem="oh5-3d-yBO" firstAttribute="leading" secondItem="Zqx-GC-hPW" secondAttribute="trailing" constant="3" id="FMa-cU-t1G"/>
                                                         <constraint firstItem="YFF-L9-PCS" firstAttribute="leading" secondItem="Zqx-GC-hPW" secondAttribute="trailing" constant="3" id="SGH-NV-wfL"/>
                                                         <constraint firstAttribute="trailing" secondItem="zdZ-bl-Tya" secondAttribute="trailing" constant="5" id="ayN-lR-kSt"/>
+                                                        <constraint firstAttribute="trailing" secondItem="oh5-3d-yBO" secondAttribute="trailing" constant="5" id="bdg-lL-lEh"/>
                                                         <constraint firstAttribute="trailing" secondItem="YFF-L9-PCS" secondAttribute="trailing" constant="5" id="dFx-wf-ntt"/>
                                                         <constraint firstItem="Xqc-xj-tJa" firstAttribute="leading" secondItem="Zqx-GC-hPW" secondAttribute="trailing" constant="3" id="dhZ-1W-h4a"/>
                                                         <constraint firstItem="Xqc-xj-tJa" firstAttribute="top" secondItem="oh5-3d-yBO" secondAttribute="bottom" id="f9X-PF-HSE"/>

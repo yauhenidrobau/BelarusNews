@@ -97,7 +97,6 @@
 		1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD65A71E13EE4300F5BA4D /* SettingsOfflineCell.m */; };
 		1EFE91761E1FAC76008CA308 /* SettingsNotificationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE91751E1FAC76008CA308 /* SettingsNotificationsCell.m */; };
 		1EFE917A1E237908008CA308 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE91791E237908008CA308 /* Utils.m */; };
-		1EFE91851E23BF07008CA308 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EFE91841E23BF06008CA308 /* UserNotifications.framework */; };
 		664E982BCAA093BEE2B33250 /* libPods-BelarusNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D68C11FB67ED6A701E3F2D2 /* libPods-BelarusNews.a */; };
 		843B7B561DF35E27001532A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B7B551DF35E27001532A4 /* RootViewController.m */; };
 		844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A9FD11DF0EE2A00917832 /* MenuViewController.m */; };
@@ -328,7 +327,6 @@
 			files = (
 				1E91CFFC1E64188700CB60EB /* iAd.framework in Frameworks */,
 				1E91CFFA1E6414B000CB60EB /* AdSupport.framework in Frameworks */,
-				1EFE91851E23BF07008CA308 /* UserNotifications.framework in Frameworks */,
 				664E982BCAA093BEE2B33250 /* libPods-BelarusNews.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
