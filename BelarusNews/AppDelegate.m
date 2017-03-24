@@ -50,6 +50,11 @@ NSTimer *timer;
     [self enableGoogleAnalytics];
     
     /*
+     Setup Root Controller
+     */
+    [self setupRootVC];
+    
+    /*
      Weather
      */
     [[DataManager sharedInstance] updateWeatherForecastWithCallback:^(CityObject *cityObject, NSError *error) {
@@ -64,6 +69,14 @@ NSTimer *timer;
 }
 
 #pragma mark - Private 
+
+- (void)setupRootVC{
+    NSString* storyboardName = @"Main";
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:[NSBundle mainBundle]];
+    UIViewController* rootVC = [storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+    //TODO: implement animated transition
+    self.window.rootViewController = rootVC;
+}
 
 -(void)enableGoogleAnalytics {
     

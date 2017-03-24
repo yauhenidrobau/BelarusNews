@@ -128,15 +128,12 @@ static const NSInteger defaultCornerRadius = 16;
 
         self.pubDateLabel.textColor = [UIColor bn_mainNightColor];
         self.sourceLabel.textColor = [UIColor whiteColor];
+        
     } else {
         self.sourceLabel.textColor = [UIColor bn_linkColor];
         self.titleLabel.textColor = [UIColor bn_mainTitleColor];
         self.cellBackgroundView.backgroundColor = [UIColor bn_mainColor];
         self.shareButton.tintColor = [UIColor bn_mainTitleColor];
-        if (self.favoriteButton.tintColor == [UIColor bn_mainTitleColor]) {
-        } else {
-            self.favoriteButton.tintColor = [UIColor bn_favoriteSelectedColor];
-        }
         self.pubDateLabel.textColor = [UIColor bn_mainTitleColor];
     }
 }

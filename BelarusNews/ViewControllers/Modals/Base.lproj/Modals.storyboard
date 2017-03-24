@@ -102,6 +102,7 @@
                                     <constraint firstItem="D7M-M1-rAO" firstAttribute="width" secondItem="MSN-vu-KWv" secondAttribute="width" multiplier="0.5" id="LP5-gZ-bko"/>
                                     <constraint firstItem="BG5-Gf-9Bi" firstAttribute="leading" secondItem="MSN-vu-KWv" secondAttribute="leading" constant="5" id="OQN-y4-NZI"/>
                                     <constraint firstAttribute="bottom" secondItem="D7M-M1-rAO" secondAttribute="bottom" id="VTq-bP-yMc"/>
+                                    <constraint firstAttribute="height" constant="200" id="Vw5-aq-nuL"/>
                                     <constraint firstAttribute="bottom" secondItem="0GR-pr-QO7" secondAttribute="bottom" id="XDQ-a2-gyo"/>
                                     <constraint firstAttribute="trailing" secondItem="0GR-pr-QO7" secondAttribute="trailing" id="YaV-pW-r7J"/>
                                     <constraint firstAttribute="trailing" secondItem="7V1-wl-U7o" secondAttribute="trailing" constant="10" id="a9d-o4-RoV"/>
@@ -124,7 +125,6 @@
                             <constraint firstItem="MSN-vu-KWv" firstAttribute="centerX" secondItem="ekd-gl-hyv" secondAttribute="centerX" id="jEP-VU-ZCe"/>
                             <constraint firstItem="MSN-vu-KWv" firstAttribute="centerY" secondItem="ekd-gl-hyv" secondAttribute="centerY" id="oub-bT-bQW"/>
                             <constraint firstItem="qaz-yW-Gnj" firstAttribute="top" secondItem="uuv-nO-Ozm" secondAttribute="bottom" id="t4B-hW-t08"/>
-                            <constraint firstItem="MSN-vu-KWv" firstAttribute="height" secondItem="ekd-gl-hyv" secondAttribute="height" multiplier="0.3" id="tA4-kV-aCO"/>
                         </constraints>
                     </view>
                     <connections>

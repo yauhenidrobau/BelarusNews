@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "UIScrollView+EmptyDataSet.h"
-#import <UIViewController+LMSideBarController.h>
 
-@interface NewsTableView: UIViewController
+#import "BaseViewController.h"
+
+@interface NewsTableView: BaseViewController
 
 @property (strong, nonatomic) NSString *menuTitle;
 @property (strong, nonatomic) NSString *urlString;

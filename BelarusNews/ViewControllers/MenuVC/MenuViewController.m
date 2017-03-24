@@ -9,16 +9,17 @@
 #import "MenuViewController.h"
 
 #import "NewsTableView.h"
-#import "RootViewController.h"
 #import "UserDefaultsManager.h"
 #import "SettingsManager.h"
 #import "DataManager.h"
 #import "CityObject.h"
+#import "SWRevealViewController.h"
 
-typedef enum {
-    CellTypeFavorite,
-    CellTypeSettings
-}CellTypes;
+typedef enum NSInteger {
+    MenuItemNews = 0,
+    MenuItemFavorite = 1,
+    MenuItemSettings = 2
+} MenuItem;
 
 @interface MenuViewController ()
 
@@ -47,13 +48,14 @@ typedef enum {
 {
     [super viewDidLoad];
     
-    self.menuTitles = @[
+    self.menuTitles = @[  NSLocalizedString(@"News",nil),
                         NSLocalizedString(@"Favorites",nil),
                         NSLocalizedString(@"Settings",nil)];
     self.logoutButton.layer.cornerRadius = 15;
     self.logoutButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.logoutButton.layer.borderWidth = 2.0f;
-    
+    self.revealViewController.rearViewRevealWidth = CGRectGetWidth(self.view.frame) - 53.0f;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -63,7 +65,6 @@ typedef enum {
         self.blurImage.image = [UIImage imageNamed:@"menu_night_blur"];
     } else {
         self.blurImage.image = [UIImage imageNamed:@"menu_blur"];
-//        self.blurImage.image = [UIImage imageNamed:@"left_menu_Orange_Blur"];
     }
     self.cityObject = [SettingsManager sharedInstance].cityObject;
     if (self.cityObject.cityID) {
@@ -97,9 +98,11 @@ typedef enum {
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:2];
     titleLabel.text = self.menuTitles[indexPath.row];
     UIImageView *imageView = (UIImageView*)[cell viewWithTag:3];
-    if (indexPath.row == CellTypeFavorite) {
+    if (indexPath.row == MenuItemNews) {
+        imageView.image = [UIImage imageNamed:@"left_menu_news"];
+    } else if (indexPath.row == MenuItemFavorite) {
         imageView.image = [UIImage imageNamed:@"left_menu_favorite"];
-    } else if (indexPath.row == CellTypeSettings) {
+    } else if (indexPath.row == MenuItemSettings) {
         imageView.image = [UIImage imageNamed:@"left_menu_settings"];
     }
     return cell;
@@ -107,16 +110,51 @@ typedef enum {
 
 #pragma mark - TABLE VIEW DELEGATE
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    self.titleString = self.menuTitles[indexPath.row];
-    [self.sideBarController hideMenuViewController:YES];
-//    [self.sideBarController showViewController:vc sender:self];
 
+    NSString *rootVCId;
+    NSString* storyboardName;
+    switch (indexPath.row) {
+        case MenuItemNews:
+            storyboardName = @"News";
+            rootVCId = @"BaseNavVC";
+            break;
+        case MenuItemFavorite:
+            storyboardName = @"News";
+            rootVCId = @"BaseNavVC";
+            break;
+        case MenuItemSettings:
+            storyboardName = @"Settings";
+            rootVCId = @"SettingsNavVC";
+            break;
+        default:
+            [self closeMenu];
+            return;
+    }
+    
+    if (!storyboardName.length || !rootVCId.length) {
+        [self closeMenu];
+        return;
+    }
+    
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+    UIViewController* rootVC = [storyboard instantiateViewControllerWithIdentifier:rootVCId];
+    if (indexPath.row == MenuItemFavorite) {
+        [[NSUserDefaults standardUserDefaults]setObject:NSLocalizedString(@"Favorites",nil) forKey:@"Favorite"];
+    } else {
+        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"Favorite"];
+    }
+    [self.revealViewController setFrontViewController:rootVC animated:YES];
+    
+    [self closeMenu];
 }
 
 #pragma mark - Private 
+
+- (void)closeMenu {
+    [self.revealViewController rightRevealToggleAnimated:YES];
+}
 
 -(void)configWeatherDescription:(NSInteger)weatherID {
     if (weatherID > 199 && weatherID < 233) {

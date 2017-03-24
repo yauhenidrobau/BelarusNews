@@ -14,14 +14,6 @@
 /* Class = "UILabel"; text = "Title"; ObjectID = "tVM-SA-36T"; */
 "tVM-SA-36T.text" = "Title";
 
-//Left Menu
-
-/* Class = "UIButton"; normalTitle = "Log out"; ObjectID = "SLt-Ud-KeY"; */
-"SLt-Ud-KeY.normalTitle" = "Exit";
-
-/* Class = "UILabel"; text = "noWeatherText"; ObjectID = "hYn-Db-pZ9"; */
-"hYn-Db-pZ9.text" = "Set your city in settings to see the weather";
-
 // SETTINGS
 
 /* Class = "UILabel"; text = "Sign Out"; ObjectID = "h8H-Yb-iAC"; */

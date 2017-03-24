@@ -43,7 +43,6 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - LMSideBarController (1.0.1)
   - Reachability (3.2)
   - Realm (2.4.2):
     - Realm/Headers (= 2.4.2)
@@ -51,6 +50,7 @@ PODS:
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
+  - SWRevealViewController (2.3.0)
   - UIAlertController+Blocks (0.9.2)
 
 DEPENDENCIES:
@@ -60,10 +60,10 @@ DEPENDENCIES:
   - Fabric
   - Google/Analytics
   - GooglePlaces
-  - LMSideBarController
   - Reachability (~> 3.2)
   - Realm
   - SDWebImage (~> 3.7.6)
+  - SWRevealViewController (~> 2.3)
   - UIAlertController+Blocks
 
 SPEC CHECKSUMS:
@@ -79,12 +79,12 @@ SPEC CHECKSUMS:
   GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
   GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  LMSideBarController: bfbe56b30c76a541918b4c3f8972f64a49b295a1
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   UIAlertController+Blocks: 80e28b92523fb58aba4d1bccec013d5a0b0bddb2
 
-PODFILE CHECKSUM: 43c589aa4138103428e6a3ad5ce4a12c1f98574b
+PODFILE CHECKSUM: 02a8fecbe8b26e4568b88b6948481cab67e40a9c
 
 COCOAPODS: 1.0.0

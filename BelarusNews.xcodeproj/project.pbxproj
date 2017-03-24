@@ -56,6 +56,12 @@
 		1E1505081E83ECAF009F235E /* WebLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1505071E83ECAF009F235E /* WebLinkViewController.m */; };
 		1E15050B1E83ECD7009F235E /* ModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15050A1E83ECD7009F235E /* ModalViewController.m */; };
 		1E15050E1E83EDC4009F235E /* Modals.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E1505101E83EDC4009F235E /* Modals.storyboard */; };
+		1E1505171E8534F5009F235E /* UIViewController+BelarusNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1505161E8534F5009F235E /* UIViewController+BelarusNews.m */; };
+		1E15051A1E8535C2009F235E /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E1505191E8535C2009F235E /* News.storyboard */; };
+		1E15051F1E8536F0009F235E /* RevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15051E1E8536F0009F235E /* RevealViewController.m */; };
+		1E1505231E853B9D009F235E /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1505221E853B9D009F235E /* BaseViewController.m */; };
+		1E1505241E8543DD009F235E /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E1505261E8543DD009F235E /* Menu.storyboard */; };
+		1E15052C1E85463B009F235E /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E15052B1E85463B009F235E /* Settings.storyboard */; };
 		1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2666911E127AD6001DF2A2 /* INSSearchBar.m */; };
 		1E4C8C641E56D8FB00B2ED44 /* SettingsAutoupdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C8C631E56D8FB00B2ED44 /* SettingsAutoupdateCell.m */; };
 		1E640B581E0A85FE00AA539C /* NSString+ZLStringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B341E0A85FC00AA539C /* NSString+ZLStringSize.m */; };
@@ -209,6 +215,17 @@
 		1E15050F1E83EDC4009F235E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Modals.storyboard; sourceTree = "<group>"; };
 		1E1505121E83EDCF009F235E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Modals.strings; sourceTree = "<group>"; };
 		1E1505141E83EDD1009F235E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Modals.strings; sourceTree = "<group>"; };
+		1E1505151E8534F5009F235E /* UIViewController+BelarusNews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BelarusNews.h"; sourceTree = "<group>"; };
+		1E1505161E8534F5009F235E /* UIViewController+BelarusNews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BelarusNews.m"; sourceTree = "<group>"; };
+		1E1505191E8535C2009F235E /* News.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = News.storyboard; sourceTree = "<group>"; };
+		1E15051D1E8536F0009F235E /* RevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevealViewController.h; sourceTree = "<group>"; };
+		1E15051E1E8536F0009F235E /* RevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevealViewController.m; sourceTree = "<group>"; };
+		1E1505211E853B9D009F235E /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		1E1505221E853B9D009F235E /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		1E1505251E8543DD009F235E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Menu.storyboard; sourceTree = "<group>"; };
+		1E1505281E8543DF009F235E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Menu.strings; sourceTree = "<group>"; };
+		1E15052A1E8543E3009F235E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Menu.strings; sourceTree = "<group>"; };
+		1E15052B1E85463B009F235E /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		1E1D3A9E1DE47D9F00D6C00C /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1E2666901E127AD6001DF2A2 /* INSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSSearchBar.h; sourceTree = "<group>"; };
 		1E2666911E127AD6001DF2A2 /* INSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSSearchBar.m; sourceTree = "<group>"; };
@@ -297,7 +314,6 @@
 		1EFE91791E237908008CA308 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		1EFE91801E23841B008CA308 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1EFE91821E23841C008CA308 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		1EFE91841E23BF06008CA308 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		3D68C11FB67ED6A701E3F2D2 /* libPods-BelarusNews.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BelarusNews.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		843B7B541DF35E27001532A4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		843B7B551DF35E27001532A4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
@@ -464,7 +480,6 @@
 			children = (
 				1E91CFFB1E64188700CB60EB /* iAd.framework */,
 				1E91CFF91E6414B000CB60EB /* AdSupport.framework */,
-				1EFE91841E23BF06008CA308 /* UserNotifications.framework */,
 				1E0FE3781E6EE73A0009BC26 /* CFShareCircle */,
 				84FF33391E1DCD04002847AB /* Spinners */,
 				1E26668F1E127AC3001DF2A2 /* CustomSearchBar */,
@@ -484,9 +499,30 @@
 				1E1505041E83EC56009F235E /* UIViewController+ShowModal.m */,
 				1E1505061E83ECAF009F235E /* WebLinkViewController.h */,
 				1E1505071E83ECAF009F235E /* WebLinkViewController.m */,
-				1E1505101E83EDC4009F235E /* Modals.storyboard */,
 			);
 			path = Modals;
+			sourceTree = "<group>";
+		};
+		1E1505181E853590009F235E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				1E1505101E83EDC4009F235E /* Modals.storyboard */,
+				1E7328FB1D7813740027E46E /* Main.storyboard */,
+				1E7329031D7813740027E46E /* LaunchScreen.storyboard */,
+				1E1505191E8535C2009F235E /* News.storyboard */,
+				1E1505261E8543DD009F235E /* Menu.storyboard */,
+				1E15052B1E85463B009F235E /* Settings.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		1E1505201E853B8E009F235E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1E1505211E853B9D009F235E /* BaseViewController.h */,
+				1E1505221E853B9D009F235E /* BaseViewController.m */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		1E26668F1E127AC3001DF2A2 /* CustomSearchBar */ = {
@@ -603,13 +639,12 @@
 			children = (
 				1E73292D1D7814340027E46E /* Model */,
 				1E73292C1D78142D0027E46E /* ViewControllers */,
+				1E1505181E853590009F235E /* Storyboards */,
 				1E7329281D7813890027E46E /* Util */,
 				1E7328F51D7813740027E46E /* AppDelegate.h */,
 				1E7328F61D7813740027E46E /* AppDelegate.m */,
-				1E7328FB1D7813740027E46E /* Main.storyboard */,
 				1E7329011D7813740027E46E /* Assets.xcassets */,
 				84702F8A1DF8887C005CE945 /* Localizable.strings */,
-				1E7329031D7813740027E46E /* LaunchScreen.storyboard */,
 				1E7329061D7813740027E46E /* Info.plist */,
 				1E7328F21D7813740027E46E /* Supporting Files */,
 			);
@@ -653,6 +688,8 @@
 				1EFE91791E237908008CA308 /* Utils.m */,
 				1E1286161E5D850600D2899D /* UIColor+BelarusNews.h */,
 				1E1286171E5D850600D2899D /* UIColor+BelarusNews.m */,
+				1E1505151E8534F5009F235E /* UIViewController+BelarusNews.h */,
+				1E1505161E8534F5009F235E /* UIViewController+BelarusNews.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -660,6 +697,7 @@
 		1E73292C1D78142D0027E46E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1E1505201E853B8E009F235E /* Common */,
 				1E1505021E83EC45009F235E /* Modals */,
 				1EFD65A11E13EA9200F5BA4D /* Settings */,
 				1EFD65A01E13D78800F5BA4D /* Root */,
@@ -716,6 +754,8 @@
 			children = (
 				843B7B541DF35E27001532A4 /* RootViewController.h */,
 				843B7B551DF35E27001532A4 /* RootViewController.m */,
+				1E15051D1E8536F0009F235E /* RevealViewController.h */,
+				1E15051E1E8536F0009F235E /* RevealViewController.m */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -906,6 +946,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E1505241E8543DD009F235E /* Menu.storyboard in Resources */,
 				1E0FE3B01E6EE73A0009BC26 /* pinterest copy.png in Resources */,
 				1E0FE3A01E6EE73A0009BC26 /* camera_roll.png in Resources */,
 				1E0FE3AD1E6EE73A0009BC26 /* mail@2x.png in Resources */,
@@ -920,6 +961,7 @@
 				1E0FE3A61E6EE73A0009BC26 /* evernote.png in Resources */,
 				1E0FE3B11E6EE73A0009BC26 /* pinterest.png in Resources */,
 				1E15050E1E83EDC4009F235E /* Modals.storyboard in Resources */,
+				1E15052C1E85463B009F235E /* Settings.storyboard in Resources */,
 				1E0FE3A21E6EE73A0009BC26 /* close.png in Resources */,
 				1E0FE3B51E6EE73A0009BC26 /* print@2x.png in Resources */,
 				1E0FE3B61E6EE73A0009BC26 /* twitter copy.png in Resources */,
@@ -931,6 +973,7 @@
 				1E0FE3AB1E6EE73A0009BC26 /* google_drive@2x.png in Resources */,
 				1E0FE3B81E6EE73A0009BC26 /* twitter@2x copy.png in Resources */,
 				1E0FE3B21E6EE73A0009BC26 /* pinterest@2x copy.png in Resources */,
+				1E15051A1E8535C2009F235E /* News.storyboard in Resources */,
 				1E7329051D7813740027E46E /* LaunchScreen.storyboard in Resources */,
 				1E0FE3A81E6EE73A0009BC26 /* facebook.png in Resources */,
 				1E0FE3A31E6EE73A0009BC26 /* close@2x.png in Resources */,
@@ -1058,6 +1101,7 @@
 				1E0FE3641E6EB1300009BC26 /* UserDefaultsManager.m in Sources */,
 				1E1505081E83ECAF009F235E /* WebLinkViewController.m in Sources */,
 				1E91CFDF1E600F0A00CB60EB /* SettingsRoundImagesCell.m in Sources */,
+				1E1505231E853B9D009F235E /* BaseViewController.m in Sources */,
 				1E0FE3631E6EB1300009BC26 /* ShareManager.m in Sources */,
 				1E640B591E0A85FE00AA539C /* MASCompositeConstraint.m in Sources */,
 				844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */,
@@ -1080,6 +1124,7 @@
 				1E640B601E0A85FE00AA539C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				1E0FE3601E6EB1300009BC26 /* RemoteFacade.m in Sources */,
 				1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */,
+				1E15051F1E8536F0009F235E /* RevealViewController.m in Sources */,
 				1E15050B1E83ECD7009F235E /* ModalViewController.m in Sources */,
 				84FF33411E1DCEAC002847AB /* FXBlurView.m in Sources */,
 				1E0FE39C1E6EE73A0009BC26 /* CFShareCircleView.m in Sources */,
@@ -1093,6 +1138,7 @@
 				1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */,
 				1E4C8C641E56D8FB00B2ED44 /* SettingsAutoupdateCell.m in Sources */,
 				1E7329551D7848530027E46E /* DetailsViewController.m in Sources */,
+				1E1505171E8534F5009F235E /* UIViewController+BelarusNews.m in Sources */,
 				1E1286181E5D850600D2899D /* UIColor+BelarusNews.m in Sources */,
 				1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */,
 				1E7328F41D7813740027E46E /* main.m in Sources */,
@@ -1142,6 +1188,17 @@
 				1E1505141E83EDD1009F235E /* ru */,
 			);
 			name = Modals.storyboard;
+			path = ../ViewControllers/Modals;
+			sourceTree = "<group>";
+		};
+		1E1505261E8543DD009F235E /* Menu.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E1505251E8543DD009F235E /* Base */,
+				1E1505281E8543DF009F235E /* en */,
+				1E15052A1E8543E3009F235E /* ru */,
+			);
+			name = Menu.storyboard;
 			sourceTree = "<group>";
 		};
 		1E7328FB1D7813740027E46E /* Main.storyboard */ = {
@@ -1152,6 +1209,7 @@
 				84702F931DF88B6C005CE945 /* en */,
 			);
 			name = Main.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		1E7329031D7813740027E46E /* LaunchScreen.storyboard */ = {
@@ -1162,6 +1220,7 @@
 				1EFE91821E23841C008CA308 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		84702F8A1DF8887C005CE945 /* Localizable.strings */ = {

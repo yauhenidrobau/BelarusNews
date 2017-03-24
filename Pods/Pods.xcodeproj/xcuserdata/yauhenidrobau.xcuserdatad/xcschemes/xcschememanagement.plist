@@ -19,11 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>LMSideBarController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-BelarusNews.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -44,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SWRevealViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UIAlertController+Blocks.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,12 +52,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>233D1657FDB4F70BD92D819250ECD05F</key>
+		<key>179EA09A2AB1EDA9DA4620D7DD3A328E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>276E7290570EB630596B76E28129C9CF</key>
+		<key>4B1EED1A7D11D778E097C9E4AEB77A75</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,7 +67,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9EF222F9493AAD10E703C5A7A5F8F987</key>
+		<key>AF65EBCD084A0A5D696F0A4CA363E3FE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,22 +77,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B162F943D3F4D34AF0CE01B35831307E</key>
+		<key>B1C55C2AAD69946F1C3392425E328095</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B39FC414063078D7DFFAFBD2A11F4C4E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CE916AF2F8EA6C8471E9C132E2F5F1A2</key>
+		<key>C250AB6A419E51FF6F491CBFB2660D57</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E1BBB76ADBF2EF4EF2CE5DF6BBC77296</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FFA6E611701CA38F97598DACE3D5E488</key>
 		<dict>
 			<key>primary</key>
 			<true/>

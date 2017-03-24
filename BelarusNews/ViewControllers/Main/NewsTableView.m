@@ -44,6 +44,8 @@
 
 #import <Google/Analytics.h>
 
+#import "UIViewController+BelarusNews.h"
+
 typedef void(^UpdateDataCallback)(NSError *error);
 typedef enum {
     AllCategoryType = 0,
@@ -373,7 +375,7 @@ typedef enum {
 - (void)menu:(ZLDropDownMenu *)menu didSelectRowAtIndexPath:(ZLIndexPath *)indexPath {
     self.menuTitle = @"";
     self.isSearchStart = NO;
-
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"Favorite"];
     NSArray *array = self.titlesForRequestArray[indexPath.column];
     if (array.count == 1) {
         self.categoryString = self.mainTitleArray[indexPath.column];
@@ -534,7 +536,7 @@ typedef enum {
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         self.navigationController.navigationBar.shadowImage = [UIImage new];
         self.navigationController.navigationBar.translucent = YES;
-        self.refreshControl.tintColor = [UIColor yellowColor];
+        self.refreshControl.tintColor = [UIColor bn_mainTitleColor];
         [self.backgroundImage setImage:[UIImage imageNamed:@"main_blur"]];
     }
     self.leftMenuButton.imageView.image = [self.leftMenuButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -542,11 +544,10 @@ typedef enum {
 }
 
 -(void)setupData {
-    
+    self.menuTitle = [[NSUserDefaults standardUserDefaults]objectForKey:@"Favorite"];
     if (!self.menuTitle.length) {
         RLMResults *results = [NewsEntity objectsWhere:@"category == %@",self.categoryString];
         NSArray *allResultsArray = [[RealmDataManager sharedInstance] RLMResultsToArray:results];
-        
         self.newsArray = [self sortNewsArray:allResultsArray];
         NSLog(@"Get ELEMENTS  %lu",(unsigned long)self.newsArray.count);
     } else if ([self.menuTitle isEqualToString:NSLocalizedString(@"Favorites", nil)]){
@@ -629,10 +630,7 @@ typedef enum {
                     [networkReachability stopNotifier];
                     if (!error) {
                         [wself setupData];
-                        [wself.refreshControl endRefreshing];
-                        if(showIndicator) {
-                        [wself showLoadingIndicator:!showIndicator];
-                        }
+                        [wself showLoadingIndicator:NO];
                     }
                 }];
             }

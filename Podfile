@@ -9,8 +9,8 @@ target ‘BelarusNews' do
    pod 'Fabric'
    pod 'Crashlytics'
    pod 'AFNetworking', '~> 2.0'
-   pod 'LMSideBarController'
    pod 'GooglePlaces'
    pod 'Google/Analytics'
+   pod 'SWRevealViewController', '~> 2.3'
 
 end

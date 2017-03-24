@@ -6,8 +6,8 @@
 //  Copyright © 2016 YAUHENI DROBAU. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface SettingsVC : UIViewController
+@interface SettingsVC : BaseViewController
 
 @end
