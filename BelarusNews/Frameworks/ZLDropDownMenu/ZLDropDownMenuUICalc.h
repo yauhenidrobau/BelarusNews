@@ -18,7 +18,7 @@
 #define kDropdownMenuUnselectedNightCellTextColor kRGBColorFromHex(0xFFFFFF)  // open menu unSelected title NIGHT
 
 #define kDropdownMenuIndicatorColor               kRGBColorFromHex(0xFFFFFF)  // subTitle color
-#define kDropdownMenuBottomSeparatorColor         [UIColor bn_mainColor]
+#define kDropdownMenuBottomSeparatorColor         [UIColor whiteColor]
 #define kDropdownMenuTitleColor                   kRGBColorFromHex(0xFFFFFF)  
 
 #define WS(weakSelf)                              __weak __typeof(&*self) weakSelf = self
