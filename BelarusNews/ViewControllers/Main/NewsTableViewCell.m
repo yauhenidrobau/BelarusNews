@@ -125,8 +125,8 @@ static const NSInteger defaultCornerRadius = 16;
         self.titleLabel.textColor = [UIColor bn_mainNightColor];
         self.cellBackgroundView.backgroundColor = [UIColor bn_newsCellNightColor];
         self.shareButton.tintColor = [UIColor bn_nightModeTitleColor];
-        
-        self.pubDateLabel.textColor = [UIColor bn_favoriteSelectedNightColor];
+
+        self.pubDateLabel.textColor = [UIColor bn_mainNightColor];
         self.sourceLabel.textColor = [UIColor whiteColor];
     } else {
         self.sourceLabel.textColor = [UIColor bn_linkColor];
@@ -138,7 +138,6 @@ static const NSInteger defaultCornerRadius = 16;
             self.favoriteButton.tintColor = [UIColor bn_favoriteSelectedColor];
         }
         self.pubDateLabel.textColor = [UIColor bn_mainTitleColor];
-        
     }
 }
 
