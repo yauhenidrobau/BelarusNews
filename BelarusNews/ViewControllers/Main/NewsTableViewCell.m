@@ -13,6 +13,7 @@
 #import "UIColor+BelarusNews.h"
 #import "SettingsManager.h"
 #import "Constants.h"
+#import "Macros.h"
 
 @interface NewsTableViewCell ()
 
@@ -39,7 +40,7 @@
     self.backgroundColor = [UIColor clearColor];
     self.imageNewsView.clipsToBounds = YES;
     self.imageNewsView.contentMode = UIViewContentModeScaleAspectFill;
-    
+    self.lastArticlesLabel.text = NSLocalizedString(@"New", nil);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -69,15 +70,15 @@
         self.pubDateLabel.textColor = [UIColor bn_favoriteSelectedNightColor];
         self.sourceLabel.textColor = [UIColor whiteColor];
     } else {
-        self.sourceLabel.textColor = [UIColor bn_mainColor];
-        self.titleLabel.textColor = [UIColor whiteColor];
-        self.cellBackgroundView.backgroundColor = [UIColor bn_newsCellColor];
+        self.sourceLabel.textColor = [UIColor bn_linkColor];
+        self.titleLabel.textColor = [UIColor bn_mainTitleColor];
+        self.cellBackgroundView.backgroundColor = [UIColor bn_mainColor];
         self.shareButton.tintColor = [UIColor blackColor];
         if (self.favoriteButton.tintColor == [UIColor blackColor]) {
         } else {
             self.favoriteButton.tintColor = [UIColor bn_favoriteSelectedColor];
         }
-        self.pubDateLabel.textColor = [UIColor whiteColor];
+        self.pubDateLabel.textColor = [UIColor bn_mainTitleColor];
         
     }
 }
@@ -97,15 +98,15 @@
     } else {
         [self.favoriteButton setTintColor:[UIColor bn_lightBlueColor]];
     }
-    
-    if([[[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"d MMM"] isEqualToString:[[DateFormatterManager sharedInstance] stringFromDate:[NSDate date] withFormat:@"d MMM"]]) {
-        self.pubDateLabel.text =[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Today at", nil),[[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"HH:mm"]];
+    if ([[NSDate date]timeIntervalSince1970] - entity.pubDateFeed.timeIntervalSince1970 < 2000 ) {
         [self showNewArticles:YES];
-        
+    } else {
+        [self showNewArticles:NO];
+    }
+    if([[[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"d MMM"] isEqualToString:[[DateFormatterManager sharedInstance] stringFromDate:[NSDate date] withFormat:@"d MMM"]]) {
+        self.pubDateLabel.text =[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Today at", nil),[[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"HH:mm"]];        
     } else {
         self.pubDateLabel.text = [[DateFormatterManager sharedInstance] stringFromDate:entity.pubDateFeed withFormat:@"d MMM HH:mm:ss"];
-        [self showNewArticles:NO];
-
     }
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
                  placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.category]]];

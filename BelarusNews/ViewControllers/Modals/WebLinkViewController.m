@@ -90,12 +90,16 @@
         self.mainBackgroundView.backgroundColor = [UIColor blackColor];
         [self.ButtonYES setBackgroundColor:[UIColor bn_mainNightColor]];
         [self.buttonNO setBackgroundColor:[UIColor bn_mainNightColor]];
+        [self.buttonNO setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.ButtonYES setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     } else {
-        self.mainView.layer.borderColor = [UIColor bn_mainColor].CGColor;
-        self.articleLinkLabel.textColor = [UIColor bn_mainColor];
+        self.mainView.layer.borderColor = [UIColor bn_mainTitleColor].CGColor;
+        self.articleLinkLabel.textColor = [UIColor bn_mainTitleColor];
         self.mainBackgroundView.backgroundColor = [UIColor bn_newsCellColor];
         [self.ButtonYES setBackgroundColor:[UIColor bn_mainColor]];
         [self.buttonNO setBackgroundColor:[UIColor bn_mainColor]];
+        [self.buttonNO setTitleColor:[UIColor bn_mainTitleColor] forState:UIControlStateNormal];
+        [self.ButtonYES setTitleColor:[UIColor bn_mainTitleColor] forState:UIControlStateNormal];
     }
 }
 - (void)closeTapped {

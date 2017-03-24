@@ -63,9 +63,8 @@
     } else {
         [self.cellSwitch setOnTintColor:[UIColor  bn_mainColor]];
         
-        self.cellTitleLabel.textColor = [UIColor  bn_mainColor];
-        self.cityNameLabel
-        .textColor = [UIColor  bn_mainColor];
+        self.cellTitleLabel.textColor = [UIColor  bn_mainTitleColor];
+        self.cityNameLabel.textColor = [UIColor  bn_mainColor];
         self.separatorView.backgroundColor = [UIColor  bn_mainColor];
     }
 }

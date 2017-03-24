@@ -506,11 +506,10 @@ typedef enum {
         self.refreshControl.tintColor = [UIColor bn_mainNightColor];
         [self.backgroundImage setImage:[UIImage imageNamed:@"black_blur"]];
     } else {
-        [self.scrollButton setTintColor:[UIColor bn_mainColor]];
+        [self.scrollButton setTintColor:[UIColor bn_mainTitleColor]];
         self.activityInd.tintColor = [UIColor bn_mainColor];
 
         [self.searchBar.searchField setTintColor:[UIColor bn_mainColor]];
-        [self.scrollButton setTintColor:[UIColor bn_mainColor]];
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         self.navigationController.navigationBar.shadowImage = [UIImage new];
         self.navigationController.navigationBar.translucent = YES;

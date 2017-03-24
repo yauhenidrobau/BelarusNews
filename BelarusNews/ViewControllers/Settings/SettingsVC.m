@@ -211,10 +211,10 @@ typedef enum {
         self.navigationController.navigationBar.shadowImage = [UIImage new];
         self.navigationController.navigationBar.translucent = YES;
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        [Utils setNavigationBar:self.navigationController.navigationBar light:NO];
-        [self.navigationController.navigationBar setTintColor:[UIColor bn_mainColor]];
+        [Utils setNavigationBar:self.navigationController.navigationBar light:YES];
+        [self.navigationController.navigationBar setTintColor:[UIColor bn_mainTitleColor]];
         [self.navigationController.navigationBar setTitleTextAttributes:
-         @{NSForegroundColorAttributeName:[UIColor bn_mainColor]}];
+         @{NSForegroundColorAttributeName:[UIColor bn_mainTitleColor]}];
     }
 }
 

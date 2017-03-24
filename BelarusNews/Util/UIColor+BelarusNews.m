@@ -13,11 +13,19 @@
 @implementation UIColor (BelarusNews)
 
 +(UIColor*)bn_mainColor {
-    return RGB(224, 217, 66);
+    return RGBA(25,48,64,0.8);
+//    RGB(224, 217, 66);
+}
++(UIColor*)bn_mainTitleColor {
+    return [UIColor whiteColor];
+}
+
++(UIColor*)bn_linkColor {
+    return RGB(126,126,126);
 }
 
 +(UIColor*)bn_mainNightColor {
-    return RGBA(0, 255, 184, 1);
+    return RGBA(0, 222,197, 1);
 }
 
 +(UIColor*)bn_nightModeBackgroundColor {

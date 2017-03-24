@@ -78,10 +78,7 @@
         } else if ([menuViewController.titleString isEqualToString:NSLocalizedString(@"Settings",nil)]) {
             menuViewController.titleString = @"";
             [self.mainNavigationController pushViewController:self.settingsVC animated:YES];
-        } else if ([menuViewController.titleString isEqualToString:NSLocalizedString(@"Log out",nil)]) {
-            menuViewController.titleString = @"";
-            [Utils exitFromApplication];
-        }
+        } 
     } else {
         NSString *titleString = self.mainViewController.categoryString;
         [self.mainViewController viewDidLoad];
