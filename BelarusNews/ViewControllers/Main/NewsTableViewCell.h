@@ -27,5 +27,6 @@
 -(UIImageView*)imageFromCell;
 -(void)updateCellWithRightSwipe;
 -(void)updateCellWithLeftSwipe;
+-(void)setDefaultCellStyle;
 
 @end

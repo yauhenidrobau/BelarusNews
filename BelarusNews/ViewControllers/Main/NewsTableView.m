@@ -209,6 +209,7 @@ typedef enum {
    
     NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.cellDelegate = self;
+    [cell setDefaultCellStyle];
     NewsEntity *newsEntity = nil;
     newsEntity = [self setNewsEntityForIndexPath:indexPath];
     [cell cellForNews:newsEntity WithIndexPath:(NSIndexPath *)indexPath];
@@ -271,10 +272,6 @@ typedef enum {
         } animated:YES];
     }
    
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

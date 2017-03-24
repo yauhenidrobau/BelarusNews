@@ -16,7 +16,7 @@
 #import "Macros.h"
 
 static const NSInteger contentOffset = 90;
-static const NSInteger defaultContentOffset = 5;
+static const NSInteger defaultContentOffset = 10;
 static const NSInteger defaultButtonWidth = 0;
 static const NSInteger buttonWidth = 40;
 static const NSInteger defaultCornerRadius = 16;
@@ -215,8 +215,8 @@ static const NSInteger defaultCornerRadius = 16;
 
 -(void)setDefaultCellStyle {
     
-    self.cellBackgroundViewLeadingConstraint.constant = 5;
-    self.cellBackgroundViewTrailingConstraint.constant = 5;
+    self.cellBackgroundViewLeadingConstraint.constant = 8;
+    self.cellBackgroundViewTrailingConstraint.constant = 10;
     [self layoutIfNeeded];
     self.isUpdatedCell = NO;
 }
