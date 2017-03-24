@@ -9,19 +9,11 @@
 #import "Utils.h"
 
 #import "DateFormatterManager.h"
-#import <UserNotifications/UserNotifications.h>
 #import <UIKit/UIKit.h>
 #import "UserDefaultsManager.h"
 #import "UIColor+BelarusNews.h"
 
 @implementation Utils
-
-+(void)exitFromApplication {
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    [center removeAllDeliveredNotifications];
-    [[UIApplication sharedApplication]cancelAllLocalNotifications];
-    exit(0);
-}
 
 +(NewsTableView*)getMainController {
     

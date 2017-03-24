@@ -11,7 +11,6 @@
 
 @interface Utils : NSObject
 
-+(void)exitFromApplication;
 +(NewsTableView*)getMainController;
 +(void)setNightNavigationBar:(UINavigationBar*)navBar;
 +(void)setDefaultNavigationBar:(UINavigationBar*)navBar;

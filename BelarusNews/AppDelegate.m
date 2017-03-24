@@ -12,7 +12,6 @@
 #import <Crashlytics/Crashlytics.h>
 #import "NewsTableView.h"
 #import "RealmDataManager.h"
-#import <UserNotifications/UserNotifications.h>
 #import <UIKit/UIDevice.h>
 #import "Utils.h"
 #import "Constants.h"
