@@ -25,5 +25,7 @@
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath;
 -(void)updateNightModeCell:(BOOL)update;
 -(UIImageView*)imageFromCell;
+-(void)updateCellWithRightSwipe;
+-(void)updateCellWithLeftSwipe;
 
 @end

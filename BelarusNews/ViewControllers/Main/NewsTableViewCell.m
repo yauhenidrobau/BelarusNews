@@ -15,6 +15,12 @@
 #import "Constants.h"
 #import "Macros.h"
 
+static const NSInteger contentOffset = 90;
+static const NSInteger defaultContentOffset = 5;
+static const NSInteger defaultButtonWidth = 0;
+static const NSInteger buttonWidth = 40;
+static const NSInteger defaultCornerRadius = 16;
+
 @interface NewsTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageNewsView;
@@ -23,10 +29,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *pubDateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *shareButtonWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *favoriteButtonWidthConstraint;
+
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UIView *cellBackgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *sourceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastArticlesLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBackgroundViewTrailingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBackgroundViewLeadingConstraint;
+@property (nonatomic) BOOL isUpdatedCell;
+@property (nonatomic) BOOL isFavoriteArticle;
 
 @end
 
@@ -40,7 +53,14 @@
     self.backgroundColor = [UIColor clearColor];
     self.imageNewsView.clipsToBounds = YES;
     self.imageNewsView.contentMode = UIViewContentModeScaleAspectFill;
+    self.cellBackgroundView.layer.cornerRadius = defaultCornerRadius;
+    [self prepareButton:self.shareButton];
+    [self prepareButton:self.favoriteButton];
+
     self.lastArticlesLabel.text = NSLocalizedString(@"New", nil);
+    UISwipeGestureRecognizer *swipeRecognizerLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(updateCellWithLeftSwipe)];
+    swipeRecognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.cellBackgroundView addGestureRecognizer:swipeRecognizerLeft];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -49,14 +69,57 @@
 
 #pragma mark - IBActions
 - (IBAction)favoriteButtonDidTap:(id)sender {
-    [self.cellDelegate newsTableViewCell:self didTapFavoriteButton:sender];    
+    if (self.isFavoriteArticle) {
+        [self.favoriteButton setTintColor:[UIColor bn_mainTitleColor]];
+    } else {
+        [self.favoriteButton setTintColor:[UIColor bn_lightBlueColor]];
+    }
+    self.isFavoriteArticle = !self.isFavoriteArticle;
+    [self.cellDelegate newsTableViewCell:self didTapFavoriteButton:sender];
 }
 
 - (IBAction)shareButtonDidTap:(id)sender {
     [self.cellDelegate newsTableViewCell:self didTapShareButton:sender];
 }
 
+#pragma mark - Public 
+-(void)updateCellWithLeftSwipe {
+    self.shareButton.userInteractionEnabled = YES;
+    if (!self.isUpdatedCell) {
+        [UIView animateWithDuration:0.6 animations:^{
+            self.cellBackgroundViewLeadingConstraint.constant = self.cellBackgroundViewLeadingConstraint.constant - contentOffset;
+            self.shareButtonWidthConstraint.constant = buttonWidth;
+            self.favoriteButtonWidthConstraint.constant = buttonWidth;
+            self.cellBackgroundViewTrailingConstraint.constant = self.cellBackgroundViewTrailingConstraint.constant + contentOffset;
+            [self layoutIfNeeded];
+        }];
+        self.isUpdatedCell = YES;
+    }
+}
+
+-(void)updateCellWithRightSwipe {
+    if (self.isUpdatedCell) {
+        [UIView animateWithDuration:0.6 animations:^{
+            self.cellBackgroundViewLeadingConstraint.constant = defaultContentOffset;
+            self.cellBackgroundViewTrailingConstraint.constant = defaultContentOffset;
+            self.shareButtonWidthConstraint.constant = defaultButtonWidth;
+            self.favoriteButtonWidthConstraint.constant = defaultButtonWidth;
+            [self layoutIfNeeded];
+        } completion:^(BOOL finished) {
+        }];
+        self.isUpdatedCell = NO;
+    }
+}
+
 #pragma mark - Private
+
+-(void)prepareButton:(UIButton*)button {
+    button.layer.cornerRadius = defaultCornerRadius;
+    button.backgroundColor = [UIColor bn_mainColor];
+    [button setImage:[button.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor bn_mainTitleColor]];
+}
+
 -(void)updateNightModeCell:(BOOL)update {
     if (update) {
         self.titleLabel.textColor = [UIColor bn_mainNightColor];
@@ -73,8 +136,8 @@
         self.sourceLabel.textColor = [UIColor bn_linkColor];
         self.titleLabel.textColor = [UIColor bn_mainTitleColor];
         self.cellBackgroundView.backgroundColor = [UIColor bn_mainColor];
-        self.shareButton.tintColor = [UIColor blackColor];
-        if (self.favoriteButton.tintColor == [UIColor blackColor]) {
+        self.shareButton.tintColor = [UIColor bn_mainTitleColor];
+        if (self.favoriteButton.tintColor == [UIColor bn_mainTitleColor]) {
         } else {
             self.favoriteButton.tintColor = [UIColor bn_favoriteSelectedColor];
         }
@@ -86,15 +149,13 @@
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath  {
     [self layoutIfNeeded];
     
+    self.isFavoriteArticle = entity.favorite;
     self.sourceLabel.text = entity.linkFeed;
     self.titleLabel.text = entity.titleFeed;
     self.descriptionLabel.text = entity.descriptionFeed;
-    [self.favoriteButton setImage:[self.favoriteButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [self.shareButton setImage:[self.shareButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [self.shareButton setTintColor:[UIColor blackColor]];
 
     if (!entity.favorite) {
-        [self.favoriteButton setTintColor:[UIColor blackColor]];
+        [self.favoriteButton setTintColor:[UIColor bn_mainTitleColor]];
     } else {
         [self.favoriteButton setTintColor:[UIColor bn_lightBlueColor]];
     }
@@ -150,5 +211,13 @@
         self.titleLabel.font = [UIFont systemFontOfSize:fontSize];
         self.pubDateLabel.font = [UIFont systemFontOfSize:fontSize-2];
     }
+}
+
+-(void)setDefaultCellStyle {
+    
+    self.cellBackgroundViewLeadingConstraint.constant = 5;
+    self.cellBackgroundViewTrailingConstraint.constant = 5;
+    [self layoutIfNeeded];
+    self.isUpdatedCell = NO;
 }
 @end

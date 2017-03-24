@@ -107,6 +107,8 @@ typedef enum {
     self.userDefaults = [UserDefaultsManager sharedInstance];
     self.operationQueue = [NSOperationQueue new];
     self.isAlertShown = [self.userDefaults boolForKey:NO_INTERNET_KEY];
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(cellSwipeWithGestureRecognizer:)];
+    [self.tableView addGestureRecognizer:recognizer];
     
 }
 
@@ -166,6 +168,28 @@ typedef enum {
         [wself.tableView setContentOffset:CGPointZero animated:YES];
     }];
     self.scrollButton.hidden = YES;
+}
+
+#pragma mark - Gesture Recognizer
+
+- (void)cellSwipeWithGestureRecognizer:(UISwipeGestureRecognizer *)gestureRecognizer {
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        CGPoint swipeLocation = [gestureRecognizer  locationInView:self.tableView];
+        NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
+        UITableViewCell *swipedCell = [self.tableView cellForRowAtIndexPath:swipedIndexPath];
+        if ([swipedCell class] == [NewsTableViewCell class]) {
+            if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+                [((NewsTableViewCell*)swipedCell) updateCellWithLeftSwipe];
+            } else if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionRight) {
+                [((NewsTableViewCell*)swipedCell) updateCellWithRightSwipe];
+                
+            }
+            [swipedCell layoutIfNeeded];
+            [swipedCell updateConstraints];
+        }
+    }
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -235,19 +259,22 @@ typedef enum {
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     } else {
-    [self showModalViewControllerWithIdentifier:@"WebLinkViewController" setupBlock:^(ModalViewController *modal) {
-        WebLinkViewController *vc = (WebLinkViewController*)modal;
-        vc.link = newsEntity.linkFeed;
-        vc.closed = ^(BOOL isNotAskEnable,BOOL openLink) {
-            if (self.openLink) {
-                [self performSegueWithIdentifier:segueId sender:cell];
-                [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            }
-        };
-    } animated:YES];
+        [self showModalViewControllerWithIdentifier:@"WebLinkViewController" setupBlock:^(ModalViewController *modal) {
+            WebLinkViewController *vc = (WebLinkViewController*)modal;
+            vc.link = newsEntity.linkFeed;
+            vc.closed = ^(BOOL isNotAskEnable,BOOL openLink) {
+                if (self.openLink) {
+                    [self performSegueWithIdentifier:segueId sender:cell];
+                    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                }
+            };
+        } animated:YES];
     }
-    
    
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -439,7 +466,6 @@ typedef enum {
     }
     NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
     [[RealmDataManager sharedInstance]updateEntity:entity WithProperty:@"favorite"];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)newsTableViewCell:(NewsTableViewCell*)cell didTapShareButton:(UIButton*)button {
@@ -452,8 +478,6 @@ typedef enum {
     [self.shareCircleView showAnimated:YES];
    
     [[RealmDataManager sharedInstance] updateEntity:entity WithProperty:@"isShare"];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-
 }
 
 #pragma mark - CFShareCircleViewDelegate
