@@ -69,10 +69,10 @@ static const NSInteger defaultCornerRadius = 16;
 
 #pragma mark - IBActions
 - (IBAction)favoriteButtonDidTap:(id)sender {
-    if (self.isFavoriteArticle) {
-        [self.favoriteButton setTintColor:[UIColor bn_mainTitleColor]];
+    if (self.favoriteButton.tintColor == [UIColor bn_mainTitleColor]) {
+        self.favoriteButton.tintColor = [UIColor bn_lightBlueColor];
     } else {
-        [self.favoriteButton setTintColor:[UIColor bn_lightBlueColor]];
+        self.favoriteButton.tintColor = [UIColor bn_mainTitleColor];
     }
     self.isFavoriteArticle = !self.isFavoriteArticle;
     [self.cellDelegate newsTableViewCell:self didTapFavoriteButton:sender];
@@ -125,11 +125,7 @@ static const NSInteger defaultCornerRadius = 16;
         self.titleLabel.textColor = [UIColor bn_mainNightColor];
         self.cellBackgroundView.backgroundColor = [UIColor bn_newsCellNightColor];
         self.shareButton.tintColor = [UIColor bn_nightModeTitleColor];
-        if (self.favoriteButton.tintColor == [UIColor blackColor]) {
-            self.favoriteButton.tintColor = [UIColor bn_backgroundColor];
-        } else {
-            self.favoriteButton.tintColor = [UIColor bn_lightBlueColor];
-        }
+        
         self.pubDateLabel.textColor = [UIColor bn_favoriteSelectedNightColor];
         self.sourceLabel.textColor = [UIColor whiteColor];
     } else {

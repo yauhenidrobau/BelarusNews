@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "UIColor+BelarusNews.h"
 
 #define kRGBColorFromHex(rgbValue)        [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0f green:((float)((rgbValue & 0xFF00) >> 8))/255.0f blue:((float)(rgbValue & 0xFF))/255.0f alpha:1.0f]
 
@@ -17,7 +18,7 @@
 #define kDropdownMenuUnselectedNightCellTextColor kRGBColorFromHex(0xFFFFFF)  // open menu unSelected title NIGHT
 
 #define kDropdownMenuIndicatorColor               kRGBColorFromHex(0xFFFFFF)  // subTitle color
-#define kDropdownMenuBottomSeparatorColor         kRGBColorFromHex(0xFFFF00)
+#define kDropdownMenuBottomSeparatorColor         [UIColor bn_mainColor]
 #define kDropdownMenuTitleColor                   kRGBColorFromHex(0xFFFFFF)  
 
 #define WS(weakSelf)                              __weak __typeof(&*self) weakSelf = self
