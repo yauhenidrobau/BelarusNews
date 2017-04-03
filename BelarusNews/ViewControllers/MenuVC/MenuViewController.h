@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <LMSideBarController.h>
 
 
 typedef enum {
@@ -17,7 +16,7 @@ typedef enum {
     MtsByCategory = 3
 }CategoryTypes;
 
-@interface MenuViewController : LMSideBarController <LMSideBarControllerDelegate>
+@interface MenuViewController :UIViewController
 
 @property (strong, nonatomic) NSString *titleString;
 

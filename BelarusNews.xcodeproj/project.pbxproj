@@ -104,7 +104,6 @@
 		1EFE91761E1FAC76008CA308 /* SettingsNotificationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE91751E1FAC76008CA308 /* SettingsNotificationsCell.m */; };
 		1EFE917A1E237908008CA308 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE91791E237908008CA308 /* Utils.m */; };
 		664E982BCAA093BEE2B33250 /* libPods-BelarusNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D68C11FB67ED6A701E3F2D2 /* libPods-BelarusNews.a */; };
-		843B7B561DF35E27001532A4 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B7B551DF35E27001532A4 /* RootViewController.m */; };
 		844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A9FD11DF0EE2A00917832 /* MenuViewController.m */; };
 		84702F881DF8887C005CE945 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84702F8A1DF8887C005CE945 /* Localizable.strings */; };
 		84FF333C1E1DCE0B002847AB /* FeTenDot.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF333B1E1DCE0B002847AB /* FeTenDot.m */; };
@@ -315,8 +314,6 @@
 		1EFE91801E23841B008CA308 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1EFE91821E23841C008CA308 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		3D68C11FB67ED6A701E3F2D2 /* libPods-BelarusNews.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BelarusNews.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		843B7B541DF35E27001532A4 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		843B7B551DF35E27001532A4 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		844A9FD01DF0EE2A00917832 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		844A9FD11DF0EE2A00917832 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		84702F891DF8887C005CE945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -752,8 +749,6 @@
 		1EFD65A01E13D78800F5BA4D /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				843B7B541DF35E27001532A4 /* RootViewController.h */,
-				843B7B551DF35E27001532A4 /* RootViewController.m */,
 				1E15051D1E8536F0009F235E /* RevealViewController.h */,
 				1E15051E1E8536F0009F235E /* RevealViewController.m */,
 			);
@@ -1120,7 +1115,6 @@
 				1E0FE3621E6EB1300009BC26 /* SettingsManager.m in Sources */,
 				84FF33421E1DCEAC002847AB /* UIColor+flat.m in Sources */,
 				1E0FE35B1E6EB1300009BC26 /* DataManager.m in Sources */,
-				843B7B561DF35E27001532A4 /* RootViewController.m in Sources */,
 				1E640B601E0A85FE00AA539C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				1E0FE3601E6EB1300009BC26 /* RemoteFacade.m in Sources */,
 				1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */,

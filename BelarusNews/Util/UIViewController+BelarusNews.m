@@ -15,10 +15,13 @@
 - (void)setupRevealViewController {
     SWRevealViewController *revealViewController = self.revealViewController;
     if (revealViewController && !self.navigationItem.leftBarButtonItem) {
-        UIBarButtonItem* revealButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"menuIcon"]
-                                                                            style:UIBarButtonItemStylePlain
-                                                                           target:self.revealViewController
-                                                                           action:@selector( revealToggle: )];
+        UIImage *image = [UIImage imageNamed:@"menuIcon"];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
+        [button setImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        button.tintColor = [UIColor whiteColor];
+        [button addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *revealButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
         self.navigationItem.leftBarButtonItem = revealButtonItem;
         
         [self.navigationController.navigationBar addGestureRecognizer: self.revealViewController.panGestureRecognizer];

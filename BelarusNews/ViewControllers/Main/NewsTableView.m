@@ -12,7 +12,6 @@
 #import <Reachability.h>
 #import <AFNetworking.h>
 #import <UIAlertController+Blocks.h>
-#import "UIViewController+LMSideBarController.h"
 #import "Constants.h"
 #import "Macros.h"
 
@@ -55,7 +54,7 @@ typedef enum {
 }CategoryTypes;
 
 
-@interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,LMSideBarControllerDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate>
+@interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UIView *searchBarView;
@@ -158,10 +157,6 @@ typedef enum {
 
 -(void)pullToRefresh {
     [self updateWithIndicator:NO];
-}
-
-- (IBAction)leftBarItemTouchUpInside:(id)sender {
-    [self.sideBarController showMenuViewControllerInDirection:LMSideBarControllerDirectionLeft];
 }
 
 -(IBAction)scrollButtonTouchUpInside:(id)sender {

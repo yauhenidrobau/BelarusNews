@@ -27,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property(nonatomic, getter=isNavigationBarHidden) BOOL navigationBarHidden;
+@property (weak, nonatomic) IBOutlet UITextField *urlTextField;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
+@property (weak, nonatomic) IBOutlet UIButton *previousButton;
 
 @end
 
@@ -36,18 +39,19 @@
 
 -(void)viewDidLoad{
      [super  viewDidLoad];
-     
+    
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
      self.webView.hidden = YES;
      index = 0;
+    _urlTextField.text = _sourceLink;
      _arrTitile = @[NSLocalizedString(@"LOADING",nil),NSLocalizedString(@"PLEASE WAIT",nil),NSLocalizedString(@"CALM DOWN",nil),NSLocalizedString(@"WAIT",nil)];
-     [self.containerView layoutIfNeeded];
      // init Loader
      _spinner = [[FeSpinnerTenDot alloc] initWithView:self.containerView withBlur:NO];
      _spinner.titleLabelText = _arrTitile[index];
      _spinner.fontTitleLabel = [UIFont fontWithName:@"Neou-Thin" size:36];
      _spinner.delegate = self;
     
-     [self.view addSubview:_spinner];
+     [self.view addSubview: _spinner];
      [self.webView layoutIfNeeded];
      if (_sourceLink.length) {
          NSLog(@"%@",_sourceLink);
@@ -82,16 +86,29 @@
     [self dismiss:self];
 }
 
+#pragma mark IBActions
+- (IBAction)pageGoBack:(id)sender {
+    [self.webView goBack];
+}
+
+- (IBAction)pageGoForward:(id)sender {
+    [self.webView goForward];
+}
+
+- (IBAction)goButtonTouched:(id)sender {
+    NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:self.urlTextField.text]];
+    [self.webView loadRequest:request];
+    [self start:self];
+}
+
 #pragma mark - UIWebViewDelegate
 
 -(void)webViewDidStartLoad:(UIWebView*)webView {
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
-
+    [self.nextButton setEnabled:[self.webView canGoForward]];
+    [self.previousButton setEnabled:[self.webView canGoBack]];
     [self dismiss:self];
     if (![SettingsManager sharedInstance].isNightModeEnabled) {
         [self.navigationController.navigationBar setTintColor:[UIColor bn_navBarTitleColor]];
