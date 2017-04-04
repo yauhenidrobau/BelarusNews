@@ -272,18 +272,20 @@ typedef enum {
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    NewsTableViewCell *cell = (NewsTableViewCell*)sender;
-    NewsEntity *newsEntity = [self setNewsEntityForIndexPath:[self.tableView indexPathForCell:cell]];
-    if ([segue.identifier isEqualToString:@"DetailsVCID"]) {
-        DetailsViewController *vc = segue.destinationViewController;
-        vc.sourceLink = [NSString stringWithString:newsEntity.linkFeed];
-    } else if ([segue.identifier isEqualToString:@"DetailsOfflineVCID"]) {
-        DetailsOfflineVCViewController *vc = segue.destinationViewController;
-        vc.entity = newsEntity;
-    } else if ([segue.identifier isEqualToString:@"ShareVCID"]) {
-        DetailsViewController *vc = segue.destinationViewController;
-        vc.sourceLink = self.shareItemsDict[@"authLink"];
+    NewsTableViewCell *cell;
+    if ([sender isKindOfClass:[NewsTableViewCell class]]) {
+        cell = (NewsTableViewCell*)sender;
+        NewsEntity *newsEntity = [self setNewsEntityForIndexPath:[self.tableView indexPathForCell:cell]];
+        if ([segue.identifier isEqualToString:@"DetailsVCID"]) {
+            DetailsViewController *vc = segue.destinationViewController;
+            vc.sourceLink = [NSString stringWithString:newsEntity.linkFeed];
+        } else if ([segue.identifier isEqualToString:@"DetailsOfflineVCID"]) {
+            DetailsOfflineVCViewController *vc = segue.destinationViewController;
+            vc.entity = newsEntity;
+        } else if ([segue.identifier isEqualToString:@"ShareVCID"]) {
+            DetailsViewController *vc = segue.destinationViewController;
+            vc.sourceLink = self.shareItemsDict[@"authLink"];
+        }
     }
 }
 
