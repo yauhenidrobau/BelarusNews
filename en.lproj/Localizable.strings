@@ -50,9 +50,9 @@
 "New" = "New";
 
 "LOADING" = "LOADING";
-"PLEASE WAITING" = "PLEASE WAIT";
+"PLEASE WAIT" = "PLEASE WAIT";
 "CALM DOWN" = "CALM DOWN";
-"WAITING" = "WAIT";
+"WAIT" = "WAIT";
 
 //Weather
 "Clear" = "Clear sky";

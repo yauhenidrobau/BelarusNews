@@ -49,9 +49,9 @@
 "Choose Category" = "Назад";
 
 "LOADING" = "Загрузка";
-"PLEASE WAITING" = "Пожалуйста подождите";
+"PLEASE WAIT" = "Пожалуйста подождите";
 "CALM DOWN" = "Немного терпения";
-"WAITING" = "Секундочку...";
+"WAIT" = "Секундочку...";
 
 //NewsCell"
 "New" = "Новое";
