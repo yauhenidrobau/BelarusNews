@@ -92,7 +92,7 @@
 -(void) commonInit
 {
     // init frame as bound container
-    self.frame = _containerView.frame;
+    self.frame = _containerView.bounds;
     
     // init Background
     [self initBackgroundWithBlur:_isShouldBlur];

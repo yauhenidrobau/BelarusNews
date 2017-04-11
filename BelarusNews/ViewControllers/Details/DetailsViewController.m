@@ -46,19 +46,13 @@
     _urlTextField.text = _sourceLink;
      _arrTitile = @[NSLocalizedString(@"LOADING",nil),NSLocalizedString(@"PLEASE WAIT",nil),NSLocalizedString(@"CALM DOWN",nil),NSLocalizedString(@"WAIT",nil)];
      // init Loader
-     _spinner = [[FeSpinnerTenDot alloc] initWithView:self.containerView withBlur:NO];
-     _spinner.titleLabelText = _arrTitile[index];
-     _spinner.fontTitleLabel = [UIFont fontWithName:@"Neou-Thin" size:36];
-     _spinner.delegate = self;
-    
-     [self.view addSubview: _spinner];
-     [self.webView layoutIfNeeded];
-     if (_sourceLink.length) {
-         NSLog(@"%@",_sourceLink);
-         NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:_sourceLink]];
-         [self.webView loadRequest:request];
-         [self start:self];
-     }
+//     _spinner = [[FeSpinnerTenDot alloc] initWithView:self.containerView withBlur:NO];
+//     _spinner.titleLabelText = _arrTitile[index];
+//     _spinner.fontTitleLabel = [UIFont fontWithName:@"Neou-Thin" size:36];
+//     _spinner.delegate = self;
+//    
+//     [self.view addSubview: _spinner];
+//     [self.webView layoutIfNeeded];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -68,6 +62,12 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:(animated)];
     
+    if (_sourceLink.length) {
+        NSLog(@"%@",_sourceLink);
+        NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:_sourceLink]];
+        [self.webView loadRequest:request];
+        [self start:self];
+    }
     if (self.webView.hidden) {
         self.webView.hidden = NO;
     }
@@ -76,7 +76,7 @@
         [self updateForNightMode:YES];
     } else {
         [self updateForNightMode:NO];
-        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+        [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
     }
 }
 

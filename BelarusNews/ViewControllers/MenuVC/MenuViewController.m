@@ -51,6 +51,7 @@ typedef enum NSInteger {
     self.menuTitles = @[  NSLocalizedString(@"News",nil),
                         NSLocalizedString(@"Favorites",nil),
                         NSLocalizedString(@"Settings",nil)];
+    self.noWeatherLabel.text = NSLocalizedString(@"Set your city in settings to see the weather", nil);
     self.logoutButton.layer.cornerRadius = 15;
     self.logoutButton.layer.borderColor = [UIColor whiteColor].CGColor;
     self.logoutButton.layer.borderWidth = 2.0f;

@@ -60,8 +60,6 @@
 		1E15051A1E8535C2009F235E /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E1505191E8535C2009F235E /* News.storyboard */; };
 		1E15051F1E8536F0009F235E /* RevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15051E1E8536F0009F235E /* RevealViewController.m */; };
 		1E1505231E853B9D009F235E /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1505221E853B9D009F235E /* BaseViewController.m */; };
-		1E1505241E8543DD009F235E /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E1505261E8543DD009F235E /* Menu.storyboard */; };
-		1E15052C1E85463B009F235E /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E15052B1E85463B009F235E /* Settings.storyboard */; };
 		1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2666911E127AD6001DF2A2 /* INSSearchBar.m */; };
 		1E4C8C641E56D8FB00B2ED44 /* SettingsAutoupdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C8C631E56D8FB00B2ED44 /* SettingsAutoupdateCell.m */; };
 		1E640B581E0A85FE00AA539C /* NSString+ZLStringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B341E0A85FC00AA539C /* NSString+ZLStringSize.m */; };
@@ -105,6 +103,8 @@
 		1EFE917A1E237908008CA308 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFE91791E237908008CA308 /* Utils.m */; };
 		664E982BCAA093BEE2B33250 /* libPods-BelarusNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D68C11FB67ED6A701E3F2D2 /* libPods-BelarusNews.a */; };
 		844A9FD21DF0EE2B00917832 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844A9FD11DF0EE2A00917832 /* MenuViewController.m */; };
+		845AFFDD1E943BC7001CEF7C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845AFFDF1E943BC7001CEF7C /* Settings.storyboard */; };
+		845AFFEB1E94419C001CEF7C /* Menu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 845AFFE91E94419C001CEF7C /* Menu.storyboard */; };
 		84702F881DF8887C005CE945 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84702F8A1DF8887C005CE945 /* Localizable.strings */; };
 		84FF333C1E1DCE0B002847AB /* FeTenDot.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF333B1E1DCE0B002847AB /* FeTenDot.m */; };
 		84FF33411E1DCEAC002847AB /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF333E1E1DCEAC002847AB /* FXBlurView.m */; };
@@ -221,10 +221,6 @@
 		1E15051E1E8536F0009F235E /* RevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevealViewController.m; sourceTree = "<group>"; };
 		1E1505211E853B9D009F235E /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		1E1505221E853B9D009F235E /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		1E1505251E8543DD009F235E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Menu.storyboard; sourceTree = "<group>"; };
-		1E1505281E8543DF009F235E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Menu.strings; sourceTree = "<group>"; };
-		1E15052A1E8543E3009F235E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Menu.strings; sourceTree = "<group>"; };
-		1E15052B1E85463B009F235E /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		1E1D3A9E1DE47D9F00D6C00C /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1E2666901E127AD6001DF2A2 /* INSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSSearchBar.h; sourceTree = "<group>"; };
 		1E2666911E127AD6001DF2A2 /* INSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSSearchBar.m; sourceTree = "<group>"; };
@@ -316,6 +312,10 @@
 		3D68C11FB67ED6A701E3F2D2 /* libPods-BelarusNews.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BelarusNews.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		844A9FD01DF0EE2A00917832 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		844A9FD11DF0EE2A00917832 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		845AFFDE1E943BC7001CEF7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		845AFFE11E943BD0001CEF7C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
+		845AFFE31E943BD3001CEF7C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Settings.strings; sourceTree = "<group>"; };
+		845AFFEA1E94419C001CEF7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Menu.storyboard; sourceTree = "<group>"; };
 		84702F891DF8887C005CE945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84702F8B1DF8888D005CE945 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84702F8C1DF8888F005CE945 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -503,12 +503,12 @@
 		1E1505181E853590009F235E /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				845AFFE91E94419C001CEF7C /* Menu.storyboard */,
 				1E1505101E83EDC4009F235E /* Modals.storyboard */,
 				1E7328FB1D7813740027E46E /* Main.storyboard */,
 				1E7329031D7813740027E46E /* LaunchScreen.storyboard */,
 				1E1505191E8535C2009F235E /* News.storyboard */,
-				1E1505261E8543DD009F235E /* Menu.storyboard */,
-				1E15052B1E85463B009F235E /* Settings.storyboard */,
+				845AFFDF1E943BC7001CEF7C /* Settings.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -941,10 +941,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E1505241E8543DD009F235E /* Menu.storyboard in Resources */,
 				1E0FE3B01E6EE73A0009BC26 /* pinterest copy.png in Resources */,
 				1E0FE3A01E6EE73A0009BC26 /* camera_roll.png in Resources */,
 				1E0FE3AD1E6EE73A0009BC26 /* mail@2x.png in Resources */,
+				845AFFEB1E94419C001CEF7C /* Menu.storyboard in Resources */,
 				1E0FE3A71E6EE73A0009BC26 /* evernote@2x.png in Resources */,
 				1E0FE3A41E6EE73A0009BC26 /* dropbox.png in Resources */,
 				1E0FE3B71E6EE73A0009BC26 /* twitter.png in Resources */,
@@ -956,7 +956,7 @@
 				1E0FE3A61E6EE73A0009BC26 /* evernote.png in Resources */,
 				1E0FE3B11E6EE73A0009BC26 /* pinterest.png in Resources */,
 				1E15050E1E83EDC4009F235E /* Modals.storyboard in Resources */,
-				1E15052C1E85463B009F235E /* Settings.storyboard in Resources */,
+				845AFFDD1E943BC7001CEF7C /* Settings.storyboard in Resources */,
 				1E0FE3A21E6EE73A0009BC26 /* close.png in Resources */,
 				1E0FE3B51E6EE73A0009BC26 /* print@2x.png in Resources */,
 				1E0FE3B61E6EE73A0009BC26 /* twitter copy.png in Resources */,
@@ -1185,16 +1185,6 @@
 			path = ../ViewControllers/Modals;
 			sourceTree = "<group>";
 		};
-		1E1505261E8543DD009F235E /* Menu.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1E1505251E8543DD009F235E /* Base */,
-				1E1505281E8543DF009F235E /* en */,
-				1E15052A1E8543E3009F235E /* ru */,
-			);
-			name = Menu.storyboard;
-			sourceTree = "<group>";
-		};
 		1E7328FB1D7813740027E46E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1215,6 +1205,24 @@
 			);
 			name = LaunchScreen.storyboard;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		845AFFDF1E943BC7001CEF7C /* Settings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				845AFFDE1E943BC7001CEF7C /* Base */,
+				845AFFE11E943BD0001CEF7C /* en */,
+				845AFFE31E943BD3001CEF7C /* ru */,
+			);
+			name = Settings.storyboard;
+			sourceTree = "<group>";
+		};
+		845AFFE91E94419C001CEF7C /* Menu.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				845AFFEA1E94419C001CEF7C /* Base */,
+			);
+			name = Menu.storyboard;
 			sourceTree = "<group>";
 		};
 		84702F8A1DF8887C005CE945 /* Localizable.strings */ = {

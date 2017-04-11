@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Your city"; ObjectID = "2l1-qF-u4o"; */
+"2l1-qF-u4o.text" = "Ваше местоположение";
+
+/* Class = "UILabel"; text = "Night mode"; ObjectID = "DP0-oj-2cj"; */
+"DP0-oj-2cj.text" = "Ночной режим";
+
+/* Class = "UILabel"; text = "Rounded Images"; ObjectID = "I5h-Gn-XlB"; */
+"I5h-Gn-XlB.text" = "Круглые картинки";
+
+/* Class = "UILabel"; text = "Autoupdates"; ObjectID = "Tib-Ws-3fE"; */
+"Tib-Ws-3fE.text" = "Автообновление новостей";
+
+/* Class = "UILabel"; text = "Offline mode"; ObjectID = "gk8-At-y5I"; */
+"gk8-At-y5I.text" = "Оффлайн режим";
