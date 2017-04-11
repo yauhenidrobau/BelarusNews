@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *urlTextField;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet UIButton *previousButton;
+@property (weak, nonatomic) IBOutlet UILabel *loadingLabel;
 
 @end
 
@@ -45,6 +46,8 @@
      index = 0;
     _urlTextField.text = _sourceLink;
      _arrTitile = @[NSLocalizedString(@"LOADING",nil),NSLocalizedString(@"PLEASE WAIT",nil),NSLocalizedString(@"CALM DOWN",nil),NSLocalizedString(@"WAIT",nil)];
+    self.loadingLabel.text = _arrTitile[3];
+
      // init Loader
 //     _spinner = [[FeSpinnerTenDot alloc] initWithView:self.containerView withBlur:NO];
 //     _spinner.titleLabelText = _arrTitile[index];
@@ -121,9 +124,9 @@
 {
     if (!_timer)
     {
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeTitle) userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(changeTitle) userInfo:nil repeats:YES];
     }
-    [_spinner show];
+//    [_spinner show];
 }
 
 - (IBAction)dismiss:(id)sender
@@ -141,10 +144,14 @@
 -(void)changeTitle
 {
     NSLog(@"index = %ld",(long)index);
+    CATransition *fade = [CATransition animation];
+    fade.duration = 2;
+    [self.loadingLabel.layer addAnimation:fade forKey:@"text"];
     if (index >= _arrTitile.count) {
-        _spinner.titleLabelText = _arrTitile[3];
+        self.loadingLabel.text = _arrTitile[3];
+        index = 0;
     }else {
-    _spinner.titleLabelText = _arrTitile[index];
+    self.loadingLabel.text = _arrTitile[index];
     }
     index++;
 }
