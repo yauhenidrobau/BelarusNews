@@ -193,13 +193,9 @@ typedef enum {
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.isSearchStart) {
-        return self.searchResults.count? self.searchResults.count : 0;
+        return self.searchResults.count;
     }
-    return self.newsArray.count? self.newsArray.count : 0;
-}
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.newsArray.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -226,10 +222,6 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 20;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    return 110;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -553,15 +545,12 @@ typedef enum {
         self.newsArray = [self sortNewsArray:[NSArray arrayWithArray:[[RealmDataManager sharedInstance] getFavoritesArray]]];
         NSLog(@"Get favorites Elements  %lu",(unsigned long)self.newsArray.count);
     }
-   
     [self.tableView reloadData];
     [self showLoadingIndicator:NO];
     [self.refreshControl endRefreshing];
 
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
-        [self.activityInd stopAnimating];
-        [self.refreshControl endRefreshing];
     }
 }
 
@@ -603,7 +592,6 @@ typedef enum {
     } else {
         [self updateDataWithIndicator:showIndicator];
     }
-    
 }
 
 -(void)updateDataWithIndicator:(BOOL)showIndicator {
@@ -623,13 +611,15 @@ typedef enum {
                 [self.userDefaults setBool:YES ForKey:NO_INTERNET_KEY];
             } else {
                 __weak typeof(self) wself = self;
-                [[DataManager sharedInstance ] updateDataWithURLString:wself.urlString andCategory:wself.categoryString andSource:wself.source WithCallBack:^(NSError *error) {
-                    [networkReachability stopNotifier];
-                    if (!error) {
-                        [wself setupData];
-                        [wself showLoadingIndicator:NO];
-                    }
-                }];
+                if (self.urlString.length && self.categoryString.length) {
+                    [[DataManager sharedInstance ] updateDataWithURLString:wself.urlString andCategory:wself.categoryString andSource:wself.source WithCallBack:^(NSError *error) {
+                        [networkReachability stopNotifier];
+                        if (!error) {
+                            [wself setupData];
+                            [wself showLoadingIndicator:NO];
+                        }
+                    }];
+                }
             }
         }
     });
@@ -646,7 +636,7 @@ typedef enum {
 }
 
 -(void)prepareTableView {
-    self.tableView.estimatedRowHeight = 80;
+    self.tableView.estimatedRowHeight = 112;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
@@ -665,49 +655,12 @@ typedef enum {
 }
 
 -(void)prepareData {
-    _mainTitleArray = @[@"ONLINER",@"TUT.BY",@"DEV.BY", @"S13", @"Новый-Час"];
-    _sourceArray = @[ONLINER_BY,TUT_BY,DEV_BY,S13_RU,NOVYCHAS_BY];
-    _subTitleArray = @[
-                       @[NSLocalizedString(@"People",nil),
-                         NSLocalizedString(@"Auto",nil),
-                         NSLocalizedString(@"Science",nil),
-                         NSLocalizedString(@"Realty",nil)],
-                       @[NSLocalizedString(@"Main",nil),
-                         NSLocalizedString(@"Economic",nil),
-                         NSLocalizedString(@"Society",nil),
-                         NSLocalizedString(@"World",nil),
-                         NSLocalizedString(@"Culture",nil),
-                         NSLocalizedString(@"Accident",nil),
-                         NSLocalizedString(@"Finance",nil),
-                         NSLocalizedString(@"Realty",nil),
-                         NSLocalizedString(@"Sport",nil),
-                         NSLocalizedString(@"Auto",nil),
-                         NSLocalizedString(@"Lady",nil),
-                         NSLocalizedString(@"Science",nil)],
-                       @[NSLocalizedString(@"All News",nil)],
-                       @[NSLocalizedString(@"All News",nil)],
-                       @[NSLocalizedString(@"All News",nil)]
-                       ];
-    _titlesForRequestArray = @[
-                       @[@"People",
-                         @"Auto",
-                         @"Science",
-                         @"Realty"],
-                       @[@"Main",
-                         @"Economic",
-                         @"Society",
-                         @"World",
-                         @"Culture",
-                         @"Accident",
-                         @"Finance",
-                         @"Realty",
-                         @"Sport",
-                         @"Auto",
-                         @"Lady",
-                         @"Science"],
-                       @[@"All News"],
-                       @[@"All News"],
-                       @[@"All News"]];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]];
+
+    _mainTitleArray = [Utils getCategoriesTitlesFromDictionary:dict];;
+    _sourceArray = [Utils getCategoriesLinksFromDictionary:dict];
+    _subTitleArray = [Utils getSubCategoriesFromDictionary:dict];
+    _titlesForRequestArray = [Utils getTitlesForRequestFromDictionary:dict];
     self.newsURLDict = @{@"DEV.BY": @[DEV_BY_NEWS],
                          @"TUT.BY": [NSDictionary dictionaryWithObjectsAndKeys:
                                      MAIN_NEWS,NSLocalizedString(@"Main",nil),
@@ -727,19 +680,18 @@ typedef enum {
                                          AUTO_ONLINER_LINK,NSLocalizedString(@"Auto",nil),TECH_ONLINER_NEWS,NSLocalizedString(@"Science",nil),REALT_ONLINER_NEWS,NSLocalizedString(@"Realty",nil), nil],
                          @"Новый-Час" : @[NOVY_CHAS_NEWS],
                         @"S13" : @[S13_NEWS]};
-    self.categoryString = self.titlesForRequestArray[0][0];
-    self.source = self.sourceArray[0];
-
-    self.urlString = PEOPLE_ONLINER_LINK;
+    if (self.titlesForRequestArray.count) {
+        self.categoryString = self.titlesForRequestArray[0][0];
+        self.source = self.sourceArray[0];
+        self.urlString = ((NSDictionary*)self.newsURLDict[self.mainTitleArray[0]])[self.subTitleArray[0][0]];
+    }
     [self.userDefaults setObject:self.categoryString forKey:@"CurrentTitle"];
     [self.userDefaults setObject:self.urlString forKey:@"CurrentUrl"];
     self.shareItemsDict = [NSMutableDictionary new];
 }
 
 -(void)prepareDropMenu {
-    for (ZLDropDownMenu * menu in self.menuView.subviews) {
-        [menu removeFromSuperview];
-    }
+    
     ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, deviceWidth(), 43)];
     menu.isNightMode = self.isNightMode;
     if (self.isNightMode) {

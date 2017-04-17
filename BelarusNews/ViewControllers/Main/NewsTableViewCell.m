@@ -111,15 +111,6 @@ static const NSInteger defaultCornerRadius = 16;
     }
 }
 
-#pragma mark - Private
-
--(void)prepareButton:(UIButton*)button {
-    button.layer.cornerRadius = defaultCornerRadius;
-    button.backgroundColor = [UIColor bn_mainColor];
-    [button setImage:[button.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [button setTintColor:[UIColor bn_mainTitleColor]];
-}
-
 -(void)updateNightModeCell:(BOOL)update {
     if (update) {
         self.titleLabel.textColor = [UIColor bn_mainNightColor];
@@ -174,6 +165,23 @@ static const NSInteger defaultCornerRadius = 16;
     return self.imageNewsView;
 }
 
+-(void)setDefaultCellStyle {
+    
+    self.cellBackgroundViewLeadingConstraint.constant = 8;
+    self.cellBackgroundViewTrailingConstraint.constant = 10;
+    [self layoutIfNeeded];
+    self.isUpdatedCell = NO;
+}
+
+#pragma mark - Private
+
+-(void)prepareButton:(UIButton*)button {
+    button.layer.cornerRadius = defaultCornerRadius;
+    button.backgroundColor = [UIColor bn_mainColor];
+    [button setImage:[button.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor bn_mainTitleColor]];
+}
+
 -(void)showNewArticles:(BOOL)show {
     if (show) {
         self.lastArticlesLabel.hidden = NO;
@@ -205,11 +213,4 @@ static const NSInteger defaultCornerRadius = 16;
     }
 }
 
--(void)setDefaultCellStyle {
-    
-    self.cellBackgroundViewLeadingConstraint.constant = 8;
-    self.cellBackgroundViewTrailingConstraint.constant = 10;
-    [self layoutIfNeeded];
-    self.isUpdatedCell = NO;
-}
 @end

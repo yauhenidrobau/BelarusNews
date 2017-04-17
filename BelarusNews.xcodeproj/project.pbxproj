@@ -60,6 +60,8 @@
 		1E15051A1E8535C2009F235E /* News.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E1505191E8535C2009F235E /* News.storyboard */; };
 		1E15051F1E8536F0009F235E /* RevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15051E1E8536F0009F235E /* RevealViewController.m */; };
 		1E1505231E853B9D009F235E /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1505221E853B9D009F235E /* BaseViewController.m */; };
+		1E157ED01EA4ADB300C69FA7 /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E157ECF1EA4ADB300C69FA7 /* CheckBoxView.xib */; };
+		1E157ED31EA4ADC400C69FA7 /* CheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E157ED21EA4ADC400C69FA7 /* CheckBoxView.m */; };
 		1E2666921E127AD6001DF2A2 /* INSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2666911E127AD6001DF2A2 /* INSSearchBar.m */; };
 		1E4C8C641E56D8FB00B2ED44 /* SettingsAutoupdateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4C8C631E56D8FB00B2ED44 /* SettingsAutoupdateCell.m */; };
 		1E640B581E0A85FE00AA539C /* NSString+ZLStringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E640B341E0A85FC00AA539C /* NSString+ZLStringSize.m */; };
@@ -221,6 +223,9 @@
 		1E15051E1E8536F0009F235E /* RevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevealViewController.m; sourceTree = "<group>"; };
 		1E1505211E853B9D009F235E /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		1E1505221E853B9D009F235E /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		1E157ECF1EA4ADB300C69FA7 /* CheckBoxView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckBoxView.xib; sourceTree = "<group>"; };
+		1E157ED11EA4ADC400C69FA7 /* CheckBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxView.h; sourceTree = "<group>"; };
+		1E157ED21EA4ADC400C69FA7 /* CheckBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxView.m; sourceTree = "<group>"; };
 		1E1D3A9E1DE47D9F00D6C00C /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		1E2666901E127AD6001DF2A2 /* INSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSSearchBar.h; sourceTree = "<group>"; };
 		1E2666911E127AD6001DF2A2 /* INSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INSSearchBar.m; sourceTree = "<group>"; };
@@ -522,6 +527,24 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		1E157ECD1EA4AD9500C69FA7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1E157ECE1EA4AD9500C69FA7 /* CheckBox */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1E157ECE1EA4AD9500C69FA7 /* CheckBox */ = {
+			isa = PBXGroup;
+			children = (
+				1E157ECF1EA4ADB300C69FA7 /* CheckBoxView.xib */,
+				1E157ED11EA4ADC400C69FA7 /* CheckBoxView.h */,
+				1E157ED21EA4ADC400C69FA7 /* CheckBoxView.m */,
+			);
+			path = CheckBox;
+			sourceTree = "<group>";
+		};
 		1E26668F1E127AC3001DF2A2 /* CustomSearchBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -634,6 +657,7 @@
 		1E7328F11D7813740027E46E /* BelarusNews */ = {
 			isa = PBXGroup;
 			children = (
+				1E157ECD1EA4AD9500C69FA7 /* Views */,
 				1E73292D1D7814340027E46E /* Model */,
 				1E73292C1D78142D0027E46E /* ViewControllers */,
 				1E1505181E853590009F235E /* Storyboards */,
@@ -977,6 +1001,7 @@
 				1E0FE3AA1E6EE73A0009BC26 /* google_drive.png in Resources */,
 				1E7328FD1D7813740027E46E /* Main.storyboard in Resources */,
 				1E0FE3A91E6EE73A0009BC26 /* facebook@2x.png in Resources */,
+				1E157ED01EA4ADB300C69FA7 /* CheckBoxView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1117,6 +1142,7 @@
 				1E0FE35B1E6EB1300009BC26 /* DataManager.m in Sources */,
 				1E640B601E0A85FE00AA539C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				1E0FE3601E6EB1300009BC26 /* RemoteFacade.m in Sources */,
+				1E157ED31EA4ADC400C69FA7 /* CheckBoxView.m in Sources */,
 				1EFD65A81E13EE4300F5BA4D /* SettingsOfflineCell.m in Sources */,
 				1E15051F1E8536F0009F235E /* RevealViewController.m in Sources */,
 				1E15050B1E83ECD7009F235E /* ModalViewController.m in Sources */,
@@ -1361,8 +1387,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drobov.news;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d29c2f04-d54e-4b6d-905d-eefe3f5aa1e4";
-				PROVISIONING_PROFILE_SPECIFIER = "BelarusNewsProd(2)";
+				PROVISIONING_PROFILE = "a37a02aa-c986-478f-9060-cd3aa855912e";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: com.drobov.news";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

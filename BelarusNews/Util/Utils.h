@@ -16,6 +16,15 @@
 +(void)setDefaultNavigationBar:(UINavigationBar*)navBar;
 +(void)setNavigationBar:(UINavigationBar*)bar light:(BOOL)light;
 
++(NSArray*)getCategoriesTitlesFromDictionary:(NSDictionary*)dict;
++(NSArray*)getCategoriesLinksFromDictionary:(NSDictionary*)dict;
++(NSArray*)getSubCategoriesFromDictionary:(NSDictionary*)dict;
++(NSArray*)getTitlesForRequestFromDictionary:(NSDictionary*)dict;
+
++(NSDictionary*)getAllCategories;
+
++(void)addShadowToView:(UIView*)view;
+
 @end
 
 @interface NSDateFormatter (Localized)

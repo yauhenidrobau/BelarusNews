@@ -43,6 +43,7 @@
     
     self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
      self.webView.hidden = YES;
+    self.webView.alpha = 0;
      index = 0;
     _urlTextField.text = _sourceLink;
      _arrTitile = @[NSLocalizedString(@"LOADING",nil),NSLocalizedString(@"PLEASE WAIT",nil),NSLocalizedString(@"CALM DOWN",nil),NSLocalizedString(@"WAIT",nil)];
@@ -112,7 +113,6 @@
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.nextButton setEnabled:[self.webView canGoForward]];
     [self.previousButton setEnabled:[self.webView canGoBack]];
-    [self dismiss:self];
     if (![SettingsManager sharedInstance].isNightModeEnabled) {
         [self.navigationController.navigationBar setTintColor:[UIColor bn_navBarTitleColor]];
     }
@@ -124,7 +124,7 @@
 {
     if (!_timer)
     {
-        _timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(changeTitle) userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(changeTitle) userInfo:nil repeats:YES];
     }
 //    [_spinner show];
 }
@@ -135,26 +135,50 @@
     [_spinner dismiss];
     _timer = nil;
     index = 0;
-    _containerView.hidden = YES;
+    [self showContainerView:NO];
 
 }
 
 #pragma mark Private
 
--(void)changeTitle
-{
-    NSLog(@"index = %ld",(long)index);
-    CATransition *fade = [CATransition animation];
-    fade.duration = 2;
-    [self.loadingLabel.layer addAnimation:fade forKey:@"text"];
-    if (index >= _arrTitile.count) {
-        self.loadingLabel.text = _arrTitile[3];
-        index = 0;
-    }else {
-    self.loadingLabel.text = _arrTitile[index];
+-(void)showContainerView:(BOOL)show {
+    if (show) {
+        _containerView.hidden = NO;
+        [UIView animateWithDuration:1 animations:^{
+            self.containerView.alpha = 1;
+        } completion:^(BOOL finished) {
+        }];
+    } else {
+        
+        [UIView animateWithDuration:1.5 animations:^{
+            self.containerView.alpha = 0;
+            self.webView.hidden = NO;
+            self.webView.alpha = 1;
+        } completion:^(BOOL finished) {
+            _containerView.hidden = YES;
+        }];
     }
-    index++;
 }
+
+-(void)changeTitle {
+    
+    if ([[self.webView stringByEvaluatingJavaScriptFromString:@"document.readyState"] isEqualToString:@"loading"]) {
+        NSLog(@"index = %ld",(long)index);
+        CATransition *fade = [CATransition animation];
+        fade.duration = 1;
+        [self.loadingLabel.layer addAnimation:fade forKey:@"text"];
+        if (index >= _arrTitile.count) {
+            self.loadingLabel.text = _arrTitile[3];
+            index = 0;
+        }else {
+            self.loadingLabel.text = _arrTitile[index];
+        }
+        index++;
+    } else {
+        [self dismiss:nil];
+    }
+}
+
 -(void)FeSpinnerTenDotDidDismiss:(FeSpinnerTenDot *)sender
 {
     NSLog(@"did dismiss");

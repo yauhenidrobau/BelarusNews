@@ -59,6 +59,8 @@
 #define NO_INTERNET_KEY @"NoInternet"
 #define TEST_HOST @"http:www.google.by"
 
+#define CATEGORIES_KEY @"Categories"
+
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)

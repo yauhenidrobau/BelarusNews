@@ -60,6 +60,12 @@ NSTimer *timer;
     [[DataManager sharedInstance] updateWeatherForecastWithCallback:^(CityObject *cityObject, NSError *error) {
     }];
     
+    /*
+     Filter Categories
+     */
+    if (![NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]) {
+        [[NSUserDefaults standardUserDefaults]setObject:[NSKeyedArchiver archivedDataWithRootObject:[Utils getAllCategories]] forKey:CATEGORIES_KEY];
+    }
     return YES;
 }
 
