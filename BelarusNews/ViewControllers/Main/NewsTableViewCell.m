@@ -15,7 +15,7 @@
 #import "Constants.h"
 #import "Macros.h"
 
-static const NSInteger contentOffset = 90;
+//static const NSInteger contentOffset = 150;
 static const NSInteger defaultContentOffset = 10;
 static const NSInteger defaultButtonWidth = 0;
 static const NSInteger buttonWidth = 40;
@@ -40,6 +40,7 @@ static const NSInteger defaultCornerRadius = 16;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBackgroundViewLeadingConstraint;
 @property (nonatomic) BOOL isUpdatedCell;
 @property (nonatomic) BOOL isFavoriteArticle;
+@property (nonatomic) NSInteger contentOffset;
 
 @end
 
@@ -50,6 +51,7 @@ static const NSInteger defaultCornerRadius = 16;
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    [self layoutIfNeeded];
     self.backgroundColor = [UIColor clearColor];
     self.imageNewsView.clipsToBounds = YES;
     self.imageNewsView.contentMode = UIViewContentModeScaleAspectFill;
@@ -65,6 +67,12 @@ static const NSInteger defaultCornerRadius = 16;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
+
+#pragma  mark - Override properties 
+-(void)setShareViewFrame:(CGRect)shareViewFrame {
+    
+    _shareViewFrame =  self.shareButton.frame;
 }
 
 #pragma mark - IBActions
@@ -84,13 +92,15 @@ static const NSInteger defaultCornerRadius = 16;
 
 #pragma mark - Public 
 -(void)updateCellWithLeftSwipe {
+    self.contentOffset = self.shareButton.frame.size.width + self.favoriteButton.frame.size.width + 15;
+
     self.shareButton.userInteractionEnabled = YES;
     if (!self.isUpdatedCell) {
         [UIView animateWithDuration:0.6 animations:^{
-            self.cellBackgroundViewLeadingConstraint.constant = self.cellBackgroundViewLeadingConstraint.constant - contentOffset;
-            self.shareButtonWidthConstraint.constant = buttonWidth;
-            self.favoriteButtonWidthConstraint.constant = buttonWidth;
-            self.cellBackgroundViewTrailingConstraint.constant = self.cellBackgroundViewTrailingConstraint.constant + contentOffset;
+            self.cellBackgroundViewLeadingConstraint.constant = self.cellBackgroundViewLeadingConstraint.constant - self.contentOffset;
+//            self.shareButtonWidthConstraint.constant = buttonWidth;
+//            self.favoriteButtonWidthConstraint.constant = buttonWidth;
+            self.cellBackgroundViewTrailingConstraint.constant = self.cellBackgroundViewTrailingConstraint.constant + self.contentOffset;
             [self layoutIfNeeded];
         }];
         self.isUpdatedCell = YES;
@@ -102,8 +112,8 @@ static const NSInteger defaultCornerRadius = 16;
         [UIView animateWithDuration:0.6 animations:^{
             self.cellBackgroundViewLeadingConstraint.constant = defaultContentOffset;
             self.cellBackgroundViewTrailingConstraint.constant = defaultContentOffset;
-            self.shareButtonWidthConstraint.constant = defaultButtonWidth;
-            self.favoriteButtonWidthConstraint.constant = defaultButtonWidth;
+//            self.shareButtonWidthConstraint.constant = defaultButtonWidth;
+//            self.favoriteButtonWidthConstraint.constant = defaultButtonWidth;
             [self layoutIfNeeded];
         } completion:^(BOOL finished) {
         }];

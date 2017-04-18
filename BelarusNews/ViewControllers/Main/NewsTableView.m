@@ -76,7 +76,7 @@ typedef enum {
 @property (nonatomic, strong) NSArray *mainTitleArray;
 @property (nonatomic, strong) NSArray *subTitleArray;
 @property (nonatomic, strong) NSArray *sourceArray;
-@property (nonatomic, strong) NSArray *titlesForRequestArray;
+@property (nonatomic, strong) NSArray<NSArray*> *titlesForRequestArray;
 @property (nonatomic, strong) NSMutableDictionary *shareItemsDict;
 @property (nonatomic, strong) NSString *source;
 
@@ -260,7 +260,6 @@ typedef enum {
             };
         } animated:YES];
     }
-   
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -274,11 +273,14 @@ typedef enum {
         } else if ([segue.identifier isEqualToString:@"DetailsOfflineVCID"]) {
             DetailsOfflineVCViewController *vc = segue.destinationViewController;
             vc.entity = newsEntity;
-        } else if ([segue.identifier isEqualToString:@"ShareVCID"]) {
-            DetailsViewController *vc = segue.destinationViewController;
-            vc.sourceLink = self.shareItemsDict[@"authLink"];
         }
+    } else if ([segue.identifier isEqualToString:@"ShareVCID"]) {
+        
+//        DetailsViewController *vc = segue.destinationViewController;
+//        vc.sourceLink = self.shareItemsDict[@"authLink"];
+//        [self.tableView reloadData];
     }
+
 }
 
 #pragma mark - DZNEmptyDataSetSource
@@ -368,7 +370,7 @@ typedef enum {
     NSArray *array = self.titlesForRequestArray[indexPath.column];
     if (array.count == 1) {
         self.categoryString = self.mainTitleArray[indexPath.column];
-        self.urlString = self.newsURLDict[self.categoryString][0];
+        self.urlString = self.newsURLDict[self.categoryString][NSLocalizedString(array[0],nil)];
     } else {
     self.categoryString = array[indexPath.row];
     NSDictionary *dict = self.newsURLDict[self.mainTitleArray[indexPath.column]];
@@ -463,9 +465,21 @@ typedef enum {
     }
     NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
     self.shareItemsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:entity,@"entity", nil];
-    [self.shareCircleView showAnimated:YES];
+//    [self.shareCircleView showAnimated:YES];
    
     [[RealmDataManager sharedInstance] updateEntity:entity WithProperty:@"isShare"];
+    NSArray *objectTOShare = @[entity.titleFeed,entity.linkFeed,entity.urlImage];
+    
+    UIActivityViewController *activity = [[UIActivityViewController alloc]initWithActivityItems:objectTOShare applicationActivities:nil];
+    
+    NSArray *excludeActivities = @[UIActivityTypePostToWeibo,UIActivityTypePrint,
+                                   UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact,
+                                   UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,
+                                   UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,
+                                   UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop];
+    
+    activity.excludedActivityTypes = excludeActivities;
+    [self presentViewController:activity animated:YES completion:nil];
 }
 
 #pragma mark - CFShareCircleViewDelegate
@@ -477,6 +491,7 @@ typedef enum {
     [self.shareItemsDict setObject:[[ShareManager sharedInstance]shareWithServiceID:(ShareServiceType)sharer.serviceID AndEntity:self.shareItemsDict[@"entity"]]forKey:@"authLink"];
     [self performSegueWithIdentifier:@"ShareVCID" sender:self];
     NSLog(@"Selected sharer: %@", sharer.name);
+    [self.tableView reloadData];
 }
 
 - (void)shareCircleCanceled:(NSNotification *)notification{
@@ -520,7 +535,6 @@ typedef enum {
     } else {
         [self.scrollButton setTintColor:[UIColor bn_mainTitleColor]];
         self.activityInd.tintColor = [UIColor bn_mainColor];
-
         [self.searchBar.searchField setTintColor:[UIColor bn_mainColor]];
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -661,7 +675,7 @@ typedef enum {
     _sourceArray = [Utils getCategoriesLinksFromDictionary:dict];
     _subTitleArray = [Utils getSubCategoriesFromDictionary:dict];
     _titlesForRequestArray = [Utils getTitlesForRequestFromDictionary:dict];
-    self.newsURLDict = @{@"DEV.BY": @[DEV_BY_NEWS],
+    self.newsURLDict = @{@"DEV.BY": [NSDictionary dictionaryWithObjectsAndKeys:DEV_BY_NEWS,NSLocalizedString(@"All News",nil),nil],
                          @"TUT.BY": [NSDictionary dictionaryWithObjectsAndKeys:
                                      MAIN_NEWS,NSLocalizedString(@"Main",nil),
                                      ECONOMIC_NEWS,NSLocalizedString(@"Economic",nil),
@@ -678,12 +692,18 @@ typedef enum {
                          @"ONLINER": [NSDictionary dictionaryWithObjectsAndKeys:
                                          PEOPLE_ONLINER_LINK,NSLocalizedString(@"People",nil),
                                          AUTO_ONLINER_LINK,NSLocalizedString(@"Auto",nil),TECH_ONLINER_NEWS,NSLocalizedString(@"Science",nil),REALT_ONLINER_NEWS,NSLocalizedString(@"Realty",nil), nil],
-                         @"Новый-Час" : @[NOVY_CHAS_NEWS],
-                        @"S13" : @[S13_NEWS]};
+                         @"Новый-Час" : [NSDictionary dictionaryWithObjectsAndKeys:NOVY_CHAS_NEWS,NSLocalizedString(@"All News",nil),nil],
+                        @"S13" : [NSDictionary dictionaryWithObjectsAndKeys:S13_NEWS,NSLocalizedString(@"All News",nil),nil]};
     if (self.titlesForRequestArray.count) {
-        self.categoryString = self.titlesForRequestArray[0][0];
+        if (self.titlesForRequestArray[0].count == 1) {
+            self.categoryString = self.mainTitleArray[0];
+        } else {
+            self.categoryString = self.titlesForRequestArray[0][0];
+        }
         self.source = self.sourceArray[0];
-        self.urlString = ((NSDictionary*)self.newsURLDict[self.mainTitleArray[0]])[self.subTitleArray[0][0]];
+        NSDictionary *temp = self.newsURLDict[self.mainTitleArray[0]];
+        NSString *tempSubTitle = self.subTitleArray[0][0];
+        self.urlString = temp[tempSubTitle];
     }
     [self.userDefaults setObject:self.categoryString forKey:@"CurrentTitle"];
     [self.userDefaults setObject:self.urlString forKey:@"CurrentUrl"];
@@ -703,11 +723,11 @@ typedef enum {
     }
     menu.delegate = self;
     menu.dataSource = self;
-    
     [self.menuView addSubview:menu];
 }
 
 -(void)prepareShareView {
+    
     self.shareCircleView = [[CFShareCircleView alloc] initWithSharers:@[[CFSharer twitter], [CFSharer facebook], [CFSharer vk]]];
     self.shareCircleView.delegate = self;
 }

@@ -144,6 +144,9 @@
 -(void)showContainerView:(BOOL)show {
     if (show) {
         _containerView.hidden = NO;
+        self.webView.hidden = YES;
+        self.webView.alpha = 0;
+
         [UIView animateWithDuration:1 animations:^{
             self.containerView.alpha = 1;
         } completion:^(BOOL finished) {

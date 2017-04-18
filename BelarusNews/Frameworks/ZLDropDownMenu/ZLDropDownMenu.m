@@ -135,15 +135,16 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
 //        titleButton.backgroundColor = [UIColor redColor];
 
         lastTitleButton = titleButton;
-        if (index != _numOfMenu - 1) {
-            UIView *rightSeperator = [[UIView alloc] init];
-            rightSeperator.backgroundColor = kDropdownMenuSeperatorColor;
-            [titleButton addSubview:rightSeperator];
-            [rightSeperator mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.right.bottom.equalTo(titleButton);
-                make.width.mas_equalTo(dropDownMenuTitleButtonUIValue()->RIGHTSEPERATOR_WIDTH);
-            }];
-        }
+        // Vertical Separator
+//        if (index != _numOfMenu - 1) {
+//            UIView *rightSeperator = [[UIView alloc] init];
+//            rightSeperator.backgroundColor = kDropdownMenuSeperatorColor;
+//            [titleButton addSubview:rightSeperator];
+//            [rightSeperator mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.top.right.bottom.equalTo(titleButton);
+//                make.width.mas_equalTo(dropDownMenuTitleButtonUIValue()->RIGHTSEPERATOR_WIDTH);
+//            }];
+//        }
         titleButton.index = index;
         [titleButton addTarget:self action:@selector(titleButtonDidClick:) forControlEvents:UIControlEventTouchUpInside];
     }

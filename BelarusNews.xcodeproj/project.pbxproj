@@ -301,6 +301,8 @@
 		1E91CFF71E640C1700CB60EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1E91CFF91E6414B000CB60EB /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		1E91CFFB1E64188700CB60EB /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		1ECAD0FF1EA635B2002D2138 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Menu.strings; sourceTree = "<group>"; };
+		1ECAD1011EA635B4002D2138 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Menu.strings; sourceTree = "<group>"; };
 		1EFD659B1E13C80000F5BA4D /* DetailsOfflineVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsOfflineVCViewController.h; sourceTree = "<group>"; };
 		1EFD659C1E13C80000F5BA4D /* DetailsOfflineVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsOfflineVCViewController.m; sourceTree = "<group>"; };
 		1EFD65A21E13EABE00F5BA4D /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
@@ -1247,6 +1249,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				845AFFEA1E94419C001CEF7C /* Base */,
+				1ECAD0FF1EA635B2002D2138 /* en */,
+				1ECAD1011EA635B4002D2138 /* ru */,
 			);
 			name = Menu.storyboard;
 			sourceTree = "<group>";

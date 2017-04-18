@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TdY-jj-Zll">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TdY-jj-Zll">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -145,38 +145,38 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHe-A4-5sX">
-                                        <rect key="frame" x="25" y="519" width="272" height="128"/>
+                                        <rect key="frame" x="25" y="519" width="265" height="128"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xx2-5p-i8W" userLabel="Check Box View1" customClass="CheckBoxView">
-                                                <rect key="frame" x="25" y="5" width="109" height="31"/>
+                                                <rect key="frame" x="25" y="5" width="102" height="31"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="r9j-ml-p6r"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Exp-cT-UGA" userLabel="Check Box View2" customClass="CheckBoxView">
-                                                <rect key="frame" x="25" y="44" width="109" height="31"/>
+                                                <rect key="frame" x="25" y="44" width="102" height="31"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="bgh-kO-e8M"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSB-Wj-5Xp" userLabel="Check Box View3" customClass="CheckBoxView">
-                                                <rect key="frame" x="25" y="83" width="109" height="31"/>
+                                                <rect key="frame" x="25" y="83" width="102" height="31"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="yS7-wE-m0j"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0n-tg-Ynf" userLabel="Check Box View4" customClass="CheckBoxView">
-                                                <rect key="frame" x="154" y="5" width="109.5" height="31"/>
+                                                <rect key="frame" x="147" y="5" width="101" height="31"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="eM3-fk-em5"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DbW-28-ZHN" userLabel="Check Box View5" customClass="CheckBoxView">
-                                                <rect key="frame" x="154" y="44" width="109.5" height="31"/>
+                                                <rect key="frame" x="147" y="44" width="101" height="31"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="3x8-3m-yKY"/>
@@ -189,7 +189,7 @@
                                             <constraint firstItem="DbW-28-ZHN" firstAttribute="trailing" secondItem="h0n-tg-Ynf" secondAttribute="trailing" id="6Yj-Tx-9lH"/>
                                             <constraint firstItem="Exp-cT-UGA" firstAttribute="top" secondItem="Xx2-5p-i8W" secondAttribute="bottom" constant="8" id="DWS-sk-lvi"/>
                                             <constraint firstItem="Exp-cT-UGA" firstAttribute="width" secondItem="Xx2-5p-i8W" secondAttribute="width" id="Gvn-wp-r9h"/>
-                                            <constraint firstItem="Xx2-5p-i8W" firstAttribute="width" secondItem="dHe-A4-5sX" secondAttribute="width" multiplier="0.4" constant="1" id="Hlj-qO-cA5"/>
+                                            <constraint firstItem="Xx2-5p-i8W" firstAttribute="width" secondItem="dHe-A4-5sX" secondAttribute="width" multiplier="0.38" constant="1" id="Hlj-qO-cA5"/>
                                             <constraint firstItem="Xx2-5p-i8W" firstAttribute="leading" secondItem="dHe-A4-5sX" secondAttribute="leading" constant="25" id="KxY-AJ-6C1"/>
                                             <constraint firstItem="Exp-cT-UGA" firstAttribute="leading" secondItem="Xx2-5p-i8W" secondAttribute="leading" id="MqQ-11-A9b"/>
                                             <constraint firstItem="bSB-Wj-5Xp" firstAttribute="width" secondItem="Xx2-5p-i8W" secondAttribute="width" id="QmL-W7-eHd"/>
@@ -220,7 +220,7 @@
                                     <constraint firstItem="w6F-df-9Ad" firstAttribute="leading" secondItem="o2y-I4-ISF" secondAttribute="leading" id="Miy-zP-xXe"/>
                                     <constraint firstItem="dHe-A4-5sX" firstAttribute="top" secondItem="wf6-y4-H3X" secondAttribute="bottom" constant="8" id="NDU-51-eVx"/>
                                     <constraint firstAttribute="bottom" secondItem="dHe-A4-5sX" secondAttribute="bottom" constant="20" id="OOj-ez-bHo"/>
-                                    <constraint firstAttribute="trailing" secondItem="dHe-A4-5sX" secondAttribute="trailing" constant="25" id="TkR-NG-Y0l"/>
+                                    <constraint firstAttribute="trailing" secondItem="dHe-A4-5sX" secondAttribute="trailing" constant="32" id="TkR-NG-Y0l"/>
                                     <constraint firstAttribute="trailing" secondItem="w6F-df-9Ad" secondAttribute="trailing" id="TrX-8L-jTu"/>
                                     <constraint firstItem="5JP-Vi-DKl" firstAttribute="top" secondItem="w6F-df-9Ad" secondAttribute="bottom" constant="50" id="dbE-V3-1VT"/>
                                     <constraint firstAttribute="trailing" secondItem="tVv-xS-7v0" secondAttribute="trailing" id="ffI-ed-Ax5"/>
