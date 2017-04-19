@@ -16,12 +16,12 @@
 +(void)setDefaultNavigationBar:(UINavigationBar*)navBar;
 +(void)setNavigationBar:(UINavigationBar*)bar light:(BOOL)light;
 
-+(NSArray*)getCategoriesTitlesFromDictionary:(NSDictionary*)dict;
-+(NSArray*)getCategoriesLinksFromDictionary:(NSDictionary*)dict;
-+(NSArray*)getSubCategoriesFromDictionary:(NSDictionary*)dict;
-+(NSArray*)getTitlesForRequestFromDictionary:(NSDictionary*)dict;
++(NSArray*)getCategoriesTitlesFromMenuArray:(NSArray*)array;
++(NSArray*)getCategoriesLinksFromMenuArray:(NSArray*)array;
++(NSArray*)getSubCategoriesFromMenuArray:(NSArray*)array;
++(NSArray*)getTitlesForRequestFromMenuArray:(NSArray*)array;
 
-+(NSDictionary*)getAllCategories;
++(NSArray*)getAllCategories;
 
 +(void)addShadowToView:(UIView*)view;
 

@@ -168,11 +168,11 @@ typedef enum NSInteger {
 #pragma mark - Private 
 
 -(void)prepareCategories {
-    NSDictionary *categories = [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]];
+    NSArray *categories = [NSArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]];
     for (NSInteger i = 0; i < self.CBArray.count; i++) {
         CheckBoxView *cbView = self.CBArray[i];
-        cbView.titleString = categories.allKeys[i];
-        NSNumber *checked = categories[categories.allKeys[i]][@"Checked"];
+        cbView.titleString = categories[i][@"SourceName"];
+        NSNumber *checked = categories[i][@"Checked"];
         
         cbView.checked = checked.integerValue;
     }

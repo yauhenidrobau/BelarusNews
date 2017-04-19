@@ -62,8 +62,11 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityInd;
 @property (weak, nonatomic) IBOutlet UIView *menuView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) UIRefreshControl *refreshControlRight;
 @property (nonatomic, strong) INSSearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableViewRight;
+
 @property (nonatomic, strong) CFShareCircleView *shareCircleView;
 @property (nonatomic, strong) UserDefaultsManager *userDefaults;
 @property (nonatomic) CGPoint lastContentOffset;
@@ -108,16 +111,8 @@ typedef enum {
     self.userDefaults = [UserDefaultsManager sharedInstance];
     self.operationQueue = [NSOperationQueue new];
     self.isAlertShown = [self.userDefaults boolForKey:NO_INTERNET_KEY];
-    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(cellSwipeWithGestureRecognizer:)];
-    [self.tableView addGestureRecognizer:recognizer];
-    
-}
-
--(void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
     if ([self.userDefaults boolForKey:AUTOUPDATE_MODE]) {
-         self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:120.0 target:self selector:@selector(timerActionRefresh) userInfo:nil repeats:YES];
         NSLog(@"Autoupdates enabled");
     } else {
         NSLog(@"Autoupdates disabled");
@@ -126,6 +121,12 @@ typedef enum {
     self.isNightMode = [self.userDefaults boolForKey:NIGHT_MODE];
     [self setupData];
     [self prepareAppierance];
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    
     self.weatherTimer = [NSTimer scheduledTimerWithTimeInterval:30 * 60 target:self selector:@selector(updateWeatherData) userInfo:nil repeats:YES];
 
 }
@@ -163,39 +164,18 @@ typedef enum {
     __weak __typeof(self) wself = self;
     [UIView animateWithDuration:0.9 animations:^{
         [wself.tableView setContentOffset:CGPointZero animated:YES];
+        [wself.tableViewRight setContentOffset:CGPointZero animated:YES];
     }];
     self.scrollButton.hidden = YES;
-}
-
-#pragma mark - Gesture Recognizer
-
-- (void)cellSwipeWithGestureRecognizer:(UISwipeGestureRecognizer *)gestureRecognizer {
-    
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        CGPoint swipeLocation = [gestureRecognizer  locationInView:self.tableView];
-        NSIndexPath *swipedIndexPath = [self.tableView indexPathForRowAtPoint:swipeLocation];
-        UITableViewCell *swipedCell = [self.tableView cellForRowAtIndexPath:swipedIndexPath];
-        if ([swipedCell class] == [NewsTableViewCell class]) {
-            if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-                [((NewsTableViewCell*)swipedCell) updateCellWithLeftSwipe];
-            } else if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionRight) {
-                [((NewsTableViewCell*)swipedCell) updateCellWithRightSwipe];
-                
-            }
-            [swipedCell layoutIfNeeded];
-            [swipedCell updateConstraints];
-        }
-    }
-    
 }
 
 #pragma mark - UITableViewDataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.isSearchStart) {
-        return self.searchResults.count;
+        return self.searchResults.count/2;
     }
-    return self.newsArray.count;
+    return self.newsArray.count/2;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -204,7 +184,17 @@ typedef enum {
     cell.cellDelegate = self;
     [cell setDefaultCellStyle];
     NewsEntity *newsEntity = nil;
-    newsEntity = [self setNewsEntityForIndexPath:indexPath];
+    NSInteger newsArrayCount;
+    if (self.isSearchStart) {
+        newsArrayCount = self.searchResults.count/2;
+    } else {
+        newsArrayCount = self.newsArray.count/2;
+    }
+    if (tableView == self.tableViewRight) {
+        newsEntity = [self setNewsEntityForIndexPath:[NSIndexPath indexPathForRow:indexPath.row + newsArrayCount inSection:0]];
+    } else {
+        newsEntity = [self setNewsEntityForIndexPath:indexPath];
+    }
     [cell cellForNews:newsEntity WithIndexPath:(NSIndexPath *)indexPath];
     if (self.isNightMode) {
         [cell updateNightModeCell:YES];
@@ -215,6 +205,12 @@ typedef enum {
 }
 
 #pragma mark UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
+    cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    ((NewsTableViewCell*)cell).isUpdatedCell = YES;
+    [((NewsTableViewCell*)cell) updateCellWithRightSwipe];
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0;
@@ -241,7 +237,12 @@ typedef enum {
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString* segueId = (![[Reachability reachabilityWithHostName:TEST_HOST] isReachable] || self.isOfflineMode) ? @"DetailsOfflineVCID" : @"DetailsVCID";
     NewsTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    NewsEntity *newsEntity = [self setNewsEntityForIndexPath:[self.tableView indexPathForCell:cell]];
+    NewsEntity *newsEntity;
+    if (tableView == self.tableView) {
+        newsEntity = [self setNewsEntityForIndexPath:[self.tableView indexPathForCell:cell]];
+    } else {
+        newsEntity = [self setNewsEntityForIndexPath:[NSIndexPath indexPathForRow:[self.tableView indexPathForCell:cell].row + self.newsArray.count/2 inSection:0]];
+    }
 
     if (self.isNotAskEnable) {
         if (self.openLink) {
@@ -388,7 +389,6 @@ typedef enum {
                                                           action:@"Visited"
                                                            label:self.categoryString
                                                            value:@1] build]];
-    
 }
 
 #pragma mark - INSSearchBarDelegate
@@ -426,8 +426,8 @@ typedef enum {
 
                 wself.searchResults = searchResults;
                 [wself.tableView reloadData];
+                [wself.tableViewRight reloadData];
                 [wself showLoadingIndicator:NO];
-
                 NSLog(@"Get FROM SEARCH %ld",(unsigned long)wself.searchResults.count);
             }];
         });
@@ -450,18 +450,20 @@ typedef enum {
 #pragma mark - NewsTableViewCellDelegate
 
 - (void)newsTableViewCell:(NewsTableViewCell*)cell didTapFavoriteButton:(UIButton*)button {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSIndexPath *indexPath;
+    indexPath = [self.tableView indexPathForCell:cell];
     if (!indexPath) {
-        return;
+        indexPath = [self.tableViewRight indexPathForCell:cell];
     }
     NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
     [[RealmDataManager sharedInstance]updateEntity:entity WithProperty:@"favorite"];
 }
 
 - (void)newsTableViewCell:(NewsTableViewCell*)cell didTapShareButton:(UIButton*)button {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    NSIndexPath *indexPath;
+   indexPath = [self.tableView indexPathForCell:cell];
     if (!indexPath) {
-        return;
+       indexPath = [self.tableViewRight indexPathForCell:cell];
     }
     NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
     self.shareItemsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:entity,@"entity", nil];
@@ -472,11 +474,7 @@ typedef enum {
     
     UIActivityViewController *activity = [[UIActivityViewController alloc]initWithActivityItems:objectTOShare applicationActivities:nil];
     
-    NSArray *excludeActivities = @[UIActivityTypePostToWeibo,UIActivityTypePrint,
-                                   UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact,
-                                   UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList,
-                                   UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,
-                                   UIActivityTypePostToTencentWeibo,UIActivityTypeAirDrop];
+    NSArray *excludeActivities = @[];
     
     activity.excludedActivityTypes = excludeActivities;
     [self presentViewController:activity animated:YES completion:nil];
@@ -492,6 +490,8 @@ typedef enum {
     [self performSegueWithIdentifier:@"ShareVCID" sender:self];
     NSLog(@"Selected sharer: %@", sharer.name);
     [self.tableView reloadData];
+    [self.tableViewRight reloadData];
+
 }
 
 - (void)shareCircleCanceled:(NSNotification *)notification{
@@ -504,7 +504,12 @@ typedef enum {
     self.refreshControl = [[UIRefreshControl alloc] initWithFrame:self.view.frame];
     [self.refreshControl addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
     self.refreshControl.backgroundColor = [UIColor clearColor];
+    self.refreshControlRight = [[UIRefreshControl alloc] initWithFrame:self.view.frame];
+    [self.refreshControlRight addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
+    self.refreshControlRight.backgroundColor = [UIColor clearColor];
     [self.tableView addSubview:self.refreshControl];
+    [self.tableViewRight addSubview:self.refreshControlRight];
+
 }
 
 -(void)timerActionRefresh {
@@ -531,6 +536,8 @@ typedef enum {
         [self.scrollButton setTintColor:[UIColor bn_mainNightColor]];
         [Utils setNightNavigationBar:self.navigationController.navigationBar];
         self.refreshControl.tintColor = [UIColor bn_mainNightColor];
+        self.refreshControlRight.tintColor = [UIColor bn_mainNightColor];
+
         [self.backgroundImage setImage:[UIImage imageNamed:@"black_blur"]];
     } else {
         [self.scrollButton setTintColor:[UIColor bn_mainTitleColor]];
@@ -540,6 +547,8 @@ typedef enum {
         self.navigationController.navigationBar.shadowImage = [UIImage new];
         self.navigationController.navigationBar.translucent = YES;
         self.refreshControl.tintColor = [UIColor bn_mainTitleColor];
+        self.refreshControlRight.tintColor = [UIColor bn_mainTitleColor];
+
         [self.backgroundImage setImage:[UIImage imageNamed:@"main_blur"]];
     }
     self.leftMenuButton.imageView.image = [self.leftMenuButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -560,11 +569,16 @@ typedef enum {
         NSLog(@"Get favorites Elements  %lu",(unsigned long)self.newsArray.count);
     }
     [self.tableView reloadData];
+    [self.tableViewRight reloadData];
+
     [self showLoadingIndicator:NO];
     [self.refreshControl endRefreshing];
+    [self.refreshControlRight endRefreshing];
 
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
+        [self.tableViewRight setScrollEnabled:NO];
+
     }
 }
 
@@ -582,6 +596,8 @@ typedef enum {
     } else {
         [self.activityInd stopAnimating];
         [self.refreshControl endRefreshing];
+        [self.refreshControlRight endRefreshing];
+
     }
 }
 
@@ -654,6 +670,10 @@ typedef enum {
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
+    self.tableViewRight.estimatedRowHeight = 112;
+    self.tableViewRight.rowHeight = UITableViewAutomaticDimension;
+    self.tableViewRight.emptyDataSetSource = self;
+    self.tableViewRight.emptyDataSetDelegate = self;
 }
 
 -(void)prepareNavigationBar {
@@ -669,12 +689,12 @@ typedef enum {
 }
 
 -(void)prepareData {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]];
+    NSArray *categoriesMenu = [NSArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]];
 
-    _mainTitleArray = [Utils getCategoriesTitlesFromDictionary:dict];;
-    _sourceArray = [Utils getCategoriesLinksFromDictionary:dict];
-    _subTitleArray = [Utils getSubCategoriesFromDictionary:dict];
-    _titlesForRequestArray = [Utils getTitlesForRequestFromDictionary:dict];
+    _mainTitleArray = [Utils getCategoriesTitlesFromMenuArray:categoriesMenu];
+    _sourceArray = [Utils getCategoriesLinksFromMenuArray:categoriesMenu];
+    _subTitleArray = [Utils getSubCategoriesFromMenuArray:categoriesMenu];
+    _titlesForRequestArray = [Utils getTitlesForRequestFromMenuArray:categoriesMenu];
     self.newsURLDict = @{@"DEV.BY": [NSDictionary dictionaryWithObjectsAndKeys:DEV_BY_NEWS,NSLocalizedString(@"All News",nil),nil],
                          @"TUT.BY": [NSDictionary dictionaryWithObjectsAndKeys:
                                      MAIN_NEWS,NSLocalizedString(@"Main",nil),
@@ -712,6 +732,9 @@ typedef enum {
 
 -(void)prepareDropMenu {
     
+    for (ZLDropDownMenu *menu in self.menuView.subviews) {
+        [menu removeFromSuperview];
+    }
     ZLDropDownMenu *menu = [[ZLDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, deviceWidth(), 43)];
     menu.isNightMode = self.isNightMode;
     if (self.isNightMode) {

@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 
-@property (strong, nonatomic) NSMutableDictionary *categoriesDict;
+@property (strong, nonatomic) NSArray *categoriesMenu;
 @end
 
 @implementation CheckBoxView
@@ -41,8 +41,8 @@
     [super awakeFromNib];
     
     [self addTapHandler];
-    self.categoriesDict = [NSMutableDictionary dictionaryWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]];
-    self.checked = self.categoriesDict[self.titleString][@"Checked"];
+    self.categoriesMenu = [NSArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]];
+    self.checked = self.categoriesMenu[0][@"Checked"];
     [self updateImageAnimated:NO];
 }
 
@@ -81,11 +81,15 @@
 -(void)setChecked:(BOOL)checked
 {
     _checked = checked;
-    self.categoriesDict = [NSMutableDictionary dictionaryWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]];
+    self.categoriesMenu = [NSArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]];
 
     if (self.titleString) {
-        self.categoriesDict[self.titleString][@"Checked"] = @(checked);
-        [[NSUserDefaults standardUserDefaults]setObject:[NSKeyedArchiver archivedDataWithRootObject:self.categoriesDict] forKey:CATEGORIES_KEY];
+        for (NSMutableDictionary *dict in self.categoriesMenu) {
+            if ([dict[@"SourceName"] isEqualToString:self.titleString]) {
+                [dict setObject:@(checked) forKey:@"Checked"];
+            }
+        }
+        [[NSUserDefaults standardUserDefaults]setObject:[NSKeyedArchiver archivedDataWithRootObject:self.categoriesMenu] forKey:CATEGORIES_KEY];
         [self updateImageAnimated:YES];
     }
 }

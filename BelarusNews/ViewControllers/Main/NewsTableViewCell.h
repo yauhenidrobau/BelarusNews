@@ -22,6 +22,7 @@
 
 @property (nonatomic, weak) id<NewsTableViewCellDelegate> cellDelegate;
 @property (nonatomic,readonly) CGRect shareViewFrame;
+@property (nonatomic) BOOL isUpdatedCell;
 
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath;
 -(void)updateNightModeCell:(BOOL)update;

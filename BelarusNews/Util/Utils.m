@@ -47,42 +47,49 @@
     }
 }
 
-+(NSArray*)getCategoriesTitlesFromDictionary:(NSDictionary *)dict {
++(NSArray*)getCategoriesTitlesFromMenuArray:(NSArray *)array {
     NSMutableArray *titles = [NSMutableArray new];
-    for (NSString *key in dict) {
-        NSNumber *checked = dict[key][@"Checked"];
+    for (NSDictionary *dict in array) {
+        NSNumber *checked = dict[@"Checked"];
         if (checked.integerValue) {
-            [titles addObject:key];
+            [titles addObject:dict[@"SourceName"]];
         }
     }
     return titles;
 }
 
-+(NSArray*)getCategoriesLinksFromDictionary:(NSDictionary*)dict {
++(NSArray*)getCategoriesLinksFromMenuArray:(NSArray *)array {
     NSMutableArray *linkArray = [NSMutableArray new];
-    for (NSString *key in dict) {
-        NSNumber *checked = dict[key][@"Checked"];
+    for (NSDictionary *dict in array) {
+        NSNumber *checked = dict[@"Checked"];
         if (checked.integerValue) {
-            [linkArray addObject:dict[key][@"link"]];
+            [linkArray addObject:dict[@"link"]];
         }
     }
+    
     return linkArray;
 }
 
-+(NSArray*)getSubCategoriesFromDictionary:(NSDictionary*)dict {
++(NSArray*)getSubCategoriesFromMenuArray:(NSArray *)array {
     NSMutableArray *subCategories = [NSMutableArray new];
-    for (NSString *key in dict) {
-        NSNumber *checked = dict[key][@"Checked"];
+    for (NSDictionary *dict in array) {
+        NSNumber *checked = dict[@"Checked"];
         if (checked.integerValue) {
-            [subCategories addObject:dict[key][@"Categories"]];
+            [subCategories addObject:dict[@"Categories"]];
         }
     }
+    
     return subCategories;
 }
 
-+(NSArray*)getTitlesForRequestFromDictionary:(NSDictionary*)dict {
++(NSArray*)getTitlesForRequestFromMenuArray:(NSArray *)array {
     NSMutableArray *titlesForRequest = [NSMutableArray new];
-    NSDictionary *titles = @{@"TUT.BY" :
+    NSDictionary *titles = @{@"ONLINER" :
+                                 @[@"People",
+                                   @"Auto",
+                                   @"Science",
+                                   @"Realty"],
+                             @"TUT.BY" :
                              @[@"Main",
                                @"Economic",
                                @"Society",
@@ -99,31 +106,26 @@
                              @[@"All News"],
                              @"S13" :
                              @[@"All News"],
-                             @"ONLINER" :
-                             @[@"People",
-                               @"Auto",
-                               @"Science",
-                               @"Realty"],
                              @"Новый-Час" :
                              @[@"All News"]};
-    for (NSString *key in dict) {
-        NSNumber *checked = dict[key][@"Checked"];
+    for (NSDictionary *dict in array) {
+        NSNumber *checked = dict[@"Checked"];
         if (checked.integerValue) {
-            [titlesForRequest addObject:titles[key]];
+            [titlesForRequest addObject:titles[dict[@"SourceName"]]];
         }
     }
+    
     return titlesForRequest;
 }
 
-+(NSDictionary*)getAllCategories {
-    return [NSDictionary dictionaryWithObjectsAndKeys:[NSMutableDictionary dictionaryWithObjectsAndKeys:ONLINER_BY,@"link",
++(NSArray*)getAllCategories {
+    NSArray *categories = [NSArray arrayWithObjects:[NSMutableDictionary dictionaryWithObjectsAndKeys:ONLINER_BY,@"link",
                                                         @[NSLocalizedString(@"People",nil),
                                                         NSLocalizedString(@"Auto",nil),
                                                         NSLocalizedString(@"Science",nil),
                                                         NSLocalizedString(@"Realty",nil)],@"Categories",
-                                                       @(1),@"Checked",nil],
-                                                        @"ONLINER",
-            
+                                                                     @(1),@"Checked",@"ONLINER",@"SourceName",nil],
+                     
                                                         [NSMutableDictionary dictionaryWithObjectsAndKeys:TUT_BY,@"link",
                                                         @[NSLocalizedString(@"Main",nil),
                                                           NSLocalizedString(@"Economic",nil),
@@ -137,23 +139,22 @@
                                                           NSLocalizedString(@"Auto",nil),
                                                           NSLocalizedString(@"Lady",nil),
                                                           NSLocalizedString(@"Science",nil)],@"Categories",
-                                                          @(1),@"Checked", nil],
-                                                        @"TUT.BY",
+                                                          @(1),@"Checked",@"TUT.BY",@"SourceName", nil],
             
                                                         [NSMutableDictionary dictionaryWithObjectsAndKeys:DEV_BY,@"link",
                                                         @[NSLocalizedString(@"All News",nil)],@"Categories",
-                                                          @(1),@"Checked",nil],
-                                                        @"DEV.BY",
+                                                          @(1),@"Checked",@"DEV.BY",@"SourceName",nil],
             
                                                         [NSMutableDictionary dictionaryWithObjectsAndKeys:S13_RU,@"link",
                                                          @[NSLocalizedString(@"All News",nil)],@"Categories",
-                                                         @(1),@"Checked",nil],
-                                                        @"S13",
+                                                         @(1),@"Checked",@"S13",@"SourceName",nil],
             
                                                         [NSMutableDictionary dictionaryWithObjectsAndKeys:NOVYCHAS_BY,@"link",
                                                          @[NSLocalizedString(@"All News",nil)],@"Categories",
-                                                         @(1),@"Checked",nil],
-                                                        @"Новый-Час",nil];
+                                                         @(1),@"Checked",@"Новый-Час",@"SourceName",nil],
+                                                        nil];
+
+    return categories;
 }
 
 +(void)addShadowToView:(UIView*)view {

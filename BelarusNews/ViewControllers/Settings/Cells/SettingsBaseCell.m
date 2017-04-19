@@ -58,8 +58,13 @@
     if ([SettingsManager sharedInstance].isNightModeEnabled) {
         self.cellTitleLabel.textColor = [UIColor bn_nightModeTitleColor];
         self.separatorView.backgroundColor = [UIColor bn_lightBlueColor];
+        [self.cellSwitch setTintColor:[UIColor bn_nightModeTitleColor]];
+        self.cellSwitch.onTintColor = [UIColor bn_mainNightColor];
     } else {
-        self.cellTitleLabel.textColor = [UIColor bn_titleColor];
+        [self.cellSwitch setTintColor:[UIColor bn_mainColor]];
+        self.cellSwitch.onTintColor = [UIColor bn_mainColor];
+
+        self.cellTitleLabel.textColor = [UIColor bn_mainTitleColor];
         self.separatorView.backgroundColor = [UIColor lightGrayColor];
     }
 }

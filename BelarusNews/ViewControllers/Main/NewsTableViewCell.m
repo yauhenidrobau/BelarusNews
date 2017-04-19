@@ -16,9 +16,7 @@
 #import "Macros.h"
 
 //static const NSInteger contentOffset = 150;
-static const NSInteger defaultContentOffset = 10;
-static const NSInteger defaultButtonWidth = 0;
-static const NSInteger buttonWidth = 40;
+static const NSInteger defaultWidth = 0;
 static const NSInteger defaultCornerRadius = 16;
 
 @interface NewsTableViewCell ()
@@ -26,6 +24,7 @@ static const NSInteger defaultCornerRadius = 16;
 @property (weak, nonatomic) IBOutlet UIImageView *imageNewsView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UIView *descriptionView;
 @property (weak, nonatomic) IBOutlet UILabel *pubDateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
@@ -38,9 +37,9 @@ static const NSInteger defaultCornerRadius = 16;
 @property (weak, nonatomic) IBOutlet UILabel *lastArticlesLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBackgroundViewTrailingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBackgroundViewLeadingConstraint;
-@property (nonatomic) BOOL isUpdatedCell;
 @property (nonatomic) BOOL isFavoriteArticle;
 @property (nonatomic) NSInteger contentOffset;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *descriptionViewWidthConstraint;
 
 @end
 
@@ -56,6 +55,8 @@ static const NSInteger defaultCornerRadius = 16;
     self.imageNewsView.clipsToBounds = YES;
     self.imageNewsView.contentMode = UIViewContentModeScaleAspectFill;
     self.cellBackgroundView.layer.cornerRadius = defaultCornerRadius;
+    self.descriptionView.layer.cornerRadius = defaultCornerRadius;
+
     [self prepareButton:self.shareButton];
     [self prepareButton:self.favoriteButton];
 
@@ -63,6 +64,9 @@ static const NSInteger defaultCornerRadius = 16;
     UISwipeGestureRecognizer *swipeRecognizerLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(updateCellWithLeftSwipe)];
     swipeRecognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.cellBackgroundView addGestureRecognizer:swipeRecognizerLeft];
+    UISwipeGestureRecognizer *swipeRecognizerRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(updateCellWithRightSwipe)];
+    swipeRecognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.cellBackgroundView addGestureRecognizer:swipeRecognizerRight];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -97,11 +101,13 @@ static const NSInteger defaultCornerRadius = 16;
     self.shareButton.userInteractionEnabled = YES;
     if (!self.isUpdatedCell) {
         [UIView animateWithDuration:0.6 animations:^{
-            self.cellBackgroundViewLeadingConstraint.constant = self.cellBackgroundViewLeadingConstraint.constant - self.contentOffset;
+//            self.cellBackgroundViewLeadingConstraint.constant = self.cellBackgroundViewLeadingConstraint.constant - self.contentOffset;
 //            self.shareButtonWidthConstraint.constant = buttonWidth;
 //            self.favoriteButtonWidthConstraint.constant = buttonWidth;
-            self.cellBackgroundViewTrailingConstraint.constant = self.cellBackgroundViewTrailingConstraint.constant + self.contentOffset;
+//            self.cellBackgroundViewTrailingConstraint.constant = self.cellBackgroundViewTrailingConstraint.constant + self.contentOffset;
+            self.descriptionViewWidthConstraint.constant = self.cellBackgroundView.frame.size.width;
             [self layoutIfNeeded];
+        }completion:^(BOOL finished) {
         }];
         self.isUpdatedCell = YES;
     }
@@ -110,8 +116,9 @@ static const NSInteger defaultCornerRadius = 16;
 -(void)updateCellWithRightSwipe {
     if (self.isUpdatedCell) {
         [UIView animateWithDuration:0.6 animations:^{
-            self.cellBackgroundViewLeadingConstraint.constant = defaultContentOffset;
-            self.cellBackgroundViewTrailingConstraint.constant = defaultContentOffset;
+//            self.cellBackgroundViewLeadingConstraint.constant = defaultContentOffset;
+//            self.cellBackgroundViewTrailingConstraint.constant = defaultContentOffset;
+            self.descriptionViewWidthConstraint.constant = defaultWidth;
 //            self.shareButtonWidthConstraint.constant = defaultButtonWidth;
 //            self.favoriteButtonWidthConstraint.constant = defaultButtonWidth;
             [self layoutIfNeeded];
@@ -129,13 +136,15 @@ static const NSInteger defaultCornerRadius = 16;
 
         self.pubDateLabel.textColor = [UIColor bn_mainNightColor];
         self.sourceLabel.textColor = [UIColor whiteColor];
-        
+        self.descriptionLabel.textColor = [UIColor bn_mainNightColor];
+
     } else {
         self.sourceLabel.textColor = [UIColor bn_linkColor];
         self.titleLabel.textColor = [UIColor bn_mainTitleColor];
         self.cellBackgroundView.backgroundColor = [UIColor bn_mainColor];
         self.shareButton.tintColor = [UIColor bn_mainTitleColor];
         self.pubDateLabel.textColor = [UIColor bn_mainTitleColor];
+        self.descriptionLabel.textColor = [UIColor bn_mainTitleColor];
     }
 }
 
