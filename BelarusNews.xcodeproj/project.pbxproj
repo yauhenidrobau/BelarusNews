@@ -92,6 +92,9 @@
 		1E7329441D781E980027E46E /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329431D781E980027E46E /* XMLParser.m */; };
 		1E7329471D7836400027E46E /* ParserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329461D7836400027E46E /* ParserManager.m */; };
 		1E7329551D7848530027E46E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7329541D7848530027E46E /* DetailsViewController.m */; };
+		1E7C6ACA1EB070E000FAED19 /* FilterNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C6AC91EB070E000FAED19 /* FilterNewsViewController.m */; };
+		1E7C6ACE1EB0721700FAED19 /* CheckBoxStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7C6ACD1EB0721700FAED19 /* CheckBoxStackView.m */; };
+		1E7C6AD01EB0721F00FAED19 /* CheckBoxStackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7C6ACF1EB0721F00FAED19 /* CheckBoxStackView.xib */; };
 		1E91CFDF1E600F0A00CB60EB /* SettingsRoundImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFDE1E600F0A00CB60EB /* SettingsRoundImagesCell.m */; };
 		1E91CFE81E60616500CB60EB /* SettingsCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFE71E60616500CB60EB /* SettingsCityCell.m */; };
 		1E91CFF61E60788300CB60EB /* LocationAutoCompleteController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91CFF51E60788300CB60EB /* LocationAutoCompleteController.m */; };
@@ -266,7 +269,7 @@
 		1E640B551E0A85FC00AA539C /* ZLDropDownMenuTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLDropDownMenuTitleButton.m; sourceTree = "<group>"; };
 		1E640B561E0A85FC00AA539C /* ZLDropDownMenuUICalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLDropDownMenuUICalc.h; sourceTree = "<group>"; };
 		1E640B571E0A85FC00AA539C /* ZLDropDownMenuUICalc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLDropDownMenuUICalc.m; sourceTree = "<group>"; };
-		1E7328EF1D7813740027E46E /* BelarusNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BelarusNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E7328EF1D7813740027E46E /* Новости Беларуси.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Новости Беларуси.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7328F31D7813740027E46E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1E7328F51D7813740027E46E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1E7328F61D7813740027E46E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -292,6 +295,11 @@
 		1E7329461D7836400027E46E /* ParserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParserManager.m; sourceTree = "<group>"; };
 		1E7329531D7848530027E46E /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		1E7329541D7848530027E46E /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		1E7C6AC81EB070E000FAED19 /* FilterNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNewsViewController.h; sourceTree = "<group>"; };
+		1E7C6AC91EB070E000FAED19 /* FilterNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNewsViewController.m; sourceTree = "<group>"; };
+		1E7C6ACC1EB0721700FAED19 /* CheckBoxStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxStackView.h; sourceTree = "<group>"; };
+		1E7C6ACD1EB0721700FAED19 /* CheckBoxStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxStackView.m; sourceTree = "<group>"; };
+		1E7C6ACF1EB0721F00FAED19 /* CheckBoxStackView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckBoxStackView.xib; sourceTree = "<group>"; };
 		1E91CFDD1E600F0A00CB60EB /* SettingsRoundImagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsRoundImagesCell.h; sourceTree = "<group>"; };
 		1E91CFDE1E600F0A00CB60EB /* SettingsRoundImagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsRoundImagesCell.m; sourceTree = "<group>"; };
 		1E91CFE61E60616500CB60EB /* SettingsCityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCityCell.h; sourceTree = "<group>"; };
@@ -503,6 +511,8 @@
 				1E1505041E83EC56009F235E /* UIViewController+ShowModal.m */,
 				1E1505061E83ECAF009F235E /* WebLinkViewController.h */,
 				1E1505071E83ECAF009F235E /* WebLinkViewController.m */,
+				1E7C6AC81EB070E000FAED19 /* FilterNewsViewController.h */,
+				1E7C6AC91EB070E000FAED19 /* FilterNewsViewController.m */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -532,6 +542,7 @@
 		1E157ECD1EA4AD9500C69FA7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1E7C6ACB1EB0720100FAED19 /* CheckBoxStackView */,
 				1E157ECE1EA4AD9500C69FA7 /* CheckBox */,
 			);
 			path = Views;
@@ -649,7 +660,7 @@
 		1E7328F01D7813740027E46E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1E7328EF1D7813740027E46E /* BelarusNews.app */,
+				1E7328EF1D7813740027E46E /* Новости Беларуси.app */,
 				1E73290B1D7813750027E46E /* BelarusNewsTests.xctest */,
 				1E7329161D7813750027E46E /* BelarusNewsUITests.xctest */,
 			);
@@ -739,6 +750,16 @@
 				1E372F801DF94B8400362CC1 /* XML */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		1E7C6ACB1EB0720100FAED19 /* CheckBoxStackView */ = {
+			isa = PBXGroup;
+			children = (
+				1E7C6ACC1EB0721700FAED19 /* CheckBoxStackView.h */,
+				1E7C6ACD1EB0721700FAED19 /* CheckBoxStackView.m */,
+				1E7C6ACF1EB0721F00FAED19 /* CheckBoxStackView.xib */,
+			);
+			path = CheckBoxStackView;
 			sourceTree = "<group>";
 		};
 		1E91CFE01E605CA400CB60EB /* SettingsCityTableVC */ = {
@@ -870,7 +891,7 @@
 			);
 			name = BelarusNews;
 			productName = KinopoiskParserObj;
-			productReference = 1E7328EF1D7813740027E46E /* BelarusNews.app */;
+			productReference = 1E7328EF1D7813740027E46E /* Новости Беларуси.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1E73290A1D7813750027E46E /* BelarusNewsTests */ = {
@@ -967,6 +988,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E7C6AD01EB0721F00FAED19 /* CheckBoxStackView.xib in Resources */,
 				1E0FE3B01E6EE73A0009BC26 /* pinterest copy.png in Resources */,
 				1E0FE3A01E6EE73A0009BC26 /* camera_roll.png in Resources */,
 				1E0FE3AD1E6EE73A0009BC26 /* mail@2x.png in Resources */,
@@ -1136,6 +1158,7 @@
 				1E7329441D781E980027E46E /* XMLParser.m in Sources */,
 				1E640B5C1E0A85FE00AA539C /* MASLayoutConstraint.m in Sources */,
 				1E0FE39D1E6EE73A0009BC26 /* CFSharer.m in Sources */,
+				1E7C6ACE1EB0721700FAED19 /* CheckBoxStackView.m in Sources */,
 				1E640B581E0A85FE00AA539C /* NSString+ZLStringSize.m in Sources */,
 				84FF33451E1DD00F002847AB /* FeSpinnerTenDot.m in Sources */,
 				1E7328F71D7813740027E46E /* AppDelegate.m in Sources */,
@@ -1159,6 +1182,7 @@
 				1E0FE3611E6EB1300009BC26 /* SearchManager.m in Sources */,
 				1E7329361D7814C00027E46E /* NewsTableViewCell.m in Sources */,
 				1E4C8C641E56D8FB00B2ED44 /* SettingsAutoupdateCell.m in Sources */,
+				1E7C6ACA1EB070E000FAED19 /* FilterNewsViewController.m in Sources */,
 				1E7329551D7848530027E46E /* DetailsViewController.m in Sources */,
 				1E1505171E8534F5009F235E /* UIViewController+BelarusNews.m in Sources */,
 				1E1286181E5D850600D2899D /* UIColor+BelarusNews.m in Sources */,
@@ -1368,7 +1392,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drobov.news;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Новости Беларуси";
 				PROVISIONING_PROFILE = "5c0ccce3-5a65-4396-98c8-300bae6fe54f";
 				PROVISIONING_PROFILE_SPECIFIER = BelarusNewsDev;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1390,7 +1414,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drobov.news;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Новости Беларуси";
 				PROVISIONING_PROFILE = "a37a02aa-c986-478f-9060-cd3aa855912e";
 				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: com.drobov.news";
 				TARGETED_DEVICE_FAMILY = 1;

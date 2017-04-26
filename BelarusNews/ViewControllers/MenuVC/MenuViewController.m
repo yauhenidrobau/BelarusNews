@@ -17,6 +17,7 @@
 #import "CheckBoxView.h"
 #import "Constants.h"
 #import "Utils.h"
+#import "CheckBoxStackView.h"
 
 typedef enum NSInteger {
     MenuItemNews = 0,
@@ -39,15 +40,8 @@ typedef enum NSInteger {
 @property (strong, nonatomic) CityObject *cityObject;
 @property (weak, nonatomic) IBOutlet UIImageView *weatherBackgroundImage;
 @property (weak, nonatomic) IBOutlet UILabel *noWeatherLabel;
+@property (weak, nonatomic) IBOutlet CheckBoxStackView *checkBoxStackView;
 
-@property (weak, nonatomic) IBOutlet CheckBoxView *CBView1;
-@property (weak, nonatomic) IBOutlet CheckBoxView *CBView2;
-@property (weak, nonatomic) IBOutlet CheckBoxView *CBView3;
-@property (weak, nonatomic) IBOutlet CheckBoxView *CBView4;
-@property (weak, nonatomic) IBOutlet CheckBoxView *CBView5;
-@property (weak, nonatomic) IBOutlet UIView *checkBoxView;
-
-@property (strong, nonatomic) NSArray *CBArray;
 @end
 
 @implementation MenuViewController
@@ -61,9 +55,7 @@ typedef enum NSInteger {
     self.menuTitles = @[  NSLocalizedString(@"News",nil),
                         NSLocalizedString(@"Favorites",nil),
                         NSLocalizedString(@"Settings",nil)];
-    self.CBArray = @[_CBView1,_CBView2,_CBView3,_CBView4,_CBView5];
     
-    [Utils addShadowToView:self.checkBoxView];
 
     self.noWeatherLabel.text = NSLocalizedString(@"Set your city in settings to see the weather", nil);
     self.revealViewController.rearViewRevealWidth = CGRectGetWidth(self.view.frame) - 53.0f;
@@ -92,8 +84,6 @@ typedef enum NSInteger {
         self.weatherBackgroundImage.hidden = YES;
         self.noWeatherLabel.hidden = NO;
     }
-    
-    [self prepareCategories];
     
 }
 #pragma mark - TABLE VIEW DATASOURCE
@@ -163,19 +153,6 @@ typedef enum NSInteger {
     [self.revealViewController setFrontViewController:rootVC animated:YES];
     
     [self closeMenu];
-}
-
-#pragma mark - Private 
-
--(void)prepareCategories {
-    NSArray *categories = [NSArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]];
-    for (NSInteger i = 0; i < self.CBArray.count; i++) {
-        CheckBoxView *cbView = self.CBArray[i];
-        cbView.titleString = categories[i][@"SourceName"];
-        NSNumber *checked = categories[i][@"Checked"];
-        
-        cbView.checked = checked.integerValue;
-    }
 }
 
 -(void)closeMenu {

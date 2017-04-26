@@ -62,7 +62,7 @@ typedef enum {
 //                           @"NotificationCell",
                            @"AutoupdatesCell",
                            @"NightModeCell",
-                           @"RoundImagesCell",
+//                           @"RoundImagesCell",
                            @"CityCell"];
     }
     return _cellTitleListID;

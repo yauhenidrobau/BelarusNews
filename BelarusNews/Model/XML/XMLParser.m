@@ -53,6 +53,9 @@ NSMutableDictionary *CDDateDict;
     if ([elementName isEqualToString:@"media:thumbnail"]) {
         urlImage = [[NSMutableString alloc] initWithString: attributeDict[@"url"]];
     }
+    if ([elementName isEqualToString:@"media:content"]) {
+        urlImage = [[NSMutableString alloc] initWithString: attributeDict[@"url"]];
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCDATA:(NSData *)CDATABlock {

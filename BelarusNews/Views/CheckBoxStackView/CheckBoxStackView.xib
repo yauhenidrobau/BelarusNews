@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12118"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckBoxStackView">
+            <connections>
+                <outlet property="CBView1" destination="mVG-JC-kza" id="OtR-k3-UyH"/>
+                <outlet property="CBView2" destination="qYq-jJ-6Zi" id="Fd5-Vr-d1B"/>
+                <outlet property="CBView3" destination="7Js-1A-kef" id="apj-O5-wvV"/>
+                <outlet property="CBView4" destination="NUe-6w-PL2" id="UjJ-RT-mg3"/>
+                <outlet property="CBView5" destination="7hO-16-oB3" id="qzC-aH-G2K"/>
+                <outlet property="checkBoxView" destination="lFD-Vu-w2e" id="D4e-hP-Wxm"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="265" height="128"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFD-Vu-w2e">
+                    <rect key="frame" x="0.0" y="0.0" width="265" height="128"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mVG-JC-kza" userLabel="Check Box View1" customClass="CheckBoxView">
+                            <rect key="frame" x="25" y="5" width="102" height="31"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="31" id="6tF-Rp-IY9"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qYq-jJ-6Zi" userLabel="Check Box View2" customClass="CheckBoxView">
+                            <rect key="frame" x="25" y="44" width="102" height="31"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="31" id="ej8-5U-flk"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Js-1A-kef" userLabel="Check Box View3" customClass="CheckBoxView">
+                            <rect key="frame" x="25" y="83" width="102" height="31"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="31" id="5Sl-bO-tEY"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUe-6w-PL2" userLabel="Check Box View4" customClass="CheckBoxView">
+                            <rect key="frame" x="147" y="5" width="102" height="31"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="31" id="IbL-8D-JFB"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7hO-16-oB3" userLabel="Check Box View5" customClass="CheckBoxView">
+                            <rect key="frame" x="147" y="44" width="102" height="31"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="31" id="JN8-si-gj8"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="mVG-JC-kza" firstAttribute="top" secondItem="lFD-Vu-w2e" secondAttribute="top" constant="5" id="9MF-Pa-aKI"/>
+                        <constraint firstItem="mVG-JC-kza" firstAttribute="width" secondItem="lFD-Vu-w2e" secondAttribute="width" multiplier="0.38" constant="1" id="Dz9-8y-ZOA"/>
+                        <constraint firstItem="qYq-jJ-6Zi" firstAttribute="leading" secondItem="mVG-JC-kza" secondAttribute="leading" id="EVA-vg-TSK"/>
+                        <constraint firstItem="7hO-16-oB3" firstAttribute="width" secondItem="mVG-JC-kza" secondAttribute="width" id="HIG-tV-lc4"/>
+                        <constraint firstItem="mVG-JC-kza" firstAttribute="leading" secondItem="lFD-Vu-w2e" secondAttribute="leading" constant="25" id="REs-Xi-dhN"/>
+                        <constraint firstItem="7hO-16-oB3" firstAttribute="top" secondItem="NUe-6w-PL2" secondAttribute="bottom" constant="8" id="Tf0-VC-5bh"/>
+                        <constraint firstItem="7Js-1A-kef" firstAttribute="width" secondItem="mVG-JC-kza" secondAttribute="width" id="Wh9-d0-QPj"/>
+                        <constraint firstItem="NUe-6w-PL2" firstAttribute="width" secondItem="mVG-JC-kza" secondAttribute="width" id="Zqw-B3-q8x"/>
+                        <constraint firstItem="qYq-jJ-6Zi" firstAttribute="top" secondItem="mVG-JC-kza" secondAttribute="bottom" constant="8" id="h2u-Bw-o6R"/>
+                        <constraint firstItem="NUe-6w-PL2" firstAttribute="top" secondItem="mVG-JC-kza" secondAttribute="top" id="iUh-Vm-rfj"/>
+                        <constraint firstItem="7Js-1A-kef" firstAttribute="leading" secondItem="mVG-JC-kza" secondAttribute="leading" id="lTN-W7-9uE"/>
+                        <constraint firstItem="7Js-1A-kef" firstAttribute="top" secondItem="qYq-jJ-6Zi" secondAttribute="bottom" constant="8" id="uaA-gl-dBR"/>
+                        <constraint firstItem="7hO-16-oB3" firstAttribute="trailing" secondItem="NUe-6w-PL2" secondAttribute="trailing" id="urn-7h-tRt"/>
+                        <constraint firstItem="qYq-jJ-6Zi" firstAttribute="width" secondItem="mVG-JC-kza" secondAttribute="width" id="xyl-nL-j0Q"/>
+                        <constraint firstItem="NUe-6w-PL2" firstAttribute="leading" secondItem="mVG-JC-kza" secondAttribute="trailing" constant="20" id="y4J-F9-cKH"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="lFD-Vu-w2e" secondAttribute="bottom" id="CzX-Vq-rUO"/>
+                <constraint firstItem="lFD-Vu-w2e" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="a63-x2-t5h"/>
+                <constraint firstAttribute="trailing" secondItem="lFD-Vu-w2e" secondAttribute="trailing" id="nEm-DA-RJw"/>
+                <constraint firstItem="lFD-Vu-w2e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tss-4m-usH"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="39" y="-72"/>
+        </view>
+    </objects>
+</document>

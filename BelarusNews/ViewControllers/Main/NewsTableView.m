@@ -45,6 +45,10 @@
 
 #import "UIViewController+BelarusNews.h"
 
+#import <SafariServices/SFSafariViewController.h>
+
+#import "FilterNewsViewController.h"
+
 typedef void(^UpdateDataCallback)(NSError *error);
 typedef enum {
     AllCategoryType = 0,
@@ -54,7 +58,7 @@ typedef enum {
 }CategoryTypes;
 
 
-@interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate>
+@interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate, SFSafariViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UIView *searchBarView;
@@ -119,16 +123,27 @@ typedef enum {
     }
     self.isOfflineMode = [self.userDefaults boolForKey:OFFLINE_MODE];
     self.isNightMode = [self.userDefaults boolForKey:NIGHT_MODE];
-    [self setupData];
-    [self prepareAppierance];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    
     self.weatherTimer = [NSTimer scheduledTimerWithTimeInterval:30 * 60 target:self selector:@selector(updateWeatherData) userInfo:nil repeats:YES];
+    if (![NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]) {
+        [[NSUserDefaults standardUserDefaults]setObject:[NSKeyedArchiver archivedDataWithRootObject:[Utils getAllCategories]] forKey:CATEGORIES_KEY];
 
+        __weak typeof(self) wself = self;
+        [self showModalViewControllerWithIdentifier:@"FilterNewsViewController" setupBlock:^(ModalViewController *modal) {
+            FilterNewsViewController *vc = (FilterNewsViewController*)modal;
+            vc.closed = ^() {
+                [wself prepareData];
+                [self prepareAppierance];
+                [wself updateWithIndicator:YES];
+            };
+        } animated:YES];
+    } else {
+        [self prepareAppierance];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -246,7 +261,23 @@ typedef enum {
 
     if (self.isNotAskEnable) {
         if (self.openLink) {
-            [self performSegueWithIdentifier:segueId sender:cell];
+            if ([segueId isEqualToString:@"DetailsVCID"]) {
+                NSURL *URL = [NSURL URLWithString:newsEntity.linkFeed];
+                
+                if (URL) {
+                    if ([SFSafariViewController class] != nil) {
+                        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+                        sfvc.delegate = self;
+                        [self presentViewController:sfvc animated:YES completion:nil];
+                    } else {
+                        if (![[UIApplication sharedApplication] openURL:URL]) {
+                            NSLog(@"%@%@",@"Failed to open url:",[URL description]);
+                        }
+                    }
+                }
+            } else {
+                [self performSegueWithIdentifier:segueId sender:cell];
+            }
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }
     } else {
@@ -255,7 +286,23 @@ typedef enum {
             vc.link = newsEntity.linkFeed;
             vc.closed = ^(BOOL isNotAskEnable,BOOL openLink) {
                 if (self.openLink) {
-                    [self performSegueWithIdentifier:segueId sender:cell];
+                    if ([segueId isEqualToString:@"DetailsVCID"]) {
+                        NSURL *URL = [NSURL URLWithString:newsEntity.linkFeed];
+                        
+                        if (URL) {
+                            if ([SFSafariViewController class] != nil) {
+                                SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+                                sfvc.delegate = self;
+                                [self presentViewController:sfvc animated:YES completion:nil];
+                            } else {
+                                if (![[UIApplication sharedApplication] openURL:URL]) {
+                                    NSLog(@"%@%@",@"Failed to open url:",[URL description]);
+                                }
+                            }
+                        }
+                    } else {
+                        [self performSegueWithIdentifier:segueId sender:cell];
+                    }
                     [tableView deselectRowAtIndexPath:indexPath animated:YES];
                 }
             };
@@ -269,8 +316,7 @@ typedef enum {
         cell = (NewsTableViewCell*)sender;
         NewsEntity *newsEntity = [self setNewsEntityForIndexPath:[self.tableView indexPathForCell:cell]];
         if ([segue.identifier isEqualToString:@"DetailsVCID"]) {
-            DetailsViewController *vc = segue.destinationViewController;
-            vc.sourceLink = [NSString stringWithString:newsEntity.linkFeed];
+            
         } else if ([segue.identifier isEqualToString:@"DetailsOfflineVCID"]) {
             DetailsOfflineVCViewController *vc = segue.destinationViewController;
             vc.entity = newsEntity;
@@ -377,6 +423,7 @@ typedef enum {
     NSDictionary *dict = self.newsURLDict[self.mainTitleArray[indexPath.column]];
     self.urlString = dict[NSLocalizedString(self.categoryString,nil)];
     }
+    self.source = self.sourceArray[indexPath.column];
     NSLog(@"%@ : %@", self.categoryString,self.urlString);
     [self.userDefaults setObject:self.categoryString forKey:@"CurrentTitle"];
     [self.userDefaults setObject:self.urlString forKey:@"CurrentUrl"];
@@ -666,11 +713,11 @@ typedef enum {
 }
 
 -(void)prepareTableView {
-    self.tableView.estimatedRowHeight = 112;
+    self.tableView.estimatedRowHeight = 115;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
-    self.tableViewRight.estimatedRowHeight = 112;
+    self.tableViewRight.estimatedRowHeight = 115;
     self.tableViewRight.rowHeight = UITableViewAutomaticDimension;
     self.tableViewRight.emptyDataSetSource = self;
     self.tableViewRight.emptyDataSetDelegate = self;

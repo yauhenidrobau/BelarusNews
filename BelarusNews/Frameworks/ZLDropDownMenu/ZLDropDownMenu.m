@@ -296,7 +296,7 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
 
 - (UIWindow *)keyWindow
 {
-    return [[[UIApplication sharedApplication] windows] lastObject];
+    return [[[UIApplication sharedApplication] windows] firstObject];
 }
 
 #pragma mark -- lazyLoad
@@ -333,8 +333,6 @@ static NSInteger clickCount;
         }];
     }
 }
-
-
 
 - (void)backgroundViewDidTap:(UIButton *)tapGesture
 {

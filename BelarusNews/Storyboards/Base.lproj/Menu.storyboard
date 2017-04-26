@@ -144,63 +144,11 @@
                                             <outlet property="delegate" destination="TdY-jj-Zll" id="fPC-YW-lXS"/>
                                         </connections>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHe-A4-5sX">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHe-A4-5sX" customClass="CheckBoxStackView">
                                         <rect key="frame" x="25" y="519" width="265" height="128"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xx2-5p-i8W" userLabel="Check Box View1" customClass="CheckBoxView">
-                                                <rect key="frame" x="25" y="5" width="102" height="31"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="31" id="r9j-ml-p6r"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Exp-cT-UGA" userLabel="Check Box View2" customClass="CheckBoxView">
-                                                <rect key="frame" x="25" y="44" width="102" height="31"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="31" id="bgh-kO-e8M"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bSB-Wj-5Xp" userLabel="Check Box View3" customClass="CheckBoxView">
-                                                <rect key="frame" x="25" y="83" width="102" height="31"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="31" id="yS7-wE-m0j"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0n-tg-Ynf" userLabel="Check Box View4" customClass="CheckBoxView">
-                                                <rect key="frame" x="147" y="5" width="101" height="31"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="31" id="eM3-fk-em5"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DbW-28-ZHN" userLabel="Check Box View5" customClass="CheckBoxView">
-                                                <rect key="frame" x="147" y="44" width="101" height="31"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="31" id="3x8-3m-yKY"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="h0n-tg-Ynf" firstAttribute="width" secondItem="Xx2-5p-i8W" secondAttribute="width" id="0HY-rs-j07"/>
-                                            <constraint firstItem="DbW-28-ZHN" firstAttribute="trailing" secondItem="h0n-tg-Ynf" secondAttribute="trailing" id="6Yj-Tx-9lH"/>
-                                            <constraint firstItem="Exp-cT-UGA" firstAttribute="top" secondItem="Xx2-5p-i8W" secondAttribute="bottom" constant="8" id="DWS-sk-lvi"/>
-                                            <constraint firstItem="Exp-cT-UGA" firstAttribute="width" secondItem="Xx2-5p-i8W" secondAttribute="width" id="Gvn-wp-r9h"/>
-                                            <constraint firstItem="Xx2-5p-i8W" firstAttribute="width" secondItem="dHe-A4-5sX" secondAttribute="width" multiplier="0.38" constant="1" id="Hlj-qO-cA5"/>
-                                            <constraint firstItem="Xx2-5p-i8W" firstAttribute="leading" secondItem="dHe-A4-5sX" secondAttribute="leading" constant="25" id="KxY-AJ-6C1"/>
-                                            <constraint firstItem="Exp-cT-UGA" firstAttribute="leading" secondItem="Xx2-5p-i8W" secondAttribute="leading" id="MqQ-11-A9b"/>
-                                            <constraint firstItem="bSB-Wj-5Xp" firstAttribute="width" secondItem="Xx2-5p-i8W" secondAttribute="width" id="QmL-W7-eHd"/>
-                                            <constraint firstItem="h0n-tg-Ynf" firstAttribute="leading" secondItem="Xx2-5p-i8W" secondAttribute="trailing" constant="20" id="SMG-Xo-cUw"/>
-                                            <constraint firstItem="h0n-tg-Ynf" firstAttribute="top" secondItem="Xx2-5p-i8W" secondAttribute="top" id="gJ2-wR-0yv"/>
                                             <constraint firstAttribute="height" constant="128" id="hf9-s4-XeG"/>
-                                            <constraint firstItem="bSB-Wj-5Xp" firstAttribute="top" secondItem="Exp-cT-UGA" secondAttribute="bottom" constant="8" id="ktN-9t-vUL"/>
-                                            <constraint firstItem="bSB-Wj-5Xp" firstAttribute="leading" secondItem="Xx2-5p-i8W" secondAttribute="leading" id="o9l-ed-Z9s"/>
-                                            <constraint firstItem="Xx2-5p-i8W" firstAttribute="top" secondItem="dHe-A4-5sX" secondAttribute="top" constant="5" id="r5p-qB-K0C"/>
-                                            <constraint firstItem="DbW-28-ZHN" firstAttribute="width" secondItem="Xx2-5p-i8W" secondAttribute="width" id="tW8-dY-H3E"/>
-                                            <constraint firstItem="DbW-28-ZHN" firstAttribute="top" secondItem="h0n-tg-Ynf" secondAttribute="bottom" constant="8" id="yfF-Kh-kpi"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Фильтр Новостей" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wf6-y4-H3X">
@@ -241,13 +189,8 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="CBView1" destination="Xx2-5p-i8W" id="AxH-xh-BaN"/>
-                        <outlet property="CBView2" destination="Exp-cT-UGA" id="y75-zW-6OJ"/>
-                        <outlet property="CBView3" destination="bSB-Wj-5Xp" id="kXe-Pp-cR3"/>
-                        <outlet property="CBView4" destination="h0n-tg-Ynf" id="Ijt-30-0fr"/>
-                        <outlet property="CBView5" destination="DbW-28-ZHN" id="Awg-KU-HFn"/>
                         <outlet property="blurImage" destination="tVv-xS-7v0" id="cng-qr-SlN"/>
-                        <outlet property="checkBoxView" destination="dHe-A4-5sX" id="3Yw-Bj-zX9"/>
+                        <outlet property="checkBoxStackView" destination="dHe-A4-5sX" id="LVe-tL-BfH"/>
                         <outlet property="cityNameLabel" destination="Sqq-Su-zWI" id="0ZI-8Q-U5Q"/>
                         <outlet property="noWeatherLabel" destination="4fu-dr-vsq" id="fki-by-tMY"/>
                         <outlet property="weatherBackgroundImage" destination="GTh-Vd-8Eg" id="ur6-wB-AI4"/>

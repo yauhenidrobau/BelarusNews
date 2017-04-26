@@ -60,12 +60,6 @@ NSTimer *timer;
     [[DataManager sharedInstance] updateWeatherForecastWithCallback:^(CityObject *cityObject, NSError *error) {
     }];
     
-    /*
-     Filter Categories
-     */
-    if (![NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]) {
-        [[NSUserDefaults standardUserDefaults]setObject:[NSKeyedArchiver archivedDataWithRootObject:[Utils getAllCategories]] forKey:CATEGORIES_KEY];
-    }
     return YES;
 }
 
@@ -80,7 +74,6 @@ NSTimer *timer;
     NSString* storyboardName = @"Main";
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:[NSBundle mainBundle]];
     UIViewController* rootVC = [storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-    //TODO: implement animated transition
     self.window.rootViewController = rootVC;
 }
 

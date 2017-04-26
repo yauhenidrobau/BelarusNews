@@ -69,7 +69,7 @@
     if (_sourceLink.length) {
         NSLog(@"%@",_sourceLink);
         NSURLRequest *request = [NSURLRequest requestWithURL: [NSURL URLWithString:_sourceLink]];
-        [self.webView loadRequest:request];
+//        [self.webView loadRequest:request];
         [self start:self];
     }
     if (self.webView.hidden) {

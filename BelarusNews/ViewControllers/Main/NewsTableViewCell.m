@@ -18,6 +18,7 @@
 //static const NSInteger contentOffset = 150;
 static const NSInteger defaultWidth = 0;
 static const NSInteger defaultCornerRadius = 16;
+static const NSInteger defaultDescriptionLeading = 169.5;
 
 @interface NewsTableViewCell ()
 
@@ -39,7 +40,8 @@ static const NSInteger defaultCornerRadius = 16;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellBackgroundViewLeadingConstraint;
 @property (nonatomic) BOOL isFavoriteArticle;
 @property (nonatomic) NSInteger contentOffset;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *descriptionViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet UIImageView *logoIcon;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *descriptionViewLeadingConstraint;
 
 @end
 
@@ -53,10 +55,11 @@ static const NSInteger defaultCornerRadius = 16;
     [self layoutIfNeeded];
     self.backgroundColor = [UIColor clearColor];
     self.imageNewsView.clipsToBounds = YES;
-    self.imageNewsView.contentMode = UIViewContentModeScaleAspectFill;
     self.cellBackgroundView.layer.cornerRadius = defaultCornerRadius;
     self.descriptionView.layer.cornerRadius = defaultCornerRadius;
-
+    
+    [self.logoIcon setImage:[UIImage imageNamed:@"icon-launch-TUT.BY"]];
+    [self showLogo:NO];
     [self prepareButton:self.shareButton];
     [self prepareButton:self.favoriteButton];
 
@@ -105,7 +108,7 @@ static const NSInteger defaultCornerRadius = 16;
 //            self.shareButtonWidthConstraint.constant = buttonWidth;
 //            self.favoriteButtonWidthConstraint.constant = buttonWidth;
 //            self.cellBackgroundViewTrailingConstraint.constant = self.cellBackgroundViewTrailingConstraint.constant + self.contentOffset;
-            self.descriptionViewWidthConstraint.constant = self.cellBackgroundView.frame.size.width;
+            self.descriptionViewLeadingConstraint.constant = 0;
             [self layoutIfNeeded];
         }completion:^(BOOL finished) {
         }];
@@ -116,11 +119,9 @@ static const NSInteger defaultCornerRadius = 16;
 -(void)updateCellWithRightSwipe {
     if (self.isUpdatedCell) {
         [UIView animateWithDuration:0.6 animations:^{
-//            self.cellBackgroundViewLeadingConstraint.constant = defaultContentOffset;
-//            self.cellBackgroundViewTrailingConstraint.constant = defaultContentOffset;
-            self.descriptionViewWidthConstraint.constant = defaultWidth;
 //            self.shareButtonWidthConstraint.constant = defaultButtonWidth;
 //            self.favoriteButtonWidthConstraint.constant = defaultButtonWidth;
+            self.descriptionViewLeadingConstraint.constant = defaultDescriptionLeading;
             [self layoutIfNeeded];
         } completion:^(BOOL finished) {
         }];
@@ -177,6 +178,9 @@ static const NSInteger defaultCornerRadius = 16;
     if ([SettingsManager sharedInstance].isRoundImagesEnabled) {
         self.imageNewsView.layer.cornerRadius = CGRectGetWidth(self.imageNewsView.frame) / 2;
     }
+    if ([entity.sourceName containsString:@"tut.by"]) {
+        [self showLogo:YES];
+    }
     [self updateFontSize];
 }
 
@@ -193,6 +197,14 @@ static const NSInteger defaultCornerRadius = 16;
 }
 
 #pragma mark - Private
+
+-(void)showLogo:(BOOL)show {
+    if (show) {
+        self.logoIcon.hidden = NO;
+    } else {
+        self.logoIcon.hidden = YES;
+    }
+}
 
 -(void)prepareButton:(UIButton*)button {
     button.layer.cornerRadius = defaultCornerRadius;
