@@ -107,10 +107,27 @@ typedef enum {
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    [self prepareData];
-    [self peparePullToRefresh];
-    [self setupData];
-    [self updateWithIndicator:YES];
+    self.weatherTimer = [NSTimer scheduledTimerWithTimeInterval:30 * 60 target:self selector:@selector(updateWeatherData) userInfo:nil repeats:YES];
+    if (![NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]) {
+        [[NSUserDefaults standardUserDefaults]setObject:[NSKeyedArchiver archivedDataWithRootObject:[Utils getAllCategories]] forKey:CATEGORIES_KEY];
+        
+        __weak typeof(self) wself = self;
+        [self showModalViewControllerWithIdentifier:@"FilterNewsViewController" setupBlock:^(ModalViewController *modal) {
+            FilterNewsViewController *vc = (FilterNewsViewController*)modal;
+            vc.closed = ^() {
+                [wself prepareData];
+                [wself prepareAppierance];
+                [wself updateWithIndicator:YES];
+            };
+        } animated:YES];
+    } else {
+        [self prepareData];
+        [self peparePullToRefresh];
+        [self setupData];
+        [self updateWithIndicator:YES];
+        [self prepareAppierance];
+    }
+
 
     self.userDefaults = [UserDefaultsManager sharedInstance];
     self.operationQueue = [NSOperationQueue new];
@@ -129,21 +146,6 @@ typedef enum {
     [super viewWillAppear:animated];
     
     self.weatherTimer = [NSTimer scheduledTimerWithTimeInterval:30 * 60 target:self selector:@selector(updateWeatherData) userInfo:nil repeats:YES];
-    if (![NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]) {
-        [[NSUserDefaults standardUserDefaults]setObject:[NSKeyedArchiver archivedDataWithRootObject:[Utils getAllCategories]] forKey:CATEGORIES_KEY];
-
-        __weak typeof(self) wself = self;
-        [self showModalViewControllerWithIdentifier:@"FilterNewsViewController" setupBlock:^(ModalViewController *modal) {
-            FilterNewsViewController *vc = (FilterNewsViewController*)modal;
-            vc.closed = ^() {
-                [wself prepareData];
-                [self prepareAppierance];
-                [wself updateWithIndicator:YES];
-            };
-        } animated:YES];
-    } else {
-        [self prepareAppierance];
-    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
