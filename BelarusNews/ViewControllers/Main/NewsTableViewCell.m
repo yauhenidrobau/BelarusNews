@@ -43,6 +43,8 @@ static const NSInteger defaultDescriptionLeading = 169.5;
 @property (weak, nonatomic) IBOutlet UIImageView *logoIcon;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *descriptionViewLeadingConstraint;
 
+@property(nonatomic) CGFloat currentFontSize;
+
 @end
 
 @implementation NewsTableViewCell
@@ -160,6 +162,11 @@ static const NSInteger defaultDescriptionLeading = 169.5;
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath  {
     [self layoutIfNeeded];
     
+    [self updateFontSize];
+    if (!indexPath.row) {
+        self.titleLabel.font = [UIFont boldSystemFontOfSize:self.currentFontSize];
+
+    }
     self.isFavoriteArticle = entity.favorite;
     self.sourceLabel.text = entity.linkFeed;
     self.titleLabel.text = entity.titleFeed;
@@ -189,7 +196,6 @@ static const NSInteger defaultDescriptionLeading = 169.5;
     if ([entity.sourceName containsString:@"tut.by"]) {
         [self showLogo:YES];
     }
-    [self updateFontSize];
 }
 
 -(UIImageView*)imageFromCell {
@@ -250,6 +256,8 @@ static const NSInteger defaultDescriptionLeading = 169.5;
         self.titleLabel.font = [UIFont systemFontOfSize:fontSize];
         self.pubDateLabel.font = [UIFont systemFontOfSize:fontSize-2];
     }
+    self.currentFontSize = fontSize;
+    
 }
 
 @end

@@ -711,7 +711,7 @@ typedef enum {
 }
 
 -(void)prepareTableView {
-    self.tableView.estimatedRowHeight = 100;
+    self.tableView.estimatedRowHeight = 130;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
@@ -782,8 +782,8 @@ typedef enum {
         menu.customBackgroundColor = [UIColor bn_nightModeBackgroundColor];
         menu.collectionViewColor = [UIColor bn_nightModeBackgroundColor];
     } else {
-        menu.customBackgroundColor = [UIColor clearColor];
-        menu.collectionViewColor = [UIColor whiteColor];
+        menu.customBackgroundColor = [UIColor redColor];
+        menu.collectionViewColor = [UIColor bn_mainBackgroundColor];
     }
     menu.delegate = self;
     menu.dataSource = self;

@@ -21,8 +21,8 @@
 
 typedef enum NSInteger {
     MenuItemNews = 0,
-    MenuItemFavorite = 1,
-    MenuItemSettings = 2
+    MenuItemFavorite = 2,
+    MenuItemSettings = 1
 } MenuItem;
 
 @interface MenuViewController ()
@@ -53,7 +53,7 @@ typedef enum NSInteger {
     [super viewDidLoad];
     
     self.menuTitles = @[  NSLocalizedString(@"News",nil),
-                        NSLocalizedString(@"Favorites",nil),
+//                        NSLocalizedString(@"Favorites",nil),
                         NSLocalizedString(@"Settings",nil)];
     
 
@@ -105,9 +105,11 @@ typedef enum NSInteger {
     UIImageView *imageView = (UIImageView*)[cell viewWithTag:3];
     if (indexPath.row == MenuItemNews) {
         imageView.image = [UIImage imageNamed:@"left_menu_news"];
-    } else if (indexPath.row == MenuItemFavorite) {
+    }
+    else if (indexPath.row == MenuItemFavorite) {
         imageView.image = [UIImage imageNamed:@"left_menu_favorite"];
-    } else if (indexPath.row == MenuItemSettings) {
+    }
+    else if (indexPath.row == MenuItemSettings) {
         imageView.image = [UIImage imageNamed:@"left_menu_settings"];
     }
     return cell;

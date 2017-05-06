@@ -13,13 +13,13 @@
 #define kRGBColorFromHex(rgbValue)        [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0f green:((float)((rgbValue & 0xFF00) >> 8))/255.0f blue:((float)(rgbValue & 0xFF))/255.0f alpha:1.0f]
 
 #define kDropdownMenuSeperatorColor               kRGBColorFromHex(0x000000)
-#define kDropdownMenuSelectedCellColor            kRGBColorFromHex(0x1277E9)  // open menu selected title
-#define kDropdownMenuUnselectedCellTextColor      kRGBColorFromHex(0x040910)  // open menu unSelected title
+#define kDropdownMenuSelectedCellColor            [UIColor bn_mainColor]  // open menu selected title
+#define kDropdownMenuUnselectedCellTextColor      [UIColor lightGrayColor]  // open menu unSelected title
 #define kDropdownMenuUnselectedNightCellTextColor kRGBColorFromHex(0xFFFFFF)  // open menu unSelected title NIGHT
 
 #define kDropdownMenuIndicatorColor               kRGBColorFromHex(0xFFFFFF)  // subTitle color
-#define kDropdownMenuBottomSeparatorColor         [UIColor whiteColor]
-#define kDropdownMenuTitleColor                   kRGBColorFromHex(0xFFFFFF)  
+#define kDropdownMenuBottomSeparatorColor         [UIColor redColor]
+#define kDropdownMenuTitleColor                   [UIColor redColor]
 
 #define WS(weakSelf)                              __weak __typeof(&*self) weakSelf = self
 #define SS(strongSelf)                            __strong __typeof(&*weakSelf) strongSelf = weakSelf

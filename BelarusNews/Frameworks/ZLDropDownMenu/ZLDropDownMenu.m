@@ -66,7 +66,7 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
         flowLayout.minimumInteritemSpacing = dropDownMenuCollectionViewUIValue()->INTERITEMSPACING;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.collectionViewLayout = flowLayout;
-        _collectionView.backgroundColor = [UIColor clearColor];
+        _collectionView.backgroundColor = [UIColor lightGrayColor];
         [_collectionView registerClass:[ZLDropDownMenuCollectionViewCell class] forCellWithReuseIdentifier:collectionCellID];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
@@ -109,7 +109,7 @@ static NSString * const collectionCellID = @"ZLDropDownMenuCollectionViewCell";
     _numOfMenu = [_dataSource numberOfColumnsInMenu:self];
     
     WS(weakSelf);
-    CGFloat width = deviceWidth() / _numOfMenu;
+    CGFloat width = deviceWidth() / _numOfMenu-2;
     _titleButtons = [NSMutableArray arrayWithCapacity:_numOfMenu];
     ZLDropDownMenuTitleButton *lastTitleButton = nil;
     for (NSInteger index = 0; index < _numOfMenu; index++) {
