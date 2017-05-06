@@ -81,7 +81,7 @@
 }
 
 +(UIColor*)bn_newsCellNightColor {
-    return [UIColor colorWithRed:255.0 / 255.0 green:255.0 / 255.0 blue:255.0/ 255.0 alpha:0.2];
+    return RGBA(65,65,65, 1);
 }
 
 +(UIColor*)bn_newsCellDateColor {

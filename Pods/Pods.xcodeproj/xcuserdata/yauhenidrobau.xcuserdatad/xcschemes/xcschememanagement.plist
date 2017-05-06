@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SESlideTableViewCell.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SWRevealViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,12 +57,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>179EA09A2AB1EDA9DA4620D7DD3A328E</key>
+		<key>0E8B573615257C82175CF0E42622B7FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4B1EED1A7D11D778E097C9E4AEB77A75</key>
+		<key>149C61667DB12A6A97EA1EBD4067CF57</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,7 +72,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AF65EBCD084A0A5D696F0A4CA363E3FE</key>
+		<key>6453BB510D12656753B22FC613903E18</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,22 +82,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B1C55C2AAD69946F1C3392425E328095</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C250AB6A419E51FF6F491CBFB2660D57</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>E1BBB76ADBF2EF4EF2CE5DF6BBC77296</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FFA6E611701CA38F97598DACE3D5E488</key>
+		<key>EB6067A901D800D03CCF4584FAB84972</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F40E1D635EBE543A5DC5B890A2CBF436</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FB947F1D36D30BBB3653E239B7BCE91B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCD36566D9737861155BB2935113CD92</key>
 		<dict>
 			<key>primary</key>
 			<true/>

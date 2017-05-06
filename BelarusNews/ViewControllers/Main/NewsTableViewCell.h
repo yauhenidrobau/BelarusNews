@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "NewsEntity.h"
 
+#import <SESlideTableViewCell.h>
+
 @class NewsTableViewCell;
 
 @protocol NewsTableViewCellDelegate <NSObject>
@@ -18,11 +20,12 @@
 
 @end
 
-@interface NewsTableViewCell : UITableViewCell
+@interface NewsTableViewCell : SESlideTableViewCell
 
 @property (nonatomic, weak) id<NewsTableViewCellDelegate> cellDelegate;
 @property (nonatomic,readonly) CGRect shareViewFrame;
 @property (nonatomic) BOOL isUpdatedCell;
+@property (nonatomic,readonly) UIColor *mainBackgroundColor;
 
 -(void)cellForNews:(NewsEntity *)entity WithIndexPath:(NSIndexPath *)indexPath;
 -(void)updateNightModeCell:(BOOL)update;
@@ -30,5 +33,8 @@
 -(void)updateCellWithRightSwipe;
 -(void)updateCellWithLeftSwipe;
 -(void)setDefaultCellStyle;
+
+- (void)favoriteButtonDidTap:(id)sender;
+- (void)shareButtonDidTap:(id)sender;
 
 @end

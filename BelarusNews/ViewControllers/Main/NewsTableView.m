@@ -23,6 +23,8 @@
 #import "UserDefaultsManager.h"
 
 #import "NewsTableViewCell.h"
+#import <SESlideTableViewCell.h>
+
 #import "DetailsViewController.h"
 #import "DetailsOfflineVCViewController.h"
 
@@ -58,7 +60,7 @@ typedef enum {
 }CategoryTypes;
 
 
-@interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate, SFSafariViewControllerDelegate>
+@interface NewsTableView () <UIScrollViewDelegate, DZNEmptyDataSetSource,DZNEmptyDataSetDelegate, ZLDropDownMenuDelegate, ZLDropDownMenuDataSource,INSSearchBarDelegate, NewsTableViewCellDelegate,CFShareCircleViewDelegate, SFSafariViewControllerDelegate, SESlideTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *scrollButton;
 @property (weak, nonatomic) IBOutlet UIView *searchBarView;
@@ -69,7 +71,6 @@ typedef enum {
 @property (strong, nonatomic) UIRefreshControl *refreshControlRight;
 @property (nonatomic, strong) INSSearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UITableView *tableViewRight;
 
 @property (nonatomic, strong) CFShareCircleView *shareCircleView;
 @property (nonatomic, strong) UserDefaultsManager *userDefaults;
@@ -127,8 +128,7 @@ typedef enum {
         [self updateWithIndicator:YES];
         [self prepareAppierance];
     }
-
-
+    
     self.userDefaults = [UserDefaultsManager sharedInstance];
     self.operationQueue = [NSOperationQueue new];
     self.isAlertShown = [self.userDefaults boolForKey:NO_INTERNET_KEY];
@@ -156,6 +156,7 @@ typedef enum {
     [super viewWillDisappear:animated];
     [self.timer invalidate];
     self.timer = nil;
+    [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"Favorite"];
 }
 
 #pragma mark - Override Properties
@@ -181,7 +182,6 @@ typedef enum {
     __weak __typeof(self) wself = self;
     [UIView animateWithDuration:0.9 animations:^{
         [wself.tableView setContentOffset:CGPointZero animated:YES];
-        [wself.tableViewRight setContentOffset:CGPointZero animated:YES];
     }];
     self.scrollButton.hidden = YES;
 }
@@ -190,28 +190,29 @@ typedef enum {
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.isSearchStart) {
-        return self.searchResults.count/2;
+        return self.searchResults.count;
     }
-    return self.newsArray.count/2;
+    return self.newsArray.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-    NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    NSString *cellIdentifier = indexPath.row? @"Cell" : @"FirstCell";
+
+    NewsTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.cellDelegate = self;
+    cell.delegate = self;
     [cell setDefaultCellStyle];
+    cell.showsRightSlideIndicator = NO;
+    cell.slideBackgroundColor = cell.mainBackgroundColor;
     NewsEntity *newsEntity = nil;
     NSInteger newsArrayCount;
     if (self.isSearchStart) {
-        newsArrayCount = self.searchResults.count/2;
+        newsArrayCount = self.searchResults.count;
     } else {
-        newsArrayCount = self.newsArray.count/2;
+        newsArrayCount = self.newsArray.count;
     }
-    if (tableView == self.tableViewRight) {
-        newsEntity = [self setNewsEntityForIndexPath:[NSIndexPath indexPathForRow:indexPath.row + newsArrayCount inSection:0]];
-    } else {
-        newsEntity = [self setNewsEntityForIndexPath:indexPath];
-    }
+    
+    newsEntity = [self setNewsEntityForIndexPath:indexPath];
     [cell cellForNews:newsEntity WithIndexPath:(NSIndexPath *)indexPath];
     if (self.isNightMode) {
         [cell updateNightModeCell:YES];
@@ -224,7 +225,7 @@ typedef enum {
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
-    cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    indexPath.row? cell = [tableView  dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath] : [tableView  dequeueReusableCellWithIdentifier:@"FirstCell" forIndexPath:indexPath];
     ((NewsTableViewCell*)cell).isUpdatedCell = YES;
     [((NewsTableViewCell*)cell) updateCellWithRightSwipe];
 }
@@ -255,12 +256,7 @@ typedef enum {
     NSString* segueId = (![[Reachability reachabilityWithHostName:TEST_HOST] isReachable] || self.isOfflineMode) ? @"DetailsOfflineVCID" : @"DetailsVCID";
     NewsTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     NewsEntity *newsEntity;
-    if (tableView == self.tableView) {
-        newsEntity = [self setNewsEntityForIndexPath:[self.tableView indexPathForCell:cell]];
-    } else {
-        newsEntity = [self setNewsEntityForIndexPath:[NSIndexPath indexPathForRow:[self.tableView indexPathForCell:cell].row + self.newsArray.count/2 inSection:0]];
-    }
-
+    newsEntity = [self setNewsEntityForIndexPath:[self.tableView indexPathForCell:cell]];
     if (self.isNotAskEnable) {
         if (self.openLink) {
             if ([segueId isEqualToString:@"DetailsVCID"]) {
@@ -311,6 +307,19 @@ typedef enum {
         } animated:YES];
     }
 }
+
+
+#pragma mark - SESlideTableViewCell
+- (void)slideTableViewCell:(SESlideTableViewCell*)cell didTriggerRightButton:(NSInteger)buttonIndex {
+    NSLog(@"right button triggered:%d", (int)buttonIndex);
+        if (buttonIndex == 1) {
+            [((NewsTableViewCell*)cell) favoriteButtonDidTap:nil];
+        } else {
+            [((NewsTableViewCell*)cell) shareButtonDidTap:nil];
+        }
+}
+
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NewsTableViewCell *cell;
@@ -475,7 +484,6 @@ typedef enum {
 
                 wself.searchResults = searchResults;
                 [wself.tableView reloadData];
-                [wself.tableViewRight reloadData];
                 [wself showLoadingIndicator:NO];
                 NSLog(@"Get FROM SEARCH %ld",(unsigned long)wself.searchResults.count);
             }];
@@ -491,8 +499,8 @@ typedef enum {
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     self.scrollButton.hidden = !(scrollView.contentOffset.y > 20);
-    UITapGestureRecognizer *gestureRecognizer = [UITapGestureRecognizer new];
-    [self.searchBar hideSearchBar:gestureRecognizer];
+//    UITapGestureRecognizer *gestureRecognizer = [UITapGestureRecognizer new];
+//    [self.searchBar hideSearchBar:gestureRecognizer];
 
 }
 
@@ -501,24 +509,18 @@ typedef enum {
 - (void)newsTableViewCell:(NewsTableViewCell*)cell didTapFavoriteButton:(UIButton*)button {
     NSIndexPath *indexPath;
     indexPath = [self.tableView indexPathForCell:cell];
-    if (!indexPath) {
-        indexPath = [self.tableViewRight indexPathForCell:cell];
-    }
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
     [[RealmDataManager sharedInstance]updateEntity:entity WithProperty:@"favorite"];
 }
 
 - (void)newsTableViewCell:(NewsTableViewCell*)cell didTapShareButton:(UIButton*)button {
     NSIndexPath *indexPath;
-   indexPath = [self.tableView indexPathForCell:cell];
-    if (!indexPath) {
-       indexPath = [self.tableViewRight indexPathForCell:cell];
-    }
+    indexPath = [self.tableView indexPathForCell:cell];
     NewsEntity *entity = [self setNewsEntityForIndexPath:indexPath];
     self.shareItemsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:entity,@"entity", nil];
 //    [self.shareCircleView showAnimated:YES];
    
-    [[RealmDataManager sharedInstance] updateEntity:entity WithProperty:@"isShare"];
     NSArray *objectTOShare = @[entity.titleFeed,entity.linkFeed,entity.urlImage];
     
     UIActivityViewController *activity = [[UIActivityViewController alloc]initWithActivityItems:objectTOShare applicationActivities:nil];
@@ -539,7 +541,6 @@ typedef enum {
     [self performSegueWithIdentifier:@"ShareVCID" sender:self];
     NSLog(@"Selected sharer: %@", sharer.name);
     [self.tableView reloadData];
-    [self.tableViewRight reloadData];
 
 }
 
@@ -557,8 +558,6 @@ typedef enum {
     [self.refreshControlRight addTarget:self action:@selector(pullToRefresh) forControlEvents:UIControlEventValueChanged];
     self.refreshControlRight.backgroundColor = [UIColor clearColor];
     [self.tableView addSubview:self.refreshControl];
-    [self.tableViewRight addSubview:self.refreshControlRight];
-
 }
 
 -(void)timerActionRefresh {
@@ -618,7 +617,6 @@ typedef enum {
         NSLog(@"Get favorites Elements  %lu",(unsigned long)self.newsArray.count);
     }
     [self.tableView reloadData];
-    [self.tableViewRight reloadData];
 
     [self showLoadingIndicator:NO];
     [self.refreshControl endRefreshing];
@@ -626,8 +624,6 @@ typedef enum {
 
     if (!self.newsArray.count) {
         [self.tableView setScrollEnabled:NO];
-        [self.tableViewRight setScrollEnabled:NO];
-
     }
 }
 
@@ -715,14 +711,10 @@ typedef enum {
 }
 
 -(void)prepareTableView {
-    self.tableView.estimatedRowHeight = 115;
+    self.tableView.estimatedRowHeight = 100;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
-    self.tableViewRight.estimatedRowHeight = 115;
-    self.tableViewRight.rowHeight = UITableViewAutomaticDimension;
-    self.tableViewRight.emptyDataSetSource = self;
-    self.tableViewRight.emptyDataSetDelegate = self;
 }
 
 -(void)prepareNavigationBar {

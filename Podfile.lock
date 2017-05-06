@@ -50,6 +50,7 @@ PODS:
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
+  - SESlideTableViewCell (0.7.1)
   - SWRevealViewController (2.3.0)
   - UIAlertController+Blocks (0.9.2)
 
@@ -63,6 +64,7 @@ DEPENDENCIES:
   - Reachability (~> 3.2)
   - Realm
   - SDWebImage (~> 3.7.6)
+  - SESlideTableViewCell
   - SWRevealViewController (~> 2.3)
   - UIAlertController+Blocks
 
@@ -82,9 +84,10 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  SESlideTableViewCell: 459c3ce79b760e8bc015dd83ca84196bd70c11ed
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   UIAlertController+Blocks: 80e28b92523fb58aba4d1bccec013d5a0b0bddb2
 
-PODFILE CHECKSUM: 02a8fecbe8b26e4568b88b6948481cab67e40a9c
+PODFILE CHECKSUM: 2c1a2b7b7177a6e2dd4cdef6bf319c6475884542
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.2.0

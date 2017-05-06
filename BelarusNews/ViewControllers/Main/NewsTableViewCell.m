@@ -16,8 +16,8 @@
 #import "Macros.h"
 
 //static const NSInteger contentOffset = 150;
-static const NSInteger defaultWidth = 0;
-static const NSInteger defaultCornerRadius = 16;
+
+static const NSInteger defaultCornerRadius = 0;
 static const NSInteger defaultDescriptionLeading = 169.5;
 
 @interface NewsTableViewCell ()
@@ -70,6 +70,8 @@ static const NSInteger defaultDescriptionLeading = 169.5;
     UISwipeGestureRecognizer *swipeRecognizerRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(updateCellWithRightSwipe)];
     swipeRecognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
     [self.cellBackgroundView addGestureRecognizer:swipeRecognizerRight];
+//    [self addRightButtonWithImage:self.isFavoriteArticle? [UIImage imageNamed:@"icon-nonfavorites"]: [UIImage imageNamed:@"icon-favorites"] text:@"" textColor:[UIColor whiteColor] font:nil backgroundColor:[UIColor bn_mainColor]];
+    [self addRightButtonWithImage:[UIImage imageNamed:@"icon-share"] text:@"" textColor:[UIColor whiteColor] font:nil backgroundColor:[UIColor bn_mainBackgroundColor]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -82,8 +84,12 @@ static const NSInteger defaultDescriptionLeading = 169.5;
     _shareViewFrame =  self.shareButton.frame;
 }
 
+-(UIColor*)mainBackgroundColor {
+    return self.cellBackgroundView.backgroundColor;
+}
+
 #pragma mark - IBActions
-- (IBAction)favoriteButtonDidTap:(id)sender {
+- (void)favoriteButtonDidTap:(id)sender {
     if (self.favoriteButton.tintColor == [UIColor bn_mainTitleColor]) {
         self.favoriteButton.tintColor = [UIColor bn_lightBlueColor];
     } else {
@@ -93,7 +99,7 @@ static const NSInteger defaultDescriptionLeading = 169.5;
     [self.cellDelegate newsTableViewCell:self didTapFavoriteButton:sender];
 }
 
-- (IBAction)shareButtonDidTap:(id)sender {
+- (void)shareButtonDidTap:(id)sender {
     [self.cellDelegate newsTableViewCell:self didTapShareButton:sender];
 }
 
@@ -131,6 +137,7 @@ static const NSInteger defaultDescriptionLeading = 169.5;
 
 -(void)updateNightModeCell:(BOOL)update {
     if (update) {
+        
         self.titleLabel.textColor = [UIColor bn_mainNightColor];
         self.cellBackgroundView.backgroundColor = [UIColor bn_newsCellNightColor];
         self.shareButton.tintColor = [UIColor bn_nightModeTitleColor];
@@ -140,6 +147,7 @@ static const NSInteger defaultDescriptionLeading = 169.5;
         self.descriptionLabel.textColor = [UIColor bn_mainNightColor];
 
     } else {
+        
         self.sourceLabel.textColor = [UIColor bn_linkColor];
         self.titleLabel.textColor = [UIColor bn_mainTitleColor];
         self.cellBackgroundView.backgroundColor = [UIColor bn_mainColor];
@@ -175,9 +183,9 @@ static const NSInteger defaultDescriptionLeading = 169.5;
     [self.imageNewsView sd_setImageWithURL:[NSURL URLWithString:entity.urlImage]
                  placeholderImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.jpg",entity.category]]];
     self.imageNewsView.layer.cornerRadius = 0;
-    if ([SettingsManager sharedInstance].isRoundImagesEnabled) {
-        self.imageNewsView.layer.cornerRadius = CGRectGetWidth(self.imageNewsView.frame) / 2;
-    }
+//    if ([SettingsManager sharedInstance].isRoundImagesEnabled) {
+//        self.imageNewsView.layer.cornerRadius = CGRectGetWidth(self.imageNewsView.frame) / 2;
+//    }
     if ([entity.sourceName containsString:@"tut.by"]) {
         [self showLogo:YES];
     }
@@ -190,8 +198,8 @@ static const NSInteger defaultDescriptionLeading = 169.5;
 
 -(void)setDefaultCellStyle {
     
-    self.cellBackgroundViewLeadingConstraint.constant = 8;
-    self.cellBackgroundViewTrailingConstraint.constant = 10;
+    self.cellBackgroundViewLeadingConstraint.constant = 0;
+    self.cellBackgroundViewTrailingConstraint.constant = 0;
     [self layoutIfNeeded];
     self.isUpdatedCell = NO;
 }

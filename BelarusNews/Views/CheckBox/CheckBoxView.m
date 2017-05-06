@@ -42,7 +42,7 @@
     
     [self addTapHandler];
     self.categoriesMenu = [NSArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults]objectForKey:CATEGORIES_KEY]]];
-    self.checked = self.categoriesMenu[0][@"Checked"];
+    self.checked = [self.categoriesMenu[0][@"Checked"] boolValue];
     [self updateImageAnimated:NO];
 }
 
