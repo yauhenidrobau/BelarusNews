@@ -759,15 +759,13 @@ const int FrontViewPositionNone = 0xff;
 
 - (void)setFrontViewController:(UIViewController *)frontViewController animated:(BOOL)animated
 {
-    [self _performTransitionOperation:SWRevealControllerOperationReplaceFrontController withViewController:frontViewController animated:NO];
-
-//    if ( ![self isViewLoaded])
-//    {
-//        [self _performTransitionOperation:SWRevealControllerOperationReplaceFrontController withViewController:frontViewController animated:NO];
-//        return;
-//    }
-//    
-//    [self _dispatchTransitionOperation:SWRevealControllerOperationReplaceFrontController withViewController:frontViewController animated:animated];
+    if ( ![self isViewLoaded])
+    {
+        [self _performTransitionOperation:SWRevealControllerOperationReplaceFrontController withViewController:frontViewController animated:NO];
+        return;
+    }
+    
+    [self _dispatchTransitionOperation:SWRevealControllerOperationReplaceFrontController withViewController:frontViewController animated:animated];
 }
 
 
@@ -919,6 +917,8 @@ const int FrontViewPositionNone = 0xff;
     _clipsViewsToBounds = clipsViewsToBounds;
     [_contentView setClipsToBounds:clipsViewsToBounds];
 }
+
+
 
 #pragma mark - Provided acction methods
 

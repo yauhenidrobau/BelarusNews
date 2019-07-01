@@ -320,7 +320,6 @@ typedef enum {
 }
 
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NewsTableViewCell *cell;
     if ([sender isKindOfClass:[NewsTableViewCell class]]) {
